@@ -1,0 +1,49 @@
+name: histo
+channels:
+  - anaconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - astroid=2.4.2=py37_0
+  - ca-certificates=2020.10.14=0
+  - certifi=2020.11.8=py37h06a4308_0
+  - click=7.1.2=py_0
+  - flask=1.1.2=py_0
+  - freetype=2.10.4=h5ab3b9f_0
+  - isort=5.6.4=py_0
+  - itsdangerous=1.1.0=py37_0
+  - jinja2=2.11.2=py_0
+  - jpeg=9b=habf39ab_1
+  - lazy-object-proxy=1.4.3=py37h7b6447c_0
+  - lcms2=2.11=h396b838_0
+  - ld_impl_linux-64=2.33.1=h53a641e_7
+  - libedit=3.1.20191231=h14c3975_1
+  - libffi=3.3=he6710b0_2
+  - libgcc-ng=9.1.0=hdf63c60_0
+  - libpng=1.6.37=hbc83047_0
+  - libstdcxx-ng=9.1.0=hdf63c60_0
+  - libtiff=4.1.0=h2733197_1
+  - lz4-c=1.9.2=heb0550a_3
+  - markupsafe=1.1.1=py37h14c3975_1
+  - mccabe=0.6.1=py37_1
+  - ncurses=6.2=he6710b0_1
+  - olefile=0.46=py37_0
+  - openssl=1.1.1h=h7b6447c_0
+  - pillow=8.0.1=py37he98fc37_0
+  - pip=20.3=py37h06a4308_0
+  - pylint=2.6.0=py37_0
+  - python=3.7.9=h7579374_0
+  - readline=8.0=h7b6447c_0
+  - setuptools=50.3.2=py37h06a4308_2
+  - six=1.15.0=py37h06a4308_0
+  - sqlite=3.33.0=h62c20be_0
+  - tk=8.6.10=hbc83047_0
+  - toml=0.10.1=py_0
+  - typed-ast=1.4.1=py37h7b6447c_0
+  - werkzeug=1.0.1=py_0
+  - wheel=0.36.0=pyhd3eb1b0_0
+  - wrapt=1.11.2=py37h7b6447c_0
+  - xz=5.2.5=h7b6447c_0
+  - zlib=1.2.11=h7b6447c_3
+  - zstd=1.4.4=h0b5b093_3
+prefix: /home/corentin/anaconda3/envs/histo
