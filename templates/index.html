@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+{% block content %}
+    <div class="container">
+        <div class="row">
+          <div class="col-lg">
+            <h1> Ouvrir une image pour l'annoter</h1>
+            <div class="row">
+                <h4>Sélectionner l'image</h3>
+                <form method=post enctype=multipart/form-data>
+                  <input type=file name=file>
+                  <input type=submit value=Upload>
+                </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+{% endblock %}
