@@ -1,0 +1,20 @@
+Prenom_Patient	Corentin
+Nom_Patient	Meyer
+ID_Patient	68
+Redacteur_histo	AAAA
+Diagnostic	Myo Con
+Blue_Dots	-1
+CFDT	0
+Central_Nuclei	0
+Core	1
+Minicores	1
+No_Nuclei	-1
+Rods	1
+Small_patch	0
+Whitebackground	-1
+blabla1	-1
+blabla3	-1
+blbla2	-1
+feature4	-1
+feature°0)"''/*	-1
+feautre6	-1

@@ -9,32 +9,37 @@
 
           <div class="col-lg">
             <h1> Partie Annotation</h1>
+            <form method="post">
                 <div class="form-group">
                 <div class="form-row">
-                  <form action="" method="post" name="sequenceADN">
-                    {{form.hidden_tag()}}
-                    {{form.prenom_patient()}}
-                    {{form.nom_patient()}}
-                    {{form.nom_clinicien()}}
-                    {% for j in form.feature_list %}
-                    <div class="row">       
-                    <div class="col-lg"><label for=inlineRadio1>{{j}}</label></div>
-                    <div class="form-check form-check-inline col-sm">
-                      <input class="form-check-input" type="radio" name={{j}} id="inlineRadio1" value="1">
-                      <label class="form-check-label" for="inlineRadio1">Présent</label>
-                    </div>
-                    <div class="form-check form-check-inline col-sm">
-                      <input class="form-check-input" type="radio" name={{j}} id="inlineRadio2" value="-1" checked>
-                      <label class="form-check-label" for="inlineRadio2">Absent</label>
-                    </div>
-                    <div class="form-check form-check-inline col-sm">
-                      <input class="form-check-input" type="radio" name={{j}} id="inlineRadio3" value="0">
-                      <label class="form-check-label" for="inlineRadio3">Incertain</label>
-                    </div>
+                <div class="col"><input type="name" class="form-control" name="prenom_patient" placeholder="Prénom du Patient" required></div>
+                <div class="col"><input type="name" class="form-control" name="nom_patient" placeholder="Nom du Patient" required></div>
+                <div class="col"><input type="name" class="form-control" name="id_patient" placeholder="Identifiant Patient" required></div>
+                </div>
+                  <input type="name" class="form-control" name="redacteur_rapport" placeholder="Nom du rédacteur de rapport histologique" required>
+                </div>
+                <div class="feature_list_radio">
+                {% for feat in feature_list %}
+                <div class="row">       
+                <div class="col-lg"><label for=inlineRadio1>{{feat}}</label></div>
+                <div class="form-check form-check-inline col-sm">
+                    <input class="form-check-input" type="radio" name={{feat}} id="inlineRadio1" value="1">
+                    <label class="form-check-label" for="inlineRadio1">Présent</label>
                   </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Génerer le rapport</button>
-                  </form>
+                  <div class="form-check form-check-inline col-sm">
+                    <input class="form-check-input" type="radio" name={{feat}} id="inlineRadio2" value="-1" checked>
+                    <label class="form-check-label" for="inlineRadio2">Absent</label>
+                  </div>
+                  <div class="form-check form-check-inline col-sm">
+                    <input class="form-check-input" type="radio" name={{feat}} id="inlineRadio3" value="0">
+                    <label class="form-check-label" for="inlineRadio3">Incertain</label>
+                  </div>
+                </div>
+                  {% endfor %}
+                </div>
+                <div class="col"><input type="name" class="form-control" name="diag" placeholder="Diagnostic maladie" required></div>
+                <button type="submit" name="submit_button" class="btn btn-primary">Génerer le rapport</button>
+              </form>
           </div>
         </div>
 

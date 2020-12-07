@@ -6,12 +6,14 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 from flask_bootstrap import Bootstrap
-
-UPLOAD_FOLDER = 'uploads'
+import pandas as pd
+UPLOAD_FOLDER = "uploads"
+REPORT_FOLDER = "results"
 ALLOWED_EXTENSIONS = {'tif', 'tiff', 'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['REPORT_FOLDER'] = REPORT_FOLDER
 app.config['SECRET_KEY'] = 'myverylongsecretkey'
 Bootstrap(app)
 
@@ -26,18 +28,16 @@ def create_thumbnail(image_path):
 
 def create_feature_list(config_file):
     feature = open(config_file, "r")
-    feature_list = [line.strip() for line in feature.readlines()]
+    feature_list = [line.strip().replace(" ", "_") for line in feature.readlines()]
     return feature_list
-
-class ReportForm(FlaskForm):
-    feature_list = create_feature_list("config_ontology")
-    prenom_patient = TextAreaField('prenom_patient', validators=[DataRequired()])
-    nom_patient = TextAreaField('nom_patient', validators=[DataRequired()])
-    nom_clinicien = TextAreaField('nom_clinicien', validators=[DataRequired()])
 
 @app.route('/uploads/<filename>')
 def uploads(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+@app.route('/results/<filename>')
+def get_report(filename):
+    return send_from_directory(app.config['REPORT_FOLDER'], filename)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -61,22 +61,35 @@ def upload_file():
 
 @app.route('/annot', methods=['GET', 'POST'])
 def annot_page():
+    session.clear()
     filename = request.args.get("filename")
-    form = ReportForm()
-    if form.is_submitted():
-        session['prenom_patient'] = form.prenom_patient.data
-        session['nom'] = form.nom_patient.data
-        session['feature'] = form.feature_list
-        submit = SubmitField('rapport')
-        print(form.data)
-        return redirect(url_for('write_report'))
-    return render_template('annot.html', filename=filename, thumbnail=filename+"_thumbnail.jpg", feature_list=ReportForm.feature_list, form=form)
+    feature_list = create_feature_list("config_ontology")
+    if request.method=='POST':
+        if 'submit_button' in request.form:
+            data = request.form.to_dict()
+            session["info_annot"] = data
+            session["filename"] = filename
+            return redirect(url_for('write_report'))
+    return render_template('annot.html', filename=filename, thumbnail=filename+"_thumbnail.jpg", feature_list=feature_list)
 
 @app.route('/results', methods=['GET', 'POST'])
 def write_report():
-    print('session', session['prenom_patient'])
-    #print("=======", request.form['prenom_patient'])
-    return render_template('results.html', session=session)
+    prenom_patient = session["info_annot"].pop("prenom_patient")
+    nom_patient = session["info_annot"].pop("nom_patient")
+    id_patient = session["info_annot"].pop("id_patient")
+    redacteur_rapport = session["info_annot"].pop("redacteur_rapport")
+    diag = session["info_annot"].pop("diag")
+    del session["info_annot"]["submit_button"]
+    filename = session["filename"]+"_"+prenom_patient+"_"+nom_patient+".txt"
+    f = open("results/"+filename, "w")
+    f.write("Prenom_Patient\t"+prenom_patient+"\n")
+    f.write("Nom_Patient\t"+nom_patient+"\n")
+    f.write("ID_Patient\t"+id_patient+"\n")
+    f.write("Redacteur_histo\t"+redacteur_rapport+"\n")
+    f.write("Diagnostic\t"+diag+"\n")
+    for i in session["info_annot"]:
+        f.write(i+"\t"+session["info_annot"][i]+"\n")
+    return render_template('results.html', data=session["info_annot"], prenom_patient=prenom_patient, nom_patient=nom_patient, id_patient=id_patient, redacteur_rapport=redacteur_rapport, filename=filename)
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5010)

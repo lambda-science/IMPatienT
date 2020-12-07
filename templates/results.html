@@ -1,8 +1,13 @@
 {% extends "base.html"%}
 {% block content %}
-<h1>page résultats </h1>
-<p>{%for i in session%} 
-  
-    <li>{{i}} = {{session[i]}}</li> 
-{%endfor%} </p>
+
+<h1>Rapport Histologique</h1>
+
+<a href="{{url_for('get_report', filename=filename)}}">Télécharger ce rapport en cliquant ici </a><p>(clique droit enregistrer sous)</p>
+<p> Ce rapport a aussi été sauvegardé ici: {{url_for('get_report', filename=filename)}}</p>
+
+<object data="{{url_for('get_report', filename=filename)}}" width="500" height="800">
+    Not supported
+    </object>
+
 {% endblock %}
