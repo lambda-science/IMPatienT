@@ -72,10 +72,30 @@ var anno = OpenSeadragon.Annotorious(viewer);
       success: console.log("Annotation Sent to Backend Successfully"),
       dataType: "text"
     });
-
-    }); 
-}
-</script>
+  });
+    anno.on('updateAnnotation', function(annotation) {
+      var myJSON = JSON.stringify(annotation);
+      console.log(myJSON)
+      $.ajax({
+      type: "POST",
+      url: "{{url_for('update_annot')}}",
+      data: myJSON,
+      success: console.log("Annotation Update to Backend Successfully"),
+      dataType: "text"
+    });
+  });
+    anno.on('deleteAnnotation', function(annotation) {
+      var myJSON = JSON.stringify(annotation);
+      console.log(myJSON)
+      $.ajax({
+      type: "POST",
+      url: "{{url_for('delete_annot')}}",
+      data: myJSON,
+      success: console.log("Annotation Deleted to Backend Successfully"),
+      dataType: "text"
+    });
+  });
+};
 </script>
 
 
@@ -84,4 +104,5 @@ var anno = OpenSeadragon.Annotorious(viewer);
           $('[data-toggle="tooltip"]').tooltip();
         });
       </script>
+
 {% endblock %}
