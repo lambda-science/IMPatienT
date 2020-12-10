@@ -4,7 +4,7 @@
         <div class="row">
           <div class="col-lg">
             <h1> Partie Image</h1>
-                <img src="{{url_for('uploads', filename=thumbnail)}}" id="zoomit-target" data-zoomed="{{url_for('uploads', filename=filename)}}">
+            <div id="seadragon-viewer" style="width:600px; height:600px;"></div>
           </div>
 
           <div class="col-lg">
@@ -18,20 +18,20 @@
                 </div>
                   <input type="name" class="form-control" name="redacteur_rapport" placeholder="Nom du rédacteur de rapport histologique" required>
                 </div>
-                <div class="feature_list_radio">
+                <div class="feature_list_radio overflow-auto">
                 {% for feat in feature_list %}
                 <div class="row">       
-                <div class="col-lg"><label for=inlineRadio1>{{feat}}</label></div>
+                <div class="col-lg"><label for=inlineRadio1><a href="#" data-toggle="tooltip" title="my very long description that can take multiple lines">{{feat[1]}}</a></label></div>
                 <div class="form-check form-check-inline col-sm">
-                    <input class="form-check-input" type="radio" name={{feat}} id="inlineRadio1" value="1">
+                    <input class="form-check-input" type="radio" name={{feat[0]}} id="inlineRadio1" value="1">
                     <label class="form-check-label" for="inlineRadio1">Présent</label>
                   </div>
                   <div class="form-check form-check-inline col-sm">
-                    <input class="form-check-input" type="radio" name={{feat}} id="inlineRadio2" value="-1" checked>
+                    <input class="form-check-input" type="radio" name={{feat[0]}} id="inlineRadio2" value="-1" checked>
                     <label class="form-check-label" for="inlineRadio2">Absent</label>
                   </div>
                   <div class="form-check form-check-inline col-sm">
-                    <input class="form-check-input" type="radio" name={{feat}} id="inlineRadio3" value="0">
+                    <input class="form-check-input" type="radio" name={{feat[0]}} id="inlineRadio3" value="0">
                     <label class="form-check-label" for="inlineRadio3">Incertain</label>
                   </div>
                 </div>
@@ -44,7 +44,44 @@
         </div>
 
       </div>
-      <script type="text/javascript">
-        $('#zoomit-target').zoomIt();
-        </script>
+      
+
+<script>
+  window.onload = function() {
+    var viewer = OpenSeadragon({
+      id: "seadragon-viewer",
+      //prefixUrl: "{{url_for('send_dzi', filename=filename+'_files/')}}",
+      prefixUrl: "/static/images/",
+      tileSources: "{{url_for('send_dzi', filename=filename+'.dzi')}}"
+    });
+
+// Initialize the Annotorious plugin
+var anno = OpenSeadragon.Annotorious(viewer);
+
+  // Load annotations in W3C WebAnnotation format
+  anno.loadAnnotations("{{url_for('get_report', filename=filename+'.json')}}");
+
+    // Attach handlers to listen to events
+    anno.on('createAnnotation', function(annotation) {
+      var myJSON = JSON.stringify(annotation);
+      console.log(myJSON)
+      $.ajax({
+      type: "POST",
+      url: "{{url_for('write_annot')}}",
+      data: myJSON,
+      success: console.log("Annotation Sent to Backend Successfully"),
+      dataType: "text"
+    });
+
+    }); 
+}
+</script>
+</script>
+
+
+     <script>
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+      </script>
 {% endblock %}
