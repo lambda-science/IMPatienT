@@ -107,7 +107,6 @@ def write_annot():
 
 @app.route("/update_annot", methods=["POST"])
 def update_annot():
-    #To-Do
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
     updated_list = []
