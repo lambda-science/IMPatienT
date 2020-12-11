@@ -57,20 +57,22 @@ def get_report(filename):
 def upload_file():
     if request.method == "POST":
         # check if the post request has the file part
-        if "file" not in request.files:
-            flash("No file part")
+        if "file" not in request.files or "patient_ID" not in request.form:
+            flash("No file part or patient_ID")
             return redirect(request.url)
         file = request.files["file"]
+        patient_ID = request.form["patient_ID"]
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == "":
             flash("No selected file")
             return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+        if file and allowed_file(file.filename) and patient_ID:
+            filename = secure_filename(patient_ID+"_"+file.filename)
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
             create_deepzoom_file(UPLOAD_FOLDER+"/"+filename)
             session["filename"] = filename
+            session["patient_ID"] = patient_ID
             return redirect(url_for("annot_page", filename=filename))
     return render_template("index.html")
 
@@ -83,7 +85,7 @@ def annot_page():
             data = request.form.to_dict()
             session["info_annot"] = data
             return redirect(url_for("write_report"))
-    return render_template("annot.html", filename=filename, thumbnail=filename+"_thumbnail.jpg", feature_list=feature_list)
+    return render_template("annot.html", filename=filename, thumbnail=filename+"_thumbnail.jpg", feature_list=feature_list, patient_ID=session["patient_ID"])
 
 
 @app.route("/write_annot", methods=["POST"])
@@ -139,11 +141,11 @@ def delete_annot():
 def write_report():
     prenom_patient = session["info_annot"].pop("prenom_patient")
     nom_patient = session["info_annot"].pop("nom_patient")
-    id_patient = session["info_annot"].pop("id_patient")
+    id_patient = session["patient_ID"]
     redacteur_rapport = session["info_annot"].pop("redacteur_rapport")
     diag = session["info_annot"].pop("diag")
     del session["info_annot"]["submit_button"]
-    filename = session["filename"]+"_"+prenom_patient+"_"+nom_patient+".txt"
+    filename = session["filename"]+".txt"
     f = open("results/"+filename, "w")
     f.write("Prenom_Patient\t"+prenom_patient+"\n")
     f.write("Nom_Patient\t"+nom_patient+"\n")
