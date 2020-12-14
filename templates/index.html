@@ -6,9 +6,6 @@
             <div class="row">
             <h1> Importer une image et l'associer à un patient</h1></br>
           </div>
-            <div class="row">
-                
-                </div>
                 <div class="col-sm">
                 <form method=post enctype=multipart/form-data>
                   <input type="text" class="form-control" name="patient_ID" placeholder="Identifiant Patient" required>
@@ -16,11 +13,15 @@
                   <input type=file class="form-control-file" name=file>
                   <input type=submit class="btn btn-primary mb-2" value=Upload>
                 </div>
-                </div>
                 </form>
+                <h1>Reprendre l'annoation de fichiers déjà ajoutés</h1>
+                <ul>
+            {% for file in file_list %}
+                <li><a href="annot?filename={{ file }}">{{ file }}</a>
+            {% endfor %}
+            </ul>
+              </div>
             </div>
           </div>
-        </div>
 
-      </div>
 {% endblock %}

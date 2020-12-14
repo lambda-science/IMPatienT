@@ -2,12 +2,13 @@
 {% block content %}
 
 <h1>Rapport Histologique</h1>
+<a href="{{url_for('get_report', filename=filename_report)}}">Télécharger le rapport en cliquant ici </a><p>(clique droit enregistrer sous)</p>
+<p> Ce rapport a aussi été sauvegardé ici: {{url_for('get_report', filename=filename_report)}}</p>
 
-<a href="{{url_for('get_report', filename=filename)}}">Télécharger ce rapport en cliquant ici </a><p>(clique droit enregistrer sous)</p>
-<p> Ce rapport a aussi été sauvegardé ici: {{url_for('get_report', filename=filename)}}</p>
-
-<object data="{{url_for('get_report', filename=filename)}}" width="500" height="800">
+<h1>Annotation d'image</h1>
+<a href="{{url_for('get_report', filename=filename_annot)}}">Télécharger les annotations en cliquant ici </a><p>(clique droit enregistrer sous)</p>
+<p> Les annotations ont aussi été enregistrées ici: {{url_for('get_report', filename=filename_annot)}}</p>
+<object data="{{url_for('get_report', filename=filename_report)}}" width="500" height="800">
     Not supported
     </object>
-
 {% endblock %}

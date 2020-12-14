@@ -1,0 +1,21 @@
+[
+    {
+        "type": "Annotation",
+        "body": [
+            {
+                "type": "TextualBody",
+                "value": "aaa",
+                "purpose": "tagging"
+            }
+        ],
+        "target": {
+            "selector": {
+                "type": "FragmentSelector",
+                "conformsTo": "http://www.w3.org/TR/media-frags/",
+                "value": "xywh=pixel:369.4666748046875,414.5333557128906,104.26666259765625,79.33331298828125"
+            }
+        },
+        "@context": "http://www.w3.org/ns/anno.jsonld",
+        "id": "#22c095f0-2bd2-48dd-9b1f-c4b626bb42a2"
+    }
+]

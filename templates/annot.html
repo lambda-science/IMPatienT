@@ -45,12 +45,10 @@
 
       </div>
       
-
 <script>
   window.onload = function() {
     var viewer = OpenSeadragon({
       id: "seadragon-viewer",
-      //prefixUrl: "{{url_for('send_dzi', filename=filename+'_files/')}}",
       prefixUrl: "/static/images/",
       tileSources: "{{url_for('send_dzi', filename=filename+'.dzi')}}"
     });

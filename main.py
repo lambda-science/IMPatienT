@@ -8,6 +8,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 import pandas as pd
+from glob import glob 
 
 UPLOAD_FOLDER = "uploads"
 REPORT_FOLDER = "results"
@@ -40,6 +41,9 @@ def create_deepzoom_file(image_path):
     # Create Deep Zoom image pyramid from source
     creator.create(SOURCE, ""+image_path+".dzi")
 
+def create_history_file():
+    file_list = [i.split("/")[-1] for i in glob("uploads/*") if i.split(".")[-1] in ALLOWED_EXTENSIONS]
+    return file_list
 
 @app.route("/uploads/<path:filename>")
 def send_dzi(filename):
@@ -55,6 +59,7 @@ def get_report(filename):
 
 @app.route("/", methods=["GET", "POST"])
 def upload_file():
+    file_list = create_history_file()
     if request.method == "POST":
         # check if the post request has the file part
         if "file" not in request.files or "patient_ID" not in request.form:
@@ -74,7 +79,7 @@ def upload_file():
             session["filename"] = filename
             session["patient_ID"] = patient_ID
             return redirect(url_for("annot_page", filename=filename))
-    return render_template("index.html")
+    return render_template("index.html", file_list=file_list)
 
 @app.route("/annot", methods=["GET", "POST"])
 def annot_page():
@@ -145,8 +150,9 @@ def write_report():
     redacteur_rapport = session["info_annot"].pop("redacteur_rapport")
     diag = session["info_annot"].pop("diag")
     del session["info_annot"]["submit_button"]
-    filename = session["filename"]+".txt"
-    f = open("results/"+filename, "w")
+    filename_report = session["filename"]+".txt"
+    filename_annot = session["filename"]+".json"
+    f = open("results/"+filename_report, "w")
     f.write("Prenom_Patient\t"+prenom_patient+"\n")
     f.write("Nom_Patient\t"+nom_patient+"\n")
     f.write("ID_Patient\t"+id_patient+"\n")
@@ -154,7 +160,8 @@ def write_report():
     f.write("Diagnostic\t"+diag+"\n")
     for i in session["info_annot"]:
         f.write(i+"\t"+session["info_annot"][i]+"\n")
-    return render_template("results.html", data=session["info_annot"], prenom_patient=prenom_patient, nom_patient=nom_patient, id_patient=id_patient, redacteur_rapport=redacteur_rapport, filename=filename)
+    return render_template("results.html", data=session["info_annot"], prenom_patient=prenom_patient, nom_patient=nom_patient, id_patient=id_patient, 
+    redacteur_rapport=redacteur_rapport, filename_report=filename_report, filename_annot=filename_annot)
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5010)
