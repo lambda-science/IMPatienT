@@ -16,4 +16,4 @@ python setup.py install
 4. Launch the app
 `python main.py`
 
-4. Go to [127.0.0.1:5011/](http://127.0.0.1:5010/) in your web-browser and upload your first histology image.
+5. Go to [127.0.0.1:5011/](http://127.0.0.1:5010/) in your web-browser and upload your first histology image.
