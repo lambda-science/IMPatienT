@@ -52,10 +52,9 @@ def create_deepzoom_file(image_path):
 
 def create_history_file():
     """List all images with allowed extensions in the upload folder"""
-    file_list = [
-        i.split("/")[-1] for i in glob("uploads/*")
-        if i.split(".")[-1] in ALLOWED_EXTENSIONS
-    ]
+    file_list = [(i.split("/")[-1].split("_")[0], i.split("/")[-1])
+                 for i in glob("uploads/*")
+                 if i.split(".")[-1] in ALLOWED_EXTENSIONS]
     return file_list
 
 
@@ -103,7 +102,9 @@ def upload_file():
             create_deepzoom_file(UPLOAD_FOLDER + "/" + filename)
             session["filename"] = filename
             session["patient_ID"] = patient_ID
-            return redirect(url_for("annot_page", filename=filename))
+            return redirect(
+                url_for("annot_page", filename=filename,
+                        patient_ID=patient_ID))
     return render_template("index.html", file_list=file_list)
 
 
@@ -111,8 +112,9 @@ def upload_file():
 def annot_page():
     """Render the annotation page after the upload of the initial image. 
     Redirects to the results page when the annotation form is submitted."""
-    session["filename"] = request.args.get("filename")
     filename = request.args.get("filename")
+    session["filename"] = request.args.get("filename")
+    session["patient_ID"] = request.args.get("patient_ID")
     feature_list = create_feature_list("config/config_ontology")
     if request.method == "POST":
         if "submit_button" in request.form:

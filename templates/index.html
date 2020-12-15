@@ -17,7 +17,8 @@
       <h1>Reprendre l'annoation de fichiers déjà ajoutés</h1>
       <ul>
         {% for file in file_list %}
-        <li><a href="annot?filename={{ file }}">{{ file }}</a>
+        <li><a href="annot?filename={{file[1]}}&patient_ID={{file[0]}}">Fichier: {{ file[1] }} ; Identifiant Patient:
+            {{file[0]}}</a>
           {% endfor %}
       </ul>
     </div>
