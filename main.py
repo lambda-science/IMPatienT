@@ -111,7 +111,7 @@ def annot_page():
     """Render the annotation page after the upload of the initial image. 
     Redirects to the results page when the annotation form is submitted."""
     filename = request.args.get("filename")
-    feature_list = create_feature_list("config_ontology")
+    feature_list = create_feature_list("config/config_ontology")
     if request.method == "POST":
         if "submit_button" in request.form:
             # When the form is submitted we store the form data in the session variable (cookie) under the "info_annot" key
