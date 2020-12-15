@@ -6,7 +6,7 @@ from flask import Flask, flash, request, redirect, url_for, render_template, sen
 from werkzeug.utils import secure_filename
 from PIL import Image
 
-from glob import glob 
+from glob import glob
 from src import deepzoom
 
 # Constant variable for folders and allowed extension
@@ -20,16 +20,20 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["REPORT_FOLDER"] = REPORT_FOLDER
 app.config["SECRET_KEY"] = "myverylongsecretkey"
 
+
 def allowed_file(filename):
     """Check if the sumbmitted file name is in allowed extension"""
     return "." in filename and \
            filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
 def create_feature_list(config_file):
     """Extract the list of feature and format them from the configuration file path"""
     feature = open(config_file, "r")
-    feature_list = [ (line.strip().replace(" ", "_"), line) for line in feature.readlines()]
+    feature_list = [(line.strip().replace(" ", "_"), line)
+                    for line in feature.readlines()]
     return feature_list
+
 
 def create_deepzoom_file(image_path):
     """Convert an image to a deep zoom image format. Create .dzi file and a folder with the name of the image"""
@@ -43,27 +47,35 @@ def create_deepzoom_file(image_path):
         image_quality=1,
     )
     # Create Deep Zoom image pyramid from source
-    creator.create(SOURCE, ""+image_path+".dzi")
+    creator.create(SOURCE, "" + image_path + ".dzi")
+
 
 def create_history_file():
     """List all images with allowed extensions in the upload folder"""
-    file_list = [i.split("/")[-1] for i in glob("uploads/*") if i.split(".")[-1] in ALLOWED_EXTENSIONS]
+    file_list = [
+        i.split("/")[-1] for i in glob("uploads/*")
+        if i.split(".")[-1] in ALLOWED_EXTENSIONS
+    ]
     return file_list
+
 
 @app.route("/uploads/<path:filename>")
 def send_dzi(filename):
     """Serve files located in subfolder inside uploads folder"""
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
+
 @app.route("/uploads/<filename>")
 def uploads(filename):
     """Serve files located in uploads folder"""
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
+
 @app.route("/results/<path:filename>")
 def get_report(filename):
     """Serve files located in subfolder inside results"""
     return send_from_directory(app.config["REPORT_FOLDER"], filename)
+
 
 @app.route("/", methods=["GET", "POST"])
 def upload_file():
@@ -84,28 +96,33 @@ def upload_file():
             flash("No selected file")
             return redirect(request.url)
         if file and allowed_file(file.filename) and patient_ID:
-            filename = secure_filename(patient_ID+"_"+file.filename)
+            filename = secure_filename(patient_ID + "_" + file.filename)
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
             # Create the deep zoom image and save filename & patient ID from the form
-            create_deepzoom_file(UPLOAD_FOLDER+"/"+filename)
+            create_deepzoom_file(UPLOAD_FOLDER + "/" + filename)
             session["filename"] = filename
             session["patient_ID"] = patient_ID
             return redirect(url_for("annot_page", filename=filename))
     return render_template("index.html", file_list=file_list)
 
+
 @app.route("/annot", methods=["GET", "POST"])
 def annot_page():
     """Render the annotation page after the upload of the initial image. 
-    Redirects to the results page when the annotation form is submitted."""    
+    Redirects to the results page when the annotation form is submitted."""
     filename = request.args.get("filename")
     feature_list = create_feature_list("config_ontology")
-    if request.method=="POST":
+    if request.method == "POST":
         if "submit_button" in request.form:
             # When the form is submitted we store the form data in the session variable (cookie) under the "info_annot" key
             data = request.form.to_dict()
             session["info_annot"] = data
             return redirect(url_for("write_report"))
-    return render_template("annot.html", filename=filename, thumbnail=filename+"_thumbnail.jpg", feature_list=feature_list, patient_ID=session["patient_ID"])
+    return render_template("annot.html",
+                           filename=filename,
+                           thumbnail=filename + "_thumbnail.jpg",
+                           feature_list=feature_list,
+                           patient_ID=session["patient_ID"])
 
 
 @app.route("/write_annot", methods=["POST"])
@@ -117,19 +134,25 @@ def write_annot():
     parsed = json.loads(raw_data)
     # If no annotations yet: json file is created
     if os.path.exists("results/" + session["filename"] + ".json") == False:
-        with open("results/" + session["filename"] + ".json", "w") as json_file:
+        with open("results/" + session["filename"] + ".json",
+                  "w") as json_file:
             annot_list.append(parsed)
             json_file.write(json.dumps(annot_list, indent=4))
     # If there are already some annotation: we add the new annotations to the file
     else:
         # First open as read only to load existing JSON
-        with open("results/" + session["filename"] + ".json", "r") as json_file:
+        with open("results/" + session["filename"] + ".json",
+                  "r") as json_file:
             old_data = json.load(json_file)
             old_data.append(parsed)
         # Then open as write to overwrite the old file with old json+new data
-        with open("results/" + session["filename"] + ".json", "w") as json_file:
+        with open("results/" + session["filename"] + ".json",
+                  "w") as json_file:
             json_file.write(json.dumps(old_data, indent=4))
-    return json.dumps({"success":True}), 200, {"ContentType":"application/json"} 
+    return json.dumps({"success": True}), 200, {
+        "ContentType": "application/json"
+    }
+
 
 @app.route("/update_annot", methods=["POST"])
 def update_annot():
@@ -150,7 +173,10 @@ def update_annot():
     # Write the new annotations JSON data to file.
     with open("results/" + session["filename"] + ".json", "w") as json_file:
         json_file.write(json.dumps(updated_list, indent=4))
-    return json.dumps({"success":True}), 200, {"ContentType":"application/json"} 
+    return json.dumps({"success": True}), 200, {
+        "ContentType": "application/json"
+    }
+
 
 @app.route("/delete_annot", methods=["POST"])
 def delete_annot():
@@ -169,7 +195,10 @@ def delete_annot():
     # Write the new annotations JSON data to file.
     with open("results/" + session["filename"] + ".json", "w") as json_file:
         json_file.write(json.dumps(updated_list, indent=4))
-    return json.dumps({"success":True}), 200, {"ContentType":"application/json"} 
+    return json.dumps({"success": True}), 200, {
+        "ContentType": "application/json"
+    }
+
 
 @app.route("/results", methods=["GET", "POST"])
 def write_report():
@@ -182,21 +211,28 @@ def write_report():
     diag = session["info_annot"].pop("diag")
     del session["info_annot"]["submit_button"]
     # Format report and annotation file name
-    filename_report = session["filename"]+".txt"
-    filename_annot = session["filename"]+".json"
+    filename_report = session["filename"] + ".txt"
+    filename_annot = session["filename"] + ".json"
     # Write the histology report to file with first the basic informations
-    f = open("results/"+filename_report, "w")
-    f.write("Prenom_Patient\t"+prenom_patient+"\n")
-    f.write("Nom_Patient\t"+nom_patient+"\n")
-    f.write("ID_Patient\t"+id_patient+"\n")
-    f.write("Redacteur_histo\t"+redacteur_rapport+"\n")
-    f.write("Diagnostic\t"+diag+"\n")
+    f = open("results/" + filename_report, "w")
+    f.write("Prenom_Patient\t" + prenom_patient + "\n")
+    f.write("Nom_Patient\t" + nom_patient + "\n")
+    f.write("ID_Patient\t" + id_patient + "\n")
+    f.write("Redacteur_histo\t" + redacteur_rapport + "\n")
+    f.write("Diagnostic\t" + diag + "\n")
     # Then we write each histology feature values with a loop
     for i in session["info_annot"]:
-        f.write(i+"\t"+session["info_annot"][i]+"\n")
+        f.write(i + "\t" + session["info_annot"][i] + "\n")
     # Finally we render the results page
-    return render_template("results.html", data=session["info_annot"], prenom_patient=prenom_patient, nom_patient=nom_patient, id_patient=id_patient, 
-    redacteur_rapport=redacteur_rapport, filename_report=filename_report, filename_annot=filename_annot)
+    return render_template("results.html",
+                           data=session["info_annot"],
+                           prenom_patient=prenom_patient,
+                           nom_patient=nom_patient,
+                           id_patient=id_patient,
+                           redacteur_rapport=redacteur_rapport,
+                           filename_report=filename_report,
+                           filename_annot=filename_annot)
+
 
 if __name__ == "__main__":
     # Run the app, access it in the browser at: 127.0.0.1:5010/
