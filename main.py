@@ -1,14 +1,13 @@
 import os
-import deepzoom
+import json
+import pandas as pd
+
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory, session
 from werkzeug.utils import secure_filename
 from PIL import Image
-import json
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired
-import pandas as pd
+
 from glob import glob 
+from src import deepzoom
 
 # Constant variable for folders and allowed extension
 UPLOAD_FOLDER = "uploads"
