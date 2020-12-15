@@ -25,7 +25,7 @@
           {% for feat in feature_list %}
           <div class="row">
             <div class="col-lg"><label for=inlineRadio1><a href="#" data-toggle="tooltip"
-                  title="my very long description that can take multiple lines">{{feat[1]}}</a></label></div>
+                  title="{{feat[2]}}">{{feat[1]}}</a></label></div>
             <div class="form-check form-check-inline col-sm">
               <input class="form-check-input" type="radio" name={{feat[0]}} id="inlineRadio1" value="1">
               <label class="form-check-label" for="inlineRadio1">Présent</label>

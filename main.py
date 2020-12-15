@@ -29,9 +29,11 @@ def allowed_file(filename):
 
 def create_feature_list(config_file):
     """Extract the list of feature and format them from the configuration file path"""
+    feature_df = pd.read_csv(config_file, sep='\t', header=None)
+    print(feature_df)
     feature = open(config_file, "r")
-    feature_list = [(line.strip().replace(" ", "_"), line)
-                    for line in feature.readlines()]
+    feature_list = [(row[0].strip().replace(" ", "_"), row[0], row[1])
+                    for index, row in feature_df.iterrows()]
     return feature_list
 
 
@@ -115,7 +117,7 @@ def annot_page():
     filename = request.args.get("filename")
     session["filename"] = request.args.get("filename")
     session["patient_ID"] = request.args.get("patient_ID")
-    feature_list = create_feature_list("config/config_ontology")
+    feature_list = create_feature_list("config/config_ontology.tsv")
     if request.method == "POST":
         if "submit_button" in request.form:
             # When the form is submitted we store the form data in the session variable (cookie) under the "info_annot" key
