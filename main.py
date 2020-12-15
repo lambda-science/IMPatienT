@@ -30,8 +30,6 @@ def allowed_file(filename):
 def create_feature_list(config_file):
     """Extract the list of feature and format them from the configuration file path"""
     feature_df = pd.read_csv(config_file, sep='\t', header=None)
-    print(feature_df)
-    feature = open(config_file, "r")
     feature_list = [(row[0].strip().replace(" ", "_"), row[0], row[1])
                     for index, row in feature_df.iterrows()]
     return feature_list
