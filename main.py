@@ -110,6 +110,7 @@ def upload_file():
 def annot_page():
     """Render the annotation page after the upload of the initial image. 
     Redirects to the results page when the annotation form is submitted."""
+    session["filename"] = request.args.get("filename")
     filename = request.args.get("filename")
     feature_list = create_feature_list("config/config_ontology")
     if request.method == "POST":
