@@ -78,6 +78,7 @@ def get_report(filename):
 
 
 @app.route("/", methods=["GET", "POST"])
+@app.route("/index", methods=["GET", "POST"])
 def upload_file():
     """Index page that is used to upload the image to the app and register patient ID.
     Redirect to the annotation page after a succesful upload.

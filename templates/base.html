@@ -30,7 +30,6 @@
 </head>
 
 <body>
-
   {% with messages = get_flashed_messages() %}
   {% if messages %}
   <ul>
@@ -41,7 +40,10 @@
   {% endif %}
   {% endwith %}
 
-
+  <div>
+    Histo Annot:
+    <a href="/index">Index</a>
+  </div>
   {% block content %}{% endblock %}
 </body>
 
