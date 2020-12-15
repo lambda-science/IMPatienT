@@ -1,8 +1,8 @@
-Prenom_Patient	aaa
-Nom_Patient	aaaa
+Prenom_Patient	Jean
+Nom_Patient	Dupond
 ID_Patient	666
-Redacteur_histo	aaa
-Diagnostic	aaaa
+Redacteur_histo	Corentin
+Diagnostic	Nemaline Myopathy
 CFTD	-1
 Caps	-1
 Central_Nuclei	-1
