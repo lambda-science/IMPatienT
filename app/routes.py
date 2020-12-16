@@ -1,60 +1,12 @@
 import os
 import json
-import pandas as pd
+
+from app import app
+from app.forms import ImageForm, AnnotForm
+import app.histofunc as Histofunc
 
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory, session
 from werkzeug.utils import secure_filename
-from PIL import Image
-
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField
-from wtforms.validators import DataRequired, Required
-
-from glob import glob
-from src import deepzoom
-
-# Constant variable for folders and allowed extension
-UPLOAD_FOLDER = "uploads"
-REPORT_FOLDER = "results"
-ALLOWED_EXTENSIONS = ["tif", "tiff", "png", "jpg", "jpeg"]
-
-# Flask app initialisation and configuration
-app = Flask(__name__)
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-app.config["REPORT_FOLDER"] = REPORT_FOLDER
-app.config["SECRET_KEY"] = "myverylongsecretkey"
-
-
-def create_feature_list(config_file):
-    """Extract the list of feature and format them from the configuration file path"""
-    feature_df = pd.read_csv(config_file, sep='\t', header=None)
-    feature_list = [(row[0].strip().replace(" ", "_"), row[0], row[1])
-                    for index, row in feature_df.iterrows()]
-    return feature_list
-
-
-def create_deepzoom_file(image_path):
-    """Convert an image to a deep zoom image format. Create .dzi file and a folder with the name of the image"""
-    # Specify your source image
-    SOURCE = image_path
-    # Create Deep Zoom Image creator with weird parameters
-    creator = deepzoom.ImageCreator(
-        tile_size=256,
-        tile_overlap=2,
-        tile_format="png",
-        image_quality=1,
-    )
-    # Create Deep Zoom image pyramid from source
-    creator.create(SOURCE, "" + image_path + ".dzi")
-
-
-def create_history_file():
-    """List all images with allowed extensions in the upload folder"""
-    file_list = [(i.split("/")[-1].split("_")[0], i.split("/")[-1])
-                 for i in glob("uploads/*")
-                 if i.split(".")[-1] in ALLOWED_EXTENSIONS]
-    return file_list
 
 
 @app.route("/uploads/<path:filename>")
@@ -75,23 +27,7 @@ def upload_file():
     """Index page that is used to upload the image to the app and register patient ID.
     Redirect to the annotation page after a succesful upload.
     Also show the availiable file that already have been uploaded"""
-    class ImageForm(FlaskForm):
-        image = FileField(validators=[
-            FileRequired(),
-            FileAllowed(ALLOWED_EXTENSIONS,
-                        "Ce fichier n'est pas une image valide !")
-        ],
-                          render_kw={"class": "form-control-file"})
-        patient_ID = StringField('patient_ID',
-                                 validators=[DataRequired()],
-                                 render_kw={
-                                     "placeholder": "Identifiant Patient",
-                                     "class": "form-control"
-                                 })
-        submit = SubmitField('Upload',
-                             render_kw={"class": "btn btn-primary mb-2"})
-
-    file_list = create_history_file()
+    file_list = Histofunc.create_history_file()
     form = ImageForm()
     if form.validate_on_submit():
         file = form.image.data
@@ -99,7 +35,7 @@ def upload_file():
         filename = secure_filename(patient_ID + "_" + file.filename)
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
         # Create the deep zoom image
-        create_deepzoom_file(
+        Histofunc.create_deepzoom_file(
             os.path.join(app.config["UPLOAD_FOLDER"], filename))
         return redirect(
             url_for("annot_page", filename=filename, patient_ID=patient_ID))
@@ -112,53 +48,7 @@ def annot_page():
     Redirects to the results page when the annotation form is submitted."""
     session["filename"] = request.args.get("filename")
     session["patient_ID"] = request.args.get("patient_ID")
-    feature_list = create_feature_list(
-        os.path.join("config", "config_ontology.tsv"))
-
-    class AnnotForm(FlaskForm):
-        patient_nom = StringField('patient_nom',
-                                  validators=[DataRequired()],
-                                  render_kw={
-                                      "placeholder": "Nom Patient",
-                                      "class": "form-control"
-                                  })
-        patient_prenom = StringField('patient_prenom',
-                                     validators=[DataRequired()],
-                                     render_kw={
-                                         "placeholder": "Prénom Patient",
-                                         "class": "form-control"
-                                     })
-        patient_id = StringField('patient_ID',
-                                 render_kw={
-                                     "placeholder": session["patient_ID"],
-                                     "class": "form-control",
-                                     "readonly": "True"
-                                 })
-        expert_name = StringField('expert_name',
-                                  validators=[DataRequired()],
-                                  render_kw={
-                                      "placeholder": "Nom du rapporteur",
-                                      "class": "form-control",
-                                  })
-        submit = SubmitField('Générer le rapport',
-                             render_kw={"class": "btn btn-primary mb-2"})
-
-        diagnostic = StringField('diagnostic',
-                                 validators=[DataRequired()],
-                                 render_kw={
-                                     "placeholder": "Diagnostique de Maladie",
-                                     "class": "form-control"
-                                 })
-
-    for feature in feature_list:
-        setattr(
-            AnnotForm, feature[0],
-            RadioField(feature[1],
-                       choices=[('1', 'Présent'), ('-1', 'Absent'),
-                                ('0', 'Incertain')],
-                       default='-1',
-                       validators=[DataRequired()]))
-    form = AnnotForm()
+    form = AnnotForm(session["patient_ID"])
     if form.validate_on_submit():
         # Save form data in the session cookie
         session["patient_nom"] = form.patient_nom.data
@@ -166,12 +56,12 @@ def annot_page():
         session["expert_name"] = form.expert_name.data
         session["diagnostic"] = form.diagnostic.data
         session["feature"] = {}
-        for feature in feature_list:
+        for feature in app.config["FEATURE_LIST"]:
             session["feature"][feature[0]] = form.data[feature[0]]
         return redirect(url_for("write_report"))
     return render_template("annot.html",
                            filename=session["filename"],
-                           feature_list=feature_list,
+                           feature_list=app.config["FEATURE_LIST"],
                            patient_ID=session["patient_ID"],
                            form=form)
 
@@ -279,8 +169,3 @@ def write_report():
                            redacteur_rapport=session["expert_name"],
                            filename_report=session["filename"] + ".txt",
                            filename_annot=session["filename"] + ".json")
-
-
-if __name__ == "__main__":
-    # Run the app, access it in the browser at: 127.0.0.1:5010/
-    app.run(debug=True, host="127.0.0.1", port=5010)
