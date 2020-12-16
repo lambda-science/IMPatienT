@@ -1,5 +1,10 @@
 {% extends "base.html"%}
 {% block content %}
+<!-- OpenSeaDragon files -->
+<script type="text/javascript" src="{{url_for('static', filename='openseadragon.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='openseadragon-annotorious.min.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename='annotorious.min.css')}}">
+
 <div class="container">
   <div class="row">
     <div class="col-lg">
@@ -11,39 +16,32 @@
       <h1> Partie Annotation</h1>
       <form method="post">
         <div class="form-group">
-          <div class="form-row">
-            <div class="col"><input type="name" class="form-control" name="prenom_patient"
-                placeholder="Prénom du Patient" required></div>
-            <div class="col"><input type="name" class="form-control" name="nom_patient" placeholder="Nom du Patient"
-                required></div>
-            <div class="col"><input class="form-control" type="text" placeholder="{{patient_ID}}" readonly></div>
+          {{ form.hidden_tag() }}
+          {{ form.patient_nom }}
+          {{ form.patient_prenom }}
+          {{ form.patient_id }}
+          {{ form.expert_name }}
+          <div class="feature_list_radio overflow-auto">
+            <table>
+              <thead>
+                <td>Feature</td>
+                <td>Présent</td>
+                <td>Absent</td>
+                <td>Incertain</td>
+              </thead>
+              {% for feat in feature_list %}
+              <tr>
+                <td><a href="#" data-toggle="tooltip" title="{{feat[2]}}">{{feat[1]}}</a></td>
+                {% for subfield in form[feat[0]] %}
+                <td>{{ subfield }}</td>
+                {% endfor %}
+              </tr>
+              {% endfor %}
+            </table>
           </div>
-          <input type="name" class="form-control" name="redacteur_rapport"
-            placeholder="Nom du rédacteur de rapport histologique" required>
+          {{form.diagnostic}}
+          {{ form.submit }}
         </div>
-        <div class="feature_list_radio overflow-auto">
-          {% for feat in feature_list %}
-          <div class="row">
-            <div class="col-lg"><label for=inlineRadio1><a href="#" data-toggle="tooltip"
-                  title="{{feat[2]}}">{{feat[1]}}</a></label></div>
-            <div class="form-check form-check-inline col-sm">
-              <input class="form-check-input" type="radio" name={{feat[0]}} id="inlineRadio1" value="1">
-              <label class="form-check-label" for="inlineRadio1">Présent</label>
-            </div>
-            <div class="form-check form-check-inline col-sm">
-              <input class="form-check-input" type="radio" name={{feat[0]}} id="inlineRadio2" value="-1" checked>
-              <label class="form-check-label" for="inlineRadio2">Absent</label>
-            </div>
-            <div class="form-check form-check-inline col-sm">
-              <input class="form-check-input" type="radio" name={{feat[0]}} id="inlineRadio3" value="0">
-              <label class="form-check-label" for="inlineRadio3">Incertain</label>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        <div class="col"><input type="name" class="form-control" name="diag" placeholder="Diagnostic maladie" required>
-        </div>
-        <button type="submit" name="submit_button" class="btn btn-primary">Génerer le rapport</button>
       </form>
     </div>
   </div>
@@ -55,7 +53,7 @@
     var viewer = OpenSeadragon({
       id: "seadragon-viewer",
       prefixUrl: "/static/images/",
-      tileSources: "{{url_for('send_dzi', filename=filename+'.dzi')}}"
+      tileSources: "{{url_for('uploads', filename=filename+'.dzi')}}"
     });
 
     // Initialize the Annotorious plugin

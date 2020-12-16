@@ -16,20 +16,16 @@
 
   <!-- Custom files -->
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='custom.css')}}">
-  <script type="text/javascript" src="{{url_for('static', filename='js.js')}}"></script>
 
-  <!-- OpenSeaDragon files -->
-  <script type="text/javascript" src="{{url_for('static', filename='openseadragon.min.js')}}"></script>
-  <script type="text/javascript" src="{{url_for('static', filename='openseadragon-annotorious.min.js')}}"></script>
-  <link rel="stylesheet" href="{{url_for('static', filename='annotorious.min.css')}}">
 </head>
 
 <body>
+  <hr>
   {% with messages = get_flashed_messages() %}
   {% if messages %}
   <ul>
     {% for message in messages %}
-    <li>{{ message }} </li>
+    <li>{{ message }}</li>
     {% endfor %}
   </ul>
   {% endif %}

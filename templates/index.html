@@ -8,10 +8,16 @@
       </div>
       <div class="col-sm">
         <form method=post enctype=multipart/form-data>
-          <input type="text" class="form-control" name="patient_ID" placeholder="Identifiant Patient" required>
+          {{ form.hidden_tag() }}
+          {{ form.patient_ID }}
           <h4>Sélectionner l'image</h4>
-          <input type=file class="form-control-file" name=file>
-          <input type=submit class="btn btn-primary mb-2" value=Upload>
+          {{ form.image }}
+          <p>
+            {% for error in form.image.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+          </p>
+          {{ form.submit }}
       </div>
       </form>
       <h1>Reprendre l'annoation de fichiers déjà ajoutés</h1>
