@@ -6,6 +6,7 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    images = db.relationship('Image', backref='creator', lazy='dynamic')
 
     def __repr__(self):
         return '<User {} Email {}>'.format(self.username, self.email)
@@ -29,6 +30,7 @@ class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_firstname = db.Column(db.String(140))
     patient_name = db.Column(db.String(140), index=True)
+    images = db.relationship('Image', backref='from_patient', lazy='dynamic')
 
     def __repr__(self):
         return '<Patient {} {} {}>'.format(self.id, self.patient_firstname,
