@@ -34,8 +34,14 @@
   <div>
     Histo Annot:
     <a href="/index">Index</a>
+    {% if current_user.is_anonymous %}
+    <a href="{{ url_for('login') }}">Login</a>
+    {% else %}
+    <a href="{{ url_for('logout') }}">Logout</a>
+    {% endif %}
   </div>
-  {% block content %}{% endblock %}
+  {% block content %}
+  {% endblock %}
 </body>
 
 </html>
