@@ -6,6 +6,6 @@
 `conda activate histo`
 
 3. Launch the app
-`python main.py`
+`flask run`
 
-4. Go to [127.0.0.1:5010/](http://127.0.0.1:5010/) in your web-browser and upload your first histology image.
+4. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and upload your first histology image.
