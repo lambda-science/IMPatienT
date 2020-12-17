@@ -54,6 +54,7 @@ dependencies:
   - pylint=2.6.0=py38_0
   - python=3.8.5=h7579374_1
   - python-dateutil=2.8.1=py_0
+  - python-dotenv=0.15.0=pyhd8ed1ab_0
   - python-editor=1.0.4=py_0
   - python_abi=3.8=1_cp38
   - pytz=2020.4=pyhd3eb1b0_0
