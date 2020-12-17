@@ -1,8 +1,8 @@
-"""Image and Patient tables
+"""user image patient
 
-Revision ID: 86d689db99f3
-Revises: 24e69f864698
-Create Date: 2020-12-17 11:39:57.160748
+Revision ID: f86e7a4777f4
+Revises: 
+Create Date: 2020-12-17 14:02:17.824621
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '86d689db99f3'
-down_revision = '24e69f864698'
+revision = 'f86e7a4777f4'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -25,15 +25,25 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_patient_patient_name'), 'patient', ['patient_name'], unique=False)
+    op.create_table('user',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('username', sa.String(length=64), nullable=True),
+    sa.Column('email', sa.String(length=120), nullable=True),
+    sa.Column('password_hash', sa.String(length=128), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
+    op.create_index(op.f('ix_user_username'), 'user', ['username'], unique=True)
     op.create_table('image',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('image_name', sa.String(length=140), nullable=True),
-    sa.Column('expert_name', sa.Integer(), nullable=True),
+    sa.Column('expert_id', sa.Integer(), nullable=True),
     sa.Column('patient_id', sa.Integer(), nullable=True),
     sa.Column('image_binary', sa.LargeBinary(), nullable=True),
     sa.Column('diagnostic', sa.String(length=140), nullable=True),
     sa.Column('report_text', sa.Text(), nullable=True),
-    sa.ForeignKeyConstraint(['expert_name'], ['user.id'], ),
+    sa.Column('annotation_json', sa.Text(), nullable=True),
+    sa.ForeignKeyConstraint(['expert_id'], ['user.id'], ),
     sa.ForeignKeyConstraint(['patient_id'], ['patient.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -47,6 +57,9 @@ def downgrade():
     op.drop_index(op.f('ix_image_image_name'), table_name='image')
     op.drop_index(op.f('ix_image_diagnostic'), table_name='image')
     op.drop_table('image')
+    op.drop_index(op.f('ix_user_username'), table_name='user')
+    op.drop_index(op.f('ix_user_email'), table_name='user')
+    op.drop_table('user')
     op.drop_index(op.f('ix_patient_patient_name'), table_name='patient')
     op.drop_table('patient')
     # ### end Alembic commands ###

@@ -5,7 +5,10 @@
 2. Activate the environnement
 `conda activate histo`
 
-3. Launch the app
+4. Initialize databse:
+```flask db upgrade```
+
+6. Launch the app
 `flask run`
 
 4. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and upload your first histology image.

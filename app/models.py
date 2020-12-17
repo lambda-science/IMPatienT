@@ -29,11 +29,12 @@ def load_user(id):
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image_name = db.Column(db.String(140), index=True)
-    expert_name = db.Column(db.Integer, db.ForeignKey('user.id'))
+    expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
     image_binary = db.Column(db.LargeBinary)
     diagnostic = db.Column(db.String(140), index=True)
     report_text = db.Column(db.Text)
+    annotation_json = db.Column(db.Text)
 
     def __repr__(self):
         return '<Image Name {} Patient {}>'.format(self.image_name,
