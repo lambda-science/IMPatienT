@@ -17,10 +17,6 @@
       <form method="post">
         <div class="form-group">
           {{ form.hidden_tag() }}
-          {{ form.patient_nom }}
-          {{ form.patient_prenom }}
-          {{ form.patient_id }}
-          {{ form.expert_name }}
           <div class="feature_list_radio overflow-auto">
             <table>
               <thead>
@@ -53,7 +49,7 @@
     var viewer = OpenSeadragon({
       id: "seadragon-viewer",
       prefixUrl: "/static/images/",
-      tileSources: "{{url_for('uploads', filename=filename+'.dzi')}}"
+      tileSources: "{{url_for('temp', filename=filename+'.dzi')}}"
     });
 
     // Initialize the Annotorious plugin

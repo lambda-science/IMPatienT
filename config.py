@@ -7,7 +7,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'myverylongsecretkey'
     ALLOWED_EXTENSIONS = ["tif", "tiff", "png", "jpg", "jpeg"]
-    UPLOAD_FOLDER = os.path.join(basedir, "uploads")
+    UPLOAD_FOLDER = os.path.join(basedir, "temp")
     REPORT_FOLDER = os.path.join(basedir, "results")
     FEATURE_LIST = Histofunc.create_feature_list(
         os.path.join("config", "config_ontology.tsv"))

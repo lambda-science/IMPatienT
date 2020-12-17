@@ -11,6 +11,16 @@
         <form method=post enctype=multipart/form-data>
           {{ form.hidden_tag() }}
           {{ form.patient_ID }}
+          {{ form.patient_nom }}
+          {% for error in form.patient_nom.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+
+          {{ form.patient_prenom }}
+          {% for error in form.patient_prenom.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+
           <h4>Sélectionner l'image</h4>
           {{ form.image }}
           <p>

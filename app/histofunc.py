@@ -35,3 +35,9 @@ def create_history_file():
         if i.split(".")[-1] in current_app.config["ALLOWED_EXTENSIONS"]
     ]
     return file_list
+
+
+def write_file(data, filename):
+    # Convert binary data to proper format and write it on Hard Disk
+    with open(filename, 'wb') as file:
+        file.write(data)

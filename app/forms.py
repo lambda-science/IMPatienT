@@ -1,5 +1,5 @@
 from app import app
-from app.models import User
+from app.models import User, Patient, Image
 
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -27,22 +27,6 @@ class ImageForm(FlaskForm):
                                  "placeholder": "Identifiant Patient",
                                  "class": "form-control"
                              })
-    submit = SubmitField('Upload', render_kw={"class": "btn btn-primary mb-2"})
-
-
-class AnnotForm(FlaskForm):
-    def __init__(self, patient_id_value, *args, **kwargs):
-        super(AnnotForm, self).__init__(*args, **kwargs)
-        self.patient_id_value = patient_id_value
-        setattr(
-            AnnotForm, "patient_id",
-            StringField('patient_ID',
-                        render_kw={
-                            "placeholder": patient_id_value,
-                            "class": "form-control",
-                            "readonly": "True"
-                        }))
-
     patient_nom = StringField('patient_nom',
                               validators=[DataRequired()],
                               render_kw={
@@ -55,12 +39,31 @@ class AnnotForm(FlaskForm):
                                      "placeholder": "Prénom Patient",
                                      "class": "form-control"
                                  })
-    expert_name = StringField('expert_name',
-                              validators=[DataRequired()],
-                              render_kw={
-                                  "placeholder": "Nom du rapporteur",
-                                  "class": "form-control",
-                              })
+    submit = SubmitField('Upload', render_kw={"class": "btn btn-primary mb-2"})
+
+    def validate_patient_nom(self, patient_nom):
+        patient = Patient.query.get(self.patient_ID.data)
+        if patient is not None:
+            if patient.patient_name != patient_nom.data:
+                raise ValidationError(
+                    str('Same Patient ID with different last name already exists: '
+                        + patient.patient_name +
+                        " ; Please use another ID or correct patient name"))
+
+    def validate_patient_prenom(self, patient_prenom):
+        patient = Patient.query.get(self.patient_ID.data)
+        if patient is not None:
+            if patient.patient_firstname != patient_prenom.data:
+                raise ValidationError(
+                    str('Same Patient ID with different firstname already exists: '
+                        + patient.patient_firstname +
+                        " ;  Please use another ID or correct patient name"))
+
+
+class AnnotForm(FlaskForm):
+    def __init__(self, *args, **kwargs):
+        super(AnnotForm, self).__init__(*args, **kwargs)
+
     submit = SubmitField('Générer le rapport',
                          render_kw={"class": "btn btn-primary mb-2"})
 

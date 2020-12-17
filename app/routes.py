@@ -4,7 +4,7 @@ import json
 from app import app
 from app import db
 from app.forms import ImageForm, AnnotForm, LoginForm, RegistrationForm
-from app.models import User
+from app.models import User, Image, Patient
 import app.histofunc as Histofunc
 
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory, session
@@ -13,8 +13,8 @@ from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
 
 
-@app.route("/uploads/<path:filename>")
-def uploads(filename):
+@app.route("/temp/<path:filename>")
+def temp(filename):
     """Serve files located in subfolder inside uploads folder"""
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
@@ -38,10 +38,37 @@ def upload_file():
         file = form.image.data
         patient_ID = form.patient_ID.data
         filename = secure_filename(patient_ID + "_" + file.filename)
-        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        # Create the deep zoom image
-        Histofunc.create_deepzoom_file(
-            os.path.join(app.config["UPLOAD_FOLDER"], filename))
+
+        # Create a temporary folder for username
+        temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
+                                     session["username"])
+        if not os.path.exists(temp_user_dir):
+            os.makedirs(temp_user_dir)
+        # Save the image to a temp folder
+        file.save(os.path.join(temp_user_dir, filename))
+        # Get User ID
+        expert = User.query.filter_by(username=session["username"]).first()
+        # Create our new Image & Patient database entry
+        image = Image(image_name=filename,
+                      patient_id=form.patient_ID.data,
+                      expert_id=expert.id)
+        patient = Patient(id=form.patient_ID.data,
+                          patient_name=form.patient_nom.data,
+                          patient_firstname=form.patient_prenom.data)
+        # Check if the image or patient already exist in DB (same filename & patient ID)
+        # If not: add it to DB
+        if image.isduplicated() == False:
+            image.set_imageblob(os.path.join(temp_user_dir, filename))
+            db.session.add(image)
+            db.session.commit()
+
+        if patient.existAlready() == False:
+            db.session.add(patient)
+            db.session.commit()
+
+        # Finally delete the image file in temps folder and redirect to annotation
+        if os.path.exists(os.path.join(temp_user_dir, filename)):
+            os.remove(os.path.join(temp_user_dir, filename))
         return redirect(
             url_for("annot_page", filename=filename, patient_ID=patient_ID))
     return render_template("index.html", file_list=file_list, form=form)
@@ -49,16 +76,21 @@ def upload_file():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # Already auth. user are redirected to index
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
+
     if form.validate_on_submit():
+        # Check if password match
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
+        # Log user if password matched, store username and redirect user
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
+        session['username'] = form.username.data
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('upload_file')
         return redirect(next_page)
@@ -87,11 +119,30 @@ def register():
 
 
 @app.route("/annot", methods=["GET", "POST"])
+@login_required
 def annot_page():
     """Render the annotation page after the upload of the initial image. 
     Redirects to the results page when the annotation form is submitted."""
     session["filename"] = request.args.get("filename")
     session["patient_ID"] = request.args.get("patient_ID")
+    image_requested = Image.query.filter_by(
+        image_name=session["filename"],
+        patient_id=session["patient_ID"]).first()
+    if image_requested != None:
+        # Create a temporary folder for username
+        temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
+                                     session["username"])
+        if not os.path.exists(temp_user_dir):
+            os.makedirs(temp_user_dir)
+        # Create the deep zoom image
+        filepath_to_write = os.path.join(temp_user_dir,
+                                         image_requested.image_name)
+        Histofunc.write_file(image_requested.image_binary, filepath_to_write)
+        Histofunc.create_deepzoom_file(filepath_to_write)
+        session["filepath"] = os.path.join(session["username"],
+                                           image_requested.image_name)
+    elif image_requested == None:
+        raise ("L'image demandée n'existe pas")
     form = AnnotForm(session["patient_ID"])
     if form.validate_on_submit():
         # Save form data in the session cookie
@@ -104,7 +155,7 @@ def annot_page():
             session["feature"][feature[0]] = form.data[feature[0]]
         return redirect(url_for("write_report"))
     return render_template("annot.html",
-                           filename=session["filename"],
+                           filename=session["filepath"],
                            feature_list=app.config["FEATURE_LIST"],
                            patient_ID=session["patient_ID"],
                            form=form)

@@ -2,6 +2,8 @@ from app import db
 from app import login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from flask import current_app
+import os
 
 
 class User(UserMixin, db.Model):
@@ -40,9 +42,21 @@ class Image(db.Model):
         return '<Image Name {} Patient {}>'.format(self.image_name,
                                                    self.patient_id)
 
+    def set_imageblob(self, filename):
+        with open(os.path.join(current_app.config["UPLOAD_FOLDER"], filename),
+                  'rb') as file:
+            self.image_binary = file.read()
+
+    def isduplicated(self):
+        if Image.query.filter_by(image_name=self.image_name,
+                                 patient_id=self.patient_id).first() is None:
+            return False
+        else:
+            return True
+
 
 class Patient(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(100), primary_key=True)
     patient_firstname = db.Column(db.String(140))
     patient_name = db.Column(db.String(140), index=True)
     images = db.relationship('Image', backref='from_patient', lazy='dynamic')
@@ -50,3 +64,9 @@ class Patient(db.Model):
     def __repr__(self):
         return '<Patient {} {} {}>'.format(self.id, self.patient_firstname,
                                            self.patient_name)
+
+    def existAlready(self):
+        if Patient.query.get(str(self.id)) is None:
+            return False
+        else:
+            return True
