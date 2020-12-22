@@ -56,7 +56,7 @@
     var anno = OpenSeadragon.Annotorious(viewer);
 
     // Load annotations in W3C WebAnnotation format
-    anno.loadAnnotations("{{url_for('get_report', filename=filename+'.json')}}");
+    anno.loadAnnotations("{{url_for('temp', filename=filename+'.json')}}");
 
     // Attach handlers to listen to events
     anno.on('createAnnotation', function (annotation) {

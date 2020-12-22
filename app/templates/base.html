@@ -20,26 +20,32 @@
 </head>
 
 <body>
+  <div>
+    <nav class="navbar navbar-default">
+      Histo Annot:
+      <a href="/index">Index</a>
+      {% if current_user.is_anonymous %}
+      <a href="{{ url_for('login') }}">Login</a>
+      {% else %}
+      <a href="{{ url_for('logout') }}">Logout</a>
+      {% endif %}
+    </nav>
+  </div>
   <hr>
-  {% with messages = get_flashed_messages() %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
   {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
+  {% for category, message in messages %}
+  <div class="alert alert-{{ category }}" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+    <!-- <strong>Title</strong> --> {{ message }}
+  </div>
+  {% endfor %}
   {% endif %}
   {% endwith %}
 
-  <div>
-    Histo Annot:
-    <a href="/index">Index</a>
-    {% if current_user.is_anonymous %}
-    <a href="{{ url_for('login') }}">Login</a>
-    {% else %}
-    <a href="{{ url_for('logout') }}">Logout</a>
-    {% endif %}
-  </div>
+
   {% block content %}
   {% endblock %}
 </body>

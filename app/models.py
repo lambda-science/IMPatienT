@@ -36,7 +36,7 @@ class Image(db.Model):
     image_binary = db.Column(db.LargeBinary)
     diagnostic = db.Column(db.String(140), index=True)
     report_text = db.Column(db.Text)
-    annotation_json = db.Column(db.Text)
+    annotation_json = db.Column(db.Text, default="[]")
 
     def __repr__(self):
         return '<Image Name {} Patient {}>'.format(self.image_name,

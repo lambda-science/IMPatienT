@@ -11,18 +11,13 @@ from flask import Flask, flash, request, redirect, url_for, render_template, sen
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
+import shutil
 
 
 @app.route("/temp/<path:filename>")
 def temp(filename):
     """Serve files located in subfolder inside uploads folder"""
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
-
-
-@app.route("/results/<path:filename>")
-def get_report(filename):
-    """Serve files located in subfolder inside results"""
-    return send_from_directory(app.config["REPORT_FOLDER"], filename)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -78,14 +73,14 @@ def upload_file():
 def login():
     # Already auth. user are redirected to index
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('upload_file'))
     form = LoginForm()
 
     if form.validate_on_submit():
         # Check if password match
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Invalid username or password', "danger")
             return redirect(url_for('login'))
         # Log user if password matched, store username and redirect user
         login_user(user, remember=form.remember_me.data)
@@ -113,7 +108,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash('Congratulations, you are now a registered user!', "success")
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -123,12 +118,13 @@ def register():
 def annot_page():
     """Render the annotation page after the upload of the initial image. 
     Redirects to the results page when the annotation form is submitted."""
+    form = AnnotForm()
     session["filename"] = request.args.get("filename")
     session["patient_ID"] = request.args.get("patient_ID")
     image_requested = Image.query.filter_by(
         image_name=session["filename"],
         patient_id=session["patient_ID"]).first()
-    if image_requested != None:
+    if image_requested != None and form.validate_on_submit() == False:
         # Create a temporary folder for username
         temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
                                      session["username"])
@@ -141,14 +137,21 @@ def annot_page():
         Histofunc.create_deepzoom_file(filepath_to_write)
         session["filepath"] = os.path.join(session["username"],
                                            image_requested.image_name)
+
+        # Create the JSON File for annotation from data stored in DB
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
+                  "w") as json_file:
+            annotation_data = json.loads(
+                image_requested.annotation_json.replace("'", '"'))
+            json_file.write(json.dumps(annotation_data, indent=4))
     elif image_requested == None:
         raise ("L'image demandée n'existe pas")
-    form = AnnotForm(session["patient_ID"])
+
     if form.validate_on_submit():
         # Save form data in the session cookie
-        session["patient_nom"] = form.patient_nom.data
-        session["patient_prenom"] = form.patient_prenom.data
-        session["expert_name"] = form.expert_name.data
+        session["patient_nom"] = "tot"
+        session["patient_prenom"] = "tat"
+        session["expert_name"] = image_requested.expert_id
         session["diagnostic"] = form.diagnostic.data
         session["feature"] = {}
         for feature in app.config["FEATURE_LIST"]:
@@ -165,24 +168,28 @@ def annot_page():
 def write_annot():
     """Write new annotation entries (json data) coming from the javascript plugin Annotorious (OpenSeaDragon Plugin) to a file named after the image.
     New annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
+    temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
+                                 session["username"])
     annot_list = []
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
     # If no annotations yet: json file is created
-    if os.path.exists("results/" + session["filename"] + ".json") == False:
-        with open(os.path.join("results/", session["filename"] + ".json"),
+    if os.path.exists(
+            os.path.join(temp_user_dir,
+                         session["filename"] + ".json")) == False:
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
                   "w") as json_file:
             annot_list.append(parsed)
             json_file.write(json.dumps(annot_list, indent=4))
     # If there are already some annotation: we add the new annotations to the file
     else:
         # First open as read only to load existing JSON
-        with open(os.path.join("results/", session["filename"] + ".json"),
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
                   "r") as json_file:
             old_data = json.load(json_file)
             old_data.append(parsed)
         # Then open as write to overwrite the old file with old json+new data
-        with open(os.path.join("results/", session["filename"] + ".json"),
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
                   "w") as json_file:
             json_file.write(json.dumps(old_data, indent=4))
     return json.dumps({"success": True}), 200, {
@@ -194,11 +201,13 @@ def write_annot():
 def update_annot():
     """Update existing annotaions (json data) coming from the javascript plugin Annotorious (OpenSeaDragon Plugin) in the annotation json file named after the image.
     Updated annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
+    temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
+                                 session["username"])
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
     updated_list = []
     # First open as read only to load existing JSON
-    with open(os.path.join("results/", session["filename"] + ".json"),
+    with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
               "r") as json_file:
         old_data = json.load(json_file)
         # Compare ID of annotation and replace the old annotations with the new one when there is a match in IDs.
@@ -208,7 +217,7 @@ def update_annot():
             elif parsed["id"] == anot["id"]:
                 updated_list.append(parsed)
     # Write the new annotations JSON data to file.
-    with open(os.path.join("results/", session["filename"] + ".json"),
+    with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
               "w") as json_file:
         json_file.write(json.dumps(updated_list, indent=4))
     return json.dumps({"success": True}), 200, {
@@ -220,11 +229,13 @@ def update_annot():
 def delete_annot():
     """Delete existing annotaions (json data) if the user delete an annotion of the javascript plugin Annotorious (OpenSeaDragon Plugin).
     Delete command is coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
+    temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
+                                 session["username"])
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
     updated_list = []
     # First open as read only to load existing JSON
-    with open(os.path.join("results/", session["filename"] + ".json"),
+    with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
               "r") as json_file:
         old_data = json.load(json_file)
         # If annotation ID is different from the ID of deletion command we save them to a list. Matching ID will be skipped and erased.
@@ -232,7 +243,7 @@ def delete_annot():
             if parsed["id"] != anot["id"]:
                 updated_list.append(anot)
     # Write the new annotations JSON data to file.
-    with open(os.path.join("results/", session["filename"] + ".json"),
+    with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
               "w") as json_file:
         json_file.write(json.dumps(updated_list, indent=4))
     return json.dumps({"success": True}), 200, {
@@ -244,23 +255,33 @@ def delete_annot():
 def write_report():
     """Write the histological report and serve the results page for patient with download links"""
     # Write the histology report to file with first the basic informations
-    with open(os.path.join("results/", session["filename"] + ".txt"),
-              "w") as f:
-        f.write("Prenom_Patient\t" + session["patient_prenom"] + "\n")
-        f.write("Nom_Patient\t" + session["patient_nom"] + "\n")
-        f.write("ID_Patient\t" + session["patient_ID"] + "\n")
-        f.write("Redacteur_histo\t" + session["expert_name"] + "\n")
-        f.write("Diagnostic\t" + session["diagnostic"] + "\n")
+    temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
+                                 session["username"])
+    image_requested = Image.query.filter_by(
+        image_name=session["filename"],
+        patient_id=session["patient_ID"]).first()
+    if image_requested != None:
+        report_string = "Prenom_Patient\t" + session["patient_prenom"] + "\n"
+        report_string = report_string + "Nom_Patient\t" + session[
+            "patient_nom"] + "\n"
+        report_string = report_string + "ID_Patient\t" + session[
+            "patient_ID"] + "\n"
+        report_string = report_string + "Redacteur_histo\t" + str(
+            session["expert_name"]) + "\n"
+        report_string = report_string + "Diagnostic\t" + session[
+            "diagnostic"] + "\n"
         # Then we write each histology feature values with a loop
         for i in session["feature"]:
-            f.write(i + "\t" + session["feature"][i] + "\n")
+            report_string = report_string + i + "\t" + session["feature"][
+                i] + "\n"
+        image_requested.report_text = str(report_string)
+        image_requested.diagnostic = session["diagnostic"]
 
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
+                  "r") as json_file:
+            data_annot = json.load(json_file)
+            image_requested.annotation_json = str(data_annot)
+            db.session.commit()
+        shutil.rmtree(temp_user_dir)
     # Finally we render the results page
-    return render_template("results.html",
-                           feature_info=session["feature"],
-                           prenom_patient=session["patient_prenom"],
-                           nom_patient=session["patient_nom"],
-                           id_patient=session["patient_ID"],
-                           redacteur_rapport=session["expert_name"],
-                           filename_report=session["filename"] + ".txt",
-                           filename_annot=session["filename"] + ".json")
+    return render_template("results.html", report_histo=report_string)

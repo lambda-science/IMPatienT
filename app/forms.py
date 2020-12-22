@@ -64,7 +64,7 @@ class AnnotForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(AnnotForm, self).__init__(*args, **kwargs)
 
-    submit = SubmitField('Générer le rapport',
+    submit = SubmitField('Enregister les annotations et générer le rapport',
                          render_kw={"class": "btn btn-primary mb-2"})
 
     diagnostic = StringField('diagnostic',
