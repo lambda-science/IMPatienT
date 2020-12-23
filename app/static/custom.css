@@ -1,5 +1,5 @@
 .feature_list_radio {
-    height:450px;
+    height:500px;
   }
 
   table {
@@ -10,4 +10,14 @@
 table td {
     word-wrap: break-word;         /* All browsers since IE 5.5+ */
     overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(41, 43, 44);
+  color: white;
+  text-align: center;
 }

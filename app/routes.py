@@ -284,4 +284,4 @@ def write_report():
             db.session.commit()
         shutil.rmtree(temp_user_dir)
     # Finally we render the results page
-    return render_template("results.html", report_histo=report_string)
+    return render_template("results.html")

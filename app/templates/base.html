@@ -20,17 +20,41 @@
 </head>
 
 <body>
-  <div>
-    <nav class="navbar navbar-default">
-      Histo Annot:
-      <a href="/index">Index</a>
-      {% if current_user.is_anonymous %}
-      <a href="{{ url_for('login') }}">Login</a>
-      {% else %}
-      <a href="{{ url_for('logout') }}">Logout</a>
-      {% endif %}
-    </nav>
-  </div>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('upload_file') }}">Upload Image</a>
+        </li>
+      </ul>
+    </div>
+    <div class="mx-auto order-0">
+      <a class="navbar-brand mx-auto" href="#">Histo Annot</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+      <ul class="navbar-nav ml-auto">
+        {% if current_user.is_anonymous %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="#">Logged as: {{ current_user.username }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
   <hr>
   {% with messages = get_flashed_messages(with_categories=true) %}
   <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
@@ -45,9 +69,16 @@
   {% endif %}
   {% endwith %}
 
+  <main role="main" class="container">
 
-  {% block content %}
-  {% endblock %}
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <div class="footer">
+    <p>Created by: Corentin Meyer at CSTB Team @ ICube, CNRS (University of Strasbourg). <a
+        href="https://gitlab.com/Corentin_7/simple-histology-annot">Code availiable here</a></p>
+  </div>
 </body>
 
 </html>
