@@ -1,12 +1,12 @@
 {% extends "base.html"%}
 {% block content %}
 
-<h1>Rapport Histologique</h1>
-<p> Le rapport a été sauvegardé dans la base de donnée.</p>
+<h1>Histology Report</h1>
+<p>The report has been saved in the database.</p>
 
-<h1>Annotation d'image</h1>
-<p> Les annotations ont été sauvegardées dans la base de donnée.</p>
+<h1>Image Annotation</h1>
+<p>The annotations have been saved in the database.</p>
 
-<a href="{{ url_for('upload_file') }}" class="btn btn-info" role="button">Retourner à l'index</a>
+<a href="{{ url_for('upload_file') }}" class="btn btn-info" role="button">Return to index</a>
 
 {% endblock %}

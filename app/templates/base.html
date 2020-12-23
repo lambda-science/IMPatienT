@@ -45,7 +45,7 @@
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="#">Logged as: {{ current_user.username }}</a>
+          <a class="nav-link" href="#">Logged in as: {{ current_user.username }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
@@ -76,8 +76,10 @@
   </main>
 
   <div class="footer">
-    <p>Created by: Corentin Meyer at CSTB Team @ ICube, CNRS (University of Strasbourg). <a
-        href="https://gitlab.com/Corentin_7/simple-histology-annot">Code availiable here</a></p>
+    <p>Created by: Corentin Meyer at CSTB Team @ ICube, CNRS, Unistra. <a
+        href="https://gitlab.com/Corentin_7/simple-histology-annot">Code availiable here</a>
+      Contact: <span class="obfuscate">rf.artsinu.ute@reyem.nitneroc</span></p>
+
   </div>
 </body>
 

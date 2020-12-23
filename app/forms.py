@@ -4,11 +4,13 @@ from app.models import User, Patient, Image
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Regexp, Length
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Username', validators=[
+        DataRequired(),
+    ])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
@@ -18,25 +20,25 @@ class ImageForm(FlaskForm):
     image = FileField(validators=[
         FileRequired(),
         FileAllowed(app.config["ALLOWED_EXTENSIONS"],
-                    "Ce fichier n'est pas une image valide !")
+                    "This file is not a valid image !")
     ],
                       render_kw={"class": "form-control-file"})
     patient_ID = StringField('patient_ID',
                              validators=[DataRequired()],
                              render_kw={
-                                 "placeholder": "Identifiant Patient",
+                                 "placeholder": "Patient ID",
                                  "class": "form-control"
                              })
     patient_nom = StringField('patient_nom',
                               validators=[DataRequired()],
                               render_kw={
-                                  "placeholder": "Nom Patient",
+                                  "placeholder": "Patient Last Name",
                                   "class": "form-control"
                               })
     patient_prenom = StringField('patient_prenom',
                                  validators=[DataRequired()],
                                  render_kw={
-                                     "placeholder": "Prénom Patient",
+                                     "placeholder": "Patient First Name",
                                      "class": "form-control"
                                  })
     submit = SubmitField('Upload', render_kw={"class": "btn btn-primary mb-2"})
@@ -64,13 +66,13 @@ class AnnotForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(AnnotForm, self).__init__(*args, **kwargs)
 
-    submit = SubmitField('Enregister les annotations et générer le rapport',
+    submit = SubmitField('Submit report and annotations to the database',
                          render_kw={"class": "btn btn-primary mb-2"})
 
     diagnostic = StringField('diagnostic',
                              validators=[DataRequired()],
                              render_kw={
-                                 "placeholder": "Diagnostique de Maladie",
+                                 "placeholder": "Disease diagnostic",
                                  "class": "form-control"
                              })
 
@@ -79,14 +81,19 @@ for feature in app.config["FEATURE_LIST"]:
     setattr(
         AnnotForm, feature[0],
         RadioField(feature[1],
-                   choices=[('1', 'Présent'), ('-1', 'Absent'),
-                            ('0', 'Incertain')],
+                   choices=[('1', 'Present'), ('-1', 'Absent'),
+                            ('0', 'Uncertain')],
                    default='-1',
                    validators=[DataRequired()]))
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Username',
+                           validators=[
+                               DataRequired(),
+                               Regexp(r'^[\w.@+-]+$'),
+                               Length(min=4, max=25)
+                           ])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password',

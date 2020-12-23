@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-lg">
       <div class="row">
-        <h1> Importer une image et l'associer à un patient</h1></br>
+        <h1>Upload an image and associate it to a patient ID and name</h1></br>
       </div>
       <div class="col-sm">
         <form method=post enctype=multipart/form-data>
@@ -20,7 +20,7 @@
           <span style="color: red;">[{{ error }}]</span>
           {% endfor %}
 
-          <h4>Sélectionner l'image</h4>
+          <h4>Select an image file</h4>
           {{ form.image }}
           <p>
             {% for error in form.image.errors %}
@@ -30,10 +30,10 @@
           {{ form.submit }}
       </div>
       </form>
-      <h1>Reprendre l'annoation de fichiers déjà ajoutés</h1>
+      <h1>Modify or Delete already registered patient with histological image</h1>
       <ul>
         {% for file in file_list %}
-        <li><a href="annot?filename={{file[1]}}&patient_ID={{file[0]}}">Fichier: {{ file[1] }} ; Identifiant Patient:
+        <li><a href="annot?filename={{file[1]}}&patient_ID={{file[0]}}">File:: {{ file[1] }} ; Patient ID:
             {{file[0]}}</a>
           {% endfor %}
       </ul>

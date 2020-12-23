@@ -21,3 +21,8 @@ table td {
   color: white;
   text-align: center;
 }
+
+.obfuscate { 
+  unicode-bidi: bidi-override; 
+  direction: rtl; 
+}
