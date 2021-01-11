@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-lg">
       <div class="row">
-        <h1>Upload an image and associate it to a patient ID and name</h1></br>
+        <h1>Upload New Image</h1></br>
       </div>
       <div class="col-sm">
         <form method=post enctype=multipart/form-data>
@@ -30,15 +30,29 @@
           {{ form.submit }}
       </div>
       </form>
-      <h1>Modify or Delete already registered patient with histological image</h1>
-      <ul>
-        {% for file in file_list %}
-        <li><a href="annot?filename={{file[1]}}&patient_ID={{file[0]}}">File:: {{ file[1] }} ; Patient ID:
-            {{file[0]}}</a>
-          {% endfor %}
-      </ul>
+
     </div>
   </div>
-</div>
 
+  <h1>Image History</h1>
+  <table>
+    <thead>
+      <td>Image</td>
+      <td>Patient ID</td>
+      <td>Diagnositc</td>
+      <td>Action</td>
+    </thead>
+    {% for image in image_history %}
+    <tr>
+      <td>{{ image.image_name }}</td>
+      <td>{{ image.patient_id }}</td>
+      <td>{{ image.diagnostic }}</td>
+      <td><a class="btn btn-success" role="button"
+          href="annot?filename={{image.image_name}}&patient_ID={{image.patient_id}}">Resume</a> <a
+          class="btn btn-danger" role="button"
+          href="delete_image?filename={{image.image_name}}&patient_ID={{image.patient_id}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
 {% endblock %}

@@ -2,9 +2,9 @@
     height:500px;
   }
 
-  table {
-    table-layout: fixed;
-    width: 100%;
+table {
+  table-layout: fixed;
+  width: 100%;
 }
 
 table td {
@@ -26,3 +26,21 @@ table td {
   unicode-bidi: bidi-override; 
   direction: rtl; 
 }
+
+table, thead, td, tr {
+  border: 1px solid black;
+  text-align: center;
+}
+
+thead {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #091f6871;
+  color: white;
+  font-weight: bold;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}

@@ -27,16 +27,23 @@ def upload_file():
     """Index page that is used to upload the image to the app and register patient ID.
     Redirect to the annotation page after a succesful upload.
     Also show the availiable file that already have been uploaded"""
-    file_list = Histofunc.create_history_file()
     form = ImageForm()
+    # Wipe old temporary data form user
+    temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
+                                 session["username"])
+    try:
+        shutil.rmtree(temp_user_dir)
+    except:
+        pass
+    # Show Image History
+    image_history = Image.query.filter_by(expert_id=current_user.id)
     if form.validate_on_submit():
         file = form.image.data
         patient_ID = form.patient_ID.data
         filename = secure_filename(patient_ID + "_" + file.filename)
 
         # Create a temporary folder for username
-        temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
-                                     session["username"])
+
         if not os.path.exists(temp_user_dir):
             os.makedirs(temp_user_dir)
         # Save the image to a temp folder
@@ -66,7 +73,22 @@ def upload_file():
             os.remove(os.path.join(temp_user_dir, filename))
         return redirect(
             url_for("annot_page", filename=filename, patient_ID=patient_ID))
-    return render_template("index.html", file_list=file_list, form=form)
+    return render_template("index.html",
+                           form=form,
+                           image_history=image_history)
+
+
+# To change to form insead of simple get
+@app.route("/delete_image", methods=["GET", "POST"])
+@login_required
+def delete_image():
+    image_requested = Image.query.filter_by(
+        image_name=request.args.get("filename"),
+        patient_id=request.args.get("patient_ID")).first()
+    if image_requested != None and image_requested.expert_id == current_user.id:
+        db.session.delete(image_requested)
+        db.session.commit()
+    return redirect(url_for('upload_file'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -124,7 +146,9 @@ def annot_page():
     image_requested = Image.query.filter_by(
         image_name=session["filename"],
         patient_id=session["patient_ID"]).first()
-    if image_requested != None and form.validate_on_submit() == False:
+    if image_requested != None and form.validate_on_submit(
+    ) == False and image_requested.expert_id == current_user.id:
+        session["image_expert_id"] = image_requested.expert_id
         # Create a temporary folder for username
         temp_user_dir = os.path.join(app.config["UPLOAD_FOLDER"],
                                      session["username"])
@@ -145,7 +169,11 @@ def annot_page():
                 image_requested.annotation_json.replace("'", '"'))
             json_file.write(json.dumps(annotation_data, indent=4))
     elif image_requested == None:
-        raise ("L'image demandée n'existe pas")
+        flash('Image doesn\'t exist!', "error")
+        return redirect(url_for('upload_file'))
+    elif image_requested.expert_id != current_user.id:
+        flash('User not authorized for this image!', "error")
+        return redirect(url_for('upload_file'))
 
     if form.validate_on_submit():
         # Save form data in the session cookie
@@ -173,28 +201,35 @@ def write_annot():
     annot_list = []
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
-    # If no annotations yet: json file is created
-    if os.path.exists(
-            os.path.join(temp_user_dir,
-                         session["filename"] + ".json")) == False:
-        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-                  "w") as json_file:
-            annot_list.append(parsed)
-            json_file.write(json.dumps(annot_list, indent=4))
-    # If there are already some annotation: we add the new annotations to the file
+    if session["image_expert_id"] == current_user.id:
+        # If no annotations yet: json file is created
+        if os.path.exists(
+                os.path.join(temp_user_dir,
+                             session["filename"] + ".json")) == False:
+            with open(
+                    os.path.join(temp_user_dir, session["filename"] + ".json"),
+                    "w") as json_file:
+                annot_list.append(parsed)
+                json_file.write(json.dumps(annot_list, indent=4))
+        # If there are already some annotation: we add the new annotations to the file
+        else:
+            # First open as read only to load existing JSON
+            with open(
+                    os.path.join(temp_user_dir, session["filename"] + ".json"),
+                    "r") as json_file:
+                old_data = json.load(json_file)
+                old_data.append(parsed)
+            # Then open as write to overwrite the old file with old json+new data
+            with open(
+                    os.path.join(temp_user_dir, session["filename"] + ".json"),
+                    "w") as json_file:
+                json_file.write(json.dumps(old_data, indent=4))
+        return json.dumps({"success": True}), 200, {
+            "ContentType": "application/json"
+        }
     else:
-        # First open as read only to load existing JSON
-        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-                  "r") as json_file:
-            old_data = json.load(json_file)
-            old_data.append(parsed)
-        # Then open as write to overwrite the old file with old json+new data
-        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-                  "w") as json_file:
-            json_file.write(json.dumps(old_data, indent=4))
-    return json.dumps({"success": True}), 200, {
-        "ContentType": "application/json"
-    }
+        flash('Unautorized database manipulation (write_annot)', "error")
+        return redirect(url_for('upload_file'))
 
 
 @app.route("/update_annot", methods=["POST"])
@@ -206,23 +241,27 @@ def update_annot():
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
     updated_list = []
-    # First open as read only to load existing JSON
-    with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-              "r") as json_file:
-        old_data = json.load(json_file)
-        # Compare ID of annotation and replace the old annotations with the new one when there is a match in IDs.
-        for anot in old_data:
-            if parsed["id"] != anot["id"]:
-                updated_list.append(anot)
-            elif parsed["id"] == anot["id"]:
-                updated_list.append(parsed)
-    # Write the new annotations JSON data to file.
-    with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-              "w") as json_file:
-        json_file.write(json.dumps(updated_list, indent=4))
-    return json.dumps({"success": True}), 200, {
-        "ContentType": "application/json"
-    }
+    if session["image_expert_id"] == current_user.id:
+        # First open as read only to load existing JSON
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
+                  "r") as json_file:
+            old_data = json.load(json_file)
+            # Compare ID of annotation and replace the old annotations with the new one when there is a match in IDs.
+            for anot in old_data:
+                if parsed["id"] != anot["id"]:
+                    updated_list.append(anot)
+                elif parsed["id"] == anot["id"]:
+                    updated_list.append(parsed)
+        # Write the new annotations JSON data to file.
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
+                  "w") as json_file:
+            json_file.write(json.dumps(updated_list, indent=4))
+        return json.dumps({"success": True}), 200, {
+            "ContentType": "application/json"
+        }
+    else:
+        flash('Unautorized database manipulation (write_annot)', "error")
+        return redirect(url_for('upload_file'))
 
 
 @app.route("/delete_annot", methods=["POST"])
@@ -234,21 +273,25 @@ def delete_annot():
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
     updated_list = []
-    # First open as read only to load existing JSON
-    with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-              "r") as json_file:
-        old_data = json.load(json_file)
-        # If annotation ID is different from the ID of deletion command we save them to a list. Matching ID will be skipped and erased.
-        for anot in old_data:
-            if parsed["id"] != anot["id"]:
-                updated_list.append(anot)
-    # Write the new annotations JSON data to file.
-    with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-              "w") as json_file:
-        json_file.write(json.dumps(updated_list, indent=4))
-    return json.dumps({"success": True}), 200, {
-        "ContentType": "application/json"
-    }
+    if session["image_expert_id"] == current_user.id:
+        # First open as read only to load existing JSON
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
+                  "r") as json_file:
+            old_data = json.load(json_file)
+            # If annotation ID is different from the ID of deletion command we save them to a list. Matching ID will be skipped and erased.
+            for anot in old_data:
+                if parsed["id"] != anot["id"]:
+                    updated_list.append(anot)
+        # Write the new annotations JSON data to file.
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
+                  "w") as json_file:
+            json_file.write(json.dumps(updated_list, indent=4))
+        return json.dumps({"success": True}), 200, {
+            "ContentType": "application/json"
+        }
+    else:
+        flash('Unautorized database manipulation (write_annot)', "error")
+        return redirect(url_for('upload_file'))
 
 
 @app.route("/results", methods=["GET", "POST"])
