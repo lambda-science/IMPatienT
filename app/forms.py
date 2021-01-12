@@ -3,7 +3,7 @@ from app.models import User, Patient, Image
 
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, SelectField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Regexp, Length
 
 
@@ -69,11 +69,12 @@ class AnnotForm(FlaskForm):
     submit = SubmitField('Submit report and annotations to the database',
                          render_kw={"class": "btn btn-primary mb-2"})
 
-    diagnostic = StringField('diagnostic',
+    diagnostic = SelectField('diagnostic',
                              validators=[DataRequired()],
+                             choices=app.config["DIAG_LIST"],
                              render_kw={
                                  "placeholder": "Disease diagnostic",
-                                 "class": "form-control"
+                                 "class": "form-control custom-select"
                              })
 
 

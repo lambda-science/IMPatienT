@@ -12,6 +12,13 @@ def create_feature_list(config_file):
     return feature_list
 
 
+def create_diag_list(config_file):
+    """Extract the list of feature and format them from the configuration file path"""
+    diag_df = pd.read_csv(config_file, sep='\t', header=None)
+    diag_list = [(row[0], row[1]) for index, row in diag_df.iterrows()]
+    return diag_list
+
+
 def create_deepzoom_file(image_path):
     """Convert an image to a deep zoom image format. Create .dzi file and a folder with the name of the image"""
     # Specify your source image

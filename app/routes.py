@@ -16,7 +16,7 @@ import shutil
 
 @app.route("/temp/<path:filename>")
 def temp(filename):
-    """Serve files located in subfolder inside uploads folder"""
+    """Serve files located in subfolder inside temp folder"""
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
 

@@ -11,6 +11,8 @@ class Config(object):
     REPORT_FOLDER = os.path.join(basedir, "results")
     FEATURE_LIST = Histofunc.create_feature_list(
         os.path.join("config", "config_ontology.tsv"))
+    DIAG_LIST = Histofunc.create_diag_list(
+        os.path.join("config", "diagnostic.tsv"))
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
