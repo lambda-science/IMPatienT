@@ -70,3 +70,29 @@ class Patient(db.Model):
             return False
         else:
             return True
+
+
+class Pdf(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    pdf_name = db.Column(db.String(140), index=True)
+    expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    pdf_binary = db.Column(db.LargeBinary)
+    lang = db.Column(db.String(140), index=True)
+    ocr_text = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<Pdf Name {} Patient {}>'.format(self.pdf_name,
+                                                 self.patient_id)
+
+    def set_pdfblob(self, filename):
+        with open(os.path.join(current_app.config["UPLOAD_FOLDER"], filename),
+                  'rb') as file:
+            self.pdf_binary = file.read()
+
+    def isduplicated(self):
+        if Pdf.query.filter_by(pdf_name=self.pdf_name,
+                               patient_id=self.patient_id).first() is None:
+            return False
+        else:
+            return True

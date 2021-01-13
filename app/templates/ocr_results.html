@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+{% block content %}
+<h1>>Uploaded !</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>PDF Viewer</h1>
+            <p>placeholder pdf file</p>
+        </div>
+
+        <div class="col">
+            <h1>OCR</h1>
+            <p>placeholder text</p>
+            <form method="post">
+                <div class="form-group">
+                    {{ form.hidden_tag() }}
+                    {{ form.submit }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

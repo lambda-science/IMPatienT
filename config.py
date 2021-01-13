@@ -13,6 +13,8 @@ class Config(object):
         os.path.join("config", "config_ontology.tsv"))
     DIAG_LIST = Histofunc.create_diag_list(
         os.path.join("config", "diagnostic.tsv"))
+    LANG_LIST = Histofunc.create_lang_list(
+        os.path.join("config", "config_lang_ocr.tsv"))
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False

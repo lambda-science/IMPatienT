@@ -1,0 +1,39 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="container center_div">
+    <div class="row">
+        <div class="col-lg">
+            <div class="row">
+                <h1>Upload New PDF</h1></br>
+            </div>
+            <div class="col-sm">
+                <form method=post enctype=multipart/form-data>
+                    {{ form.hidden_tag() }}
+                    {{ form.patient_ID }}
+                    {{ form.patient_nom }}
+                    {% for error in form.patient_nom.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+
+                    {{ form.patient_prenom }}
+                    {% for error in form.patient_prenom.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+
+                    <h4>Select a pdf file</h4>
+                    {{ form.pdf }}
+                    <p>
+                        {% for error in form.pdf.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <h4>Document Langugage</h4>
+                    {{form.lang}}
+                    {{ form.submit }}
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
