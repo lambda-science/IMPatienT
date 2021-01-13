@@ -35,5 +35,25 @@
 
         </div>
     </div>
+    <h1>PDF History</h1>
+    <table>
+        <thead>
+            <td>PDF</td>
+            <td>Patient ID</td>
+            <td>lang</td>
+            <td>Action</td>
+        </thead>
+        {% for pdf in pdf_history %}
+        <tr>
+            <td>{{ pdf.pdf_name }}</td>
+            <td>{{ pdf.patient_id }}</td>
+            <td>{{ pdf.lang }}</td>
+            <td><a class="btn btn-success" role="button"
+                    href="ocr_results?filename={{pdf.pdf_name}}&patient_ID={{pdf.patient_id}}">Resume</a> <a
+                    class="btn btn-danger" role="button"
+                    href="delete_pdf?filename={{pdf.pdf_name}}&patient_ID={{pdf.patient_id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
 {% endblock %}

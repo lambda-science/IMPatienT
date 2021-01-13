@@ -6,6 +6,7 @@ from app import db
 from app.forms import ImageForm, AnnotForm, LoginForm, RegistrationForm, PdfForm, OcrForm
 from app.models import User, Image, Patient, Pdf
 import app.histofunc as Histofunc
+import app.ocrfunc as Ocrfunc
 
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory, session
 from flask_login import current_user, login_user, login_required, logout_user
@@ -382,8 +383,6 @@ def upload_pdf():
             os.remove(os.path.join(temp_user_dir, filename))
         return redirect(
             url_for("ocr_results", filename=filename, patient_ID=patient_ID))
-    else:
-        print("Not Validated")
     return render_template("ocr_upload.html",
                            form=form,
                            pdf_history=pdf_history)
@@ -411,9 +410,12 @@ def ocr_results():
         # Write the PDF File
         filepath_to_write = os.path.join(temp_user_dir, pdf_requested.pdf_name)
         Histofunc.write_file(pdf_requested.pdf_binary, filepath_to_write)
-        session["filepath"] = os.path.join(session["username"],
+        session["filepath"] = os.path.join("temp", session["username"],
                                            pdf_requested.pdf_name)
-
+        ocr_text_list = Ocrfunc.pdf_to_text(session["filepath"], "eng")
+        session["ocr_results_text"] = '\n##### NEW PAGE #####\n'.join(
+            ocr_text_list)
+        session["ocr_results_text"] = session["ocr_results_text"].split("\n")
     elif pdf_requested == None:
         flash('PDF doesn\'t exist!', "error")
         return redirect(url_for('upload_pdf'))
@@ -423,12 +425,11 @@ def ocr_results():
 
     if form.validate_on_submit():
         # Save form data in the session cookie
-        session["ocr_results_text"] = "placeholder report text OCR"
         return redirect(url_for("write_ocr_report"))
     return render_template("ocr_results.html",
-                           filename=session["filepath"],
-                           patient_ID=session["patient_ID"],
-                           form=form)
+                           ocr_text=session["ocr_results_text"],
+                           form=form,
+                           filepath=session["filepath"])
 
 
 @app.route("/sucess_ocr", methods=["GET", "POST"])
@@ -446,3 +447,15 @@ def write_ocr_report():
         shutil.rmtree(temp_user_dir)
     # Finally we render the results page
     return render_template("ocr_sucess.html")
+
+
+@app.route("/delete_pdf", methods=["GET", "POST"])
+@login_required
+def delete_pdf():
+    pdf_requested = Pdf.query.filter_by(
+        pdf_name=request.args.get("filename"),
+        patient_id=request.args.get("patient_ID")).first()
+    if pdf_requested != None and pdf_requested.expert_id == current_user.id:
+        db.session.delete(pdf_requested)
+        db.session.commit()
+    return redirect(url_for('upload_pdf'))

@@ -1,17 +1,22 @@
 {% extends "base.html"%}
 {% block content %}
-<h1>>Uploaded !</h1>
-
 <div class="container">
     <div class="row">
         <div class="col">
             <h1>PDF Viewer</h1>
-            <p>placeholder pdf file</p>
+            <embed src="{{filepath}}" width="600px" height="700px" />
         </div>
 
         <div class="col">
             <h1>OCR</h1>
-            <p>placeholder text</p>
+            <div id="ocrtext">
+                <p>
+                    {% for line in ocr_text %}
+                    {{line}}<br>
+                    {% endfor %}
+                </p>
+            </div>
+
             <form method="post">
                 <div class="form-group">
                     {{ form.hidden_tag() }}
