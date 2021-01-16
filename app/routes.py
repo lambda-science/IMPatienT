@@ -21,11 +21,16 @@ def temp(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
 
-@app.route("/", methods=["GET", "POST"])
-@app.route("/index", methods=["GET", "POST"])
+@app.route("/")
+@app.route("/index")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/upload_img", methods=["GET", "POST"])
 @login_required
 def upload_file():
-    """Index page that is used to upload the image to the app and register patient ID.
+    """Image upload page that is used to upload the image to the app and register patient ID.
     Redirect to the annotation page after a succesful upload.
     Also show the availiable file that already have been uploaded"""
     form = ImageForm()
@@ -74,7 +79,7 @@ def upload_file():
             os.remove(os.path.join(temp_user_dir, filename))
         return redirect(
             url_for("annot_page", filename=filename, patient_ID=patient_ID))
-    return render_template("index.html",
+    return render_template("upload_img.html",
                            form=form,
                            image_history=image_history)
 
@@ -96,7 +101,7 @@ def delete_image():
 def login():
     # Already auth. user are redirected to index
     if current_user.is_authenticated:
-        return redirect(url_for('upload_file'))
+        return redirect(url_for('index'))
     form = LoginForm()
 
     if form.validate_on_submit():

@@ -1,58 +1,45 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
+
 {% block content %}
 <div class="container center_div">
-  <div class="row">
-    <div class="col-lg">
-      <div class="row">
-        <h1>Upload New Image</h1></br>
-      </div>
-      <div class="col-sm">
-        <form method=post enctype=multipart/form-data>
-          {{ form.hidden_tag() }}
-          {{ form.patient_ID }}
-          {{ form.patient_nom }}
-          {% for error in form.patient_nom.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-          {% endfor %}
+    <h1 id="bienvenu-sur-l-application-histo-annot">Bienvenu sur l&#39;application Histo-Annot</h1>
+    <h2 id="contexte-">Contexte:</h2>
+    <p>Cette application a été dévelloppée dans le cadre du <strong>projet 80-Prime MYO-xIA</strong>. Le projet MYO-xIA
+        cherche à rassembler les données patients atteint de <strong>myopathies congénitales</strong> afin de les
+        analyser par des approches d&#39;<strong>IA explicatives</strong>
+        Cette application a pour vocation de compléter les fonctions manquantes du logiciel de gestion patient:
+        <strong>Phenotips</strong>.<br>Dans le cadre de la recherche sur les myopathies congénitales, il y a un besoin
+        important de <strong>numérisation et de standardisation des données patient</strong> afin d&#39;utiliser des
+        méthodes d&#39;analyse de données modernes.</p>
+    <h2 id="fonctionnalit-s-">Fonctionnalités:</h2>
+    <p>Deux fonctionnalités sont à présent disponibles:</p>
+    <ul>
+        <li>
+            <p><strong>Annotation d&#39;images histologiques</strong>: permet d&#39;enregistrer et d&#39;annoter des
+                images de coupes histologiques de tissues de patients atteint de myopathie congénitale. Il est possible
+                de délimiter des zones sur les images et de les associer à des labels. Il est aussi possible de produit
+                un rapport histologique avec une liste d&#39;absence/présence de caractéristiques histopathologiques et
+                d&#39;y associer un diagnostique. </p>
+        </li>
+        <li>
+            <p><strong>Reconnaissance automatique de caractères (PDF)</strong>: permet d&#39;enregistrer et de convertir
+                automatiquement au format texte des fichiers PDF. Ainsi la numérisation et l&#39;extraction de données
+                des courriers entre patient, medecin et biologiste est plus aisée. </p>
+        </li>
+    </ul>
+    <h2 id="comment-utiliser-l-application-">Comment utiliser l&#39;application:</h2>
+    <ol>
+        <li><strong>Pré-requis</strong>: Enregister le patient avec ses informations générales, son pédigree, son
+            phénotype et son diagnostique génétique sur l&#39;applicaiton Phenotips disponibles ici: <a
+                href="">https://www.lbgi.fr/phenotips</a></li>
+        <li>Se connecter en haut à droite à son compte Histo-Annot </li>
+        <li>Cliquer en haut à gauche dans le menu sur &quot;Image Annot&quot; pour annoter des coupes histologiques ou
+            &quot;OCR PDF&quot; pour numériser un fichier PDF. </li>
+        <li>Pour les deux fonctionnalités il est nécessaire de remplir un formulaire avec l&#39;ID patient, le nom et le
+            prénom. En terme d&#39;ID, il faut utiliser l&#39;identifiant phenotips afin de faire le lien entre les deux
+            applications. </li>
+        <li>Se laisser guider par ce qui est affiché à l&#39;écran.</li>
+    </ol>
 
-          {{ form.patient_prenom }}
-          {% for error in form.patient_prenom.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-          {% endfor %}
-
-          <h4>Select an image file</h4>
-          {{ form.image }}
-          <p>
-            {% for error in form.image.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-          </p>
-          {{ form.submit }}
-      </div>
-      </form>
-
-    </div>
-  </div>
-
-  <h1>Image History</h1>
-  <table>
-    <thead>
-      <td>Image</td>
-      <td>Patient ID</td>
-      <td>Diagnostic</td>
-      <td>Action</td>
-    </thead>
-    {% for image in image_history %}
-    <tr>
-      <td>{{ image.image_name }}</td>
-      <td>{{ image.patient_id }}</td>
-      <td>{{ image.diagnostic }}</td>
-      <td><a class="btn btn-success" role="button"
-          href="annot?filename={{image.image_name}}&patient_ID={{image.patient_id}}">Resume</a> <a
-          class="btn btn-danger" role="button"
-          href="delete_image?filename={{image.image_name}}&patient_ID={{image.patient_id}}">Delete</a></td>
-    </tr>
-    {% endfor %}
-  </table>
 </div>
 {% endblock %}
