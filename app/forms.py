@@ -169,3 +169,16 @@ class PdfForm(FlaskForm):
 class OcrForm(FlaskForm):
     submit = SubmitField('Submit text to database',
                          render_kw={"class": "btn btn-primary mb-2"})
+
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Repeat Password',
+                              validators=[DataRequired(),
+                                          EqualTo('password')])
+    submit = SubmitField('Request Password Reset')

@@ -1,3 +1,3 @@
 FLASK_APP=histoannot.py
-FLASK_ENV=production
-FLASK_DEBUG=0
+FLASK_ENV=developpement
+FLASK_DEBUG=1

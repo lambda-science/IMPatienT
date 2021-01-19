@@ -3,10 +3,12 @@ import json
 
 from app import app
 from app import db
-from app.forms import ImageForm, AnnotForm, LoginForm, RegistrationForm, PdfForm, OcrForm
+from app.forms import ImageForm, AnnotForm, LoginForm, RegistrationForm, PdfForm, OcrForm, ResetPasswordRequestForm
 from app.models import User, Image, Patient, Pdf
 import app.histofunc as Histofunc
 import app.ocrfunc as Ocrfunc
+from app.email import send_password_reset_email
+from app.forms import ResetPasswordForm
 
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory, session
 from flask_login import current_user, login_user, login_required, logout_user
@@ -464,3 +466,35 @@ def delete_pdf():
         db.session.delete(pdf_requested)
         db.session.commit()
     return redirect(url_for('upload_pdf'))
+
+
+@app.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_password_reset_email(user)
+        flash('Check your email for the instructions to reset your password')
+        return redirect(url_for('login'))
+    return render_template('reset_password_request.html',
+                           title='Reset Password',
+                           form=form)
+
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('Your password has been reset.')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', form=form)
