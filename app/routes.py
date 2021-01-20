@@ -370,7 +370,8 @@ def upload_pdf():
         # Create our new Image & Patient database entry
         pdf = Pdf(pdf_name=filename,
                   patient_id=form.patient_ID.data,
-                  expert_id=expert.id)
+                  expert_id=expert.id,
+                  lang=form.lang.data)
         patient = Patient(id=form.patient_ID.data,
                           patient_name=form.patient_nom.data,
                           patient_firstname=form.patient_prenom.data)
@@ -419,7 +420,8 @@ def ocr_results():
         Histofunc.write_file(pdf_requested.pdf_binary, filepath_to_write)
         session["filepath"] = os.path.join("temp", session["username"],
                                            pdf_requested.pdf_name)
-        ocr_text_list = Ocrfunc.pdf_to_text(session["filepath"], "eng")
+        ocr_text_list = Ocrfunc.pdf_to_text(session["filepath"],
+                                            pdf_requested.lang)
         session["ocr_results_text"] = '\n##### NEW PAGE #####\n'.join(
             ocr_text_list)
         session["ocr_results_text"] = session["ocr_results_text"].split("\n")
