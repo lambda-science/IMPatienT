@@ -9,6 +9,7 @@ class Config(object):
     ALLOWED_EXTENSIONS = ["tif", "tiff", "png", "jpg", "jpeg"]
     UPLOAD_FOLDER = os.path.join(basedir, "temp")
     REPORT_FOLDER = os.path.join(basedir, "results")
+    SESSION_TYPE = "filesystem"
 
     FEATURE_LIST = Histofunc.create_feature_list(
         os.path.join("config", "config_ontology.tsv"))
