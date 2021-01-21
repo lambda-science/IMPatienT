@@ -30,7 +30,7 @@ class User(UserMixin, db.Model):
                 'reset_password': self.id,
                 'exp': time() + expires_in
             },
-            current_app['SECRET_KEY'],
+            current_app.config['SECRET_KEY'],
             algorithm='HS256')
 
     @staticmethod
