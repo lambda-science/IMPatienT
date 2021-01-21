@@ -1,7 +1,9 @@
 import os
-import app.histofunc as Histofunc
+import app.src.common as Common
+from dotenv import load_dotenv
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
 
 
 class Config(object):
@@ -11,11 +13,11 @@ class Config(object):
     REPORT_FOLDER = os.path.join(basedir, "results")
     SESSION_TYPE = "filesystem"
 
-    FEATURE_LIST = Histofunc.create_feature_list(
+    FEATURE_LIST = Common.create_feature_list(
         os.path.join("config", "config_ontology.tsv"))
-    DIAG_LIST = Histofunc.create_diag_list(
+    DIAG_LIST = Common.create_diag_list(
         os.path.join("config", "diagnostic.tsv"))
-    LANG_LIST = Histofunc.create_lang_list(
+    LANG_LIST = Common.create_lang_list(
         os.path.join("config", "config_lang_ocr.tsv"))
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
