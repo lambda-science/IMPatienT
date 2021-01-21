@@ -24,19 +24,19 @@
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('index') }}">Index</a>
+          <a class="nav-link" href="{{ url_for('index.index') }}">Index</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('upload_file') }}">Image Annot</a>
+          <a class="nav-link" href="{{ url_for('imgannot.upload_file') }}">Image Annot</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('upload_pdf') }}">OCR PDF</a>
+          <a class="nav-link" href="{{ url_for('ocr.upload_pdf') }}">OCR PDF</a>
         </li>
       </ul>
     </div>
     <div class="mx-auto order-0">
       <li class="nav-item active">
-        <a class="nav-link navbar-brand mx-auto" href="{{ url_for('index') }}">Histo Annot</a>
+        <a class="nav-link navbar-brand mx-auto" href="{{ url_for('index.index') }}">Histo Annot</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
           <span class="navbar-toggler-icon"></span>
       </li>
@@ -47,17 +47,17 @@
       <ul class="navbar-nav ml-auto">
         {% if current_user.is_anonymous %}
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+          <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
         </li>
         {% else %}
         <li class="nav-item">
           <a class="nav-link" href="#">Logged in as: {{ current_user.username }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
         </li>
         {% endif %}
       </ul>

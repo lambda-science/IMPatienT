@@ -53,14 +53,14 @@
     var viewer = OpenSeadragon({
       id: "seadragon-viewer",
       prefixUrl: "/static/images/",
-      tileSources: "{{url_for('temp', filename=filename+'.dzi')}}"
+      tileSources: "{{url_for('imgannot.temp', filename=filename+'.dzi')}}"
     });
 
     // Initialize the Annotorious plugin
     var anno = OpenSeadragon.Annotorious(viewer);
 
     // Load annotations in W3C WebAnnotation format
-    anno.loadAnnotations("{{url_for('temp', filename=filename+'.json')}}");
+    anno.loadAnnotations("{{url_for('imgannot.temp', filename=filename+'.json')}}");
 
     // Attach handlers to listen to events
     anno.on('createAnnotation', function (annotation) {
@@ -68,7 +68,7 @@
       console.log(myJSON)
       $.ajax({
         type: "POST",
-        url: "{{url_for('write_annot')}}",
+        url: "{{url_for('imgannot.write_annot')}}",
         data: myJSON,
         success: console.log("Annotation Sent to Backend Successfully"),
         dataType: "text"
@@ -79,7 +79,7 @@
       console.log(myJSON)
       $.ajax({
         type: "POST",
-        url: "{{url_for('update_annot')}}",
+        url: "{{url_for('imgannot.update_annot')}}",
         data: myJSON,
         success: console.log("Annotation Update to Backend Successfully"),
         dataType: "text"
@@ -90,7 +90,7 @@
       console.log(myJSON)
       $.ajax({
         type: "POST",
-        url: "{{url_for('delete_annot')}}",
+        url: "{{url_for('imgannot.delete_annot')}}",
         data: myJSON,
         success: console.log("Annotation Deleted to Backend Successfully"),
         dataType: "text"

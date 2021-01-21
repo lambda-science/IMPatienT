@@ -25,7 +25,7 @@ def upload_file():
     """Image upload page that is used to upload the image to the app and register patient ID.
     Redirect to the annotation page after a succesful upload.
     Also show the availiable file that already have been uploaded"""
-    form = ImageForm()
+    form = ImageForm(allowed_ext=current_app.config["ALLOWED_EXTENSIONS"])
     # Wipe old temporary data form user
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
                                  session["username"])

@@ -5,7 +5,7 @@ from app.models import User
 from app.auth.email import send_password_reset_email
 
 from flask import Flask, flash, request, redirect, url_for, render_template, session
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 from werkzeug.urls import url_parse
 
 

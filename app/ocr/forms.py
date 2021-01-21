@@ -5,6 +5,9 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, SelectField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Regexp, Length
 
+import app.src.common as Common
+import os
+
 
 class PdfForm(FlaskForm):
     pdf = FileField(validators=[
@@ -31,13 +34,16 @@ class PdfForm(FlaskForm):
                                      "class": "form-control"
                                  })
 
-    lang = SelectField('lang',
-                       validators=[DataRequired()],
-                       choices=current_app.config["LANG_LIST"],
-                       render_kw={
-                           "placeholder": "PDF Langage",
-                           "class": "form-control custom-select"
-                       })
+    lang = SelectField(
+        'lang',
+        validators=[DataRequired()],
+        #choices=current_app.config["LANG_LIST"],
+        choices=Common.create_lang_list(
+            os.path.join("config", "config_lang_ocr.tsv")),
+        render_kw={
+            "placeholder": "PDF Langage",
+            "class": "form-control custom-select"
+        })
     submit = SubmitField('Upload', render_kw={"class": "btn btn-primary mb-2"})
 
     def validate_patient_nom(self, patient_nom):

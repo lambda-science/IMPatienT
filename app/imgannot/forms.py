@@ -1,18 +1,24 @@
 from app.models import Patient, Image
-from flask import current_app
+#from flask import current_app
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, SelectField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Regexp, Length
 
+import app.src.common as Common
+import os
+
 
 class ImageForm(FlaskForm):
-    image = FileField(validators=[
-        FileRequired(),
-        FileAllowed(current_app.config["ALLOWED_EXTENSIONS"],
-                    "This file is not a valid image !")
-    ],
-                      render_kw={"class": "form-control-file"})
+    image = FileField(
+        validators=[
+            FileRequired(),
+            #FileAllowed(current_app.config["ALLOWED_EXTENSIONS"],
+            #            "This file is not a valid image !")
+            FileAllowed(["tif", "tiff", "png", "jpg", "jpeg"],
+                        "This file is not a valid image !")
+        ],
+        render_kw={"class": "form-control-file"})
     patient_ID = StringField('patient_ID',
                              validators=[DataRequired()],
                              render_kw={
@@ -59,16 +65,21 @@ class AnnotForm(FlaskForm):
     submit = SubmitField('Submit report and annotations to the database',
                          render_kw={"class": "btn btn-primary mb-2"})
 
-    diagnostic = SelectField('diagnostic',
-                             validators=[DataRequired()],
-                             choices=current_app.config["DIAG_LIST"],
-                             render_kw={
-                                 "placeholder": "Disease diagnostic",
-                                 "class": "form-control custom-select"
-                             })
+    diagnostic = SelectField(
+        'diagnostic',
+        validators=[DataRequired()],
+        #choices=current_app.config["DIAG_LIST"],
+        choices=Common.create_diag_list(
+            os.path.join("config", "diagnostic.tsv")),
+        render_kw={
+            "placeholder": "Disease diagnostic",
+            "class": "form-control custom-select"
+        })
 
 
-for feature in current_app.config["FEATURE_LIST"]:
+#for feature in current_app.config["FEATURE_LIST"]:
+for feature in Common.create_feature_list(
+        os.path.join("config", "config_ontology.tsv")):
     setattr(
         AnnotForm, feature[0],
         RadioField(feature[1],

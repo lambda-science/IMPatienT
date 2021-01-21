@@ -12,7 +12,7 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
-login.login_view = 'login'
+login.login_view = 'auth.login'
 login.login_message_category = "info"
 mail = Mail()
 session = Session()
@@ -31,16 +31,16 @@ def create_app(config_class=Config):
     #app.register_blueprint(errors_bp)
 
     from app.auth import bp as auth_bp
-    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(auth_bp)
 
     from app.imgannot import bp as imgannot_bp
-    app.register_blueprint(imgannot_bp, url_prefix='/imgannot')
+    app.register_blueprint(imgannot_bp)
 
     from app.ocr import bp as ocr_bp
-    app.register_blueprint(ocr_bp, url_prefix='/ocr_bp')
+    app.register_blueprint(ocr_bp)
 
     from app.index import bp as index_bp
-    app.register_blueprint(index_bp, url_prefix='/index_bp')
+    app.register_blueprint(index_bp)
 
     if not app.debug:
         if app.config['MAIL_SERVER']:
