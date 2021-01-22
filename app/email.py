@@ -5,11 +5,13 @@ from app import mail
 
 
 def send_async_email(app, msg):
+    """Function to make mail sending async"""
     with app.app_context():
         mail.send(msg)
 
 
 def send_email(subject, sender, recipients, text_body, html_body):
+    """Function to send mail using a thread (async)"""
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
     msg.html = html_body

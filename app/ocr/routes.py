@@ -21,9 +21,9 @@ def temp(filename):
 @bp.route("/upload_pdf", methods=["GET", "POST"])
 @login_required
 def upload_pdf():
-    """Index page that is used to upload the image to the app and register patient ID.
-    Redirect to the annotation page after a succesful upload.
-    Also show the availiable file that already have been uploaded"""
+    """Index page that is used to upload the PDF to the app and register patient ID.
+    Redirect to the OCR results page after a succesful upload.
+    Also show the availiable PDF files that already have been uploaded"""
     form = PdfForm()
     # Wipe old temporary data form user
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
@@ -32,7 +32,7 @@ def upload_pdf():
         shutil.rmtree(temp_user_dir)
     except:
         pass
-    # Show  History
+    # Show PDF File History linked to current user
     pdf_history = Pdf.query.filter_by(expert_id=current_user.id)
     if form.validate_on_submit():
         file = form.pdf.data
@@ -47,7 +47,7 @@ def upload_pdf():
         file.save(os.path.join(temp_user_dir, filename))
         # Get User ID
         expert = User.query.filter_by(username=session["username"]).first()
-        # Create our new  & Patient database entry
+        # Create our new PDF & Patient database entry
         pdf = Pdf(pdf_name=filename,
                   patient_id=form.patient_ID.data,
                   expert_id=expert.id,
@@ -66,7 +66,7 @@ def upload_pdf():
             db.session.add(patient)
             db.session.commit()
 
-        # Finally delete the image file in temps folder and redirect to annotation
+        # Finally delete the PDF file in temp folder and redirect to annotation
         if os.path.exists(os.path.join(temp_user_dir, filename)):
             os.remove(os.path.join(temp_user_dir, filename))
         return redirect(
@@ -81,14 +81,17 @@ def upload_pdf():
 @bp.route("/ocr_results", methods=["GET", "POST"])
 @login_required
 def ocr_results():
-    """Render the annotation page after the upload of the initial image. 
-    Redirects to the results page when the annotation form is submitted."""
+    """Render the OCR results page after the upload of the initial PDF. 
+    Render submit PDF and OCR to database button."""
     form = OcrForm()
+    # Get the filename of pdf and patient ID from args.
     session["filename"] = request.args.get("filename")
     session["patient_ID"] = request.args.get("patient_ID")
+    # Query the database
     pdf_requested = Pdf.query.filter_by(
         pdf_name=session["filename"],
         patient_id=session["patient_ID"]).first()
+    # If PDF exist and is associated to current user: serve it
     if pdf_requested != None and form.validate_on_submit(
     ) == False and pdf_requested.expert_id == current_user.id:
         session["pdf_expert_id"] = pdf_requested.expert_id
@@ -97,16 +100,21 @@ def ocr_results():
                                      session["username"])
         if not os.path.exists(temp_user_dir):
             os.makedirs(temp_user_dir)
-        # Write the PDF File
+        # Write the PDF File to disk from blob in DB.
         filepath_to_write = os.path.join(temp_user_dir, pdf_requested.pdf_name)
         Ocr.write_file(pdf_requested.pdf_binary, filepath_to_write)
         session["filepath"] = os.path.join("temp", session["username"],
                                            pdf_requested.pdf_name)
+        # Perform OCR on the PDF file on disk
         ocr_text_list = Ocr.pdf_to_text(session["filepath"],
                                         pdf_requested.lang)
+        # Join per page text with NEW PAGE tag between elements
         session["ocr_results_text"] = '\n##### NEW PAGE #####\n'.join(
             ocr_text_list)
+        # Split full string by \n for formatting purpose in HTML. Each elem = 1 line
         session["ocr_results_text"] = session["ocr_results_text"].split("\n")
+
+    # Error handling
     elif pdf_requested == None:
         flash('PDF doesn\'t exist!', "error")
         return redirect(url_for('ocr.upload_pdf'))
@@ -115,7 +123,7 @@ def ocr_results():
         return redirect(url_for('ocr.upload_pdf'))
 
     if form.validate_on_submit():
-        # Save form data in the session cookie
+        # If submit button clicked, redirect to final ocr report to db writing view
         return redirect(url_for("ocr.write_ocr_report"))
     return render_template("ocr/ocr_results.html",
                            ocr_text=session["ocr_results_text"],
@@ -125,24 +133,26 @@ def ocr_results():
 
 @bp.route("/sucess_ocr", methods=["GET", "POST"])
 def write_ocr_report():
-    """Write the histological report and serve the results page for patient with download links"""
-    # Write the histology report to file with first the basic informations
+    """Write the OCR text to database"""
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
                                  session["username"])
+    # Get PDF DB Entry
     pdf_requested = Pdf.query.filter_by(
         pdf_name=session["filename"],
         patient_id=session["patient_ID"]).first()
     if pdf_requested != None:
+        # Write the OCR results from session
         pdf_requested.report_text = str(session["ocr_results_text"])
         db.session.commit()
+        # Delete user temp folder
         shutil.rmtree(temp_user_dir)
-    # Finally we render the results page
     return render_template("ocr/ocr_sucess.html")
 
 
 @bp.route("/delete_pdf", methods=["GET", "POST"])
 @login_required
 def delete_pdf():
+    """Page to delete a PDF record from database"""
     pdf_requested = Pdf.query.filter_by(
         pdf_name=request.args.get("filename"),
         patient_id=request.args.get("patient_ID")).first()

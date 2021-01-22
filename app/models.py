@@ -9,6 +9,7 @@ import os
 
 
 class User(UserMixin, db.Model):
+    """Database table for Users"""
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -50,6 +51,7 @@ def load_user(id):
 
 
 class Image(db.Model):
+    """Database table for Image & annotations"""
     id = db.Column(db.Integer, primary_key=True)
     image_name = db.Column(db.String(140), index=True)
     expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -77,6 +79,7 @@ class Image(db.Model):
 
 
 class Patient(db.Model):
+    """Database table for Patient informations"""
     id = db.Column(db.String(100), primary_key=True)
     patient_firstname = db.Column(db.String(140))
     patient_name = db.Column(db.String(140), index=True)
@@ -94,6 +97,7 @@ class Patient(db.Model):
 
 
 class Pdf(db.Model):
+    """Database table for PDF and OCR Results"""
     id = db.Column(db.Integer, primary_key=True)
     pdf_name = db.Column(db.String(140), index=True)
     expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))

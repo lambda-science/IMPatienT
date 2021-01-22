@@ -9,6 +9,7 @@ from flask_mail import Mail
 from flask_session import Session
 from config import Config
 
+# Create instance of various object of our webapp.
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
@@ -19,6 +20,7 @@ session = Session()
 
 
 def create_app(config_class=Config):
+    """Function used to create instance of web-app with config settings"""
     app = Flask(__name__)
     app.config.from_object(config_class)
     db.init_app(app)
@@ -27,6 +29,7 @@ def create_app(config_class=Config):
     mail.init_app(app)
     session.init_app(app)
 
+    # Configuration of our various flask-blueprint folders
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
 
@@ -41,7 +44,12 @@ def create_app(config_class=Config):
 
     from app.index import bp as index_bp
     app.register_blueprint(index_bp)
+
+    # If app in production settings:
+    # configure our SMTP mail connection
+    # configure error-logging service
     if not app.debug:
+        # Mail service
         if app.config['MAIL_SERVER']:
             auth = None
             if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
@@ -60,6 +68,7 @@ def create_app(config_class=Config):
             mail_handler.setLevel(logging.ERROR)
             app.logger.addHandler(mail_handler)
 
+        # Create logs folder to log errors & log them.
         if not os.path.exists('logs'):
             os.mkdir('logs')
         file_handler = RotatingFileHandler('logs/histoannot.log',

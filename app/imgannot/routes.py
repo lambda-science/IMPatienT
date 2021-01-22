@@ -22,10 +22,10 @@ def temp(filename):
 @bp.route("/upload_img", methods=["GET", "POST"])
 @login_required
 def upload_file():
-    """Image upload page that is used to upload the image to the app and register patient ID.
+    """Image upload page that is used to upload the image to the app and register patient ID & name
     Redirect to the annotation page after a succesful upload.
-    Also show the availiable file that already have been uploaded"""
-    form = ImageForm(allowed_ext=current_app.config["ALLOWED_EXTENSIONS"])
+    Also show the image stored in DB for current user"""
+    form = ImageForm()
     # Wipe old temporary data form user
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
                                  session["username"])
@@ -82,9 +82,11 @@ def upload_file():
 @bp.route("/delete_image", methods=["GET", "POST"])
 @login_required
 def delete_image():
+    """Page to delete an image record from database"""
     image_requested = Image.query.filter_by(
         image_name=request.args.get("filename"),
         patient_id=request.args.get("patient_ID")).first()
+    # Check if image to delete have been created by current user
     if image_requested != None and image_requested.expert_id == current_user.id:
         db.session.delete(image_requested)
         db.session.commit()
@@ -94,14 +96,17 @@ def delete_image():
 @bp.route("/annot", methods=["GET", "POST"])
 @login_required
 def annot_page():
-    """Render the annotation page after the upload of the initial image. 
+    """Image annotation page with form.
     Redirects to the results page when the annotation form is submitted."""
     form = AnnotForm()
+    # Get the filename of image and patient ID from args.
     session["filename"] = request.args.get("filename")
     session["patient_ID"] = request.args.get("patient_ID")
+    # Query the database
     image_requested = Image.query.filter_by(
         image_name=session["filename"],
         patient_id=session["patient_ID"]).first()
+    # If image exist and is associated to current user: serve it
     if image_requested != None and form.validate_on_submit(
     ) == False and image_requested.expert_id == current_user.id:
         session["image_expert_id"] = image_requested.expert_id
@@ -110,7 +115,7 @@ def annot_page():
                                      session["username"])
         if not os.path.exists(temp_user_dir):
             os.makedirs(temp_user_dir)
-        # Create the deep zoom image
+        # Write image to disk from DB & create the deep zoom image.
         filepath_to_write = os.path.join(temp_user_dir,
                                          image_requested.image_name)
         Histo.write_file(image_requested.image_binary, filepath_to_write)
@@ -124,15 +129,15 @@ def annot_page():
             annotation_data = json.loads(
                 image_requested.annotation_json.replace("'", '"'))
             json_file.write(json.dumps(annotation_data, indent=4))
+    # Error handling if no image or not the right user.
     elif image_requested == None:
         flash('Image doesn\'t exist!', "error")
         return redirect(url_for('imgannot.upload_file'))
     elif image_requested.expert_id != current_user.id:
         flash('User not authorized for this image!', "error")
         return redirect(url_for('imgannot.upload_file'))
-
+    # Once annotation is finished and validated: form data in the session cookie
     if form.validate_on_submit():
-        # Save form data in the session cookie
         session["patient_nom"] = "Placeholder"
         session["patient_prenom"] = "Placeholder"
         session["expert_name"] = image_requested.expert_id
@@ -155,8 +160,10 @@ def write_annot():
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
                                  session["username"])
     annot_list = []
+    # Get AJAX JSON data and parse it
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
+    # If current user is the creator of image: proceed
     if session["image_expert_id"] == current_user.id:
         # If no annotations yet: json file is created
         if os.path.exists(
@@ -183,6 +190,7 @@ def write_annot():
         return json.dumps({"success": True}), 200, {
             "ContentType": "application/json"
         }
+    # Error message if not the right user for given image
     else:
         flash('Unautorized database manipulation (write_annot)', "error")
         return redirect(url_for('imgannot.upload_file'))
@@ -194,8 +202,10 @@ def update_annot():
     Updated annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
                                  session["username"])
+    # Get AJAX JSON data and parse it
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
+    # If current user is the creator of image: proceed
     updated_list = []
     if session["image_expert_id"] == current_user.id:
         # First open as read only to load existing JSON
@@ -215,6 +225,7 @@ def update_annot():
         return json.dumps({"success": True}), 200, {
             "ContentType": "application/json"
         }
+    # Error message if not the right user for given image
     else:
         flash('Unautorized database manipulation (write_annot)', "error")
         return redirect(url_for('imgannot.upload_file'))
@@ -226,8 +237,10 @@ def delete_annot():
     Delete command is coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
                                  session["username"])
+    # Get AJAX JSON data and parse it
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
+    # If current user is the creator of image: proceed
     updated_list = []
     if session["image_expert_id"] == current_user.id:
         # First open as read only to load existing JSON
@@ -245,6 +258,7 @@ def delete_annot():
         return json.dumps({"success": True}), 200, {
             "ContentType": "application/json"
         }
+    # Error message if not the right user for given image
     else:
         flash('Unautorized database manipulation (write_annot)', "error")
         return redirect(url_for('imgannot.upload_file'))
@@ -252,14 +266,16 @@ def delete_annot():
 
 @bp.route("/results", methods=["GET", "POST"])
 def write_report():
-    """Write the histological report and serve the results page for patient with download links"""
-    # Write the histology report to file with first the basic informations
+    """Write the histological report & annotation to DB"""
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
                                  session["username"])
+    # Get Image entry from DB to register annotation
     image_requested = Image.query.filter_by(
         image_name=session["filename"],
         patient_id=session["patient_ID"]).first()
+    # If Image exist: build the histology text report from session cookie data
     if image_requested != None:
+        # Write general patient informations
         report_string = "Prenom_Patient\t" + session["patient_prenom"] + "\n"
         report_string = report_string + "Nom_Patient\t" + session[
             "patient_nom"] + "\n"
@@ -269,17 +285,19 @@ def write_report():
             session["expert_name"]) + "\n"
         report_string = report_string + "Diagnostic\t" + session[
             "diagnostic"] + "\n"
-        # Then we write each histology feature values with a loop
+        # Then write each histology feature values with a loop
         for i in session["feature"]:
             report_string = report_string + i + "\t" + session["feature"][
                 i] + "\n"
+        # Attach report_string to DB entry and diagnostic to DB entry
         image_requested.report_text = str(report_string)
         image_requested.diagnostic = session["diagnostic"]
-
+        # Load annotation json file and attach it to DB entry
         with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
                   "r") as json_file:
             data_annot = json.load(json_file)
             image_requested.annotation_json = str(data_annot)
+            # Commit new DB entry
             db.session.commit()
         shutil.rmtree(temp_user_dir)
     # Finally we render the results page

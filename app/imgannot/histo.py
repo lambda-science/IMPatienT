@@ -20,6 +20,6 @@ def create_deepzoom_file(image_path):
 
 
 def write_file(data, filename):
-    # Convert binary data to proper format and write it on Hard Disk
+    """Convert binary data to proper format and write it on Hard Disk form database"""
     with open(filename, 'wb') as file:
         file.write(data)

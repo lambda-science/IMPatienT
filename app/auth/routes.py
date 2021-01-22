@@ -11,11 +11,11 @@ from werkzeug.urls import url_parse
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    """View page to log in"""
     # Already auth. user are redirected to index
     if current_user.is_authenticated:
         return redirect(url_for('index.index'))
     form = LoginForm()
-
     if form.validate_on_submit():
         # Check if password match
         user = User.query.filter_by(username=form.username.data).first()
@@ -34,15 +34,19 @@ def login():
 
 @bp.route('/logout')
 def logout():
+    """View page to logout"""
     logout_user()
     return redirect(url_for('auth.login'))
 
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
+    """View page to register"""
+    # Redirect if already logged
     if current_user.is_authenticated:
         return redirect(url_for('index.index'))
     form = RegistrationForm()
+    # If form validated, register user to database
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
@@ -55,9 +59,12 @@ def register():
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
+    """View page to request password reset"""
+    # If Logged already: redirect to index
     if current_user.is_authenticated:
         return redirect(url_for('index.index'))
     form = ResetPasswordRequestForm()
+    # If form validated, look for user in database and create the token & email for password reset
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
@@ -71,12 +78,16 @@ def reset_password_request():
 
 @bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
+    """View page to create new password if token is valid"""
+    # If Logged already: redirect to index
     if current_user.is_authenticated:
         return redirect(url_for('index.index'))
+    # Filter user by verifying token. Redirect if not valid. Else new password form
     user = User.verify_reset_password_token(token)
     if not user:
         return redirect(url_for('index.index'))
     form = ResetPasswordForm()
+    # Save new password to DB
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()

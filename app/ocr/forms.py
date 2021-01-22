@@ -10,6 +10,7 @@ import os
 
 
 class PdfForm(FlaskForm):
+    """Form used for handling of PDF upload associated to patient"""
     pdf = FileField(validators=[
         FileRequired(),
         FileAllowed(["pdf"], "This file is not a valid PDF File !")
@@ -47,6 +48,7 @@ class PdfForm(FlaskForm):
     submit = SubmitField('Upload', render_kw={"class": "btn btn-primary mb-2"})
 
     def validate_patient_nom(self, patient_nom):
+        """Check if patient ID correspond to given lastname"""
         patient = Patient.query.get(self.patient_ID.data)
         if patient is not None:
             if patient.patient_name != patient_nom.data:
@@ -56,6 +58,7 @@ class PdfForm(FlaskForm):
                         " ; Please use another ID or correct patient name"))
 
     def validate_patient_prenom(self, patient_prenom):
+        """Check if patient ID correspond to given firstname"""
         patient = Patient.query.get(self.patient_ID.data)
         if patient is not None:
             if patient.patient_firstname != patient_prenom.data:
@@ -66,5 +69,6 @@ class PdfForm(FlaskForm):
 
 
 class OcrForm(FlaskForm):
+    """Form to save OCR results to database"""
     submit = SubmitField('Submit text to database',
                          render_kw={"class": "btn btn-primary mb-2"})

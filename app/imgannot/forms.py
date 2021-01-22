@@ -10,6 +10,7 @@ import os
 
 
 class ImageForm(FlaskForm):
+    """Form used for image uploading"""
     image = FileField(
         validators=[
             FileRequired(),
@@ -40,6 +41,7 @@ class ImageForm(FlaskForm):
     submit = SubmitField('Upload', render_kw={"class": "btn btn-primary mb-2"})
 
     def validate_patient_nom(self, patient_nom):
+        """Check if patient lastname correspond to already in DB patient_ID"""
         patient = Patient.query.get(self.patient_ID.data)
         if patient is not None:
             if patient.patient_name != patient_nom.data:
@@ -49,6 +51,7 @@ class ImageForm(FlaskForm):
                         " ; Please use another ID or correct patient name"))
 
     def validate_patient_prenom(self, patient_prenom):
+        """Check if patient firstname correspond to already in DB patient_ID"""
         patient = Patient.query.get(self.patient_ID.data)
         if patient is not None:
             if patient.patient_firstname != patient_prenom.data:
@@ -59,6 +62,7 @@ class ImageForm(FlaskForm):
 
 
 class AnnotForm(FlaskForm):
+    """Form used for image global annotation. Feature list are added later"""
     def __init__(self, *args, **kwargs):
         super(AnnotForm, self).__init__(*args, **kwargs)
 
@@ -77,6 +81,8 @@ class AnnotForm(FlaskForm):
         })
 
 
+# Iterative form field adding for each feature annotation in the config file feature list.
+# Loop to add attribute to form class
 #for feature in current_app.config["FEATURE_LIST"]:
 for feature in Common.create_feature_list(
         os.path.join("config", "config_ontology.tsv")):
