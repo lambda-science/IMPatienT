@@ -142,3 +142,6 @@ app.db
 
 #Flask-session
 flask_session/
+
+#Env File
+.env
