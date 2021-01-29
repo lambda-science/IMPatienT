@@ -99,6 +99,7 @@ def annot_page():
     """Image annotation page with form.
     Redirects to the results page when the annotation form is submitted."""
     form = AnnotForm()
+    tag_list = [i[1] for i in current_app.config["FEATURE_LIST"]]
     # Get the filename of image and patient ID from args.
     session["filename"] = request.args.get("filename")
     session["patient_ID"] = request.args.get("patient_ID")
@@ -150,7 +151,8 @@ def annot_page():
                            filename=session["filepath"],
                            feature_list=current_app.config["FEATURE_LIST"],
                            patient_ID=session["patient_ID"],
-                           form=form)
+                           form=form,
+                           tag_list=str(tag_list))
 
 
 @bp.route("/write_annot", methods=["POST"])

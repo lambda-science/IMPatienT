@@ -11,8 +11,8 @@
   <!-- BootStrap w/ AJAX & Jquery files -->
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.min.css')}}">
   <script type="text/javascript" src="{{url_for('static', filename='jquery-3.5.1.min.js')}}"></script>
-  <script type="text/javascript" src="{{url_for('static', filename='popper.min.js')}}"></script>
   <script type="text/javascript" src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='bootstrap.bundle.min.js')}}"></script>
 
   <!-- Custom files -->
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='custom.css')}}">
@@ -34,6 +34,7 @@
         </li>
       </ul>
     </div>
+
     <div class="mx-auto order-0">
       <li class="nav-item active">
         <a class="nav-link navbar-brand mx-auto" href="{{ url_for('index.index') }}">Histo Annot</a>
@@ -43,23 +44,23 @@
 
       </button>
     </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ml-auto">
-        {% if current_user.is_anonymous %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="#">Logged in as: {{ current_user.username }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-        </li>
-        {% endif %}
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 justify-content-end"">
+      <ul class=" navbar-nav ml-auto">
+      {% if current_user.is_anonymous %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Logged in as: {{ current_user.username }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+      </li>
+      {% endif %}
       </ul>
     </div>
   </nav>

@@ -12,6 +12,14 @@
       <p>Hold shift and click-and-drag with left mouse button over the image to create an annotation. Then fill the
         form on the right and
         submit with the button.</p>
+
+      <input type="radio" class="btn-check" name="tool" id="annot_rect" autocomplete="off"
+        onclick="switch_tool(anno, 'rect')" checked>
+      <label class="btn btn-secondary" for="annot_rect">Rectangle Tool</label>
+      <input type="radio" class="btn-check" name="tool" id="annot_poly" autocomplete="off"
+        onclick="switch_tool(anno, 'polygon')">
+      <label class="btn btn-secondary" for="annot_poly">Polygon Tool</label>
+
       <div id="seadragon-viewer" style="width:600px; height:600px;"></div>
     </div>
 
@@ -49,53 +57,61 @@
 </div>
 
 <script>
-  window.onload = function () {
-    var viewer = OpenSeadragon({
-      id: "seadragon-viewer",
-      prefixUrl: "/static/images/",
-      tileSources: "{{url_for('imgannot.temp', filename=filename+'.dzi')}}"
-    });
+  // Initialize OpenSeaDragon Viewer
+  var viewer = OpenSeadragon({
+    id: "seadragon-viewer",
+    prefixUrl: "/static/images/",
+    tileSources: "{{url_for('imgannot.temp', filename=filename+'.dzi')}}"
+  });
 
-    // Initialize the Annotorious plugin
-    var anno = OpenSeadragon.Annotorious(viewer);
+  // Initialize the Annotorious plugin
+  var anno = OpenSeadragon.Annotorious(viewer, {
+    widgets: [
+      { widget: 'TAG', vocabulary: {{ tag_list | safe }} }]
+    });
+  // Load annotations in W3C WebAnnotation format
+  anno.loadAnnotations("{{url_for('imgannot.temp', filename=filename+'.json')}}");
 
-    // Load annotations in W3C WebAnnotation format
-    anno.loadAnnotations("{{url_for('imgannot.temp', filename=filename+'.json')}}");
+  // Handler to create annot
+  anno.on('createAnnotation', function (annotation) {
+    var myJSON = JSON.stringify(annotation);
+    console.log(myJSON)
+    $.ajax({
+      type: "POST",
+      url: "{{url_for('imgannot.write_annot')}}",
+      data: myJSON,
+      success: console.log("Annotation Sent to Backend Successfully"),
+      dataType: "text"
+    });
+  });
+  // Handler to update annot
+  anno.on('updateAnnotation', function (annotation) {
+    var myJSON = JSON.stringify(annotation);
+    console.log(myJSON)
+    $.ajax({
+      type: "POST",
+      url: "{{url_for('imgannot.update_annot')}}",
+      data: myJSON,
+      success: console.log("Annotation Update to Backend Successfully"),
+      dataType: "text"
+    });
+  });
+  // Handler to delete annot
+  anno.on('deleteAnnotation', function (annotation) {
+    var myJSON = JSON.stringify(annotation);
+    console.log(myJSON)
+    $.ajax({
+      type: "POST",
+      url: "{{url_for('imgannot.delete_annot')}}",
+      data: myJSON,
+      success: console.log("Annotation Deleted to Backend Successfully"),
+      dataType: "text"
+    });
+  });
 
-    // Attach handlers to listen to events
-    anno.on('createAnnotation', function (annotation) {
-      var myJSON = JSON.stringify(annotation);
-      console.log(myJSON)
-      $.ajax({
-        type: "POST",
-        url: "{{url_for('imgannot.write_annot')}}",
-        data: myJSON,
-        success: console.log("Annotation Sent to Backend Successfully"),
-        dataType: "text"
-      });
-    });
-    anno.on('updateAnnotation', function (annotation) {
-      var myJSON = JSON.stringify(annotation);
-      console.log(myJSON)
-      $.ajax({
-        type: "POST",
-        url: "{{url_for('imgannot.update_annot')}}",
-        data: myJSON,
-        success: console.log("Annotation Update to Backend Successfully"),
-        dataType: "text"
-      });
-    });
-    anno.on('deleteAnnotation', function (annotation) {
-      var myJSON = JSON.stringify(annotation);
-      console.log(myJSON)
-      $.ajax({
-        type: "POST",
-        url: "{{url_for('imgannot.delete_annot')}}",
-        data: myJSON,
-        success: console.log("Annotation Deleted to Backend Successfully"),
-        dataType: "text"
-      });
-    });
+  // Switch tool (rect or polygon) function
+  function switch_tool(anno, tool) {
+    anno.setDrawingTool(tool);
   };
 </script>
 
