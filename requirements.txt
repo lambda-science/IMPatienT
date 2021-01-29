@@ -35,8 +35,8 @@ Mako==1.1.4
 MarkupSafe==1.1.1
 mccabe==0.6.1
 mkl-fft
-mkl-random==1.1.1
-mkl-service==2.3.0
+mkl-random
+mkl-service
 mypy-extensions==0.4.3
 numpy==1.19.2
 olefile==0.46
