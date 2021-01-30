@@ -48,6 +48,8 @@ def upload_file():
         file.save(os.path.join(temp_user_dir, filename))
         # Get User ID
         expert = User.query.filter_by(username=session["username"]).first()
+        print(expert)
+        print(session["username"])
         # Create our new Image & Patient database entry
         image = Image(image_name=filename,
                       patient_id=form.patient_ID.data,
@@ -128,7 +130,8 @@ def annot_page():
         with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
                   "w") as json_file:
             annotation_data = json.loads(
-                image_requested.annotation_json.replace("'", '"'))
+                json.dumps(image_requested.annotation_json))
+
             json_file.write(json.dumps(annotation_data, indent=4))
     # Error handling if no image or not the right user.
     elif image_requested == None:
@@ -139,8 +142,10 @@ def annot_page():
         return redirect(url_for('imgannot.upload_file'))
     # Once annotation is finished and validated: form data in the session cookie
     if form.validate_on_submit():
-        session["patient_nom"] = "Placeholder"
-        session["patient_prenom"] = "Placeholder"
+        session["patient_nom"] = Patient.query.get(
+            image_requested.patient_id).patient_name
+        session["patient_prenom"] = Patient.query.get(
+            image_requested.patient_id).patient_firstname
         session["expert_name"] = image_requested.expert_id
         session["diagnostic"] = form.diagnostic.data
         session["feature"] = {}
@@ -298,7 +303,7 @@ def write_report():
         with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
                   "r") as json_file:
             data_annot = json.load(json_file)
-            image_requested.annotation_json = str(data_annot)
+            image_requested.annotation_json = data_annot
             # Commit new DB entry
             db.session.commit()
         shutil.rmtree(temp_user_dir)

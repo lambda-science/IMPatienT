@@ -1,8 +1,8 @@
-"""initial db model
+"""initial db
 
-Revision ID: 69a7a85fc8e7
+Revision ID: 1a883c035a44
 Revises: 
-Create Date: 2021-01-30 18:42:06.379124
+Create Date: 2021-01-30 19:21:34.477399
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '69a7a85fc8e7'
+revision = '1a883c035a44'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,7 +42,7 @@ def upgrade():
     sa.Column('image_binary', sa.LargeBinary(), nullable=True),
     sa.Column('diagnostic', sa.String(length=140), nullable=True),
     sa.Column('report_text', sa.Text(), nullable=True),
-    sa.Column('annotation_json', sa.Text(), nullable=True),
+    sa.Column('annotation_json', sa.JSON(), nullable=True),
     sa.ForeignKeyConstraint(['expert_id'], ['user.id'], ),
     sa.ForeignKeyConstraint(['patient_id'], ['patient.id'], ),
     sa.PrimaryKeyConstraint('id')
