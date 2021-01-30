@@ -4,3 +4,6 @@ tesseract-ocr-fra
 tesseract-ocr-deu
 tesseract-ocr-spa
 tesseract-ocr-eng
+pdftoppm
+pdftocairo
+poppler-utils
