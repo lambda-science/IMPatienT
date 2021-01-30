@@ -57,14 +57,14 @@ def upload_pdf():
                           patient_firstname=form.patient_prenom.data)
         # Check if the image or patient already exist in DB (same filename & patient ID)
         # If not: add it to DB
+        if patient.existAlready() == False:
+            db.session.add(patient)
+
         if pdf.isduplicated() == False:
             pdf.set_pdfblob(os.path.join(temp_user_dir, filename))
             db.session.add(pdf)
-            db.session.commit()
 
-        if patient.existAlready() == False:
-            db.session.add(patient)
-            db.session.commit()
+        db.session.commit()
 
         # Finally delete the PDF file in temp folder and redirect to annotation
         if os.path.exists(os.path.join(temp_user_dir, filename)):
