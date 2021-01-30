@@ -1,12 +1,12 @@
 # How To Use For Developpement Purpose:
 1. Install the python environnement
-`conda env create -f environement_linux.yml`  
+`pip install -r requirements.txt`  
 
 2. Install the Tesseract dependencies for OCR. Ubuntu example using apt:
 `sudo apt install tesseract-ocr tesseract-ocr-fra tesseract-ocr-deu tesseract-ocr-spa tesseract-ocr-eng`
 
 3. Activate the environnement
-`conda activate histo`
+`source venv/bin/activate`
 
 4. Initialize databse:
 ```flask db upgrade```
