@@ -12,7 +12,6 @@ class Config(object):
     ALLOWED_EXTENSIONS = ["tif", "tiff", "png", "jpg", "jpeg"]
     UPLOAD_FOLDER = os.path.join(basedir, "temp")
     REPORT_FOLDER = os.path.join(basedir, "results")
-    SEND_FILE_MAX_AGE_DEFAULT = 0
     # Session saving on memory instead of user cookie
     #SESSION_TYPE = "sqlalchemy"
 
