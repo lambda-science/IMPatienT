@@ -1,4 +1,5 @@
 import os
+import json
 
 from app import db
 from app.ocr import bp
@@ -149,14 +150,23 @@ def write_ocr_report():
     return render_template("ocr/ocr_sucess.html")
 
 
-@bp.route("/delete_pdf", methods=["GET", "POST"])
+@bp.route("/delete_pdf", methods=["POST"])
 @login_required
 def delete_pdf():
-    """Page to delete a PDF record from database"""
+    """Page to delete an PDF record from database from AJAX request"""
+    # Get AJAX JSON data and parse it
+    raw_data = request.get_data()
+    parsed = json.loads(raw_data)
     pdf_requested = Pdf.query.filter_by(
-        pdf_name=request.args.get("filename"),
-        patient_id=request.args.get("patient_ID")).first()
+        pdf_name=parsed["pdf_name"], patient_id=parsed["patient_id"]).first()
+    # If current user is the creator of PDF: delete from DB
     if pdf_requested != None and pdf_requested.expert_id == current_user.id:
         db.session.delete(pdf_requested)
         db.session.commit()
-    return redirect(url_for('ocr.upload_pdf'))
+        return json.dumps({"success": True}), 200, {
+            "ContentType": "application/json"
+        }
+    # Error message if not the right user for given PDF
+    else:
+        flash('Unautorized database manipulation (delete_pdf)', "error")
+        return redirect(url_for('ocr.upload_file'))

@@ -49,11 +49,36 @@
             <td>{{ pdf.patient_id }}</td>
             <td>{{ pdf.lang }}</td>
             <td><a class="btn btn-success" role="button"
-                    href="ocr_results?filename={{pdf.pdf_name}}&patient_ID={{pdf.patient_id}}">Resume</a> <a
-                    class="btn btn-danger" role="button"
-                    href="delete_pdf?filename={{pdf.pdf_name}}&patient_ID={{pdf.patient_id}}">Delete</a></td>
+                    href="ocr_results?filename={{pdf.pdf_name}}&patient_ID={{pdf.patient_id}}">Resume</a>
+                <button type="button" class="btn btn-danger"
+                    onclick="delete_pdf('{{pdf.pdf_name}}', '{{pdf.patient_id}}')">Delete</button>
+            </td>
         </tr>
         {% endfor %}
     </table>
 </div>
+
+<script>
+    function delete_pdf(pdf_name, patient_id) {
+        var dict = {
+            "pdf_name": pdf_name,
+            "patient_id": patient_id,
+        };
+
+        var myJSON = JSON.stringify(dict);
+        console.log(myJSON)
+        $.ajax({
+            type: "POST",
+            url: "{{url_for('ocr.delete_pdf')}}",
+            data: myJSON,
+            success: function () {
+                console.log("PDF deleted in Database Successfully");
+                location.reload();
+            },
+            dataType: "text"
+        });
+    }
+</script>
+
+
 {% endblock %}

@@ -81,18 +81,27 @@ def upload_file():
 
 
 # To change to form insead of simple get
-@bp.route("/delete_image", methods=["GET", "POST"])
+@bp.route("/delete_image", methods=["POST"])
 @login_required
 def delete_image():
-    """Page to delete an image record from database"""
+    """Page to delete an image record from database from AJAX request"""
+    # Get AJAX JSON data and parse it
+    raw_data = request.get_data()
+    parsed = json.loads(raw_data)
     image_requested = Image.query.filter_by(
-        image_name=request.args.get("filename"),
-        patient_id=request.args.get("patient_ID")).first()
-    # Check if image to delete have been created by current user
+        image_name=parsed["image_name"],
+        patient_id=parsed["patient_id"]).first()
+    # If current user is the creator of image: delete from DB
     if image_requested != None and image_requested.expert_id == current_user.id:
         db.session.delete(image_requested)
         db.session.commit()
-    return redirect(url_for('imgannot.upload_file'))
+        return json.dumps({"success": True}), 200, {
+            "ContentType": "application/json"
+        }
+    # Error message if not the right user for given image
+    else:
+        flash('Unautorized database manipulation (delete_image)', "error")
+        return redirect(url_for('imgannot.upload_file'))
 
 
 @bp.route("/annot", methods=["GET", "POST"])

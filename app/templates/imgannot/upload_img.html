@@ -48,11 +48,35 @@
       <td>{{ image.patient_id }}</td>
       <td>{{ image.diagnostic }}</td>
       <td><a class="btn btn-success" role="button"
-          href="annot?filename={{image.image_name}}&patient_ID={{image.patient_id}}">Resume</a> <a
-          class="btn btn-danger" role="button"
-          href="delete_image?filename={{image.image_name}}&patient_ID={{image.patient_id}}">Delete</a></td>
+          href="annot?filename={{image.image_name}}&patient_ID={{image.patient_id}}">Resume</a>
+        <button type="button" class="btn btn-danger"
+          onclick="delete_image('{{image.image_name}}', '{{image.patient_id}}')">Delete</button>
+      </td>
     </tr>
     {% endfor %}
   </table>
 </div>
+
+<script>
+  function delete_image(image_name, patient_id) {
+    var dict = {
+      "image_name": image_name,
+      "patient_id": patient_id,
+    };
+
+    var myJSON = JSON.stringify(dict);
+    console.log(myJSON)
+    $.ajax({
+      type: "POST",
+      url: "{{url_for('imgannot.delete_image')}}",
+      data: myJSON,
+      success: function () {
+        console.log("Image deleted in Database Successfully");
+        location.reload();
+      },
+      dataType: "text"
+    });
+  }
+</script>
+
 {% endblock %}
