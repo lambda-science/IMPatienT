@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn histoannot:app
+web: flask db upgrade; gunicorn myoxia:app

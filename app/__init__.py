@@ -62,7 +62,7 @@ def create_app(config_class=Config):
                 mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
                 fromaddr='no-reply@' + app.config['MAIL_SERVER'],
                 toaddrs=app.config['ADMINS'],
-                subject='Histo-Annot Failure',
+                subject='MYO-xIA Failure',
                 credentials=auth,
                 secure=secure)
             mail_handler.setLevel(logging.ERROR)
@@ -76,7 +76,7 @@ def create_app(config_class=Config):
         else:
             if not os.path.exists('logs'):
                 os.mkdir('logs')
-            file_handler = RotatingFileHandler('logs/histoannot.log',
+            file_handler = RotatingFileHandler('logs/MYOxIA.log',
                                                maxBytes=10240,
                                                backupCount=10)
             file_handler.setFormatter(
@@ -86,7 +86,7 @@ def create_app(config_class=Config):
             app.logger.addHandler(file_handler)
 
         app.logger.setLevel(logging.INFO)
-        app.logger.info('HistoAnnot startup')
+        app.logger.info('MYO-xIA startup')
 
     return app
 
