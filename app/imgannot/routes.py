@@ -167,7 +167,7 @@ def annot_page():
                            tag_list=str(tag_list))
 
 
-@bp.route("/write_annot", methods=["POST"])
+@bp.route("/write_annot", methods=["GET", "POST"])
 def write_annot():
     """Write new annotation entries (json data) coming from the javascript plugin Annotorious (OpenSeaDragon Plugin) to a file named after the image.
     New annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""

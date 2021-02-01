@@ -8,16 +8,13 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 
 class Config(object):
-
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'myverylongsecretkey'
-
     ALLOWED_EXTENSIONS = ["tif", "tiff", "png", "jpg", "jpeg"]
     UPLOAD_FOLDER = os.path.join(basedir, "temp")
     REPORT_FOLDER = os.path.join(basedir, "results")
     SEND_FILE_MAX_AGE_DEFAULT = 0
-
     # Session saving on memory instead of user cookie
-    SESSION_TYPE = "null"
+    #SESSION_TYPE = "sqlalchemy"
 
     # Create various list from config file
     FEATURE_LIST = Common.create_feature_list(

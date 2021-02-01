@@ -17,12 +17,7 @@
                 </p>
             </div>
 
-            <form method="post">
-                <div class="form-group">
-                    {{ form.hidden_tag() }}
-                    {{ form.submit }}
-                </div>
-            </form>
+            <a href="{{ url_for('ocr.upload_pdf') }}" class="btn btn-info" role="button">Return to index</a>
         </div>
     </div>
 

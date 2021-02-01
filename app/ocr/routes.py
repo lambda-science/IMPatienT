@@ -110,10 +110,11 @@ def ocr_results():
         ocr_text_list = Ocr.pdf_to_text(session["filepath"],
                                         pdf_requested.lang)
         # Join per page text with NEW PAGE tag between elements
-        session["ocr_results_text"] = '\n##### NEW PAGE #####\n'.join(
-            ocr_text_list)
+        ocr_text = '\n##### NEW PAGE #####\n'.join(ocr_text_list)
         # Split full string by \n for formatting purpose in HTML. Each elem = 1 line
-        session["ocr_results_text"] = session["ocr_results_text"].split("\n")
+        ocr_text = ocr_text.split("\n")
+        pdf_requested.ocr_text = ''.join(ocr_text)
+        db.session.commit()
 
     # Error handling
     elif pdf_requested == None:
@@ -123,31 +124,10 @@ def ocr_results():
         flash('User not authorized for this PDF!', "error")
         return redirect(url_for('ocr.upload_pdf'))
 
-    if form.validate_on_submit():
-        # If submit button clicked, redirect to final ocr report to db writing view
-        return redirect(url_for("ocr.write_ocr_report"))
     return render_template("ocr/ocr_results.html",
-                           ocr_text=session["ocr_results_text"],
-                           form=form,
+                           ocr_text=ocr_text,
+                           patient_ID=session["patient_ID"],
                            filepath=session["filepath"])
-
-
-@bp.route("/sucess_ocr", methods=["GET", "POST"])
-def write_ocr_report():
-    """Write the OCR text to database"""
-    temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                 current_user.username)
-    # Get PDF DB Entry
-    pdf_requested = Pdf.query.filter_by(
-        pdf_name=session["filename"],
-        patient_id=session["patient_ID"]).first()
-    if pdf_requested != None:
-        # Write the OCR results from session
-        pdf_requested.report_text = str(session["ocr_results_text"])
-        db.session.commit()
-        # Delete user temp folder
-        shutil.rmtree(temp_user_dir)
-    return render_template("ocr/ocr_sucess.html")
 
 
 @bp.route("/delete_pdf", methods=["POST"])
