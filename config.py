@@ -17,7 +17,7 @@ class Config(object):
     SEND_FILE_MAX_AGE_DEFAULT = 0
 
     # Session saving on memory instead of user cookie
-    SESSION_TYPE = "memcached"
+    SESSION_TYPE = "null"
 
     # Create various list from config file
     FEATURE_LIST = Common.create_feature_list(
