@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn myoxia:app
+web: flask db upgrade; gunicorn myoxia:app --preload
