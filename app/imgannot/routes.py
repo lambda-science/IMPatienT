@@ -28,7 +28,7 @@ def upload_file():
     form = ImageForm()
     # Wipe old temporary data form user
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                 session["username"])
+                                 current_user.username)
     try:
         shutil.rmtree(temp_user_dir)
     except:
@@ -47,9 +47,7 @@ def upload_file():
         # Save the image to a temp folder
         file.save(os.path.join(temp_user_dir, filename))
         # Get User ID
-        expert = User.query.filter_by(username=session["username"]).first()
-        print(expert)
-        print(session["username"])
+        expert = User.query.filter_by(username=current_user.username).first()
         # Create our new Image & Patient database entry
         image = Image(image_name=filename,
                       patient_id=form.patient_ID.data,
@@ -124,7 +122,7 @@ def annot_page():
         session["image_expert_id"] = image_requested.expert_id
         # Create a temporary folder for username
         temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                     session["username"])
+                                     current_user.username)
         if not os.path.exists(temp_user_dir):
             os.makedirs(temp_user_dir)
         # Write image to disk from DB & create the deep zoom image.
@@ -132,7 +130,7 @@ def annot_page():
                                          image_requested.image_name)
         Histo.write_file(image_requested.image_binary, filepath_to_write)
         Histo.create_deepzoom_file(filepath_to_write)
-        session["filepath"] = os.path.join(session["username"],
+        session["filepath"] = os.path.join(current_user.username,
                                            image_requested.image_name)
 
         # Create the JSON File for annotation from data stored in DB
@@ -174,7 +172,7 @@ def write_annot():
     """Write new annotation entries (json data) coming from the javascript plugin Annotorious (OpenSeaDragon Plugin) to a file named after the image.
     New annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                 session["username"])
+                                 current_user.username)
     annot_list = []
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
@@ -217,7 +215,7 @@ def update_annot():
     """Update existing annotaions (json data) coming from the javascript plugin Annotorious (OpenSeaDragon Plugin) in the annotation json file named after the image.
     Updated annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                 session["username"])
+                                 current_user.username)
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
@@ -252,7 +250,7 @@ def delete_annot():
     """Delete existing annotaions (json data) if the user delete an annotion of the javascript plugin Annotorious (OpenSeaDragon Plugin).
     Delete command is coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                 session["username"])
+                                 current_user.username)
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
@@ -284,7 +282,7 @@ def delete_annot():
 def write_report():
     """Write the histological report & annotation to DB"""
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                 session["username"])
+                                 current_user.username)
     # Get Image entry from DB to register annotation
     image_requested = Image.query.filter_by(
         image_name=session["filename"],

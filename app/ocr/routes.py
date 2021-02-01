@@ -28,7 +28,7 @@ def upload_pdf():
     form = PdfForm()
     # Wipe old temporary data form user
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                 session["username"])
+                                 current_user.username)
     try:
         shutil.rmtree(temp_user_dir)
     except:
@@ -47,7 +47,7 @@ def upload_pdf():
         # Save the image to a temp folder
         file.save(os.path.join(temp_user_dir, filename))
         # Get User ID
-        expert = User.query.filter_by(username=session["username"]).first()
+        expert = User.query.filter_by(username=current_user.username).first()
         # Create our new PDF & Patient database entry
         pdf = Pdf(pdf_name=filename,
                   patient_id=form.patient_ID.data,
@@ -98,13 +98,13 @@ def ocr_results():
         session["pdf_expert_id"] = pdf_requested.expert_id
         # Create a temporary folder for username
         temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                     session["username"])
+                                     current_user.username)
         if not os.path.exists(temp_user_dir):
             os.makedirs(temp_user_dir)
         # Write the PDF File to disk from blob in DB.
         filepath_to_write = os.path.join(temp_user_dir, pdf_requested.pdf_name)
         Ocr.write_file(pdf_requested.pdf_binary, filepath_to_write)
-        session["filepath"] = os.path.join("temp", session["username"],
+        session["filepath"] = os.path.join("temp", current_user.username,
                                            pdf_requested.pdf_name)
         # Perform OCR on the PDF file on disk
         ocr_text_list = Ocr.pdf_to_text(session["filepath"],
@@ -136,7 +136,7 @@ def ocr_results():
 def write_ocr_report():
     """Write the OCR text to database"""
     temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                 session["username"])
+                                 current_user.username)
     # Get PDF DB Entry
     pdf_requested = Pdf.query.filter_by(
         pdf_name=session["filename"],
