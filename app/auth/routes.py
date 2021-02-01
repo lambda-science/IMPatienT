@@ -15,9 +15,11 @@ def login():
     # Already auth. user are redirected to index
     if current_user.is_authenticated:
         return redirect(url_for('index.index'))
+    session.clear()
     form = LoginForm()
     if form.validate_on_submit():
         # Check if password match
+        print("test")
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password', "danger")
@@ -35,6 +37,7 @@ def login():
 def logout():
     """View page to logout"""
     logout_user()
+    session.clear()
     return redirect(url_for('auth.login'))
 
 
