@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn myoxia:app --preload
+web: flask db upgrade; gunicorn myoxia:app --preload --timeout 180
