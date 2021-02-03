@@ -14,9 +14,10 @@ import shutil
 
 
 @bp.route("/temp/<path:filename>")
+@login_required
 def temp(filename):
     """Serve files located in subfolder inside temp folder"""
-    return send_from_directory(current_app.config["UPLOAD_FOLDER"], filename)
+    return send_from_directory(current_app.config["TEMP_FOLDER"], filename)
 
 
 @bp.route("/upload_img", methods=["GET", "POST"])
@@ -27,7 +28,7 @@ def upload_file():
     Also show the image stored in DB for current user"""
     form = ImageForm()
     # Wipe old temporary data form user
-    temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
+    temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
                                  current_user.username)
     try:
         shutil.rmtree(temp_user_dir)
@@ -40,18 +41,19 @@ def upload_file():
         patient_ID = form.patient_ID.data
         filename = secure_filename(patient_ID + "_" + file.filename)
 
-        # Create a temporary folder for username
-
-        if not os.path.exists(temp_user_dir):
-            os.makedirs(temp_user_dir)
+        # Create a data folder for username
+        data_patient_dir = os.path.join(current_app.config["DATA_FOLDER"],
+                                        patient_ID)
+        if not os.path.exists(data_patient_dir):
+            os.makedirs(data_patient_dir)
         # Save the image to a temp folder
-        file.save(os.path.join(temp_user_dir, filename))
-        # Get User ID
-        expert = User.query.filter_by(username=current_user.username).first()
+        file.save(os.path.join(data_patient_dir, filename))
+
         # Create our new Image & Patient database entry
         image = Image(image_name=filename,
                       patient_id=form.patient_ID.data,
-                      expert_id=expert.id)
+                      expert_id=current_user.id,
+                      image_path=os.path.join(data_patient_dir, filename))
         patient = Patient(id=form.patient_ID.data,
                           patient_name=form.patient_nom.data,
                           patient_firstname=form.patient_prenom.data)
@@ -61,14 +63,11 @@ def upload_file():
             db.session.add(patient)
 
         if image.isduplicated() == False:
-            image.set_imageblob(os.path.join(temp_user_dir, filename))
             db.session.add(image)
 
         db.session.commit()
 
-        # Finally delete the image file in temps folder and redirect to annotation
-        if os.path.exists(os.path.join(temp_user_dir, filename)):
-            os.remove(os.path.join(temp_user_dir, filename))
+        # Finally redirect to annotation
         return redirect(
             url_for("imgannot.annot_page",
                     filename=filename,
@@ -121,15 +120,16 @@ def annot_page():
     ) == False and image_requested.expert_id == current_user.id:
         session["image_expert_id"] = image_requested.expert_id
         # Create a temporary folder for username
-        temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
+        temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
                                      current_user.username)
         if not os.path.exists(temp_user_dir):
             os.makedirs(temp_user_dir)
-        # Write image to disk from DB & create the deep zoom image.
-        filepath_to_write = os.path.join(temp_user_dir,
-                                         image_requested.image_name)
-        Histo.write_file(image_requested.image_binary, filepath_to_write)
-        Histo.create_deepzoom_file(filepath_to_write)
+        # Create the deep zoom image.
+
+        Histo.create_deepzoom_file(
+            image_requested.image_path,
+            os.path.join(current_app.config["TEMP_FOLDER"],
+                         current_user.username, image_requested.image_name))
         session["filepath"] = os.path.join(current_user.username,
                                            image_requested.image_name)
 
@@ -168,10 +168,11 @@ def annot_page():
 
 
 @bp.route("/write_annot", methods=["GET", "POST"])
+@login_required
 def write_annot():
     """Write new annotation entries (json data) coming from the javascript plugin Annotorious (OpenSeaDragon Plugin) to a file named after the image.
     New annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
-    temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
+    temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
                                  current_user.username)
     annot_list = []
     # Get AJAX JSON data and parse it
@@ -211,10 +212,11 @@ def write_annot():
 
 
 @bp.route("/update_annot", methods=["POST"])
+@login_required
 def update_annot():
     """Update existing annotaions (json data) coming from the javascript plugin Annotorious (OpenSeaDragon Plugin) in the annotation json file named after the image.
     Updated annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
-    temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
+    temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
                                  current_user.username)
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
@@ -246,10 +248,11 @@ def update_annot():
 
 
 @bp.route("/delete_annot", methods=["POST"])
+@login_required
 def delete_annot():
     """Delete existing annotaions (json data) if the user delete an annotion of the javascript plugin Annotorious (OpenSeaDragon Plugin).
     Delete command is coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
-    temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
+    temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
                                  current_user.username)
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
@@ -279,9 +282,10 @@ def delete_annot():
 
 
 @bp.route("/results", methods=["GET", "POST"])
+@login_required
 def write_report():
     """Write the histological report & annotation to DB"""
-    temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
+    temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
                                  current_user.username)
     # Get Image entry from DB to register annotation
     image_requested = Image.query.filter_by(

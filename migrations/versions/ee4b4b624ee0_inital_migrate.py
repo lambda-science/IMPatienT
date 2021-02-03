@@ -1,8 +1,8 @@
-"""initial db
+"""inital migrate
 
-Revision ID: 1a883c035a44
+Revision ID: ee4b4b624ee0
 Revises: 
-Create Date: 2021-01-30 19:21:34.477399
+Create Date: 2021-02-03 11:57:20.846187
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1a883c035a44'
+revision = 'ee4b4b624ee0'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,7 +39,8 @@ def upgrade():
     sa.Column('image_name', sa.String(length=140), nullable=True),
     sa.Column('expert_id', sa.Integer(), nullable=True),
     sa.Column('patient_id', sa.String(length=100), nullable=True),
-    sa.Column('image_binary', sa.LargeBinary(), nullable=True),
+    sa.Column('age_at_biopsy', sa.Integer(), nullable=True),
+    sa.Column('image_path', sa.String(length=4096), nullable=True),
     sa.Column('diagnostic', sa.String(length=140), nullable=True),
     sa.Column('report_text', sa.Text(), nullable=True),
     sa.Column('annotation_json', sa.JSON(), nullable=True),
@@ -54,7 +55,7 @@ def upgrade():
     sa.Column('pdf_name', sa.String(length=140), nullable=True),
     sa.Column('expert_id', sa.Integer(), nullable=True),
     sa.Column('patient_id', sa.String(length=100), nullable=True),
-    sa.Column('pdf_binary', sa.LargeBinary(), nullable=True),
+    sa.Column('pdf_path', sa.String(length=4096), nullable=True),
     sa.Column('lang', sa.String(length=140), nullable=True),
     sa.Column('ocr_text', sa.Text(), nullable=True),
     sa.ForeignKeyConstraint(['expert_id'], ['user.id'], ),

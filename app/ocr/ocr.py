@@ -34,9 +34,3 @@ def pdf_to_text(path, lang):
         # Save text results
         text.append(text_page)
     return text
-
-
-def write_file(data, filename):
-    """Convert binary data to proper format and write it on Hard Disk"""
-    with open(filename, 'wb') as file:
-        file.write(data)

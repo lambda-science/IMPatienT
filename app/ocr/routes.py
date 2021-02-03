@@ -13,10 +13,11 @@ from werkzeug.utils import secure_filename
 import shutil
 
 
-@bp.route("/temp/<path:filename>")
+@bp.route("/data/<path:filename>")
+@login_required
 def temp(filename):
-    """Serve files located in subfolder inside temp folder"""
-    return send_from_directory(current_app.config["UPLOAD_FOLDER"], filename)
+    """Serve files located in patient subfolder inside folder"""
+    return send_from_directory(current_app.config["DATA_FOLDER"], filename)
 
 
 @bp.route("/upload_pdf", methods=["GET", "POST"])
@@ -27,12 +28,13 @@ def upload_pdf():
     Also show the availiable PDF files that already have been uploaded"""
     form = PdfForm()
     # Wipe old temporary data form user
-    temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
+    temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
                                  current_user.username)
     try:
         shutil.rmtree(temp_user_dir)
     except:
         pass
+
     # Show PDF File History linked to current user
     pdf_history = Pdf.query.filter_by(expert_id=current_user.id)
     if form.validate_on_submit():
@@ -40,19 +42,21 @@ def upload_pdf():
         patient_ID = form.patient_ID.data
         filename = secure_filename(patient_ID + "_" + file.filename)
 
-        # Create a temporary folder for username
+        # Create a data folder for patient
+        data_patient_dir = os.path.join(current_app.config["DATA_FOLDER"],
+                                        patient_ID)
+        if not os.path.exists(data_patient_dir):
+            os.makedirs(data_patient_dir)
 
-        if not os.path.exists(temp_user_dir):
-            os.makedirs(temp_user_dir)
-        # Save the image to a temp folder
-        file.save(os.path.join(temp_user_dir, filename))
-        # Get User ID
-        expert = User.query.filter_by(username=current_user.username).first()
+        # Save the PDF to patient data folder
+        file.save(os.path.join(data_patient_dir, filename))
+
         # Create our new PDF & Patient database entry
         pdf = Pdf(pdf_name=filename,
                   patient_id=form.patient_ID.data,
-                  expert_id=expert.id,
-                  lang=form.lang.data)
+                  expert_id=current_user.id,
+                  lang=form.lang.data,
+                  pdf_path=os.path.join(data_patient_dir, filename))
         patient = Patient(id=form.patient_ID.data,
                           patient_name=form.patient_nom.data,
                           patient_firstname=form.patient_prenom.data)
@@ -62,14 +66,11 @@ def upload_pdf():
             db.session.add(patient)
 
         if pdf.isduplicated() == False:
-            pdf.set_pdfblob(os.path.join(temp_user_dir, filename))
             db.session.add(pdf)
 
         db.session.commit()
 
-        # Finally delete the PDF file in temp folder and redirect to annotation
-        if os.path.exists(os.path.join(temp_user_dir, filename)):
-            os.remove(os.path.join(temp_user_dir, filename))
+        # Finally redirect to annotation
         return redirect(
             url_for("ocr.ocr_results",
                     filename=filename,
@@ -85,29 +86,20 @@ def ocr_results():
     """Render the OCR results page after the upload of the initial PDF. 
     Render submit PDF and OCR to database button."""
     form = OcrForm()
-    # Get the filename of pdf and patient ID from args.
-    session["filename"] = request.args.get("filename")
-    session["patient_ID"] = request.args.get("patient_ID")
-    # Query the database
+
+    # Query the database from arg in get request
     pdf_requested = Pdf.query.filter_by(
-        pdf_name=session["filename"],
-        patient_id=session["patient_ID"]).first()
+        pdf_name=request.args.get("filename"),
+        patient_id=request.args.get("patient_ID")).first()
+
     # If PDF exist and is associated to current user: serve it
     if pdf_requested != None and form.validate_on_submit(
     ) == False and pdf_requested.expert_id == current_user.id:
-        session["pdf_expert_id"] = pdf_requested.expert_id
-        # Create a temporary folder for username
-        temp_user_dir = os.path.join(current_app.config["UPLOAD_FOLDER"],
-                                     current_user.username)
-        if not os.path.exists(temp_user_dir):
-            os.makedirs(temp_user_dir)
-        # Write the PDF File to disk from blob in DB.
-        filepath_to_write = os.path.join(temp_user_dir, pdf_requested.pdf_name)
-        Ocr.write_file(pdf_requested.pdf_binary, filepath_to_write)
-        session["filepath"] = os.path.join("temp", current_user.username,
-                                           pdf_requested.pdf_name)
-        # Perform OCR on the PDF file on disk
-        ocr_text_list = Ocr.pdf_to_text(session["filepath"],
+
+        rel_filepath = os.path.join("data", request.args.get("patient_ID"),
+                                    pdf_requested.pdf_name)
+        # Perform OCR on the PDF file
+        ocr_text_list = Ocr.pdf_to_text(pdf_requested.pdf_path,
                                         pdf_requested.lang)
         # Join per page text with NEW PAGE tag between elements
         ocr_text = '\n##### NEW PAGE #####\n'.join(ocr_text_list)
@@ -123,11 +115,10 @@ def ocr_results():
     elif pdf_requested.expert_id != current_user.id:
         flash('User not authorized for this PDF!', "error")
         return redirect(url_for('ocr.upload_pdf'))
-
     return render_template("ocr/ocr_results.html",
                            ocr_text=ocr_text,
-                           patient_ID=session["patient_ID"],
-                           filepath=session["filepath"])
+                           patient_ID=request.args.get("patient_ID"),
+                           rel_filepath=rel_filepath)
 
 
 @bp.route("/delete_pdf", methods=["POST"])

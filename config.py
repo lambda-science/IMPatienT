@@ -10,8 +10,8 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'myverylongsecretkey'
     ALLOWED_EXTENSIONS = ["tif", "tiff", "png", "jpg", "jpeg"]
-    UPLOAD_FOLDER = os.path.join(basedir, "temp")
-    REPORT_FOLDER = os.path.join(basedir, "results")
+    TEMP_FOLDER = os.path.join(basedir, "temp")
+    DATA_FOLDER = os.path.join(basedir, "data")
     # Session saving on memory instead of user cookie
     #SESSION_TYPE = "sqlalchemy"
 

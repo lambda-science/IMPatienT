@@ -56,7 +56,8 @@ class Image(db.Model):
     image_name = db.Column(db.String(140), index=True)
     expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     patient_id = db.Column(db.String(100), db.ForeignKey('patient.id'))
-    image_binary = db.Column(db.LargeBinary)
+    age_at_biopsy = db.Column(db.Integer)
+    image_path = db.Column(db.String(4096))
     diagnostic = db.Column(db.String(140), index=True)
     report_text = db.Column(db.Text)
     annotation_json = db.Column(db.JSON, default=[])
@@ -64,11 +65,6 @@ class Image(db.Model):
     def __repr__(self):
         return '<Image Name {} Patient {}>'.format(self.image_name,
                                                    self.patient_id)
-
-    def set_imageblob(self, filename):
-        with open(os.path.join(current_app.config["UPLOAD_FOLDER"], filename),
-                  'rb') as file:
-            self.image_binary = file.read()
 
     def isduplicated(self):
         if Image.query.filter_by(image_name=self.image_name,
@@ -102,18 +98,13 @@ class Pdf(db.Model):
     pdf_name = db.Column(db.String(140), index=True)
     expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     patient_id = db.Column(db.String(100), db.ForeignKey('patient.id'))
-    pdf_binary = db.Column(db.LargeBinary)
+    pdf_path = db.Column(db.String(4096))
     lang = db.Column(db.String(140), index=True)
     ocr_text = db.Column(db.Text)
 
     def __repr__(self):
         return '<Pdf Name {} Patient {}>'.format(self.pdf_name,
                                                  self.patient_id)
-
-    def set_pdfblob(self, filename):
-        with open(os.path.join(current_app.config["UPLOAD_FOLDER"], filename),
-                  'rb') as file:
-            self.pdf_binary = file.read()
 
     def isduplicated(self):
         if Pdf.query.filter_by(pdf_name=self.pdf_name,
