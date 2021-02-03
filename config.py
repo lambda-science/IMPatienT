@@ -12,7 +12,7 @@ class Config(object):
     ALLOWED_EXTENSIONS = ["tif", "tiff", "png", "jpg", "jpeg"]
     TEMP_FOLDER = os.path.join(basedir, "temp")
     DATA_FOLDER = os.path.join(basedir, "data")
-    # Session saving on memory instead of user cookie
+    # Session saving on filesystem instead of user cookie
     SESSION_TYPE = "filesystem"
 
     # Create various list from config file

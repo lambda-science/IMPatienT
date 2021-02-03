@@ -111,10 +111,10 @@ def annot_page():
     # Get the filename of image and patient ID from args.
     session["filename"] = request.args.get("filename")
     session["patient_ID"] = request.args.get("patient_ID")
-    # Query the database
+    # Query the database from args data
     image_requested = Image.query.filter_by(
-        image_name=session["filename"],
-        patient_id=session["patient_ID"]).first()
+        image_name=request.args.get("filename"),
+        patient_id=request.args.get("patient_ID")).first()
     # If image exist and is associated to current user: serve it
     if image_requested != None and form.validate_on_submit(
     ) == False and image_requested.expert_id == current_user.id:
