@@ -13,7 +13,7 @@ class Config(object):
     TEMP_FOLDER = os.path.join(basedir, "temp")
     DATA_FOLDER = os.path.join(basedir, "data")
     # Session saving on memory instead of user cookie
-    #SESSION_TYPE = "sqlalchemy"
+    SESSION_TYPE = "filesystem"
 
     # Create various list from config file
     FEATURE_LIST = Common.create_feature_list(

@@ -1,7 +1,7 @@
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
-from flask import Flask, session, current_app
+from flask import Flask, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -16,7 +16,7 @@ login = LoginManager()
 login.login_view = 'auth.login'
 login.login_message_category = "info"
 mail = Mail()
-#session = Session()
+session = Session()
 
 
 def create_app(config_class=Config):
@@ -27,7 +27,7 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     login.init_app(app)
     mail.init_app(app)
-    #session.init_app(app)
+    session.init_app(app)
 
     # Configuration of our various flask-blueprint folders
     from app.errors import bp as errors_bp

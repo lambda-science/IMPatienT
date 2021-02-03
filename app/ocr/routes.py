@@ -7,7 +7,7 @@ from app.ocr.forms import PdfForm, OcrForm
 import app.ocr.ocr as Ocr
 from app.models import User, Patient, Pdf
 
-from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory, session, current_app
+from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory, current_app
 from flask_login import current_user, login_required
 from werkzeug.utils import secure_filename
 import shutil
