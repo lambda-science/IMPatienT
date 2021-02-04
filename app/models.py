@@ -56,6 +56,7 @@ class Image(db.Model):
     image_name = db.Column(db.String(140), index=True)
     expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     patient_id = db.Column(db.String(100), db.ForeignKey('patient.id'))
+    type_coloration = db.Column(db.String(140))
     age_at_biopsy = db.Column(db.Integer)
     image_path = db.Column(db.String(4096))
     diagnostic = db.Column(db.String(140), index=True)

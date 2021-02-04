@@ -46,9 +46,13 @@
               {% endfor %}
             </table>
           </div>
-          <h4> Diagnostic </h3>
-            {{form.diagnostic}}
-            {{ form.submit }}
+          <h4> Coloration Type</h4>
+          {{form.type_coloration}}
+          <h4>Patient Age at histology Sample (in years)</h4>
+          {{form.age_histo}}
+          <h4>Diagnostic & Infos</h4>
+          {{form.diagnostic}}
+          {{ form.submit }}
         </div>
       </form>
     </div>

@@ -21,3 +21,9 @@ def create_lang_list(config_file):
     diag_df = pd.read_csv(config_file, sep='\t', header=None)
     diag_list = [(row[0], row[1]) for index, row in diag_df.iterrows()]
     return diag_list
+
+
+def create_color_list(config_file):
+    with open(config_file) as f:
+        color_list = f.read().splitlines()
+    return color_list

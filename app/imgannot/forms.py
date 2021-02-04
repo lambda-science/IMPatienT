@@ -68,7 +68,24 @@ class AnnotForm(FlaskForm):
 
     submit = SubmitField('Submit report and annotations to the database',
                          render_kw={"class": "btn btn-primary mb-2"})
-
+    type_coloration = SelectField('type_coloration',
+                                  validators=[DataRequired()],
+                                  choices=Common.create_color_list(
+                                      os.path.join("config",
+                                                   "config_coloration.txt")),
+                                  render_kw={
+                                      "placeholder":
+                                      "Histology Coloration Type",
+                                      "class": "form-control custom-select"
+                                  })
+    age_histo = SelectField('age_histology',
+                            validators=[DataRequired()],
+                            choices=[i for i in range(101)],
+                            render_kw={
+                                "placeholder":
+                                "Patient age at histology sample time",
+                                "class": "form-control custom-select"
+                            })
     diagnostic = SelectField(
         'diagnostic',
         validators=[DataRequired()],

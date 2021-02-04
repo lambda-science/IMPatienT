@@ -155,6 +155,8 @@ def annot_page():
             image_requested.patient_id).patient_firstname
         session["expert_name"] = image_requested.expert_id
         session["diagnostic"] = form.diagnostic.data
+        session["age_at_biopsy"] = form.age_histo.data
+        session["type_coloration"] = form.type_coloration.data
         session["feature"] = {}
         for feature in current_app.config["FEATURE_LIST"]:
             session["feature"][feature[0]] = form.data[feature[0]]
@@ -254,6 +256,9 @@ def write_report():
         # Attach report_string to DB entry and diagnostic to DB entry
         image_requested.report_text = str(report_string)
         image_requested.diagnostic = session["diagnostic"]
+        image_requested.age_at_biopsy = session["age_at_biopsy"]
+        image_requested.type_coloration = session["type_coloration"]
+
         # Load annotation json file and attach it to DB entry
         with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
                   "r") as json_file:
