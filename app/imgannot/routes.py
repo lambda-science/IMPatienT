@@ -41,12 +41,12 @@ def upload_file():
         patient_ID = form.patient_ID.data
         filename = secure_filename(patient_ID + "_" + file.filename)
 
-        # Create a data folder for username
+        # Create a data folder for patient
         data_patient_dir = os.path.join(current_app.config["DATA_FOLDER"],
                                         patient_ID)
         if not os.path.exists(data_patient_dir):
             os.makedirs(data_patient_dir)
-        # Save the image to a temp folder
+        # Save the image to patient data folder
         file.save(os.path.join(data_patient_dir, filename))
 
         # Create our new Image & Patient database entry

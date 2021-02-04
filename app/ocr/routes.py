@@ -15,9 +15,15 @@ import shutil
 
 @bp.route("/data/<path:filename>")
 @login_required
-def temp(filename):
+def data_folder(filename):
     """Serve files located in patient subfolder inside folder"""
-    return send_from_directory(current_app.config["DATA_FOLDER"], filename)
+    pdf_requested = Pdf.query.filter_by(
+        pdf_name=filename.split("/")[-1],
+        patient_id=filename.split("/")[-1].split("_")[0]).first()
+    if pdf_requested != None and pdf_requested.expert_id == current_user.id:
+        return send_from_directory(current_app.config["DATA_FOLDER"], filename)
+    else:
+        return "Unauthorized !", 401
 
 
 @bp.route("/upload_pdf", methods=["GET", "POST"])

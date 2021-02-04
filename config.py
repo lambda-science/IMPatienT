@@ -15,6 +15,8 @@ class Config(object):
     # Session saving on filesystem instead of user cookie
     SESSION_TYPE = "filesystem"
 
+    # Max upload size: 1GB
+    MAX_CONTENT_LENGTH = 1024 * 1024 * 1024
     # Create various list from config file
     FEATURE_LIST = Common.create_feature_list(
         os.path.join("config", "config_ontology.tsv"))
