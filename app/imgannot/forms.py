@@ -96,17 +96,3 @@ class AnnotForm(FlaskForm):
             "placeholder": "Disease diagnostic",
             "class": "form-control custom-select"
         })
-
-
-# Iterative form field adding for each feature annotation in the config file feature list.
-# Loop to add attribute to form class
-#for feature in current_app.config["FEATURE_LIST"]:
-for feature in Common.create_feature_list(
-        os.path.join("config", "config_ontology.tsv")):
-    setattr(
-        AnnotForm, feature[0],
-        RadioField(feature[1],
-                   choices=[('1', 'Present'), ('-1', 'Absent'),
-                            ('0', 'Uncertain')],
-                   default='-1',
-                   validators=[DataRequired()]))

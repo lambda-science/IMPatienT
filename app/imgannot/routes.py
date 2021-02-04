@@ -106,8 +106,9 @@ def delete_image():
 def annot_page():
     """Image annotation page with form.
     Redirects to the results page when the annotation form is submitted."""
-    form = AnnotForm()
     tag_list = [i[1] for i in current_app.config["FEATURE_LIST"]]
+    feature_list = current_app.config["FEATURE_LIST"]
+
     # Get the filename of image and patient ID from args.
     session["filename"] = request.args.get("filename")
     session["patient_ID"] = request.args.get("patient_ID")
@@ -115,6 +116,10 @@ def annot_page():
     image_requested = Image.query.filter_by(
         image_name=request.args.get("filename"),
         patient_id=request.args.get("patient_ID")).first()
+    Histo.generate_featureForm(AnnotForm, image_requested.report_text,
+                               feature_list)
+    form = AnnotForm()
+
     # If image exist and is associated to current user: serve it
     if image_requested != None and form.validate_on_submit(
     ) == False and image_requested.expert_id == current_user.id:
@@ -124,8 +129,7 @@ def annot_page():
                                      current_user.username)
         if not os.path.exists(temp_user_dir):
             os.makedirs(temp_user_dir)
-        # Create the deep zoom image.
-
+        # Create the deep zoom image & prefillform if already filled
         Histo.create_deepzoom_file(
             image_requested.image_path,
             os.path.join(current_app.config["TEMP_FOLDER"],
@@ -239,17 +243,8 @@ def write_report():
         patient_id=session["patient_ID"]).first()
     # If Image exist: build the histology text report from session cookie data
     if image_requested != None:
-        # Write general patient informations
-        report_string = "Prenom_Patient\t" + session["patient_prenom"] + "\n"
-        report_string = report_string + "Nom_Patient\t" + session[
-            "patient_nom"] + "\n"
-        report_string = report_string + "ID_Patient\t" + session[
-            "patient_ID"] + "\n"
-        report_string = report_string + "Redacteur_histo\t" + str(
-            session["expert_name"]) + "\n"
-        report_string = report_string + "Diagnostic\t" + session[
-            "diagnostic"] + "\n"
-        # Then write each histology feature values with a loop
+        # Write each histology feature values with a loop
+        report_string = ""
         for i in session["feature"]:
             report_string = report_string + i + "\t" + session["feature"][
                 i] + "\n"
