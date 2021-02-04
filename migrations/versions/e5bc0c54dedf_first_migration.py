@@ -1,8 +1,8 @@
-"""inital migrate
+"""first migration
 
-Revision ID: ee4b4b624ee0
+Revision ID: e5bc0c54dedf
 Revises: 
-Create Date: 2021-02-03 11:57:20.846187
+Create Date: 2021-02-04 16:32:06.234471
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ee4b4b624ee0'
+revision = 'e5bc0c54dedf'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,6 +39,7 @@ def upgrade():
     sa.Column('image_name', sa.String(length=140), nullable=True),
     sa.Column('expert_id', sa.Integer(), nullable=True),
     sa.Column('patient_id', sa.String(length=100), nullable=True),
+    sa.Column('type_coloration', sa.String(length=140), nullable=True),
     sa.Column('age_at_biopsy', sa.Integer(), nullable=True),
     sa.Column('image_path', sa.String(length=4096), nullable=True),
     sa.Column('diagnostic', sa.String(length=140), nullable=True),
