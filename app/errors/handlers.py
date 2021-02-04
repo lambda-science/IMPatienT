@@ -14,3 +14,9 @@ def internal_error(error):
     """View function for error 500"""
     db.session.rollback()
     return render_template('errors/500.html'), 500
+
+
+@bp.app_errorhandler(413)
+def too_large(error):
+    return render_template('errors/413.html'), 413
+    return "File is too large", 413

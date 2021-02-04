@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Error 413: File is too large</h1>
+<p>Uploaded file is too large. Please press the back button to go to the index: <a
+        href="{{ url_for('index.index') }}">Back</a></p>
+{% endblock %}

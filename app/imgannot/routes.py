@@ -167,14 +167,15 @@ def annot_page():
                            tag_list=str(tag_list))
 
 
-@bp.route("/write_annot", methods=["GET", "POST"])
+@bp.route("/modify_annot", methods=["POST", "PATCH", "DELETE"])
 @login_required
-def write_annot():
-    """Write new annotation entries (json data) coming from the javascript plugin Annotorious (OpenSeaDragon Plugin) to a file named after the image.
-    New annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
+def modify_annot():
+    """Write/Update/Delete existing annotations (json data) according to JS Plugin Annotorious AJAX Request.
+    Command is coming from an AJAX Request based on the Anno JS Object (see annot.html). (POST/PATCH/DELETE)"""
     temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
                                  current_user.username)
     annot_list = []
+    updated_list = []
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
@@ -189,89 +190,32 @@ def write_annot():
                     "w") as json_file:
                 annot_list.append(parsed)
                 json_file.write(json.dumps(annot_list, indent=4))
-        # If there are already some annotation: we add the new annotations to the file
+        # If there are already some annotation: we write/delete/update depending on request type
         else:
             # First open as read only to load existing JSON
             with open(
                     os.path.join(temp_user_dir, session["filename"] + ".json"),
                     "r") as json_file:
                 old_data = json.load(json_file)
-                old_data.append(parsed)
-            # Then open as write to overwrite the old file with old json+new data
+                if request.method == 'POST':
+                    old_data.append(parsed)
+                    updated_list = old_data
+                elif request.method == 'PATCH':
+                    # Compare ID of annotation and replace the old annotations with the new one when there is a match in IDs.
+                    for anot in old_data:
+                        if parsed["id"] != anot["id"]:
+                            updated_list.append(anot)
+                        elif parsed["id"] == anot["id"]:
+                            updated_list.append(parsed)
+                elif request.method == 'DELETE':
+                    # If annotation ID is different from the ID of deletion command we save them to a list. Matching ID will be skipped and erased.
+                    for anot in old_data:
+                        if parsed["id"] != anot["id"]:
+                            updated_list.append(anot)
             with open(
                     os.path.join(temp_user_dir, session["filename"] + ".json"),
                     "w") as json_file:
-                json_file.write(json.dumps(old_data, indent=4))
-        return json.dumps({"success": True}), 200, {
-            "ContentType": "application/json"
-        }
-    # Error message if not the right user for given image
-    else:
-        flash('Unautorized database manipulation (write_annot)', "error")
-        return redirect(url_for('imgannot.upload_file'))
-
-
-@bp.route("/update_annot", methods=["POST"])
-@login_required
-def update_annot():
-    """Update existing annotaions (json data) coming from the javascript plugin Annotorious (OpenSeaDragon Plugin) in the annotation json file named after the image.
-    Updated annotations data are coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
-    temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
-                                 current_user.username)
-    # Get AJAX JSON data and parse it
-    raw_data = request.get_data()
-    parsed = json.loads(raw_data)
-    # If current user is the creator of image: proceed
-    updated_list = []
-    if session["image_expert_id"] == current_user.id:
-        # First open as read only to load existing JSON
-        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-                  "r") as json_file:
-            old_data = json.load(json_file)
-            # Compare ID of annotation and replace the old annotations with the new one when there is a match in IDs.
-            for anot in old_data:
-                if parsed["id"] != anot["id"]:
-                    updated_list.append(anot)
-                elif parsed["id"] == anot["id"]:
-                    updated_list.append(parsed)
-        # Write the new annotations JSON data to file.
-        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-                  "w") as json_file:
-            json_file.write(json.dumps(updated_list, indent=4))
-        return json.dumps({"success": True}), 200, {
-            "ContentType": "application/json"
-        }
-    # Error message if not the right user for given image
-    else:
-        flash('Unautorized database manipulation (write_annot)', "error")
-        return redirect(url_for('imgannot.upload_file'))
-
-
-@bp.route("/delete_annot", methods=["POST"])
-@login_required
-def delete_annot():
-    """Delete existing annotaions (json data) if the user delete an annotion of the javascript plugin Annotorious (OpenSeaDragon Plugin).
-    Delete command is coming from an AJAX GET Request based on the Anno JS Object (see annot.html)."""
-    temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
-                                 current_user.username)
-    # Get AJAX JSON data and parse it
-    raw_data = request.get_data()
-    parsed = json.loads(raw_data)
-    # If current user is the creator of image: proceed
-    updated_list = []
-    if session["image_expert_id"] == current_user.id:
-        # First open as read only to load existing JSON
-        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-                  "r") as json_file:
-            old_data = json.load(json_file)
-            # If annotation ID is different from the ID of deletion command we save them to a list. Matching ID will be skipped and erased.
-            for anot in old_data:
-                if parsed["id"] != anot["id"]:
-                    updated_list.append(anot)
-        # Write the new annotations JSON data to file.
-        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
-                  "w") as json_file:
-            json_file.write(json.dumps(updated_list, indent=4))
+                json_file.write(json.dumps(updated_list, indent=4))
         return json.dumps({"success": True}), 200, {
             "ContentType": "application/json"
         }
