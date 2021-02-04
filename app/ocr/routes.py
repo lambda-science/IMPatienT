@@ -103,11 +103,15 @@ def ocr_results():
 
         rel_filepath = os.path.join("data", request.args.get("patient_ID"),
                                     pdf_requested.pdf_name)
-        # Perform OCR on the PDF file
-        ocr_text_list = Ocr.pdf_to_text(pdf_requested.pdf_path,
-                                        pdf_requested.lang)
-        # Join per page text with NEW PAGE tag between elements
-        ocr_text = '\n##### NEW PAGE #####\n'.join(ocr_text_list)
+        # Perform OCR on the PDF file if no text registered in DB
+        if pdf_requested.ocr_text == None:
+            ocr_text_list = Ocr.pdf_to_text(pdf_requested.pdf_path,
+                                            pdf_requested.lang)
+            # Join per page text with NEW PAGE tag between elements
+            ocr_text = '\n##### NEW PAGE #####\n'.join(ocr_text_list)
+        else:
+            ocr_text = pdf_requested.ocr_text
+
         form.ocr_text.data = ocr_text
 
     elif pdf_requested != None and form.validate_on_submit(

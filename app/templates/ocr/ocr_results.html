@@ -23,15 +23,15 @@
 </div>
 <script>
     // Disable by default textarea
-    $("#ocr_text").prop("disabled", true);
+    $("#ocr_text").prop("readonly", true);
     // Edit textare state based on checkbox state
     $(function () {
         $('#editSwitch').change(function () {
             if ($(this).prop('checked') === true) {
-                $("#ocr_text").prop("disabled", false);
+                $("#ocr_text").prop("readonly", false);
             }
             else if ($(this).prop('checked') === false) {
-                $("#ocr_text").prop("disabled", true);
+                $("#ocr_text").prop("readonly", true);
             }
         })
     })
