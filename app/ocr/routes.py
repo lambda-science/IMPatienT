@@ -127,7 +127,7 @@ def ocr_results():
                            rel_filepath=rel_filepath)
 
 
-@bp.route("/delete_pdf", methods=["POST"])
+@bp.route("/delete_pdf", methods=["DELETE"])
 @login_required
 def delete_pdf():
     """Page to delete an PDF record from database from AJAX request"""

@@ -67,7 +67,7 @@
     var myJSON = JSON.stringify(dict);
     console.log(myJSON)
     $.ajax({
-      type: "POST",
+      type: "DELETE",
       url: "{{url_for('imgannot.delete_image')}}",
       data: myJSON,
       success: function () {

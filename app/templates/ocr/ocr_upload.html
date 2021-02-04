@@ -68,7 +68,7 @@
         var myJSON = JSON.stringify(dict);
         console.log(myJSON)
         $.ajax({
-            type: "POST",
+            type: "DELETE",
             url: "{{url_for('ocr.delete_pdf')}}",
             data: myJSON,
             success: function () {

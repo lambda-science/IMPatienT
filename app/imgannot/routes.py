@@ -78,7 +78,7 @@ def upload_file():
 
 
 # To change to form insead of simple get
-@bp.route("/delete_image", methods=["POST"])
+@bp.route("/delete_image", methods=["DELETE"])
 @login_required
 def delete_image():
     """Page to delete an image record from database from AJAX request"""
