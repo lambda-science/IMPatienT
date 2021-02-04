@@ -9,17 +9,31 @@
 
         <div class="col">
             <h1>OCR</h1>
-            <div id="ocrtext">
-                <p>
-                    {% for line in ocr_text %}
-                    {{line}}<br>
-                    {% endfor %}
-                </p>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="editSwitch" />
+                <label class="form-check-label" for="editSwitch">Edit OCR Text</label>
             </div>
-
-            <a href="{{ url_for('ocr.upload_pdf') }}" class="btn btn-info" role="button">Return to index</a>
+            <form method=post>
+                {{ form.hidden_tag() }}
+                {{ form.ocr_text() }}
+                {{form.submit}}
+            </form>
         </div>
     </div>
-
 </div>
+<script>
+    // Disable by default textarea
+    $("#ocr_text").prop("disabled", true);
+    // Edit textare state based on checkbox state
+    $(function () {
+        $('#editSwitch').change(function () {
+            if ($(this).prop('checked') === true) {
+                $("#ocr_text").prop("disabled", false);
+            }
+            else if ($(this).prop('checked') === false) {
+                $("#ocr_text").prop("disabled", true);
+            }
+        })
+    })
+</script>
 {% endblock %}

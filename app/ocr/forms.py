@@ -2,7 +2,7 @@ from app.models import Patient, Pdf
 from flask import current_app
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, SelectField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Regexp, Length
 
 import app.src.common as Common
@@ -70,5 +70,10 @@ class PdfForm(FlaskForm):
 
 class OcrForm(FlaskForm):
     """Form to save OCR results to database"""
-    submit = SubmitField('Submit text to database',
+    ocr_text = TextAreaField(render_kw={
+        "cols": "3",
+        "rows": "30",
+        "class": "form-control",
+    })
+    submit = SubmitField('Submit text to database and\n return to upload page',
                          render_kw={"class": "btn btn-primary mb-2"})

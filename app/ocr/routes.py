@@ -92,7 +92,6 @@ def ocr_results():
     """Render the OCR results page after the upload of the initial PDF. 
     Render submit PDF and OCR to database button."""
     form = OcrForm()
-
     # Query the database from arg in get request
     pdf_requested = Pdf.query.filter_by(
         pdf_name=request.args.get("filename"),
@@ -109,10 +108,13 @@ def ocr_results():
                                         pdf_requested.lang)
         # Join per page text with NEW PAGE tag between elements
         ocr_text = '\n##### NEW PAGE #####\n'.join(ocr_text_list)
-        # Split full string by \n for formatting purpose in HTML. Each elem = 1 line
-        ocr_text = ocr_text.split("\n")
-        pdf_requested.ocr_text = ''.join(ocr_text)
+        form.ocr_text.data = ocr_text
+
+    elif pdf_requested != None and form.validate_on_submit(
+    ) == True and pdf_requested.expert_id == current_user.id:
+        pdf_requested.ocr_text = form.ocr_text.data
         db.session.commit()
+        return redirect(url_for('ocr.upload_pdf'))
 
     # Error handling
     elif pdf_requested == None:
@@ -122,6 +124,7 @@ def ocr_results():
         flash('User not authorized for this PDF!', "error")
         return redirect(url_for('ocr.upload_pdf'))
     return render_template("ocr/ocr_results.html",
+                           form=form,
                            ocr_text=ocr_text,
                            patient_ID=request.args.get("patient_ID"),
                            rel_filepath=rel_filepath)
