@@ -90,6 +90,8 @@ def delete_image():
         patient_id=parsed["patient_id"]).first()
     # If current user is the creator of image: delete from DB
     if image_requested != None and image_requested.expert_id == current_user.id:
+        if os.path.exists(image_requested.image_path):
+            os.remove(image_requested.image_path)
         db.session.delete(image_requested)
         db.session.commit()
         return json.dumps({"success": True}), 200, {

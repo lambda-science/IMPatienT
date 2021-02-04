@@ -145,6 +145,8 @@ def delete_pdf():
         pdf_name=parsed["pdf_name"], patient_id=parsed["patient_id"]).first()
     # If current user is the creator of PDF: delete from DB
     if pdf_requested != None and pdf_requested.expert_id == current_user.id:
+        if os.path.exists(pdf_requested.pdf_path):
+            os.remove(pdf_requested.pdf_path)
         db.session.delete(pdf_requested)
         db.session.commit()
         return json.dumps({"success": True}), 200, {
