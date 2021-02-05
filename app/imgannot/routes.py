@@ -1,5 +1,6 @@
 import os
 import json
+import subprocess
 
 from app import db
 from app.imgannot import bp
@@ -18,6 +19,13 @@ import shutil
 def temp(filename):
     """Serve files located in subfolder inside temp folder"""
     return send_from_directory(current_app.config["TEMP_FOLDER"], filename)
+
+
+@bp.route("/data/<path:filename>")
+@login_required
+def data_folder(filename):
+    """Serve files located in patient subfolder inside folder"""
+    return send_from_directory(current_app.config["DATA_FOLDER"], filename)
 
 
 @bp.route("/upload_img", methods=["GET", "POST"])
@@ -118,6 +126,8 @@ def annot_page():
     image_requested = Image.query.filter_by(
         image_name=request.args.get("filename"),
         patient_id=request.args.get("patient_ID")).first()
+
+    # Prefill the feature form if alraedy in DB
     Histo.generate_featureForm(AnnotForm, image_requested.report_text,
                                feature_list)
     form = AnnotForm()
@@ -131,14 +141,16 @@ def annot_page():
                                      current_user.username)
         if not os.path.exists(temp_user_dir):
             os.makedirs(temp_user_dir)
-        # Create the deep zoom image & prefillform if already filled
-        Histo.create_deepzoom_file(
-            image_requested.image_path,
-            os.path.join(current_app.config["TEMP_FOLDER"],
-                         current_user.username, image_requested.image_name))
-        session["filepath"] = os.path.join(current_user.username,
-                                           image_requested.image_name)
-
+        # Create the deep zoom image using deepzoom command (subprocess)
+        basename = os.path.splitext(
+            os.path.basename(image_requested.image_path))[0]
+        command = "python app/src/deepzoom.py " + image_requested.image_path + " " + basename + " --output " + os.path.join(
+            current_app.config["DATA_FOLDER"], session["patient_ID"], basename)
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        process.wait()
+        annot_temp_path = os.path.join(current_user.username,
+                                       image_requested.image_name)
+        deepzoom_path = os.path.join(image_requested.patient_id, basename)
         # Create the JSON File for annotation from data stored in DB
         with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
                   "w") as json_file:
@@ -168,7 +180,8 @@ def annot_page():
             session["feature"][feature[0]] = form.data[feature[0]]
         return redirect(url_for("imgannot.write_report"))
     return render_template("imgannot/annot.html",
-                           filename=session["filepath"],
+                           deepzoom_path=deepzoom_path,
+                           annot_temp_path=annot_temp_path,
                            feature_list=current_app.config["FEATURE_LIST"],
                            patient_ID=session["patient_ID"],
                            form=form,

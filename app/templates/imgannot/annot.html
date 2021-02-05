@@ -65,7 +65,7 @@
   var viewer = OpenSeadragon({
     id: "seadragon-viewer",
     prefixUrl: "/static/images/",
-    tileSources: "{{url_for('imgannot.temp', filename=filename+'.dzi')}}"
+    tileSources: "{{url_for('imgannot.data_folder', filename=deepzoom_path+'.dzi')}}"
   });
 
   // Initialize the Annotorious plugin
@@ -74,7 +74,7 @@
       { widget: 'TAG', vocabulary: {{ tag_list | safe }} }]
     });
   // Load annotations in W3C WebAnnotation format
-  anno.loadAnnotations("{{url_for('imgannot.temp', filename=filename+'.json')}}");
+  anno.loadAnnotations("{{url_for('imgannot.temp', filename=annot_temp_path+'.json')}}");
 
   // Handler to create annot
   anno.on('createAnnotation', function (annotation) {
