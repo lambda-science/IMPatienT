@@ -16,8 +16,10 @@ class ImageForm(FlaskForm):
             FileRequired(),
             #FileAllowed(current_app.config["ALLOWED_EXTENSIONS"],
             #            "This file is not a valid image !")
-            FileAllowed(["tif", "tiff", "png", "jpg", "jpeg"],
-                        "This file is not a valid image !")
+            FileAllowed([
+                "tif", "tiff", "png", "jpg", "jpeg", "svs", "vms", "vmu",
+                "ndpi", "scn", "mrxs", "bif", "svslide"
+            ], "This file is not a valid image !")
         ],
         render_kw={"class": "form-control-file"})
     patient_ID = StringField('patient_ID',
