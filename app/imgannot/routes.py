@@ -144,9 +144,13 @@ def annot_page():
         # Create the deep zoom image using deepzoom command (subprocess)
         basename = os.path.splitext(
             os.path.basename(image_requested.image_path))[0]
-        command = "python app/src/deepzoom.py " + image_requested.image_path + " " + basename + " --output " + os.path.join(
-            current_app.config["DATA_FOLDER"], session["patient_ID"], basename)
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        process = subprocess.Popen([
+            "venv/bin/python3", "app/src/deepzoom.py",
+            image_requested.image_path, basename, "--output",
+            os.path.join(current_app.config["DATA_FOLDER"],
+                         session["patient_ID"], basename)
+        ],
+                                   stdout=subprocess.PIPE)
         process.wait()
         annot_temp_path = os.path.join(current_user.username,
                                        image_requested.image_name)
