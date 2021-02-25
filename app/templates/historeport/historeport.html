@@ -1,8 +1,20 @@
 {% extends "base.html"%}
 {% block content %}
 
-<h1>Placeholder</h1>
-<p>Placeholder.</p>
+<div class="col">
+    <h1>Histo report</h1>
+    <form method="post">
+        <div class="form-group">
+            {{ form.hidden_tag() }}
+            {% for field in form %}
+            {% if field.type != 'CSRFTokenField' %}
+            {{ field() }}
+            {{ field.label(class="btn btn-outline-success") }}
+            {% endif %}
+            {% endfor %}
+        </div>
+    </form>
+</div>
 <a href="{{ url_for('imgannot.upload_file') }}" class="btn btn-info" role="button">Return to index</a>
 
 {% endblock %}

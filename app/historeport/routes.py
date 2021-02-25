@@ -1,6 +1,8 @@
 from app import db
 from app.historeport import bp
-
+from app.historeport.forms import ReportForm
+import app.historeport.report as Report
+import os
 from flask import Flask, render_template, session, current_app
 from flask_login import current_user, login_required
 
@@ -9,5 +11,6 @@ from flask_login import current_user, login_required
 @login_required
 def historeport():
     """palceholder"""
-    # Show Image History
-    return render_template("historeport/historeport.html")
+    Report.generate_historeportForm(ReportForm, os.path.join("config", "report_form_config.tsv"))
+    form = ReportForm()
+    return render_template("historeport/historeport.html", form=form)
