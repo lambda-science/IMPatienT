@@ -65,7 +65,14 @@
   var viewer = OpenSeadragon({
     id: "seadragon-viewer",
     prefixUrl: "/static/images/",
-    tileSources: "{{url_for('imgannot.data_folder', filename=deepzoom_path+'.dzi')}}"
+    tileSources: "{{url_for('imgannot.data_folder', filename=deepzoom_path+'.dzi')}}",
+    animationTime: 0.5,
+    blendTime: 0.1,
+    constrainDuringPan: true,
+    maxZoomPixelRatio: 2,
+    minZoomLevel: 1,
+    visibilityRatio: 1,
+    zoomPerScroll: 2
   });
 
   // Initialize the Annotorious plugin

@@ -14,7 +14,8 @@ class Config(object):
         "scn", "mrxs", "bif", "svslide"
     ]
     TEMP_FOLDER = os.path.join(basedir, "temp")
-    DATA_FOLDER = os.path.join(basedir, "data")
+    DATA_FOLDER = os.path.join("/", "data")
+    #DATA_FOLDER = os.path.join(basedir, "data")
     # Session saving on filesystem instead of user cookie
     SESSION_TYPE = "filesystem"
 

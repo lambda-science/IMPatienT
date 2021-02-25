@@ -1,9 +1,10 @@
 # How To Use For Developpement Purpose:
 
 1. Install the Tesseract dependencies for OCR. Ubuntu example using apt:
-`sudo apt install tesseract-ocr tesseract-ocr-fra tesseract-ocr-deu tesseract-ocr-spa tesseract-ocr-eng libgl1 libpq-dev python3-venv python3-dev python3-openslide openslide-tools poppler-utils`
 
-2. Create Python virtual environment 
+`sudo apt install tesseract-ocr tesseract-ocr-fra tesseract-ocr-deu tesseract-ocr-spa tesseract-ocr-eng libgl1 libpq-dev python3-venv python3-dev python3-openslide openslide-tools build-essential poppler-utils`
+
+1. Create Python virtual environment 
 `python3 -m venv venv`  
 
 3. Activate the environnement
