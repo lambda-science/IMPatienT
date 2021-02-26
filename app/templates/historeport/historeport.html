@@ -8,8 +8,18 @@
             {{ form.hidden_tag() }}
             {% for field in form %}
             {% if field.type != 'CSRFTokenField' %}
+            {% if a[1][loop.index-1] != a[1][loop.index-2]%}
+            </br>
+            {{ a[0][loop.index-1]}}
+            {{ a[1][loop.index-1]}}
             {{ field() }}
             {{ field.label(class="btn btn-outline-success") }}
+
+            {%elif a[1][loop.index-1] == a[1][loop.index-2] %}
+            {{ field() }}
+            {{ field.label(class="btn btn-outline-success") }}
+            {% endif %}
+
             {% endif %}
             {% endfor %}
         </div>

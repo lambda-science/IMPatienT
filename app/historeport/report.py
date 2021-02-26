@@ -10,6 +10,9 @@ def generate_historeportForm(formClass, report_config_file, report=None):
     # Iterative form field adding for each feature annotation in the config file feature list.
     # Loop to add attribute to form class
     df = pd.read_csv(report_config_file, sep="\t")
+    list_section = []
+    list_feature_cat = []
+    print(df.iloc[8:, :])
     if report != None:
         for lines in report.split("\n"):
             if lines == "":
@@ -24,7 +27,16 @@ def generate_historeportForm(formClass, report_config_file, report=None):
                                default=feature[1],
                                validators=[DataRequired()]))
     else:
-        for feature in df:
-            setattr(
-                formClass, feature.replace(" ","_"),
-                BooleanField(str(feature), default=False, render_kw={"class": "btn-check"}))
+        for index, row in df.iloc[8:-2, :].iterrows():
+            for feature in row[2:]:
+                if type(feature) == str:
+                    list_section.append(row[0])
+                    list_feature_cat.append(row[1])
+                    setattr(
+                        formClass,
+                        str(row[1] + "_" + feature).replace(" ", "_"),
+                        BooleanField(
+                            str(feature),
+                            default=False,
+                            render_kw={"class": "btn btn-check custom"}))
+    return (list_section, list_feature_cat)

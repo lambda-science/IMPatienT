@@ -11,6 +11,7 @@ from flask_login import current_user, login_required
 @login_required
 def historeport():
     """palceholder"""
-    Report.generate_historeportForm(ReportForm, os.path.join("config", "report_form_config.tsv"))
+    a = Report.generate_historeportForm(
+        ReportForm, os.path.join("config", "report_form_config.tsv"))
     form = ReportForm()
-    return render_template("historeport/historeport.html", form=form)
+    return render_template("historeport/historeport.html", form=form, a=a)
