@@ -1,27 +1,53 @@
 {% extends "base.html"%}
 {% block content %}
 
-<div class="col">
+<div class="col-xl">
     <h1>Histo report</h1>
     <form method="post">
         <div class="form-group">
-            {{ form.hidden_tag() }}
-            {% for field in form %}
-            {% if field.type != 'CSRFTokenField' %}
-            {% if a[1][loop.index-1] != a[1][loop.index-2]%}
-            </br>
-            {{ a[0][loop.index-1]}}
-            {{ a[1][loop.index-1]}}
-            {{ field() }}
-            {{ field.label(class="btn btn-outline-success") }}
-
-            {%elif a[1][loop.index-1] == a[1][loop.index-2] %}
-            {{ field() }}
-            {{ field.label(class="btn btn-outline-success") }}
-            {% endif %}
-
-            {% endif %}
+            {% for error in form.errors %}
+            <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
             {% endfor %}
+            {{ form.hidden_tag() }}
+            {{ form.patient_nom }}
+            {{ form.patient_prenom }}
+            {{ form.naissance }}
+            {{ form.biopsie_ID }}
+            {{ form.muscle_prelev }}
+            {{ form.age_biopsie.label() }}
+            {{ form.age_biopsie }}
+            {{ form.date_envoie }}
+            <table>
+                <thead>
+                    <td>Section</td>
+                    <td>Categorie</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </thead>
+                <tr>
+                    {% for caract in liste_caract %}
+                    {% if titre_colonnes[1][loop.index-1] != titre_colonnes[1][loop.index-2]%}
+                </tr>
+                <tr>
+                    <td>{{ titre_colonnes[0][loop.index-1]}}</td>
+                    <td>{{ titre_colonnes[1][loop.index-1]}}</td>
+                    <td>{{ form[caract] }}
+                        {{ form[caract].label(class="btn btn-outline-success") }}</td>
+
+                    {%elif titre_colonnes[1][loop.index-1] == titre_colonnes[1][loop.index-2] %}
+                    <td>{{ form[caract]() }}
+                        {{ form[caract].label(class="btn btn-outline-success") }}</td>
+                    {% endif %}
+                    {% endfor %}
+            </table>
+            <h4>Commentaires & Conclusions</h4>
+            {{form.comment}}
+            {{form.conclusion}}
+            {{form.submit}}
         </div>
     </form>
 </div>

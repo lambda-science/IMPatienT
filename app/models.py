@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask import current_app
 import os
+import pandas as pd
 
 
 class User(UserMixin, db.Model):
@@ -113,3 +114,30 @@ class Pdf(db.Model):
             return False
         else:
             return True
+
+
+class ReportHisto(db.Model):
+    """Database table histology reports"""
+    id = db.Column(db.Integer, primary_key=True)
+    patient_nom = db.Column(db.String(140), index=True)
+    patient_prenom = db.Column(db.String(140), index=True)
+    naissance = db.Column(db.String(10))
+    expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    biopsie_id = db.Column(db.String(140), index=True)
+    muscle_prelev = db.Column(db.String(140))
+    age_biopsie = db.Column(db.Integer)
+    date_envoie = db.Column(db.String(10))
+    comment = db.Column(db.Text)
+    conclusion = db.Column(db.String(140), index=True)
+
+    df = pd.read_csv(os.path.join("config", "report_form_config.tsv"),
+                     sep="\t")
+    for index, row in df.iterrows():
+        for feature in row[2:]:
+            if type(feature) == str:
+                vars()[str(row[0] + "_" + row[1] + "_" + feature).replace(
+                    " ", "_")] = db.Column(db.Boolean())
+
+    def __repr__(self):
+        return '<ReportHisto ID {} Nom {} Biopsie {}>'.format(
+            self.id, self.patient_nom, self.biopsie_id)

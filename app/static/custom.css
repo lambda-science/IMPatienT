@@ -28,7 +28,7 @@ table td {
 }
 
 table, thead, td, tr {
-  border: 1px solid black;
+  border: 0px solid black;
   text-align: center;
 }
 

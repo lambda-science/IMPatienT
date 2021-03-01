@@ -1,50 +1,45 @@
-Section	Catégorie	Champs1	Champs2	Champs3	Champs4	Champs5	Champs6	Champs7	Champs8	Champs9	Champs10	Champs11
-Introduction	nom	nom										
-Introduction	prenom	prenom										
-Introduction	date_naissance	date_naissance										
-Introduction	num_biopsie	num_biopsie										
-Introduction	date_biopsie	date_biopsie										
-Introduction	muscle_biopsie	muscle_biopsie										
-Introduction	age_biopsie	age_biopsie										
-Introduction	date_envoie	date_envoie										
-HE&TG	Aspect Biopsie	Très Anormale										
-HE&TG	Fibre Type 1	Hypertrophiques (grandes)	Atrophiées (petites)	Taille hétérogène								
-HE&TG	Fibre Type 2	Hypertrophiques (grandes)	Atrophiées (petites)	Taille hétérogène								
-HE&TG	Taille Fibre	Très inégales	Discrètement inégales	Sans topographie	Homogène							
-HE&TG	Apsect Fibre	Vacuolisée bordées	Lobulées	Anguleuse	Bord arrondis	Segmentation de fibre	En rayon de roue	Tourbillon	Red-ragged fibers	Fibre  annulaires		
-HE&TG	Noyaux	Centralisés	Internalisés	Sous-sarcolemmale	Augmentation du nombre	Aspects myotubulaires						
-HE&TG	Inclusions protéique	Centralisés	Périphériques									
-HE&TG	Matériel Fuscinophile	Amas/Aggrégat sombre	Granuleux	Radiant	Diffus	Centralisés	Périphériques	Sous sarcolemmale	Aspect violine (contour imprécis)	Bords réguliers	Bords irréguliers	Arrondis
-HE&TG	Zone Claires	En croissant périphérique	Centrale	Majorité de la fibre								
-HE&TG	Batonnet (rod) ou nemaline bodies	Présent	Mini-rod	Piqueté rouge (rod-like)	Inclusion poussière rouge							
-HE&TG	Aggrégat tubulaire	Présent										
-HE&TG	Fuseau Neuromusculaire	Anormal										
-HE&TG	Tissus Conjonctif	Fibreux	Lipomateux									
-HE&TG	Altération/lésion interstitielle	Oui	Augmentation Tissue conjonctif	Augmentation Tissue adipeux	Entoure complètement les fibres	Bande épaisse entre fasciule						
-HE&TG	Element inflamatoire	Présent										
-HE&TG	Collagène Endosymial	Augmentation nette	Augmentation discrète									
-HE&TG	Necklace Fibers	Présent										
-HE&TG	Coup d'ongle périphérique	Présent										
-HE&TG	Nécrose	Oui										
-HE&TG	Régénération	Oui										
-Enzymo: ATP	Différentiation des fibres	Normale	Coloration pale fibre atrophique	Zone sans activité ATPase	Uniformité de Type							
-Enzymo: ATP	Répartition numérique des fibres	Uniformité Type 1	Uniformité Type 2	Prédom. Nette Type 1	Prédom. Nette Type 2	Prédom Modérée Type 1	Prédom Modérée Type 2					
-Enzymo: ATP	Répartition topographiques des types de fibres:	Regroupement nette des fibres	Fibre 1 groupée	Fibre 2 groupée	Pas de regroupement							
-Enzymo: ATP	Activité	Acide résistant (Type 1)	Présence zone claire	Centrale	Périphérique	En plage étendue	En halo					
-Enzymo: oxydatif	Aspect Fibre	Myotubulaire	Cerné	Lobulation	Multi-lobulé	Alvéole core-like	En rayon de roue	Aspect targétoide				
-Enzymo: oxydatif	Remaniement Structurels	Forte désorganisation	Lésion sous-sarcolemmale	Réseau intermyofribrillaire irrégulier	Rimmed sarcolemma							
-Enzymo: oxydatif	Répartition activité	Disproportion importante	Zone claires (pâle)	Centrale	Périphérique	En croissant	Limites net	Limites floues	Coloration foncé sous-sarcolemmale	Accumulation mitochondrie périphérique	Liseret périphérique foncé	Zone inclusions non colorée
-Enzymo: oxydatif	Core	Présent	Périphérique	Centraux unique	Limites net	Limites floues	Sur toute la section	Minicores				
-Enzymo: oxydatif	NADH	Fibre atrophique foncée	Fibre atrophique: Halo foncé sous sarcolemmale									
-Enzymo	Activité COX	Normale	Absence activité	Absence activité locale	Faiblement positif (pâle)	Faiblement positif localement						
-Enzymo	Activité Phospholypases	Normale	Absence d'acitivité	Absence activité locale	Faiblement positif de façon diffuse	Faiblement positif localement						
-Enzymo	Coloration PAS	Pas de surcharge en glycogène	Anomalie locale (surcharge)	Coloration inégale	Teneur élevée diffuse	Teneur très irrégulière	Contraste fort type I et II	Accumulation dans fibre anormales				
-Enzymo	Coloration Soudan	Pas de surchage en lipides	Fibre type 1: surchage en lipide	Goutelette lipidiques	Surcharge dans les fibre remaniées / anormales	Fibre type II plus riche que les fibre type I						
-Micro. Elec.	Structure sarcomérique	Désorganisé ; Remanié	En croissant									
-Micro. Elec.	Bande A	Absente										
-Micro. Elec.	Materiel Z	Elargissement	Streaming									
-Micro. Elec.	Vacuole autophagiques	Oui										
-Micro. Elec.	Citerne	Dilatation										
-Micro. Elec.	Lésion type CAPS	Oui										
-CONCLUSION	Diagnostique	/										
-COMMENTAIRE	FreeText	/										
+HE&TG	Aspect Biopsie	Très Anormale					
+HE&TG	Fibre Type 1	Hypertrophiques (grandes)	Atrophiées (petites)	Taille hétérogène			
+HE&TG	Fibre Type 2	Hypertrophiques (grandes)	Atrophiées (petites)	Taille hétérogène			
+HE&TG	Taille Fibre	Très inégales	Discrètement inégales	Sans topographie	Homogène		
+HE&TG	Apsect Fibre	Vacuolisée bordées	Lobulées	Anguleuse	Bord arrondis	Segmentation de fibre	
+HE&TG	Aspect Fibre (suite)	En rayon de roue	Tourbillon	Red-ragged fibers	Fibre  annulaires		
+HE&TG	Noyaux	Centralisés	Internalisés	Sous-sarcolemmale	Augmentation du nombre	Aspects myotubulaires	
+HE&TG	Inclusions protéique	Centralisés	Périphériques				
+HE&TG	Matériel Fuscinophile	Amas/Aggrégat sombre	Granuleux	Radiant	Diffus	Centralisés	Périphériques
+HE&TG	Matériel Fuscinophile (suite)	Sous sarcolemmale	Aspect violine (contour imprécis)	Bords réguliers	Bords irréguliers	Arrondis	
+HE&TG	Zone Claires	En croissant périphérique	Centrale	Majorité de la fibre			
+HE&TG	Batonnet (rod) ou nemaline bodies	Présent	Mini-rod	Piqueté rouge (rod-like)	Inclusion poussière rouge		
+HE&TG	Aggrégat tubulaire	Présent					
+HE&TG	Fuseau Neuromusculaire	Anormal					
+HE&TG	Tissus Conjonctif	Fibreux	Lipomateux				
+HE&TG	Altération/lésion interstitielle	Oui	Augmentation Tissue conjonctif	Augmentation Tissue adipeux	Entoure complètement les fibres	Bande épaisse entre fasciule	
+HE&TG	Element inflamatoire	Présent					
+HE&TG	Collagène Endosymial	Augmentation nette	Augmentation discrète				
+HE&TG	Necklace Fibers	Présent					
+HE&TG	Coup d'ongle périphérique	Présent					
+HE&TG	Nécrose	Oui					
+HE&TG	Régénération	Oui					
+Enzymo: ATP	Différentiation des fibres	Normale	Coloration pale fibre atrophique	Zone sans activité ATPase	Uniformité de Type		
+Enzymo: ATP	Répartition numérique des fibres	Uniformité Type 1	Uniformité Type 2	Prédom. Nette Type 1	Prédom. Nette Type 2	Prédom Modérée Type 1	Prédom Modérée Type 2
+Enzymo: ATP	Répartition topographiques des types de fibres:	Regroupement nette des fibres	Fibre 1 groupée	Fibre 2 groupée	Pas de regroupement		
+Enzymo: ATP	Activité	Acide résistant (Type 1)	Présence zone claire	Centrale	Périphérique	En plage étendue	En halo
+Enzymo: oxydatif	Aspect Fibre	Myotubulaire	Cerné	Lobulation	Multi-lobulé		
+Enzymo: oxydatif	Aspect Fibre (suite)	Alvéole core-like	En rayon de roue	Aspect targétoide			
+Enzymo: oxydatif	Remaniement Structurels	Forte désorganisation	Lésion sous-sarcolemmale	Réseau intermyofribrillaire irrégulier	Rimmed sarcolemma		
+Enzymo: oxydatif	Répartition activité	Disproportion importante	Zone claires (pâle)	Centrale	Périphérique	En croissant	Limites net
+Enzymo: oxydatif	Répartition activité (suite)	Limites floues	Coloration foncé sous-sarcolemmale	Accumulation mitochondrie périphérique	Liseret périphérique foncé	Zone inclusions non colorée	
+Enzymo: oxydatif	Core	Présent	Périphérique	Centraux unique	Limites net		
+Enzymo: oxydatif	Core (suite)	Limites floues	Sur toute la section	Minicores			
+Enzymo: oxydatif	NADH	Fibre atrophique foncée	Fibre atrophique: Halo foncé sous sarcolemmale				
+Enzymo	Activité COX	Normale	Absence activité	Absence activité locale	Faiblement positif (pâle)	Faiblement positif localement	
+Enzymo	Activité Phospholypases	Normale	Absence d'acitivité	Absence activité locale	Faiblement positif de façon diffuse	Faiblement positif localement	
+Enzymo	Coloration PAS	Pas de surcharge en glycogène	Anomalie locale (surcharge)	Coloration inégale	Teneur élevée diffuse		
+Enzymo	Coloration PAS (suite)	Teneur très irrégulière	Contraste fort type I et II	Accumulation dans fibre anormales			
+Enzymo	Coloration Soudan	Pas de surchage en lipides	Fibre type 1: surchage en lipide	Goutelette lipidiques	Surcharge dans les fibre remaniées / anormales	Fibre type II plus riche que les fibre type I	
+Micro. Elec.	Structure sarcomérique	Désorganisé ; Remanié	En croissant				
+Micro. Elec.	Bande A	Absente					
+Micro. Elec.	Materiel Z	Elargissement	Streaming				
+Micro. Elec.	Vacuole autophagiques	Oui					
+Micro. Elec.	Citerne	Dilatation					
+Micro. Elec.	Lésion type CAPS	Oui					
