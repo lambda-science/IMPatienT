@@ -2,11 +2,35 @@
 {% block content %}
 <div id="jstree_demo_div"></div>
 
-<h1>AJAX demo</h1>
-<input type="text" id="plugins4_q" value="" class="input"
-    style="margin:0em auto 1em auto; display:block; padding:4px; border-radius:4px; border:1px solid silver;">
-<div id="jstree" class="demo"></div>
-<button type="button" class="btn btn-success" onclick="save_tree()">Sauvegarder</button>
+</br>
+<div class="row">
+    <div class="col">
+        <h1>Arbre Ontologie</h1>
+        <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control"
+            placeholder="Rechercher">
+        <div id="jstree" class="demo"></div>
+
+        <button type="button" class="btn btn-success" onclick="save_tree()">Sauvegarder Arbre</button>
+    </div>
+    <div class="col">
+        <h1>Info Terme</h1>
+        <form method="post">
+            <div class="form-group">
+                {% for error in form.errors %}
+                <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
+                {% endfor %}
+                {{ form.hidden_tag() }}
+                {{ form.onto_id_ext }}
+                {{ form.onto_name }}
+                {{ form.parent_id }}
+                {{ form.synonymes }}
+                {{ form.gene }}
+                {{ form.description }}
+                <button type="button" class="btn btn-success" onclick="update_node_data()">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
 <script>
     // ajax demo
 
@@ -32,14 +56,31 @@
     });
     $('#jstree').on('rename_node.jstree', function (e, data) {
         console.log("rename");
-    })
+    });
     $('#jstree').on('move_node.jstree', function (e, data) {
         console.log("move");
-    })
+    });
+    $('#jstree').on('select_node.jstree', function (e, data) {
+        $("input[id=onto_id_ext]").val(data.node.id);
+        $("input[id=onto_name]").val(data.node.text);
+        $("input[id=parent_id]").val(data.node.parent);
+        $("input[id=synonymes]").val(data.node.data.synonymes) || "";
+        $("input[id=gene]").val(data.node.data.genes) || "";
+        $("textarea[id=description]").val(data.node.data.description) || "";
+    });
 
+    function update_node_data() {
+        var node_id = $("#jstree").jstree(true).get_selected();
+        var node = $("#jstree").jstree(true).get_node(node_id);
+        node.data.synonymes = $("input[id=synonymes]").val();
+        node.data.genes = $("input[id=gene]").val();
+        node.data.description = $("textarea[id=description]").val();
+        save_tree();
+    };
     function save_tree() {
         var v = $("#jstree").jstree(true).get_json('#', { 'flat': true });
         myJSON = JSON.stringify(v)
+        console.log(myJSON)
         $.ajax({
             type: "PATCH",
             url: "{{url_for('orthocreate.modify_ontho')}}",

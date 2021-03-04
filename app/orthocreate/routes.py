@@ -1,5 +1,6 @@
 from app import db
 from app.orthocreate import bp
+from app.orthocreate.forms import OntologyDescript
 
 import os
 import json
@@ -18,7 +19,10 @@ def onto_json(filename):
 @login_required
 def orthocreate():
     """palceholder"""
-    return render_template("orthocreate/orthocreate.html")
+    form = OntologyDescript()
+    if form.validate_on_submit():
+        print(form.data)
+    return render_template("orthocreate/orthocreate.html", form=form)
 
 
 @bp.route("/modify_ontho", methods=["PATCH"])
@@ -27,7 +31,6 @@ def modify_ontho():
     """Update ontology json file with PATCH Ajax Request from JSTree"""
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
-    print(raw_data)
     parsed = json.loads(raw_data)
     with open(
             os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"),
