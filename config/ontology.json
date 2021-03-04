@@ -1,0 +1,82 @@
+[
+    {
+        "id": "1",
+        "text": "Root node",
+        "icon": true,
+        "li_attr": {
+            "id": "1"
+        },
+        "a_attr": {
+            "href": "#",
+            "id": "1_anchor"
+        },
+        "state": {
+            "loaded": true,
+            "opened": true,
+            "selected": false,
+            "disabled": false
+        },
+        "data": {},
+        "parent": "#"
+    },
+    {
+        "id": "2",
+        "text": "Child node 1",
+        "icon": true,
+        "li_attr": {
+            "id": "2"
+        },
+        "a_attr": {
+            "href": "#",
+            "id": "2_anchor"
+        },
+        "state": {
+            "loaded": true,
+            "opened": false,
+            "selected": false,
+            "disabled": false
+        },
+        "data": {},
+        "parent": "1"
+    },
+    {
+        "id": "j1_4",
+        "text": "ttt",
+        "icon": true,
+        "li_attr": {
+            "id": "j1_4"
+        },
+        "a_attr": {
+            "href": "#",
+            "id": "j1_4_anchor"
+        },
+        "state": {
+            "loaded": true,
+            "opened": false,
+            "selected": false,
+            "disabled": false
+        },
+        "data": {},
+        "parent": "2"
+    },
+    {
+        "id": "3",
+        "text": "Child node 2",
+        "icon": true,
+        "li_attr": {
+            "id": "3"
+        },
+        "a_attr": {
+            "href": "#",
+            "id": "3_anchor"
+        },
+        "state": {
+            "loaded": true,
+            "opened": false,
+            "selected": true,
+            "disabled": false
+        },
+        "data": {},
+        "parent": "1"
+    }
+]
