@@ -21,7 +21,7 @@
     },
     {
         "id": "2",
-        "text": "Child node 1",
+        "text": "Noyaux",
         "icon": true,
         "li_attr": {
             "id": "2"
@@ -32,16 +32,16 @@
         },
         "state": {
             "loaded": true,
-            "opened": false,
+            "opened": true,
             "selected": false,
             "disabled": false
         },
         "data": {},
-        "parent": "1"
+        "parent": "#"
     },
     {
         "id": "j1_4",
-        "text": "ttt",
+        "text": "Centralisation",
         "icon": true,
         "li_attr": {
             "id": "j1_4"
@@ -53,10 +53,14 @@
         "state": {
             "loaded": true,
             "opened": false,
-            "selected": false,
+            "selected": true,
             "disabled": false
         },
-        "data": {},
+        "data": {
+            "synonymes": "internalisation,centralis\u00e9",
+            "genes": "BIN2,TTN",
+            "description": "Centralisation du noyaux"
+        },
         "parent": "2"
     },
     {
@@ -73,10 +77,14 @@
         "state": {
             "loaded": true,
             "opened": false,
-            "selected": true,
+            "selected": false,
             "disabled": false
         },
-        "data": {},
-        "parent": "1"
+        "data": {
+            "synonymes": "syn1, syn2",
+            "genes": "BIN2, BIN3",
+            "description": "The lazy red fox jumps over the brown fence"
+        },
+        "parent": "#"
     }
 ]

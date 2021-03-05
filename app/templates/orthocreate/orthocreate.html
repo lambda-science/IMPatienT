@@ -1,11 +1,24 @@
 {% extends "base.html"%}
 {% block content %}
+<!-- JS Tree -->
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='themes/default/style.min.css')}}">
+<script type="text/javascript" src="{{url_for('static', filename='jstree.min.js')}}"></script>
+
+<!-- Tag Input -->
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='tagify.css')}}">
+<script type="text/javascript" src="{{url_for('static', filename='tagify.min.js')}}"></script>
+
+
+
+
+
 <div id="jstree_demo_div"></div>
 
 </br>
 <div class="row">
     <div class="col">
         <h1>Arbre Ontologie</h1>
+
         <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control"
             placeholder="Rechercher">
         <div id="jstree" class="demo"></div>
@@ -32,6 +45,10 @@
     </div>
 </div>
 <script>
+    var input = document.querySelector('input[id=synonymes]');
+    var input_tag = new Tagify(input)
+    var input2 = document.querySelector('input[id=gene]');
+    var input2_tag = new Tagify(input2)
     // ajax demo
 
 
@@ -60,20 +77,25 @@
     $('#jstree').on('move_node.jstree', function (e, data) {
         console.log("move");
     });
+
+    // Prefill Form from JSON
     $('#jstree').on('select_node.jstree', function (e, data) {
         $("input[id=onto_id_ext]").val(data.node.id);
         $("input[id=onto_name]").val(data.node.text);
         $("input[id=parent_id]").val(data.node.parent);
-        $("input[id=synonymes]").val(data.node.data.synonymes) || "";
-        $("input[id=gene]").val(data.node.data.genes) || "";
+        input_tag.removeAllTags()
+        input_tag.addTags(data.node.data.synonymes);
+        input2_tag.removeAllTags()
+        input2_tag.addTags(data.node.data.genes);
         $("textarea[id=description]").val(data.node.data.description) || "";
     });
 
+    // Register form data to JSON file
     function update_node_data() {
         var node_id = $("#jstree").jstree(true).get_selected();
         var node = $("#jstree").jstree(true).get_node(node_id);
-        node.data.synonymes = $("input[id=synonymes]").val();
-        node.data.genes = $("input[id=gene]").val();
+        node.data.synonymes = get_taglist("input[id=synonymes]");
+        node.data.genes = get_taglist("input[id=gene]");
         node.data.description = $("textarea[id=description]").val();
         save_tree();
     };
@@ -88,6 +110,18 @@
             success: console.log("Ontology File Updated"),
             dataType: "text"
         });
+    };
+
+    function get_taglist(input_id) {
+        list_tag = []
+        if ($(input_id).val() === "") {
+            return ""
+        }
+        else {
+            var tag = JSON.parse($(input_id).val());
+            for (var obj in tag) { list_tag.push(tag[obj].value) };
+            return list_tag.toString();
+        };
     };
 </script>
 {% endblock %}
