@@ -16,6 +16,7 @@ class Config(object):
     TEMP_FOLDER = os.path.join(basedir, "temp")
     DATA_FOLDER = os.path.join("/", "data")
     CONFIG_FOLDER = os.path.join(basedir, "config")
+    SEND_FILE_MAX_AGE_DEFAULT = 0
     #DATA_FOLDER = os.path.join(basedir, "data")
     # Session saving on filesystem instead of user cookie
     SESSION_TYPE = "filesystem"
