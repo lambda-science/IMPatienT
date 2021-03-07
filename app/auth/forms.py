@@ -15,32 +15,32 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 
-class RegistrationForm(FlaskForm):
-    """The form used for registration"""
-    username = StringField('Username',
-                           validators=[
-                               DataRequired(),
-                               Regexp(r'^[\w.@+-]+$'),
-                               Length(min=4, max=25)
-                           ])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Repeat Password',
-                              validators=[DataRequired(),
-                                          EqualTo('password')])
-    submit = SubmitField('Register')
-
-    def validate_username(self, username):
-        """Function used to check if username already exist"""
-        user = User.query.filter_by(username=username.data).first()
-        if user is not None:
-            raise ValidationError('Username already exists.')
-
-    def validate_email(self, email):
-        """Function used to check if email already exist"""
-        user = User.query.filter_by(email=email.data).first()
-        if user is not None:
-            raise ValidationError('Email already used.')
+#class RegistrationForm(FlaskForm):
+#    """The form used for registration"""
+#    username = StringField('Username',
+#                           validators=[
+#                               DataRequired(),
+#                               Regexp(r'^[\w.@+-]+$'),
+#                               Length(min=4, max=25)
+#                           ])
+#    email = StringField('Email', validators=[DataRequired(), Email()])
+#    password = PasswordField('Password', validators=[DataRequired()])
+#    password2 = PasswordField('Repeat Password',
+#                              validators=[DataRequired(),
+#                                          EqualTo('password')])
+#    submit = SubmitField('Register')
+#
+#    def validate_username(self, username):
+#        """Function used to check if username already exist"""
+#        user = User.query.filter_by(username=username.data).first()
+#       if user is not None:
+#            raise ValidationError('Username already exists.')
+#
+#    def validate_email(self, email):
+#        """Function used to check if email already exist"""
+#        user = User.query.filter_by(email=email.data).first()
+#        if user is not None:
+#            raise ValidationError('Email already used.')
 
 
 class ResetPasswordRequestForm(FlaskForm):
