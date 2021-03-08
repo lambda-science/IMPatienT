@@ -1,8 +1,8 @@
-"""Report Histo Table
+"""Init
 
-Revision ID: bcbd0955f082
+Revision ID: 7be94a94e860
 Revises: 
-Create Date: 2021-03-01 14:48:34.747511
+Create Date: 2021-03-08 19:27:51.504981
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'bcbd0955f082'
+revision = '7be94a94e860'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -157,13 +157,13 @@ def upgrade():
     sa.Column('Enzymo:_ATP_Activité_Périphérique', sa.Boolean(), nullable=True),
     sa.Column('Enzymo:_ATP_Activité_En_plage_étendue', sa.Boolean(), nullable=True),
     sa.Column('Enzymo:_ATP_Activité_En_halo', sa.Boolean(), nullable=True),
-    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_Myotubulaire', sa.Boolean(), nullable=True),
-    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_Cerné', sa.Boolean(), nullable=True),
-    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_Lobulation', sa.Boolean(), nullable=True),
-    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_Multi-lobulé', sa.Boolean(), nullable=True),
-    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_(suite)_Alvéole_core-like', sa.Boolean(), nullable=True),
-    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_(suite)_En_rayon_de_roue', sa.Boolean(), nullable=True),
-    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_(suite)_Aspect_targétoide', sa.Boolean(), nullable=True),
+    sa.Column('Enzymo:_oxydatif_Aspect_Fibre__Myotubulaire', sa.Boolean(), nullable=True),
+    sa.Column('Enzymo:_oxydatif_Aspect_Fibre__Cerné', sa.Boolean(), nullable=True),
+    sa.Column('Enzymo:_oxydatif_Aspect_Fibre__Lobulation', sa.Boolean(), nullable=True),
+    sa.Column('Enzymo:_oxydatif_Aspect_Fibre__Multi-lobulé', sa.Boolean(), nullable=True),
+    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_(suite)__Alvéole_core-like', sa.Boolean(), nullable=True),
+    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_(suite)__En_rayon_de_roue', sa.Boolean(), nullable=True),
+    sa.Column('Enzymo:_oxydatif_Aspect_Fibre_(suite)__Aspect_targétoide', sa.Boolean(), nullable=True),
     sa.Column('Enzymo:_oxydatif_Remaniement_Structurels_Forte_désorganisation', sa.Boolean(), nullable=True),
     sa.Column('Enzymo:_oxydatif_Remaniement_Structurels_Lésion_sous-sarcolemmale', sa.Boolean(), nullable=True),
     sa.Column('Enzymo:_oxydatif_Remaniement_Structurels_Réseau_intermyofribrillaire_irrégulier', sa.Boolean(), nullable=True),

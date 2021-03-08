@@ -1,90 +1,952 @@
 [
     {
-        "id": "1",
-        "text": "Root node",
-        "icon": true,
-        "li_attr": {
-            "id": "1"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "1_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": true,
-            "selected": false,
-            "disabled": false
-        },
-        "data": {},
-        "parent": "#"
+        "id": 1,
+        "parent": "#",
+        "text": "HE&TG"
     },
     {
-        "id": "2",
-        "text": "Noyaux",
-        "icon": true,
-        "li_attr": {
-            "id": "2"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "2_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": true,
-            "selected": false,
-            "disabled": false
-        },
-        "data": {},
-        "parent": "#"
+        "id": 2,
+        "parent": "#",
+        "text": "Enzymo: ATP"
     },
     {
-        "id": "j1_4",
-        "text": "Centralisation",
-        "icon": true,
-        "li_attr": {
-            "id": "j1_4"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "j1_4_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": true,
-            "disabled": false
-        },
-        "data": {
-            "synonymes": "internalisation,centralis\u00e9",
-            "genes": "BIN2,TTN",
-            "description": "Centralisation du noyaux,  description description description description description description description "
-        },
-        "parent": "2"
+        "id": 3,
+        "parent": "#",
+        "text": "Enzymo: oxydatif"
     },
     {
-        "id": "3",
-        "text": "Child node 2",
-        "icon": true,
-        "li_attr": {
-            "id": "3"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "3_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
-        "data": {
-            "synonymes": "syn1, syn2",
-            "genes": "BIN2, BIN3",
-            "description": "The lazy red fox jumps over the brown fence"
-        },
-        "parent": "#"
+        "id": 4,
+        "parent": "#",
+        "text": "Micro. Elec."
+    },
+    {
+        "id": 5,
+        "parent": "#",
+        "text": "Enzymo"
+    },
+    {
+        "id": 6,
+        "parent": 1,
+        "text": "Fibre Type 1"
+    },
+    {
+        "id": 7,
+        "parent": 1,
+        "text": "Fibre Type 2"
+    },
+    {
+        "id": 8,
+        "parent": 1,
+        "text": "Taille Fibre"
+    },
+    {
+        "id": 9,
+        "parent": 1,
+        "text": "Apsect Fibre"
+    },
+    {
+        "id": 10,
+        "parent": 1,
+        "text": "Aspect Fibre (suite)"
+    },
+    {
+        "id": 11,
+        "parent": 1,
+        "text": "Noyaux"
+    },
+    {
+        "id": 12,
+        "parent": 1,
+        "text": "Inclusions prot\u00e9ique"
+    },
+    {
+        "id": 13,
+        "parent": 1,
+        "text": "Mat\u00e9riel Fuscinophile"
+    },
+    {
+        "id": 14,
+        "parent": 1,
+        "text": "Mat\u00e9riel Fuscinophile (suite)"
+    },
+    {
+        "id": 15,
+        "parent": 1,
+        "text": "Zone Claires"
+    },
+    {
+        "id": 16,
+        "parent": 1,
+        "text": "Batonnet (rod) ou nemaline bodies"
+    },
+    {
+        "id": 17,
+        "parent": 1,
+        "text": "Aggr\u00e9gat tubulaire"
+    },
+    {
+        "id": 18,
+        "parent": 1,
+        "text": "Fuseau Neuromusculaire"
+    },
+    {
+        "id": 19,
+        "parent": 1,
+        "text": "Tissus Conjonctif"
+    },
+    {
+        "id": 20,
+        "parent": 1,
+        "text": "Alt\u00e9ration/l\u00e9sion interstitielle"
+    },
+    {
+        "id": 21,
+        "parent": 1,
+        "text": "Element inflamatoire"
+    },
+    {
+        "id": 22,
+        "parent": 1,
+        "text": "Collag\u00e8ne Endosymial"
+    },
+    {
+        "id": 23,
+        "parent": 1,
+        "text": "Necklace Fibers"
+    },
+    {
+        "id": 24,
+        "parent": 1,
+        "text": "Coup d'ongle p\u00e9riph\u00e9rique"
+    },
+    {
+        "id": 25,
+        "parent": 1,
+        "text": "N\u00e9crose"
+    },
+    {
+        "id": 26,
+        "parent": 1,
+        "text": "R\u00e9g\u00e9n\u00e9ration"
+    },
+    {
+        "id": 27,
+        "parent": 2,
+        "text": "Diff\u00e9rentiation des fibres"
+    },
+    {
+        "id": 28,
+        "parent": 2,
+        "text": "R\u00e9partition num\u00e9rique des fibres"
+    },
+    {
+        "id": 29,
+        "parent": 2,
+        "text": "R\u00e9partition topographiques des types de fibres:"
+    },
+    {
+        "id": 30,
+        "parent": 2,
+        "text": "Activit\u00e9"
+    },
+    {
+        "id": 31,
+        "parent": 3,
+        "text": "Aspect Fibre_"
+    },
+    {
+        "id": 32,
+        "parent": 3,
+        "text": "Aspect Fibre (suite)_"
+    },
+    {
+        "id": 33,
+        "parent": 3,
+        "text": "Remaniement Structurels"
+    },
+    {
+        "id": 34,
+        "parent": 3,
+        "text": "R\u00e9partition activit\u00e9"
+    },
+    {
+        "id": 35,
+        "parent": 3,
+        "text": "R\u00e9partition activit\u00e9 (suite)"
+    },
+    {
+        "id": 36,
+        "parent": 3,
+        "text": "Core"
+    },
+    {
+        "id": 37,
+        "parent": 3,
+        "text": "Core (suite)"
+    },
+    {
+        "id": 38,
+        "parent": 3,
+        "text": "NADH"
+    },
+    {
+        "id": 39,
+        "parent": 2,
+        "text": "Activit\u00e9 COX"
+    },
+    {
+        "id": 40,
+        "parent": 2,
+        "text": "Activit\u00e9 Phospholypases"
+    },
+    {
+        "id": 41,
+        "parent": 2,
+        "text": "Coloration PAS"
+    },
+    {
+        "id": 42,
+        "parent": 2,
+        "text": "Coloration PAS (suite)"
+    },
+    {
+        "id": 43,
+        "parent": 2,
+        "text": "Coloration Soudan"
+    },
+    {
+        "id": 44,
+        "parent": 4,
+        "text": "Structure sarcom\u00e9rique"
+    },
+    {
+        "id": 45,
+        "parent": 4,
+        "text": "Bande A"
+    },
+    {
+        "id": 46,
+        "parent": 4,
+        "text": "Materiel Z"
+    },
+    {
+        "id": 47,
+        "parent": 4,
+        "text": "Vacuole autophagiques"
+    },
+    {
+        "id": 48,
+        "parent": 4,
+        "text": "Citerne"
+    },
+    {
+        "id": 49,
+        "parent": 4,
+        "text": "L\u00e9sion type CAPS"
+    },
+    {
+        "id": 50,
+        "parent": 6,
+        "text": "Hypertrophiques (grandes)"
+    },
+    {
+        "id": 51,
+        "parent": 6,
+        "text": "Atrophi\u00e9es (petites)"
+    },
+    {
+        "id": 52,
+        "parent": 6,
+        "text": "Taille h\u00e9t\u00e9rog\u00e8ne"
+    },
+    {
+        "id": 53,
+        "parent": 7,
+        "text": "Hypertrophiques (grandes)"
+    },
+    {
+        "id": 54,
+        "parent": 7,
+        "text": "Atrophi\u00e9es (petites)"
+    },
+    {
+        "id": 55,
+        "parent": 7,
+        "text": "Taille h\u00e9t\u00e9rog\u00e8ne"
+    },
+    {
+        "id": 56,
+        "parent": 8,
+        "text": "Tr\u00e8s in\u00e9gales"
+    },
+    {
+        "id": 57,
+        "parent": 8,
+        "text": "Discr\u00e8tement in\u00e9gales"
+    },
+    {
+        "id": 58,
+        "parent": 8,
+        "text": "Sans topographie"
+    },
+    {
+        "id": 59,
+        "parent": 8,
+        "text": "Homog\u00e8ne"
+    },
+    {
+        "id": 60,
+        "parent": 9,
+        "text": "Vacuolis\u00e9e bord\u00e9es"
+    },
+    {
+        "id": 61,
+        "parent": 9,
+        "text": "Lobul\u00e9es"
+    },
+    {
+        "id": 62,
+        "parent": 9,
+        "text": "Anguleuse"
+    },
+    {
+        "id": 63,
+        "parent": 9,
+        "text": "Bord arrondis"
+    },
+    {
+        "id": 64,
+        "parent": 9,
+        "text": "Segmentation de fibre"
+    },
+    {
+        "id": 65,
+        "parent": 10,
+        "text": "En rayon de roue"
+    },
+    {
+        "id": 66,
+        "parent": 10,
+        "text": "Tourbillon"
+    },
+    {
+        "id": 67,
+        "parent": 10,
+        "text": "Red-ragged fibers"
+    },
+    {
+        "id": 68,
+        "parent": 10,
+        "text": "Fibre  annulaires"
+    },
+    {
+        "id": 69,
+        "parent": 11,
+        "text": "Centralis\u00e9s"
+    },
+    {
+        "id": 70,
+        "parent": 11,
+        "text": "Internalis\u00e9s"
+    },
+    {
+        "id": 71,
+        "parent": 11,
+        "text": "Sous-sarcolemmale"
+    },
+    {
+        "id": 72,
+        "parent": 11,
+        "text": "Augmentation du nombre"
+    },
+    {
+        "id": 73,
+        "parent": 11,
+        "text": "Aspects myotubulaires"
+    },
+    {
+        "id": 74,
+        "parent": 12,
+        "text": "Centralis\u00e9s"
+    },
+    {
+        "id": 75,
+        "parent": 12,
+        "text": "P\u00e9riph\u00e9riques"
+    },
+    {
+        "id": 76,
+        "parent": 13,
+        "text": "Amas/Aggr\u00e9gat sombre"
+    },
+    {
+        "id": 77,
+        "parent": 13,
+        "text": "Granuleux"
+    },
+    {
+        "id": 78,
+        "parent": 13,
+        "text": "Radiant"
+    },
+    {
+        "id": 79,
+        "parent": 13,
+        "text": "Diffus"
+    },
+    {
+        "id": 80,
+        "parent": 13,
+        "text": "Centralis\u00e9s"
+    },
+    {
+        "id": 81,
+        "parent": 13,
+        "text": "P\u00e9riph\u00e9riques"
+    },
+    {
+        "id": 82,
+        "parent": 14,
+        "text": "Sous sarcolemmale"
+    },
+    {
+        "id": 83,
+        "parent": 14,
+        "text": "Aspect violine (contour impr\u00e9cis)"
+    },
+    {
+        "id": 84,
+        "parent": 14,
+        "text": "Bords r\u00e9guliers"
+    },
+    {
+        "id": 85,
+        "parent": 14,
+        "text": "Bords irr\u00e9guliers"
+    },
+    {
+        "id": 86,
+        "parent": 14,
+        "text": "Arrondis"
+    },
+    {
+        "id": 87,
+        "parent": 15,
+        "text": "En croissant p\u00e9riph\u00e9rique"
+    },
+    {
+        "id": 88,
+        "parent": 15,
+        "text": "Centrale"
+    },
+    {
+        "id": 89,
+        "parent": 15,
+        "text": "Majorit\u00e9 de la fibre"
+    },
+    {
+        "id": 90,
+        "parent": 16,
+        "text": "Pr\u00e9sent"
+    },
+    {
+        "id": 91,
+        "parent": 16,
+        "text": "Mini-rod"
+    },
+    {
+        "id": 92,
+        "parent": 16,
+        "text": "Piquet\u00e9 rouge (rod-like)"
+    },
+    {
+        "id": 93,
+        "parent": 16,
+        "text": "Inclusion poussi\u00e8re rouge"
+    },
+    {
+        "id": 94,
+        "parent": 17,
+        "text": "Pr\u00e9sent"
+    },
+    {
+        "id": 95,
+        "parent": 18,
+        "text": "Anormal"
+    },
+    {
+        "id": 96,
+        "parent": 19,
+        "text": "Fibreux"
+    },
+    {
+        "id": 97,
+        "parent": 19,
+        "text": "Lipomateux"
+    },
+    {
+        "id": 98,
+        "parent": 20,
+        "text": "Oui"
+    },
+    {
+        "id": 99,
+        "parent": 20,
+        "text": "Augmentation Tissue conjonctif"
+    },
+    {
+        "id": 100,
+        "parent": 20,
+        "text": "Augmentation Tissue adipeux"
+    },
+    {
+        "id": 101,
+        "parent": 20,
+        "text": "Entoure compl\u00e8tement les fibres"
+    },
+    {
+        "id": 102,
+        "parent": 20,
+        "text": "Bande \u00e9paisse entre fasciule"
+    },
+    {
+        "id": 103,
+        "parent": 21,
+        "text": "Pr\u00e9sent"
+    },
+    {
+        "id": 104,
+        "parent": 22,
+        "text": "Augmentation nette"
+    },
+    {
+        "id": 105,
+        "parent": 22,
+        "text": "Augmentation discr\u00e8te"
+    },
+    {
+        "id": 106,
+        "parent": 23,
+        "text": "Pr\u00e9sent"
+    },
+    {
+        "id": 107,
+        "parent": 24,
+        "text": "Pr\u00e9sent"
+    },
+    {
+        "id": 108,
+        "parent": 25,
+        "text": "Oui"
+    },
+    {
+        "id": 109,
+        "parent": 26,
+        "text": "Oui"
+    },
+    {
+        "id": 110,
+        "parent": 27,
+        "text": "Normale"
+    },
+    {
+        "id": 111,
+        "parent": 27,
+        "text": "Coloration pale fibre atrophique"
+    },
+    {
+        "id": 112,
+        "parent": 27,
+        "text": "Zone sans activit\u00e9 ATPase"
+    },
+    {
+        "id": 113,
+        "parent": 27,
+        "text": "Uniformit\u00e9 de Type"
+    },
+    {
+        "id": 114,
+        "parent": 28,
+        "text": "Uniformit\u00e9 Type 1"
+    },
+    {
+        "id": 115,
+        "parent": 28,
+        "text": "Uniformit\u00e9 Type 2"
+    },
+    {
+        "id": 116,
+        "parent": 28,
+        "text": "Pr\u00e9dom. Nette Type 1"
+    },
+    {
+        "id": 117,
+        "parent": 28,
+        "text": "Pr\u00e9dom. Nette Type 2"
+    },
+    {
+        "id": 118,
+        "parent": 28,
+        "text": "Pr\u00e9dom Mod\u00e9r\u00e9e Type 1"
+    },
+    {
+        "id": 119,
+        "parent": 28,
+        "text": "Pr\u00e9dom Mod\u00e9r\u00e9e Type 2"
+    },
+    {
+        "id": 120,
+        "parent": 29,
+        "text": "Regroupement nette des fibres"
+    },
+    {
+        "id": 121,
+        "parent": 29,
+        "text": "Fibre 1 group\u00e9e"
+    },
+    {
+        "id": 122,
+        "parent": 29,
+        "text": "Fibre 2 group\u00e9e"
+    },
+    {
+        "id": 123,
+        "parent": 29,
+        "text": "Pas de regroupement"
+    },
+    {
+        "id": 124,
+        "parent": 30,
+        "text": "Acide r\u00e9sistant (Type 1)"
+    },
+    {
+        "id": 125,
+        "parent": 30,
+        "text": "Pr\u00e9sence zone claire"
+    },
+    {
+        "id": 126,
+        "parent": 30,
+        "text": "Centrale"
+    },
+    {
+        "id": 127,
+        "parent": 30,
+        "text": "P\u00e9riph\u00e9rique"
+    },
+    {
+        "id": 128,
+        "parent": 30,
+        "text": "En plage \u00e9tendue"
+    },
+    {
+        "id": 129,
+        "parent": 30,
+        "text": "En halo"
+    },
+    {
+        "id": 130,
+        "parent": 31,
+        "text": "Myotubulaire"
+    },
+    {
+        "id": 131,
+        "parent": 31,
+        "text": "Cern\u00e9"
+    },
+    {
+        "id": 132,
+        "parent": 31,
+        "text": "Lobulation"
+    },
+    {
+        "id": 133,
+        "parent": 31,
+        "text": "Multi-lobul\u00e9"
+    },
+    {
+        "id": 134,
+        "parent": 32,
+        "text": "Alv\u00e9ole core-like"
+    },
+    {
+        "id": 135,
+        "parent": 32,
+        "text": "En rayon de roue"
+    },
+    {
+        "id": 136,
+        "parent": 32,
+        "text": "Aspect targ\u00e9toide"
+    },
+    {
+        "id": 137,
+        "parent": 33,
+        "text": "Forte d\u00e9sorganisation"
+    },
+    {
+        "id": 138,
+        "parent": 33,
+        "text": "L\u00e9sion sous-sarcolemmale"
+    },
+    {
+        "id": 139,
+        "parent": 33,
+        "text": "R\u00e9seau intermyofribrillaire irr\u00e9gulier"
+    },
+    {
+        "id": 140,
+        "parent": 33,
+        "text": "Rimmed sarcolemma"
+    },
+    {
+        "id": 141,
+        "parent": 34,
+        "text": "Disproportion importante"
+    },
+    {
+        "id": 142,
+        "parent": 34,
+        "text": "Zone claires (p\u00e2le)"
+    },
+    {
+        "id": 143,
+        "parent": 34,
+        "text": "Centrale"
+    },
+    {
+        "id": 144,
+        "parent": 34,
+        "text": "P\u00e9riph\u00e9rique"
+    },
+    {
+        "id": 145,
+        "parent": 34,
+        "text": "En croissant"
+    },
+    {
+        "id": 146,
+        "parent": 34,
+        "text": "Limites net"
+    },
+    {
+        "id": 147,
+        "parent": 35,
+        "text": "Limites floues"
+    },
+    {
+        "id": 148,
+        "parent": 35,
+        "text": "Coloration fonc\u00e9 sous-sarcolemmale"
+    },
+    {
+        "id": 149,
+        "parent": 35,
+        "text": "Accumulation mitochondrie p\u00e9riph\u00e9rique"
+    },
+    {
+        "id": 150,
+        "parent": 35,
+        "text": "Liseret p\u00e9riph\u00e9rique fonc\u00e9"
+    },
+    {
+        "id": 151,
+        "parent": 35,
+        "text": "Zone inclusions non color\u00e9e"
+    },
+    {
+        "id": 152,
+        "parent": 36,
+        "text": "Pr\u00e9sent"
+    },
+    {
+        "id": 153,
+        "parent": 36,
+        "text": "P\u00e9riph\u00e9rique"
+    },
+    {
+        "id": 154,
+        "parent": 36,
+        "text": "Centraux unique"
+    },
+    {
+        "id": 155,
+        "parent": 36,
+        "text": "Limites net"
+    },
+    {
+        "id": 156,
+        "parent": 37,
+        "text": "Limites floues"
+    },
+    {
+        "id": 157,
+        "parent": 37,
+        "text": "Sur toute la section"
+    },
+    {
+        "id": 158,
+        "parent": 37,
+        "text": "Minicores"
+    },
+    {
+        "id": 159,
+        "parent": 38,
+        "text": "Fibre atrophique fonc\u00e9e"
+    },
+    {
+        "id": 160,
+        "parent": 38,
+        "text": "Fibre atrophique: Halo fonc\u00e9 sous sarcolemmale"
+    },
+    {
+        "id": 161,
+        "parent": 39,
+        "text": "Normale"
+    },
+    {
+        "id": 162,
+        "parent": 39,
+        "text": "Absence activit\u00e9"
+    },
+    {
+        "id": 163,
+        "parent": 39,
+        "text": "Absence activit\u00e9 locale"
+    },
+    {
+        "id": 164,
+        "parent": 39,
+        "text": "Faiblement positif (p\u00e2le)"
+    },
+    {
+        "id": 165,
+        "parent": 39,
+        "text": "Faiblement positif localement"
+    },
+    {
+        "id": 166,
+        "parent": 40,
+        "text": "Normale"
+    },
+    {
+        "id": 167,
+        "parent": 40,
+        "text": "Absence d'acitivit\u00e9"
+    },
+    {
+        "id": 168,
+        "parent": 40,
+        "text": "Absence activit\u00e9 locale"
+    },
+    {
+        "id": 169,
+        "parent": 40,
+        "text": "Faiblement positif de fa\u00e7on diffuse"
+    },
+    {
+        "id": 170,
+        "parent": 40,
+        "text": "Faiblement positif localement"
+    },
+    {
+        "id": 171,
+        "parent": 41,
+        "text": "Pas de surcharge en glycog\u00e8ne"
+    },
+    {
+        "id": 172,
+        "parent": 41,
+        "text": "Anomalie locale (surcharge)"
+    },
+    {
+        "id": 173,
+        "parent": 41,
+        "text": "Coloration in\u00e9gale"
+    },
+    {
+        "id": 174,
+        "parent": 41,
+        "text": "Teneur \u00e9lev\u00e9e diffuse"
+    },
+    {
+        "id": 175,
+        "parent": 42,
+        "text": "Teneur tr\u00e8s irr\u00e9guli\u00e8re"
+    },
+    {
+        "id": 176,
+        "parent": 42,
+        "text": "Contraste fort type I et II"
+    },
+    {
+        "id": 177,
+        "parent": 42,
+        "text": "Accumulation dans fibre anormales"
+    },
+    {
+        "id": 178,
+        "parent": 43,
+        "text": "Pas de surchage en lipides"
+    },
+    {
+        "id": 179,
+        "parent": 43,
+        "text": "Fibre type 1: surchage en lipide"
+    },
+    {
+        "id": 180,
+        "parent": 43,
+        "text": "Goutelette lipidiques"
+    },
+    {
+        "id": 181,
+        "parent": 43,
+        "text": "Surcharge dans les fibre remani\u00e9es / anormales"
+    },
+    {
+        "id": 182,
+        "parent": 43,
+        "text": "Fibre type II plus riche que les fibre type I"
+    },
+    {
+        "id": 183,
+        "parent": 44,
+        "text": "D\u00e9sorganis\u00e9 ; Remani\u00e9"
+    },
+    {
+        "id": 184,
+        "parent": 44,
+        "text": "En croissant"
+    },
+    {
+        "id": 185,
+        "parent": 45,
+        "text": "Absente"
+    },
+    {
+        "id": 186,
+        "parent": 46,
+        "text": "Elargissement"
+    },
+    {
+        "id": 187,
+        "parent": 46,
+        "text": "Streaming"
+    },
+    {
+        "id": 188,
+        "parent": 47,
+        "text": "Oui"
+    },
+    {
+        "id": 189,
+        "parent": 48,
+        "text": "Dilatation"
+    },
+    {
+        "id": 190,
+        "parent": 49,
+        "text": "Oui"
     }
 ]

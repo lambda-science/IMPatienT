@@ -48,8 +48,8 @@ def create_app(config_class=Config):
     from app.historeport import bp as historeport_bp
     app.register_blueprint(historeport_bp)
 
-    from app.orthocreate import bp as orthocreate_bp
-    app.register_blueprint(orthocreate_bp)
+    from app.onthocreate import bp as onthocreate_bp
+    app.register_blueprint(onthocreate_bp)
 
     # If app in production settings:
     # configure our SMTP mail connection

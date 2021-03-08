@@ -1,6 +1,6 @@
 from app import db
-from app.orthocreate import bp
-from app.orthocreate.forms import OntologyDescript
+from app.onthocreate import bp
+from app.onthocreate.forms import OntologyDescript
 
 import os
 import json
@@ -15,14 +15,14 @@ def onto_json(filename):
     return send_from_directory(current_app.config["CONFIG_FOLDER"], filename)
 
 
-@bp.route("/orthocreate", methods=["GET", "POST"])
+@bp.route("/onthocreate", methods=["GET", "POST"])
 @login_required
-def orthocreate():
+def onthocreate():
     """palceholder"""
     form = OntologyDescript()
     if form.validate_on_submit():
         print(form.data)
-    return render_template("orthocreate/orthocreate.html", form=form)
+    return render_template("onthocreate/onthocreate.html", form=form)
 
 
 @bp.route("/modify_ontho", methods=["PATCH"])

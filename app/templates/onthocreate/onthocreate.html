@@ -21,7 +21,7 @@
 
         <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control"
             placeholder="Rechercher">
-        <div id="jstree" class="demo"></div>
+        <div id="jstree" class="demo" style="overflow:scroll; max-height: 600px;"></div>
 
         <button type="button" class="btn btn-success" onclick="save_tree()">Sauvegarder Arbre</button>
     </div>
@@ -56,7 +56,7 @@
         'core': {
             "check_callback": true,
             'data': {
-                "url": "{{url_for('orthocreate.onto_json', filename='ontology.json')}}",
+                "url": "{{url_for('onthocreate.onto_json', filename='ontology.json')}}",
                 "dataType": "json" // needed only if you do not supply JSON headers
             }
         },
@@ -105,7 +105,7 @@
         console.log(myJSON)
         $.ajax({
             type: "PATCH",
-            url: "{{url_for('orthocreate.modify_ontho')}}",
+            url: "{{url_for('onthocreate.modify_ontho')}}",
             data: myJSON,
             success: console.log("Ontology File Updated"),
             dataType: "text"
