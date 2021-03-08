@@ -135,7 +135,7 @@ class ReportHisto(db.Model):
     for index, row in df.iterrows():
         for feature in row[2:]:
             if type(feature) == str:
-                vars()[str(row[0] + "_" + row[1] + "_" + feature).replace(
+                vars()[str(row[1] + "_" + feature).replace(
                     " ", "_")] = db.Column(db.Boolean())
 
     def __repr__(self):
