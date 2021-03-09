@@ -2,191 +2,191 @@
     {
         "id": 1,
         "parent": "#",
-        "text": "HE&TG"
+        "text": "Micro. Elec."
     },
     {
         "id": 2,
         "parent": "#",
-        "text": "Enzymo: ATP"
+        "text": "Enzymo G\u00e9n\u00e9rale"
     },
     {
         "id": 3,
         "parent": "#",
-        "text": "Enzymo: oxydatif"
+        "text": "Enzymo: ATP"
     },
     {
         "id": 4,
         "parent": "#",
-        "text": "Micro. Elec."
+        "text": "HE&TG"
     },
     {
         "id": 5,
         "parent": "#",
-        "text": "Enzymo"
+        "text": "Enzymo: oxydatif"
     },
     {
         "id": 6,
-        "parent": 1,
+        "parent": 4,
         "text": "Fibre Type 1"
     },
     {
         "id": 7,
-        "parent": 1,
+        "parent": 4,
         "text": "Fibre Type 2"
     },
     {
         "id": 8,
-        "parent": 1,
+        "parent": 4,
         "text": "Taille Fibre"
     },
     {
         "id": 9,
-        "parent": 1,
+        "parent": 4,
         "text": "Apsect Fibre"
     },
     {
         "id": 10,
-        "parent": 1,
+        "parent": 4,
         "text": "Aspect Fibre (suite)"
     },
     {
         "id": 11,
-        "parent": 1,
+        "parent": 4,
         "text": "Noyaux"
     },
     {
         "id": 12,
-        "parent": 1,
+        "parent": 4,
         "text": "Inclusions prot\u00e9ique"
     },
     {
         "id": 13,
-        "parent": 1,
+        "parent": 4,
         "text": "Mat\u00e9riel Fuscinophile"
     },
     {
         "id": 14,
-        "parent": 1,
+        "parent": 4,
         "text": "Mat\u00e9riel Fuscinophile (suite)"
     },
     {
         "id": 15,
-        "parent": 1,
+        "parent": 4,
         "text": "Zone Claires"
     },
     {
         "id": 16,
-        "parent": 1,
+        "parent": 4,
         "text": "Batonnet (rod) ou nemaline bodies"
     },
     {
         "id": 17,
-        "parent": 1,
+        "parent": 4,
         "text": "Aggr\u00e9gat tubulaire"
     },
     {
         "id": 18,
-        "parent": 1,
+        "parent": 4,
         "text": "Fuseau Neuromusculaire"
     },
     {
         "id": 19,
-        "parent": 1,
+        "parent": 4,
         "text": "Tissus Conjonctif"
     },
     {
         "id": 20,
-        "parent": 1,
+        "parent": 4,
         "text": "Alt\u00e9ration/l\u00e9sion interstitielle"
     },
     {
         "id": 21,
-        "parent": 1,
+        "parent": 4,
         "text": "Element inflamatoire"
     },
     {
         "id": 22,
-        "parent": 1,
+        "parent": 4,
         "text": "Collag\u00e8ne Endosymial"
     },
     {
         "id": 23,
-        "parent": 1,
+        "parent": 4,
         "text": "Necklace Fibers"
     },
     {
         "id": 24,
-        "parent": 1,
+        "parent": 4,
         "text": "Coup d'ongle p\u00e9riph\u00e9rique"
     },
     {
         "id": 25,
-        "parent": 1,
+        "parent": 4,
         "text": "N\u00e9crose"
     },
     {
         "id": 26,
-        "parent": 1,
+        "parent": 4,
         "text": "R\u00e9g\u00e9n\u00e9ration"
     },
     {
         "id": 27,
-        "parent": 2,
+        "parent": 3,
         "text": "Diff\u00e9rentiation des fibres"
     },
     {
         "id": 28,
-        "parent": 2,
+        "parent": 3,
         "text": "R\u00e9partition num\u00e9rique des fibres"
     },
     {
         "id": 29,
-        "parent": 2,
+        "parent": 3,
         "text": "R\u00e9partition topographiques des types de fibres:"
     },
     {
         "id": 30,
-        "parent": 2,
+        "parent": 3,
         "text": "Activit\u00e9"
     },
     {
         "id": 31,
-        "parent": 3,
+        "parent": 5,
         "text": "Aspect Fibre_"
     },
     {
         "id": 32,
-        "parent": 3,
+        "parent": 5,
         "text": "Aspect Fibre (suite)_"
     },
     {
         "id": 33,
-        "parent": 3,
+        "parent": 5,
         "text": "Remaniement Structurels"
     },
     {
         "id": 34,
-        "parent": 3,
+        "parent": 5,
         "text": "R\u00e9partition activit\u00e9"
     },
     {
         "id": 35,
-        "parent": 3,
+        "parent": 5,
         "text": "R\u00e9partition activit\u00e9 (suite)"
     },
     {
         "id": 36,
-        "parent": 3,
+        "parent": 5,
         "text": "Core"
     },
     {
         "id": 37,
-        "parent": 3,
+        "parent": 5,
         "text": "Core (suite)"
     },
     {
         "id": 38,
-        "parent": 3,
+        "parent": 5,
         "text": "NADH"
     },
     {
@@ -216,73 +216,73 @@
     },
     {
         "id": 44,
-        "parent": 4,
+        "parent": 1,
         "text": "Structure sarcom\u00e9rique"
     },
     {
         "id": 45,
-        "parent": 4,
+        "parent": 1,
         "text": "Bande A"
     },
     {
         "id": 46,
-        "parent": 4,
+        "parent": 1,
         "text": "Materiel Z"
     },
     {
         "id": 47,
-        "parent": 4,
+        "parent": 1,
         "text": "Vacuole autophagiques"
     },
     {
         "id": 48,
-        "parent": 4,
+        "parent": 1,
         "text": "Citerne"
     },
     {
         "id": 49,
-        "parent": 4,
+        "parent": 1,
         "text": "L\u00e9sion type CAPS"
     },
     {
         "id": 50,
         "parent": 6,
-        "text": "Hypertrophiques (grandes)"
+        "text": "Type 1 Hypertrophiques (grandes)"
     },
     {
         "id": 51,
         "parent": 6,
-        "text": "Atrophi\u00e9es (petites)"
+        "text": "Type 1 Atrophi\u00e9es (petites)"
     },
     {
         "id": 52,
         "parent": 6,
-        "text": "Taille h\u00e9t\u00e9rog\u00e8ne"
+        "text": "Type  1 Taille h\u00e9t\u00e9rog\u00e8ne"
     },
     {
         "id": 53,
         "parent": 7,
-        "text": "Hypertrophiques (grandes)"
+        "text": "Type 2 Hypertrophiques (grandes)"
     },
     {
         "id": 54,
         "parent": 7,
-        "text": "Atrophi\u00e9es (petites)"
+        "text": "Type 2 Atrophi\u00e9es (petites)"
     },
     {
         "id": 55,
         "parent": 7,
-        "text": "Taille h\u00e9t\u00e9rog\u00e8ne"
+        "text": "Type 2  Taille h\u00e9t\u00e9rog\u00e8ne"
     },
     {
         "id": 56,
         "parent": 8,
-        "text": "Tr\u00e8s in\u00e9gales"
+        "text": "Tailles Tr\u00e8s in\u00e9gales"
     },
     {
         "id": 57,
         "parent": 8,
-        "text": "Discr\u00e8tement in\u00e9gales"
+        "text": "Tailles Discr\u00e8tement in\u00e9gales"
     },
     {
         "id": 58,
@@ -292,7 +292,7 @@
     {
         "id": 59,
         "parent": 8,
-        "text": "Homog\u00e8ne"
+        "text": "Tailles Homog\u00e8ne"
     },
     {
         "id": 60,
@@ -322,7 +322,7 @@
     {
         "id": 65,
         "parent": 10,
-        "text": "En rayon de roue"
+        "text": "Aspect En rayon de roue"
     },
     {
         "id": 66,
@@ -342,7 +342,7 @@
     {
         "id": 69,
         "parent": 11,
-        "text": "Centralis\u00e9s"
+        "text": "Noyaux Centralis\u00e9s"
     },
     {
         "id": 70,
@@ -362,17 +362,17 @@
     {
         "id": 73,
         "parent": 11,
-        "text": "Aspects myotubulaires"
+        "text": "Noyaux \u00e0 Aspects myotubulaires"
     },
     {
         "id": 74,
         "parent": 12,
-        "text": "Centralis\u00e9s"
+        "text": "Inclusion Prot. Centralis\u00e9s"
     },
     {
         "id": 75,
         "parent": 12,
-        "text": "P\u00e9riph\u00e9riques"
+        "text": "Inclusions P\u00e9riph\u00e9riques"
     },
     {
         "id": 76,
@@ -397,12 +397,12 @@
     {
         "id": 80,
         "parent": 13,
-        "text": "Centralis\u00e9s"
+        "text": "Mat\u00e9riel Fuscinophile Centralis\u00e9s"
     },
     {
         "id": 81,
         "parent": 13,
-        "text": "P\u00e9riph\u00e9riques"
+        "text": "Mat\u00e9riel Fuscinophile P\u00e9riph\u00e9riques"
     },
     {
         "id": 82,
@@ -432,12 +432,12 @@
     {
         "id": 87,
         "parent": 15,
-        "text": "En croissant p\u00e9riph\u00e9rique"
+        "text": "zone clair En croissant p\u00e9riph\u00e9rique"
     },
     {
         "id": 88,
         "parent": 15,
-        "text": "Centrale"
+        "text": "Zone claire Centrale"
     },
     {
         "id": 89,
@@ -447,7 +447,7 @@
     {
         "id": 90,
         "parent": 16,
-        "text": "Pr\u00e9sent"
+        "text": "Rods Pr\u00e9sent"
     },
     {
         "id": 91,
@@ -467,12 +467,12 @@
     {
         "id": 94,
         "parent": 17,
-        "text": "Pr\u00e9sent"
+        "text": "Aggr\u00e9gat Tubulaires Pr\u00e9sent"
     },
     {
         "id": 95,
         "parent": 18,
-        "text": "Anormal"
+        "text": "Fuseau Neuro Anormal"
     },
     {
         "id": 96,
@@ -487,7 +487,7 @@
     {
         "id": 98,
         "parent": 20,
-        "text": "Oui"
+        "text": "Alt\u00e9ration interstitielle"
     },
     {
         "id": 99,
@@ -512,42 +512,42 @@
     {
         "id": 103,
         "parent": 21,
-        "text": "Pr\u00e9sent"
+        "text": "Inflamation"
     },
     {
         "id": 104,
         "parent": 22,
-        "text": "Augmentation nette"
+        "text": "Augmentation nette du collag\u00e8ne endo."
     },
     {
         "id": 105,
         "parent": 22,
-        "text": "Augmentation discr\u00e8te"
+        "text": "Augmentation discr\u00e8te du collag\u00e8ne endo."
     },
     {
         "id": 106,
         "parent": 23,
-        "text": "Pr\u00e9sent"
+        "text": "Necklace Fibers Pr\u00e9sent"
     },
     {
         "id": 107,
         "parent": 24,
-        "text": "Pr\u00e9sent"
+        "text": "Coup d'ongle Pr\u00e9sent"
     },
     {
         "id": 108,
         "parent": 25,
-        "text": "Oui"
+        "text": "N\u00e9crose"
     },
     {
         "id": 109,
         "parent": 26,
-        "text": "Oui"
+        "text": "R\u00e9g\u00e9n\u00e9ration"
     },
     {
         "id": 110,
         "parent": 27,
-        "text": "Normale"
+        "text": "Diff\u00e9renciation Normale"
     },
     {
         "id": 111,
@@ -627,12 +627,12 @@
     {
         "id": 126,
         "parent": 30,
-        "text": "Centrale"
+        "text": "Activit\u00e9 ATP Centrale"
     },
     {
         "id": 127,
         "parent": 30,
-        "text": "P\u00e9riph\u00e9rique"
+        "text": "Activit\u00e9 ATP P\u00e9riph\u00e9rique"
     },
     {
         "id": 128,
@@ -647,7 +647,7 @@
     {
         "id": 130,
         "parent": 31,
-        "text": "Myotubulaire"
+        "text": "Aspect oxydo Myotubulaire"
     },
     {
         "id": 131,
@@ -672,7 +672,7 @@
     {
         "id": 135,
         "parent": 32,
-        "text": "En rayon de roue"
+        "text": "Oxydation En rayon de roue"
     },
     {
         "id": 136,
@@ -712,17 +712,17 @@
     {
         "id": 143,
         "parent": 34,
-        "text": "Centrale"
+        "text": "Activit\u00e9 Oxy. Centrale"
     },
     {
         "id": 144,
         "parent": 34,
-        "text": "P\u00e9riph\u00e9rique"
+        "text": "Activit\u00e9 Oxyda P\u00e9riph\u00e9rique"
     },
     {
         "id": 145,
         "parent": 34,
-        "text": "En croissant"
+        "text": "activit\u00e9 En croissant"
     },
     {
         "id": 146,
@@ -757,12 +757,12 @@
     {
         "id": 152,
         "parent": 36,
-        "text": "Pr\u00e9sent"
+        "text": "Core Pr\u00e9sent"
     },
     {
         "id": 153,
         "parent": 36,
-        "text": "P\u00e9riph\u00e9rique"
+        "text": "Core P\u00e9riph\u00e9rique"
     },
     {
         "id": 154,
@@ -802,52 +802,52 @@
     {
         "id": 161,
         "parent": 39,
-        "text": "Normale"
+        "text": "Activit\u00e9 COX Normale"
     },
     {
         "id": 162,
         "parent": 39,
-        "text": "Absence activit\u00e9"
+        "text": "Absence d'acitivit\u00e9 COX"
     },
     {
         "id": 163,
         "parent": 39,
-        "text": "Absence activit\u00e9 locale"
+        "text": "Absence d'acitivit\u00e9 COX locale"
     },
     {
         "id": 164,
         "parent": 39,
-        "text": "Faiblement positif (p\u00e2le)"
+        "text": "COX Faiblement positif (p\u00e2le)"
     },
     {
         "id": 165,
         "parent": 39,
-        "text": "Faiblement positif localement"
+        "text": "COX Faiblement positif localement"
     },
     {
         "id": 166,
         "parent": 40,
-        "text": "Normale"
+        "text": "Activit\u00e9 Phospho. Normale"
     },
     {
         "id": 167,
         "parent": 40,
-        "text": "Absence d'acitivit\u00e9"
+        "text": "Absence d'acitivit\u00e9 phospho"
     },
     {
         "id": 168,
         "parent": 40,
-        "text": "Absence activit\u00e9 locale"
+        "text": "Absence d'acitivit\u00e9 phospho locale"
     },
     {
         "id": 169,
         "parent": 40,
-        "text": "Faiblement positif de fa\u00e7on diffuse"
+        "text": "Phospho Faiblement positif de fa\u00e7on diffuse"
     },
     {
         "id": 170,
         "parent": 40,
-        "text": "Faiblement positif localement"
+        "text": "Phospho Faiblement positif localement"
     },
     {
         "id": 171,
@@ -857,7 +857,7 @@
     {
         "id": 172,
         "parent": 41,
-        "text": "Anomalie locale (surcharge)"
+        "text": "PAS: Anomalie locale (surcharge)"
     },
     {
         "id": 173,
@@ -917,12 +917,12 @@
     {
         "id": 184,
         "parent": 44,
-        "text": "En croissant"
+        "text": "Structure sarcom\u00e9rique en croissant"
     },
     {
         "id": 185,
         "parent": 45,
-        "text": "Absente"
+        "text": "Bande A Absente"
     },
     {
         "id": 186,
@@ -937,7 +937,7 @@
     {
         "id": 188,
         "parent": 47,
-        "text": "Oui"
+        "text": "Vacuole pr\u00e9sente"
     },
     {
         "id": 189,
@@ -947,6 +947,6 @@
     {
         "id": 190,
         "parent": 49,
-        "text": "Oui"
+        "text": "L\u00e9sion CAPS Pr\u00e9sentes"
     }
 ]
