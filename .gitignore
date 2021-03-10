@@ -145,3 +145,6 @@ flask_session/
 
 #Env File
 .env
+
+# Ontology current file
+config/ontology.json

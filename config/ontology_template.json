@@ -1,0 +1,1902 @@
+[
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 1,
+        "parent": "#",
+        "text": "Enzymo G\u00e9n\u00e9rale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 2,
+        "parent": "#",
+        "text": "Micro. Elec."
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 3,
+        "parent": "#",
+        "text": "Enzymo: oxydatif"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 4,
+        "parent": "#",
+        "text": "Enzymo: ATP"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 5,
+        "parent": "#",
+        "text": "HE&TG"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 6,
+        "parent": 5,
+        "text": "Fibre Type 1"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 7,
+        "parent": 5,
+        "text": "Fibre Type 2"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 8,
+        "parent": 5,
+        "text": "Taille Fibre"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 9,
+        "parent": 5,
+        "text": "Apsect Fibre"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 10,
+        "parent": 5,
+        "text": "Aspect Fibre (suite)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 11,
+        "parent": 5,
+        "text": "Noyaux"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 12,
+        "parent": 5,
+        "text": "Inclusions prot\u00e9ique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 13,
+        "parent": 5,
+        "text": "Mat\u00e9riel Fuscinophile"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 14,
+        "parent": 5,
+        "text": "Mat\u00e9riel Fuscinophile (suite)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 15,
+        "parent": 5,
+        "text": "Zone Claires"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 16,
+        "parent": 5,
+        "text": "Batonnet (rod) ou nemaline bodies"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 17,
+        "parent": 5,
+        "text": "Aggr\u00e9gat tubulaire"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 18,
+        "parent": 5,
+        "text": "Fuseau Neuromusculaire"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 19,
+        "parent": 5,
+        "text": "Tissus Conjonctif"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 20,
+        "parent": 5,
+        "text": "Alt\u00e9ration/l\u00e9sion interstitielle"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 21,
+        "parent": 5,
+        "text": "Element inflamatoire"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 22,
+        "parent": 5,
+        "text": "Collag\u00e8ne Endosymial"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 23,
+        "parent": 5,
+        "text": "Necklace Fibers"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 24,
+        "parent": 5,
+        "text": "Coup d'ongle p\u00e9riph\u00e9rique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 25,
+        "parent": 5,
+        "text": "N\u00e9crose"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 26,
+        "parent": 5,
+        "text": "R\u00e9g\u00e9n\u00e9ration"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 27,
+        "parent": 4,
+        "text": "Diff\u00e9rentiation des fibres"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 28,
+        "parent": 4,
+        "text": "R\u00e9partition num\u00e9rique des fibres"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 29,
+        "parent": 4,
+        "text": "R\u00e9partition topographiques des types de fibres:"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 30,
+        "parent": 4,
+        "text": "Activit\u00e9"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 31,
+        "parent": 3,
+        "text": "Aspect Fibre_"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 32,
+        "parent": 3,
+        "text": "Aspect Fibre (suite)_"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 33,
+        "parent": 3,
+        "text": "Remaniement Structurels"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 34,
+        "parent": 3,
+        "text": "R\u00e9partition activit\u00e9"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 35,
+        "parent": 3,
+        "text": "R\u00e9partition activit\u00e9 (suite)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 36,
+        "parent": 3,
+        "text": "Core"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 37,
+        "parent": 3,
+        "text": "Core (suite)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 38,
+        "parent": 3,
+        "text": "NADH"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 39,
+        "parent": 1,
+        "text": "Activit\u00e9 COX"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 40,
+        "parent": 1,
+        "text": "Activit\u00e9 Phospholypases"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 41,
+        "parent": 1,
+        "text": "Coloration PAS"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 42,
+        "parent": 1,
+        "text": "Coloration PAS (suite)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 43,
+        "parent": 1,
+        "text": "Coloration Soudan"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 44,
+        "parent": 2,
+        "text": "Structure sarcom\u00e9rique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 45,
+        "parent": 2,
+        "text": "Bande A"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 46,
+        "parent": 2,
+        "text": "Materiel Z"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 47,
+        "parent": 2,
+        "text": "Vacuole autophagiques"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 48,
+        "parent": 2,
+        "text": "Citerne"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 49,
+        "parent": 2,
+        "text": "L\u00e9sion type CAPS"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 50,
+        "parent": 6,
+        "text": "Type 1 Hypertrophiques (grandes)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 51,
+        "parent": 6,
+        "text": "Type 1 Atrophi\u00e9es (petites)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 52,
+        "parent": 6,
+        "text": "Type  1 Taille h\u00e9t\u00e9rog\u00e8ne"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 53,
+        "parent": 7,
+        "text": "Type 2 Hypertrophiques (grandes)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 54,
+        "parent": 7,
+        "text": "Type 2 Atrophi\u00e9es (petites)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 55,
+        "parent": 7,
+        "text": "Type 2  Taille h\u00e9t\u00e9rog\u00e8ne"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 56,
+        "parent": 8,
+        "text": "Tailles Tr\u00e8s in\u00e9gales"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 57,
+        "parent": 8,
+        "text": "Tailles Discr\u00e8tement in\u00e9gales"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 58,
+        "parent": 8,
+        "text": "Sans topographie"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 59,
+        "parent": 8,
+        "text": "Tailles Homog\u00e8ne"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 60,
+        "parent": 9,
+        "text": "Vacuolis\u00e9e bord\u00e9es"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 61,
+        "parent": 9,
+        "text": "Lobul\u00e9es"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 62,
+        "parent": 9,
+        "text": "Anguleuse"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 63,
+        "parent": 9,
+        "text": "Bord arrondis"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 64,
+        "parent": 9,
+        "text": "Segmentation de fibre"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 65,
+        "parent": 10,
+        "text": "Aspect En rayon de roue"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 66,
+        "parent": 10,
+        "text": "Tourbillon"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 67,
+        "parent": 10,
+        "text": "Red-ragged fibers"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 68,
+        "parent": 10,
+        "text": "Fibre  annulaires"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 69,
+        "parent": 11,
+        "text": "Noyaux Centralis\u00e9s"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 70,
+        "parent": 11,
+        "text": "Internalis\u00e9s"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 71,
+        "parent": 11,
+        "text": "Sous-sarcolemmale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 72,
+        "parent": 11,
+        "text": "Augmentation du nombre"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 73,
+        "parent": 11,
+        "text": "Noyaux \u00e0 Aspects myotubulaires"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 74,
+        "parent": 12,
+        "text": "Inclusion Prot. Centralis\u00e9s"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 75,
+        "parent": 12,
+        "text": "Inclusions P\u00e9riph\u00e9riques"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 76,
+        "parent": 13,
+        "text": "Amas/Aggr\u00e9gat sombre"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 77,
+        "parent": 13,
+        "text": "Granuleux"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 78,
+        "parent": 13,
+        "text": "Radiant"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 79,
+        "parent": 13,
+        "text": "Diffus"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 80,
+        "parent": 13,
+        "text": "Mat\u00e9riel Fuscinophile Centralis\u00e9s"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 81,
+        "parent": 13,
+        "text": "Mat\u00e9riel Fuscinophile P\u00e9riph\u00e9riques"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 82,
+        "parent": 14,
+        "text": "Sous sarcolemmale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 83,
+        "parent": 14,
+        "text": "Aspect violine (contour impr\u00e9cis)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 84,
+        "parent": 14,
+        "text": "Bords r\u00e9guliers"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 85,
+        "parent": 14,
+        "text": "Bords irr\u00e9guliers"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 86,
+        "parent": 14,
+        "text": "Arrondis"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 87,
+        "parent": 15,
+        "text": "zone clair En croissant p\u00e9riph\u00e9rique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 88,
+        "parent": 15,
+        "text": "Zone claire Centrale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 89,
+        "parent": 15,
+        "text": "Majorit\u00e9 de la fibre"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 90,
+        "parent": 16,
+        "text": "Rods Pr\u00e9sent"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 91,
+        "parent": 16,
+        "text": "Mini-rod"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 92,
+        "parent": 16,
+        "text": "Piquet\u00e9 rouge (rod-like)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 93,
+        "parent": 16,
+        "text": "Inclusion poussi\u00e8re rouge"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 94,
+        "parent": 17,
+        "text": "Aggr\u00e9gat Tubulaires Pr\u00e9sent"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 95,
+        "parent": 18,
+        "text": "Fuseau Neuro Anormal"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 96,
+        "parent": 19,
+        "text": "Fibreux"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 97,
+        "parent": 19,
+        "text": "Lipomateux"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 98,
+        "parent": 20,
+        "text": "Alt\u00e9ration interstitielle"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 99,
+        "parent": 20,
+        "text": "Augmentation Tissue conjonctif"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 100,
+        "parent": 20,
+        "text": "Augmentation Tissue adipeux"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 101,
+        "parent": 20,
+        "text": "Entoure compl\u00e8tement les fibres"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 102,
+        "parent": 20,
+        "text": "Bande \u00e9paisse entre fasciule"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 103,
+        "parent": 21,
+        "text": "Inflamation"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 104,
+        "parent": 22,
+        "text": "Augmentation nette du collag\u00e8ne endo."
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 105,
+        "parent": 22,
+        "text": "Augmentation discr\u00e8te du collag\u00e8ne endo."
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 106,
+        "parent": 23,
+        "text": "Necklace Fibers Pr\u00e9sent"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 107,
+        "parent": 24,
+        "text": "Coup d'ongle Pr\u00e9sent"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 108,
+        "parent": 25,
+        "text": "N\u00e9crose"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 109,
+        "parent": 26,
+        "text": "R\u00e9g\u00e9n\u00e9ration"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 110,
+        "parent": 27,
+        "text": "Diff\u00e9renciation Normale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 111,
+        "parent": 27,
+        "text": "Coloration pale fibre atrophique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 112,
+        "parent": 27,
+        "text": "Zone sans activit\u00e9 ATPase"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 113,
+        "parent": 27,
+        "text": "Uniformit\u00e9 de Type"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 114,
+        "parent": 28,
+        "text": "Uniformit\u00e9 Type 1"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 115,
+        "parent": 28,
+        "text": "Uniformit\u00e9 Type 2"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 116,
+        "parent": 28,
+        "text": "Pr\u00e9dom. Nette Type 1"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 117,
+        "parent": 28,
+        "text": "Pr\u00e9dom. Nette Type 2"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 118,
+        "parent": 28,
+        "text": "Pr\u00e9dom Mod\u00e9r\u00e9e Type 1"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 119,
+        "parent": 28,
+        "text": "Pr\u00e9dom Mod\u00e9r\u00e9e Type 2"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 120,
+        "parent": 29,
+        "text": "Regroupement nette des fibres"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 121,
+        "parent": 29,
+        "text": "Fibre 1 group\u00e9e"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 122,
+        "parent": 29,
+        "text": "Fibre 2 group\u00e9e"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 123,
+        "parent": 29,
+        "text": "Pas de regroupement"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 124,
+        "parent": 30,
+        "text": "Acide r\u00e9sistant (Type 1)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 125,
+        "parent": 30,
+        "text": "Pr\u00e9sence zone claire"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 126,
+        "parent": 30,
+        "text": "Activit\u00e9 ATP Centrale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 127,
+        "parent": 30,
+        "text": "Activit\u00e9 ATP P\u00e9riph\u00e9rique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 128,
+        "parent": 30,
+        "text": "En plage \u00e9tendue"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 129,
+        "parent": 30,
+        "text": "En halo"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 130,
+        "parent": 31,
+        "text": "Aspect oxydo Myotubulaire"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 131,
+        "parent": 31,
+        "text": "Cern\u00e9"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 132,
+        "parent": 31,
+        "text": "Lobulation"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 133,
+        "parent": 31,
+        "text": "Multi-lobul\u00e9"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 134,
+        "parent": 32,
+        "text": "Alv\u00e9ole core-like"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 135,
+        "parent": 32,
+        "text": "Oxydation En rayon de roue"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 136,
+        "parent": 32,
+        "text": "Aspect targ\u00e9toide"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 137,
+        "parent": 33,
+        "text": "Forte d\u00e9sorganisation"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 138,
+        "parent": 33,
+        "text": "L\u00e9sion sous-sarcolemmale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 139,
+        "parent": 33,
+        "text": "R\u00e9seau intermyofribrillaire irr\u00e9gulier"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 140,
+        "parent": 33,
+        "text": "Rimmed sarcolemma"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 141,
+        "parent": 34,
+        "text": "Disproportion importante"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 142,
+        "parent": 34,
+        "text": "Zone claires (p\u00e2le)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 143,
+        "parent": 34,
+        "text": "Activit\u00e9 Oxy. Centrale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 144,
+        "parent": 34,
+        "text": "Activit\u00e9 Oxyda P\u00e9riph\u00e9rique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 145,
+        "parent": 34,
+        "text": "activit\u00e9 En croissant"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 146,
+        "parent": 34,
+        "text": "Limites net"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 147,
+        "parent": 35,
+        "text": "Limites floues"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 148,
+        "parent": 35,
+        "text": "Coloration fonc\u00e9 sous-sarcolemmale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 149,
+        "parent": 35,
+        "text": "Accumulation mitochondrie p\u00e9riph\u00e9rique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 150,
+        "parent": 35,
+        "text": "Liseret p\u00e9riph\u00e9rique fonc\u00e9"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 151,
+        "parent": 35,
+        "text": "Zone inclusions non color\u00e9e"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 152,
+        "parent": 36,
+        "text": "Core Pr\u00e9sent"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 153,
+        "parent": 36,
+        "text": "Core P\u00e9riph\u00e9rique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 154,
+        "parent": 36,
+        "text": "Centraux unique"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 155,
+        "parent": 36,
+        "text": "Limites net"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 156,
+        "parent": 37,
+        "text": "Limites floues"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 157,
+        "parent": 37,
+        "text": "Sur toute la section"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 158,
+        "parent": 37,
+        "text": "Minicores"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 159,
+        "parent": 38,
+        "text": "Fibre atrophique fonc\u00e9e"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 160,
+        "parent": 38,
+        "text": "Fibre atrophique: Halo fonc\u00e9 sous sarcolemmale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 161,
+        "parent": 39,
+        "text": "Activit\u00e9 COX Normale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 162,
+        "parent": 39,
+        "text": "Absence d'acitivit\u00e9 COX"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 163,
+        "parent": 39,
+        "text": "Absence d'acitivit\u00e9 COX locale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 164,
+        "parent": 39,
+        "text": "COX Faiblement positif (p\u00e2le)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 165,
+        "parent": 39,
+        "text": "COX Faiblement positif localement"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 166,
+        "parent": 40,
+        "text": "Activit\u00e9 Phospho. Normale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 167,
+        "parent": 40,
+        "text": "Absence d'acitivit\u00e9 phospho"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 168,
+        "parent": 40,
+        "text": "Absence d'acitivit\u00e9 phospho locale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 169,
+        "parent": 40,
+        "text": "Phospho Faiblement positif de fa\u00e7on diffuse"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 170,
+        "parent": 40,
+        "text": "Phospho Faiblement positif localement"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 171,
+        "parent": 41,
+        "text": "Pas de surcharge en glycog\u00e8ne"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 172,
+        "parent": 41,
+        "text": "PAS: Anomalie locale (surcharge)"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 173,
+        "parent": 41,
+        "text": "Coloration in\u00e9gale"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 174,
+        "parent": 41,
+        "text": "Teneur \u00e9lev\u00e9e diffuse"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 175,
+        "parent": 42,
+        "text": "Teneur tr\u00e8s irr\u00e9guli\u00e8re"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 176,
+        "parent": 42,
+        "text": "Contraste fort type I et II"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 177,
+        "parent": 42,
+        "text": "Accumulation dans fibre anormales"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 178,
+        "parent": 43,
+        "text": "Pas de surchage en lipides"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 179,
+        "parent": 43,
+        "text": "Fibre type 1: surchage en lipide"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 180,
+        "parent": 43,
+        "text": "Goutelette lipidiques"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 181,
+        "parent": 43,
+        "text": "Surcharge dans les fibre remani\u00e9es / anormales"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 182,
+        "parent": 43,
+        "text": "Fibre type II plus riche que les fibre type I"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 183,
+        "parent": 44,
+        "text": "D\u00e9sorganis\u00e9 ; Remani\u00e9"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 184,
+        "parent": 44,
+        "text": "Structure sarcom\u00e9rique en croissant"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 185,
+        "parent": 45,
+        "text": "Bande A Absente"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 186,
+        "parent": 46,
+        "text": "Elargissement"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 187,
+        "parent": 46,
+        "text": "Streaming"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 188,
+        "parent": 47,
+        "text": "Vacuole pr\u00e9sente"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 189,
+        "parent": 48,
+        "text": "Dilatation"
+    },
+    {
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "id": 190,
+        "parent": 49,
+        "text": "L\u00e9sion CAPS Pr\u00e9sentes"
+    }
+]
