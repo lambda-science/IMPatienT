@@ -1,0 +1,48 @@
+{% extends "base.html"%}
+{% block content %}
+
+<!-- JS Tree -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/themes/default/style.min.css"
+    integrity="sha512-P8BwDSUInKMA7I116Z1RFg/Dfk85uFdliEUYO7vQlwtxLVMNvZimfMAQsaf++9EhlAGOVX6yhDQAIY3/70jDUg=="
+    crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/jstree.min.js"
+    integrity="sha512-bU6dl4fd2XN3Do3aWypPP2DcKywDyR3YlyszV+rOw9OpglrGyBs6TyTsbglf9umgE+sy+dKm1UHhi07Lv+Vtfg=="
+    crossorigin="anonymous"></script>
+
+<div class="row">
+    <div class="col">
+        <h1>Arbre Ontologie</h1>
+
+        <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control"
+            placeholder="Rechercher">
+        <div id="jstree" class="demo" style="overflow:scroll; max-height: 600px;"></div>
+    </div>
+    <div class="col">
+        <h1>Rapport Histo</h1>
+        <div id="checkbox_feat" style="max-height: 200px;">aaa</div>
+        <div id="history_feat" style="max-height: 400px;">bbb</div>
+    </div>
+</div>
+<script>
+    $('#jstree').jstree({
+        'core': {
+            "check_callback": true,
+            'data': {
+                "url": "{{url_for('ontocreate.onto_json', filename='ontology.json')}}",
+                "dataType": "json" // needed only if you do not supply JSON headers
+            }
+        },
+        "plugins": ["wholerow", "unique", "search"]
+    });
+
+    var to = false;
+    $('#plugins4_q').keyup(function () {
+        if (to) { clearTimeout(to); }
+        to = setTimeout(function () {
+            var v = $('#plugins4_q').val();
+            $('#jstree').jstree(true).search(v);
+        }, 250);
+    });
+
+</script>
+{% endblock %}

@@ -51,6 +51,9 @@ def create_app(config_class=Config):
     from app.ontocreate import bp as ontocreate_bp
     app.register_blueprint(ontocreate_bp)
 
+    from app.historeportv2 import bp as historeportv2_bp
+    app.register_blueprint(historeportv2_bp)
+
     # If app in production settings:
     # configure our SMTP mail connection
     # configure error-logging service
