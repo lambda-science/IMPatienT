@@ -1,9 +1,13 @@
 {% extends "base.html"%}
 {% block content %}
 <!-- OpenSeaDragon files -->
-<script type="text/javascript" src="{{url_for('static', filename='openseadragon.min.js')}}"></script>
-<script type="text/javascript" src="{{url_for('static', filename='openseadragon-annotorious.min.js')}}"></script>
-<link rel="stylesheet" href="{{url_for('static', filename='annotorious.min.css')}}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.2/openseadragon.min.js"
+  integrity="sha512-qvQYH6mPuE46uFcWLI8BdGaJpB5taX4lltbSIw5GF4iODh2xIgyz5ii1WpuzPFUknHCps0mi4mFGR44bjdZlZg=="
+  crossorigin="anonymous"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@latest/dist/openseadragon-annotorious.min.js"></script>
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@latest/dist/annotorious.min.css">
 
 <div class="container">
   <div class="row">
@@ -64,7 +68,7 @@
   // Initialize OpenSeaDragon Viewer
   var viewer = OpenSeadragon({
     id: "seadragon-viewer",
-    prefixUrl: "/static/images/",
+    prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/images/",
     tileSources: "{{url_for('imgannot.data_folder', filename=deepzoom_path+'.dzi')}}",
     animationTime: 0.5,
     blendTime: 0.1,

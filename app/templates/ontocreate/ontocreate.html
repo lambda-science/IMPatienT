@@ -1,20 +1,21 @@
 {% extends "base.html"%}
 {% block content %}
 <!-- JS Tree -->
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='themes/default/style.min.css')}}">
-<script type="text/javascript" src="{{url_for('static', filename='jstree.min.js')}}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/themes/default/style.min.css"
+    integrity="sha512-P8BwDSUInKMA7I116Z1RFg/Dfk85uFdliEUYO7vQlwtxLVMNvZimfMAQsaf++9EhlAGOVX6yhDQAIY3/70jDUg=="
+    crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/jstree.min.js"
+    integrity="sha512-bU6dl4fd2XN3Do3aWypPP2DcKywDyR3YlyszV+rOw9OpglrGyBs6TyTsbglf9umgE+sy+dKm1UHhi07Lv+Vtfg=="
+    crossorigin="anonymous"></script>
 
-<!-- Tag Input -->
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='tagify.css')}}">
-<script type="text/javascript" src="{{url_for('static', filename='tagify.min.js')}}"></script>
+<!-- Tagify -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tagify/3.23.1/tagify.css"
+    integrity="sha512-1CG2eaZ3B/p7OqthY2eBpVCD2A+0b2T7aEXfMnr4FqZFoKddxURdxcD8EcKI66qthtkGAWA/Hnwy7ceNHcHJKw=="
+    crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tagify/3.23.1/tagify.min.js"
+    integrity="sha512-jb/SYEPmc1tGaJ3Yu6CZaOBhn8sqTpgTqVcXUm4udHGaUsBIOj6DsIc6aXZpsvXhtexnmIowmOVBHKuIwyB2Rw=="
+    crossorigin="anonymous"></script>
 
-
-
-
-
-<div id="jstree_demo_div"></div>
-
-</br>
 <div class="row">
     <div class="col">
         <h1>Arbre Ontologie</h1>
@@ -56,7 +57,7 @@
         'core': {
             "check_callback": true,
             'data': {
-                "url": "{{url_for('onthocreate.onto_json', filename='ontology.json')}}",
+                "url": "{{url_for('ontocreate.onto_json', filename='ontology.json')}}",
                 "dataType": "json" // needed only if you do not supply JSON headers
             }
         },
@@ -105,7 +106,7 @@
         console.log(myJSON)
         $.ajax({
             type: "PATCH",
-            url: "{{url_for('onthocreate.modify_ontho')}}",
+            url: "{{url_for('ontocreate.modify_onto')}}",
             data: myJSON,
             success: console.log("Ontology File Updated"),
             dataType: "text"
