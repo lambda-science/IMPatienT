@@ -19,8 +19,11 @@
     </div>
     <div class="col">
         <h1>Rapport Histo</h1>
-        <div id="checkbox_feat" style="max-height: 200px;">aaa</div>
-        <div id="history_feat" style="max-height: 400px;">bbb</div>
+        <form method="post">
+            <div class="form-group" id="checkbox_feat" style="max-height: 200px;"></div>
+            <button type="submit" class="btn btn-primary" id="histo_submit">Submit</button>
+        </form>
+        <div id="history_feat" style="max-height: 400px;"></div>
     </div>
 </div>
 <script>
@@ -32,7 +35,7 @@
                 "dataType": "json" // needed only if you do not supply JSON headers
             }
         },
-        "plugins": ["wholerow", "unique", "search"]
+        "plugins": ["wholerow", "unique", "search", "changed"]
     });
 
     var to = false;
@@ -42,6 +45,39 @@
             var v = $('#plugins4_q').val();
             $('#jstree').jstree(true).search(v);
         }, 250);
+    });
+
+    $('#jstree').on('select_node.jstree', function (e, data) {
+        var html = `
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <input type="radio" class="btn-check" name="`+ data.node.text + `" id="` + data.node.id + "_abs" + `" autocomplete="off" value="-1">
+        <label class="btn btn-outline-danger" for="`+ data.node.id + "_abs" + `">Absent</label>
+        <input type="radio" class="btn-check" name="`+ data.node.text + `" id="` + data.node.id + "_na" + `" autocomplete="off" value="0">
+        <label class="btn btn-outline-info" for="`+ data.node.id + "_na" + `">N/A</label>
+        <input type="radio" class="btn-check" name="`+ data.node.text + `" id="` + data.node.id + "_pres" + `" autocomplete="off" value="1">
+        <label class="btn btn-outline-success" for="`+ data.node.id + "_pres" + `">Présent</label></br>
+        </div>
+        `
+        if (document.getElementById("div_node_" + data.node.id) !== null) {
+            var div = "div[id=div_node_" + data.node.id + "]"
+            $(div).show();
+            console.log("Show" + data.node.id);
+        }
+        else {
+            $("div[id=checkbox_feat]").append("<div id=div_node_" + data.node.id + ">" + "<p>" + data.node.text + "</p> </div>");
+            $("div[id=checkbox_feat]").append("<div id=div_node_" + data.node.id + ">" + html + "</div>");
+            console.log("Append" + data.node.id);
+        }
+
+    });
+
+    $('#jstree').on('changed.jstree.jstree', function (e, data) {
+        var div = "div[id=div_node_" + data.changed.deselected[0] + "]"
+        $(div).hide();
+    });
+
+    $('#histo_submit').submit(function () {
+        alert('something');
     });
 
 </script>
