@@ -148,3 +148,5 @@ flask_session/
 
 # Ontology current file
 config/ontology.json
+# Data in notebook folder
+notebooks/*.pdf
