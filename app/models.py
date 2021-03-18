@@ -127,16 +127,9 @@ class ReportHisto(db.Model):
     muscle_prelev = db.Column(db.String(140))
     age_biopsie = db.Column(db.Integer)
     date_envoie = db.Column(db.String(10))
+    ontology_tree = db.Column(db.JSON, default=[])
     comment = db.Column(db.Text)
     conclusion = db.Column(db.String(140), index=True)
-
-    df = pd.read_csv(os.path.join("config", "report_form_config.tsv"),
-                     sep="\t")
-    for index, row in df.iterrows():
-        for feature in row[2:]:
-            if type(feature) == str:
-                vars()[str(feature).replace(
-                    " ", "_")] = db.Column(db.Boolean())
 
     def __repr__(self):
         return '<ReportHisto ID {} Nom {} Biopsie {}>'.format(

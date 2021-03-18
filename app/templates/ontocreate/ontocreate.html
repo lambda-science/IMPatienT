@@ -61,7 +61,7 @@
                 "dataType": "json" // needed only if you do not supply JSON headers
             }
         },
-        "plugins": ["contextmenu", "dnd", "wholerow", "unique", "search", "state", "hotkeys"]
+        "plugins": ["contextmenu", "dnd", "wholerow", "unique", "search", "hotkeys"]
     });
 
     var to = false;
@@ -71,12 +71,6 @@
             var v = $('#plugins4_q').val();
             $('#jstree').jstree(true).search(v);
         }, 250);
-    });
-    $('#jstree').on('rename_node.jstree', function (e, data) {
-        console.log("rename");
-    });
-    $('#jstree').on('move_node.jstree', function (e, data) {
-        console.log("move");
     });
 
     // Prefill Form from JSON
@@ -123,5 +117,6 @@
             return list_tag.toString();
         };
     };
+
 </script>
 {% endblock %}

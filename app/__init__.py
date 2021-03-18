@@ -24,7 +24,11 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     db.init_app(app)
-    migrate.init_app(app, db)
+    with app.app_context():
+        if db.engine.url.drivername == 'sqlite':
+            migrate.init_app(app, db, render_as_batch=True)
+        else:
+            migrate.init_app(app, db)
     login.init_app(app)
     mail.init_app(app)
     session.init_app(app)
@@ -45,14 +49,11 @@ def create_app(config_class=Config):
     from app.index import bp as index_bp
     app.register_blueprint(index_bp)
 
-    from app.historeport import bp as historeport_bp
-    app.register_blueprint(historeport_bp)
-
     from app.ontocreate import bp as ontocreate_bp
     app.register_blueprint(ontocreate_bp)
 
-    from app.historeportv2 import bp as historeportv2_bp
-    app.register_blueprint(historeportv2_bp)
+    from app.historeport import bp as historeport_bp
+    app.register_blueprint(historeport_bp)
 
     # If app in production settings:
     # configure our SMTP mail connection

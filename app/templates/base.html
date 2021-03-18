@@ -29,19 +29,16 @@
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('imgannot.upload_file') }}">Image Annot</a>
+          <a class="nav-link" href="{{ url_for('imgannot.upload_file') }}">Image-Annot</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('ocr.upload_pdf') }}">OCR PDF</a>
+          <a class="nav-link" href="{{ url_for('ocr.upload_pdf') }}">OCR-PDF</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('historeport.historeport') }}">Histo Report</a>
+          <a class="nav-link" href="{{ url_for('ontocreate.ontocreate') }}">Ontology</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('ontocreate.ontocreate') }}">ontology</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('historeportv2.historeportv2') }}">Histo Report V2</a>
+          <a class="nav-link" href="{{ url_for('historeport.historeport') }}">Histo-Report</a>
         </li>
       </ul>
     </div>
@@ -87,7 +84,7 @@
   {% endif %}
   {% endwith %}
 
-  <main role="main" class="container">
+  <main role="main" class="container" style="margin-bottom:50px">
 
     {% block content %}
     {% endblock %}
