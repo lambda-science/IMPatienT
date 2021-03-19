@@ -1,11 +1,9 @@
-from app.models import Patient, Image
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, TextAreaField, BooleanField, SubmitField, RadioField, SelectField, DateField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Regexp, Length
+from wtforms import StringField, TextAreaField
 
 
 class OntologyDescript(FlaskForm):
+    """Form used to save modification of nodes in the onotlogy create tool"""
     onto_id_ext = StringField('ID Ontologie Externe',
                               render_kw={
                                   "placeholder": "ID Ontologie Externe",

@@ -1,16 +1,26 @@
 from flask_login import current_user, login_required
-from flask import render_template, request
-import json
+from flask import render_template, request, flash, redirect, url_for
 from app import db
 from app.historeport import bp
 from app.models import ReportHisto
-from app.historeport.forms import ReportForm, OntologyDescriptPreAbs
+from app.historeport.forms import ReportForm, OntologyDescriptPreAbs, DeleteButton
 
 
 @bp.route("/historeport", methods=["GET", "POST"])
+def histoindex():
+    """Page for management of reports registered in database."""
+    form = DeleteButton()
+    report_history = ReportHisto.query.all()
+    return render_template("historeport/histo_index.html",
+                           history=report_history,
+                           form=form)
+
+
+@bp.route("/historeport/new", methods=["GET", "POST"])
 @login_required
 def historeport():
-    """palceholder"""
+    """Page to create new histology report of modify already existing one."""
+    # If args in URL, try to retrive report from DB and pre-fill it
     if request.args:
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
@@ -27,13 +37,15 @@ def historeport():
                               conclusion=report_request.conclusion)
         else:
             form = ReportForm()
+    # Else: empty form
     else:
         form = ReportForm()
 
     form2 = OntologyDescriptPreAbs()
     radio_field = list(form2.presence_absence)
-
+    # On validation, save to database
     if form.validate_on_submit():
+        # Update existing DB entry or create a new one (else)
         if request.args:
             report_entry = ReportHisto.query.get(request.args.get("id"))
             if report_entry is not None:
@@ -52,3 +64,22 @@ def historeport():
                            form=form,
                            form2=form2,
                            radio_field=radio_field)
+
+
+@bp.route('/delete_report/<id_report>', methods=['POST'])
+@login_required
+def delete_report(id_report):
+    """Page delete a histology report from database with delete button."""
+    form = DeleteButton()
+    # Retrieve database entry and delete it if existing
+    if form.validate_on_submit():
+        report_form = ReportHisto.query.get(id_report)
+        if report_form is None:
+            flash('Report {} not found.'.format(id), "danger")
+            return redirect(url_for('histoindex'))
+        db.session.delete(report_form)
+        db.session.commit()
+        flash('Deleted entry {}!'.format(id_report), "success")
+        return redirect(url_for('historeport.histoindex'))
+    else:
+        return redirect(url_for('historeport.histoindex'))

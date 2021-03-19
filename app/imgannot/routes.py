@@ -1,17 +1,18 @@
 import os
 import json
 import subprocess
+import shutil
+
+from flask import flash, request, redirect, url_for, render_template
+from flask import send_from_directory, session, current_app
+from flask_login import current_user, login_required
+from werkzeug.utils import secure_filename
 
 from app import db
 from app.imgannot import bp
 from app.imgannot.forms import ImageForm, AnnotForm
+from app.models import Image, Patient
 import app.imgannot.histo as Histo
-from app.models import User, Image, Patient
-
-from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory, session, current_app
-from flask_login import current_user, login_required
-from werkzeug.utils import secure_filename
-import shutil
 
 
 @bp.route("/temp/<path:filename>")
@@ -40,18 +41,18 @@ def upload_file():
                                  current_user.username)
     try:
         shutil.rmtree(temp_user_dir)
-    except:
+    except Exception:
         pass
     # Show Image History
     image_history = Image.query.filter_by(expert_id=current_user.id)
     if form.validate_on_submit():
         file = form.image.data
-        patient_ID = form.patient_ID.data
-        filename = secure_filename(patient_ID + "_" + file.filename)
+        patient_id = form.patient_ID.data
+        filename = secure_filename(patient_id + "_" + file.filename)
 
         # Create a data folder for patient
         data_patient_dir = os.path.join(current_app.config["DATA_FOLDER"],
-                                        patient_ID)
+                                        patient_id)
         if not os.path.exists(data_patient_dir):
             os.makedirs(data_patient_dir)
         # Save the image to patient data folder
@@ -67,10 +68,10 @@ def upload_file():
                           patient_firstname=form.patient_prenom.data)
         # Check if the image or patient already exist in DB (same filename & patient ID)
         # If not: add it to DB
-        if patient.existAlready() == False:
+        if not patient.exist_already():
             db.session.add(patient)
 
-        if image.isduplicated() == False:
+        if not image.isduplicated():
             db.session.add(image)
 
         db.session.commit()
@@ -79,7 +80,7 @@ def upload_file():
         return redirect(
             url_for("imgannot.annot_page",
                     filename=filename,
-                    patient_ID=patient_ID))
+                    patient_id=patient_id))
     return render_template("imgannot/upload_img.html",
                            form=form,
                            image_history=image_history)
@@ -97,7 +98,7 @@ def delete_image():
         image_name=parsed["image_name"],
         patient_id=parsed["patient_id"]).first()
     # If current user is the creator of image: delete from DB
-    if image_requested != None and image_requested.expert_id == current_user.id:
+    if image_requested is not None and image_requested.expert_id == current_user.id:
         if os.path.exists(image_requested.image_path):
             os.remove(image_requested.image_path)
         db.session.delete(image_requested)
@@ -121,20 +122,20 @@ def annot_page():
 
     # Get the filename of image and patient ID from args.
     session["filename"] = request.args.get("filename")
-    session["patient_ID"] = request.args.get("patient_ID")
+    session["patient_id"] = request.args.get("patient_id")
     # Query the database from args data
     image_requested = Image.query.filter_by(
         image_name=request.args.get("filename"),
-        patient_id=request.args.get("patient_ID")).first()
+        patient_id=request.args.get("patient_id")).first()
 
     # Prefill the feature form if alraedy in DB
-    Histo.generate_featureForm(AnnotForm, image_requested.report_text,
-                               feature_list)
+    Histo.generate_feature_form(AnnotForm, image_requested.report_text,
+                                feature_list)
     form = AnnotForm()
 
     # If image exist and is associated to current user: serve it
-    if image_requested != None and form.validate_on_submit(
-    ) == False and image_requested.expert_id == current_user.id:
+    if image_requested is not None and not form.validate_on_submit(
+    ) and image_requested.expert_id == current_user.id:
         session["image_expert_id"] = image_requested.expert_id
         # Create a temporary folder for username
         temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
@@ -148,7 +149,7 @@ def annot_page():
             "venv/bin/python3", "app/src/deepzoom.py",
             image_requested.image_path, basename, "--output",
             os.path.join(current_app.config["DATA_FOLDER"],
-                         session["patient_ID"], basename)
+                         session["patient_id"], basename)
         ],
                                    stdout=subprocess.PIPE)
         process.wait()
@@ -163,7 +164,7 @@ def annot_page():
 
             json_file.write(json.dumps(annotation_data, indent=4))
     # Error handling if no image or not the right user.
-    elif image_requested == None:
+    elif image_requested is None:
         flash('Image doesn\'t exist!', "error")
         return redirect(url_for('imgannot.upload_file'))
     elif image_requested.expert_id != current_user.id:
@@ -187,7 +188,7 @@ def annot_page():
                            deepzoom_path=deepzoom_path,
                            annot_temp_path=annot_temp_path,
                            feature_list=current_app.config["FEATURE_LIST"],
-                           patient_ID=session["patient_ID"],
+                           patient_id=session["patient_id"],
                            form=form,
                            tag_list=str(tag_list))
 
@@ -195,8 +196,10 @@ def annot_page():
 @bp.route("/modify_annot", methods=["POST", "PATCH", "DELETE"])
 @login_required
 def modify_annot():
-    """Write/Update/Delete existing annotations (json data) according to JS Plugin Annotorious AJAX Request.
-    Command is coming from an AJAX Request based on the Anno JS Object (see annot.html). (POST/PATCH/DELETE)"""
+    """Write/Update/Delete existing annotations (json data) according to
+    JS Plugin Annotorious AJAX Request.
+    Command is coming from an AJAX Request based on the Anno JS Object
+    (see annot.html). (POST/PATCH/DELETE)"""
     temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
                                  current_user.username)
     annot_list = []
@@ -207,9 +210,8 @@ def modify_annot():
     # If current user is the creator of image: proceed
     if session["image_expert_id"] == current_user.id:
         # If no annotations yet: json file is created
-        if os.path.exists(
-                os.path.join(temp_user_dir,
-                             session["filename"] + ".json")) == False:
+        if not os.path.exists(
+                os.path.join(temp_user_dir, session["filename"] + ".json")):
             with open(
                     os.path.join(temp_user_dir, session["filename"] + ".json"),
                     "w") as json_file:
@@ -226,14 +228,17 @@ def modify_annot():
                     old_data.append(parsed)
                     updated_list = old_data
                 elif request.method == 'PATCH':
-                    # Compare ID of annotation and replace the old annotations with the new one when there is a match in IDs.
+                    # Compare ID of annotation and replace the old annotations
+                    # with the new one when there is a match in IDs.
                     for anot in old_data:
                         if parsed["id"] != anot["id"]:
                             updated_list.append(anot)
                         elif parsed["id"] == anot["id"]:
                             updated_list.append(parsed)
                 elif request.method == 'DELETE':
-                    # If annotation ID is different from the ID of deletion command we save them to a list. Matching ID will be skipped and erased.
+                    # If annotation ID is different from the ID of deletion
+                    # command we save them to a list. Matching ID will be
+                    # skipped and erased.
                     for anot in old_data:
                         if parsed["id"] != anot["id"]:
                             updated_list.append(anot)
@@ -259,9 +264,9 @@ def write_report():
     # Get Image entry from DB to register annotation
     image_requested = Image.query.filter_by(
         image_name=session["filename"],
-        patient_id=session["patient_ID"]).first()
+        patient_id=session["patient_id"]).first()
     # If Image exist: build the histology text report from session cookie data
-    if image_requested != None:
+    if image_requested is not None:
         # Write each histology feature values with a loop
         report_string = ""
         for i in session["feature"]:

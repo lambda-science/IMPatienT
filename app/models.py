@@ -19,12 +19,15 @@ class User(UserMixin, db.Model):
         return '<User {} Email {}>'.format(self.username, self.email)
 
     def set_password(self, password):
+        """Method to hash password in DB"""
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
+        """Method to check plain-text password against hashed password"""
         return check_password_hash(self.password_hash, password)
 
     def get_reset_password_token(self, expires_in=600):
+        """Method generate a password reset token"""
         return jwt.encode(
             {
                 'reset_password': self.id,
@@ -35,6 +38,7 @@ class User(UserMixin, db.Model):
 
     @staticmethod
     def verify_reset_password_token(token):
+        """Method to check if token is valid"""
         try:
             id = jwt.decode(token,
                             current_app['SECRET_KEY'],
@@ -46,6 +50,7 @@ class User(UserMixin, db.Model):
 
 @login.user_loader
 def load_user(id):
+    """Method to load current user in flask-login"""
     return User.query.get(int(id))
 
 
@@ -67,6 +72,7 @@ class Image(db.Model):
                                                    self.patient_id)
 
     def isduplicated(self):
+        """Method to check if new entry already exist"""
         if Image.query.filter_by(image_name=self.image_name,
                                  patient_id=self.patient_id).first() is None:
             return False
@@ -85,7 +91,8 @@ class Patient(db.Model):
         return '<Patient {} {} {}>'.format(self.id, self.patient_firstname,
                                            self.patient_name)
 
-    def existAlready(self):
+    def exist_already(self):
+        """Method to check if new entry already exist"""
         if Patient.query.get(str(self.id)) is None:
             return False
         else:
@@ -107,6 +114,7 @@ class Pdf(db.Model):
                                                  self.patient_id)
 
     def isduplicated(self):
+        """Method to check if new entry already exist"""
         if Pdf.query.filter_by(pdf_name=self.pdf_name,
                                patient_id=self.patient_id).first() is None:
             return False

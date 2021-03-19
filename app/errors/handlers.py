@@ -1,6 +1,6 @@
+from flask import render_template
 from app import db
 from app.errors import bp
-from flask import render_template
 
 
 @bp.app_errorhandler(404)
@@ -19,4 +19,3 @@ def internal_error(error):
 @bp.app_errorhandler(413)
 def too_large(error):
     return render_template('errors/413.html'), 413
-    return "File is too large", 413

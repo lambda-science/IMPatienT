@@ -1,17 +1,14 @@
-from app.models import Patient, Image
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, SelectField, DateField, TextAreaField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Regexp, Length
 import os
-from datetime import datetime
-import app.src.common as Common
-
-from wtforms import fields
 import json
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, RadioField, SelectField, TextAreaField
+from wtforms.validators import DataRequired, Regexp, Length
+from wtforms import fields
+import app.src.common as Common
 
 
 class JSONField(fields.StringField):
+    """Form Field for JSON Handeling"""
     def _value(self):
         return json.dumps(self.data) if self.data else ''
 
@@ -110,6 +107,7 @@ class ReportForm(FlaskForm):
 
 
 class OntologyDescriptPreAbs(FlaskForm):
+    """Form used to show node informations from ontology tree"""
     onto_name = StringField('Nom Terme Ontologique',
                             render_kw={
                                 "placeholder": "Nom Terme Ontologique",
@@ -141,3 +139,8 @@ class OntologyDescriptPreAbs(FlaskForm):
                                   choices=[('1', 'Present'), ('-1', 'Absent'),
                                            ('0', 'Unknown')],
                                   validators=[DataRequired()])
+
+
+class DeleteButton(FlaskForm):
+    """Empty form for delete button"""
+    submit = SubmitField('Delete', render_kw={"class": "btn btn-danger"})

@@ -1,16 +1,17 @@
 import os
 import json
+import shutil
+
+from flask import flash, request, redirect, url_for
+from flask import render_template, send_from_directory, current_app
+from flask_login import current_user, login_required
+from werkzeug.utils import secure_filename
 
 from app import db
 from app.ocr import bp
 from app.ocr.forms import PdfForm, OcrForm
+from app.models import Patient, Pdf
 import app.ocr.ocr as Ocr
-from app.models import User, Patient, Pdf
-
-from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory, current_app
-from flask_login import current_user, login_required
-from werkzeug.utils import secure_filename
-import shutil
 
 
 @bp.route("/data/<path:filename>")
@@ -20,7 +21,7 @@ def data_folder(filename):
     pdf_requested = Pdf.query.filter_by(
         pdf_name=filename.split("/")[-1],
         patient_id=filename.split("/")[-1].split("_")[0]).first()
-    if pdf_requested != None and pdf_requested.expert_id == current_user.id:
+    if pdf_requested is not None and pdf_requested.expert_id == current_user.id:
         return send_from_directory(current_app.config["DATA_FOLDER"], filename)
     else:
         return "Unauthorized !", 401
@@ -38,19 +39,19 @@ def upload_pdf():
                                  current_user.username)
     try:
         shutil.rmtree(temp_user_dir)
-    except:
+    except Exception:
         pass
 
     # Show PDF File History linked to current user
     pdf_history = Pdf.query.filter_by(expert_id=current_user.id)
     if form.validate_on_submit():
         file = form.pdf.data
-        patient_ID = form.patient_ID.data
-        filename = secure_filename(patient_ID + "_" + file.filename)
+        patient_id = form.patient_ID.data
+        filename = secure_filename(patient_id + "_" + file.filename)
 
         # Create a data folder for patient
         data_patient_dir = os.path.join(current_app.config["DATA_FOLDER"],
-                                        patient_ID)
+                                        patient_id)
         if not os.path.exists(data_patient_dir):
             os.makedirs(data_patient_dir)
 
@@ -68,10 +69,10 @@ def upload_pdf():
                           patient_firstname=form.patient_prenom.data)
         # Check if the image or patient already exist in DB (same filename & patient ID)
         # If not: add it to DB
-        if patient.existAlready() == False:
+        if not patient.exist_already():
             db.session.add(patient)
 
-        if pdf.isduplicated() == False:
+        if not pdf.isduplicated():
             db.session.add(pdf)
 
         db.session.commit()
@@ -80,7 +81,7 @@ def upload_pdf():
         return redirect(
             url_for("ocr.ocr_results",
                     filename=filename,
-                    patient_ID=patient_ID))
+                    patient_id=patient_id))
     return render_template("ocr/ocr_upload.html",
                            form=form,
                            pdf_history=pdf_history)
@@ -89,22 +90,22 @@ def upload_pdf():
 @bp.route("/ocr_results", methods=["GET", "POST"])
 @login_required
 def ocr_results():
-    """Render the OCR results page after the upload of the initial PDF. 
+    """Render the OCR results page after the upload of the initial PDF.
     Render submit PDF and OCR to database button."""
     form = OcrForm()
     # Query the database from arg in get request
     pdf_requested = Pdf.query.filter_by(
         pdf_name=request.args.get("filename"),
-        patient_id=request.args.get("patient_ID")).first()
+        patient_id=request.args.get("patient_id")).first()
 
     # If PDF exist and is associated to current user: serve it
-    if pdf_requested != None and form.validate_on_submit(
-    ) == False and pdf_requested.expert_id == current_user.id:
+    if pdf_requested is not None and not form.validate_on_submit(
+    ) and pdf_requested.expert_id == current_user.id:
 
-        rel_filepath = os.path.join("data", request.args.get("patient_ID"),
+        rel_filepath = os.path.join("data", request.args.get("patient_id"),
                                     pdf_requested.pdf_name)
         # Perform OCR on the PDF file if no text registered in DB
-        if pdf_requested.ocr_text == None:
+        if pdf_requested.ocr_text is None:
             ocr_text_list = Ocr.pdf_to_text(pdf_requested.pdf_path,
                                             pdf_requested.lang)
             # Join per page text with NEW PAGE tag between elements
@@ -114,14 +115,14 @@ def ocr_results():
 
         form.ocr_text.data = ocr_text
 
-    elif pdf_requested != None and form.validate_on_submit(
-    ) == True and pdf_requested.expert_id == current_user.id:
+    elif pdf_requested is not None and form.validate_on_submit(
+    ) and pdf_requested.expert_id == current_user.id:
         pdf_requested.ocr_text = form.ocr_text.data
         db.session.commit()
         return redirect(url_for('ocr.upload_pdf'))
 
     # Error handling
-    elif pdf_requested == None:
+    elif pdf_requested is None:
         flash('PDF doesn\'t exist!', "error")
         return redirect(url_for('ocr.upload_pdf'))
     elif pdf_requested.expert_id != current_user.id:
@@ -130,7 +131,7 @@ def ocr_results():
     return render_template("ocr/ocr_results.html",
                            form=form,
                            ocr_text=ocr_text,
-                           patient_ID=request.args.get("patient_ID"),
+                           patient_id=request.args.get("patient_id"),
                            rel_filepath=rel_filepath)
 
 
@@ -144,7 +145,7 @@ def delete_pdf():
     pdf_requested = Pdf.query.filter_by(
         pdf_name=parsed["pdf_name"], patient_id=parsed["patient_id"]).first()
     # If current user is the creator of PDF: delete from DB
-    if pdf_requested != None and pdf_requested.expert_id == current_user.id:
+    if pdf_requested is not None and pdf_requested.expert_id == current_user.id:
         if os.path.exists(pdf_requested.pdf_path):
             os.remove(pdf_requested.pdf_path)
         db.session.delete(pdf_requested)

@@ -1,27 +1,22 @@
-from app.models import Patient, Image
-#from flask import current_app
+import os
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, SelectField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Regexp, Length
-
+from wtforms import StringField, SubmitField, SelectField
+from wtforms.validators import ValidationError, DataRequired
+from app.models import Patient
 import app.src.common as Common
-import os
 
 
 class ImageForm(FlaskForm):
     """Form used for image uploading"""
-    image = FileField(
-        validators=[
-            FileRequired(),
-            #FileAllowed(current_app.config["ALLOWED_EXTENSIONS"],
-            #            "This file is not a valid image !")
-            FileAllowed([
-                "tif", "tiff", "png", "jpg", "jpeg", "svs", "vms", "vmu",
-                "ndpi", "scn", "mrxs", "bif", "svslide"
-            ], "This file is not a valid image !")
-        ],
-        render_kw={"class": "form-control-file"})
+    image = FileField(validators=[
+        FileRequired(),
+        FileAllowed([
+            "tif", "tiff", "png", "jpg", "jpeg", "svs", "vms", "vmu", "ndpi",
+            "scn", "mrxs", "bif", "svslide"
+        ], "This file is not a valid image !")
+    ],
+                      render_kw={"class": "form-control-file"})
     patient_ID = StringField('patient_ID',
                              validators=[DataRequired()],
                              render_kw={
@@ -82,19 +77,17 @@ class AnnotForm(FlaskForm):
                                   })
     age_histo = SelectField('age_histology',
                             validators=[DataRequired()],
-                            choices=[i for i in range(101)],
+                            choices=[i for i in range(131)],
                             render_kw={
                                 "placeholder":
                                 "Patient age at histology sample time",
                                 "class": "form-control custom-select"
                             })
-    diagnostic = SelectField(
-        'diagnostic',
-        validators=[DataRequired()],
-        #choices=current_app.config["DIAG_LIST"],
-        choices=Common.create_diag_list(
-            os.path.join("config", "diagnostic.tsv")),
-        render_kw={
-            "placeholder": "Disease diagnostic",
-            "class": "form-control custom-select"
-        })
+    diagnostic = SelectField('diagnostic',
+                             validators=[DataRequired()],
+                             choices=Common.create_diag_list(
+                                 os.path.join("config", "diagnostic.tsv")),
+                             render_kw={
+                                 "placeholder": "Disease diagnostic",
+                                 "class": "form-control custom-select"
+                             })

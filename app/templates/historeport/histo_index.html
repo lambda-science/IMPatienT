@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+{% block content %}
+
+<p><a class="nav-link" href="{{ url_for('historeport.historeport') }}">Histo-Report</a></p>
+
+<h1>Report History</h1>
+<table>
+    <thead>
+        <td>Report ID</td>
+        <td>Biopsie ID</td>
+        <td>Prénom Patient</td>
+        <td>Nom Patient</td>
+        <td>Action</td>
+    </thead>
+    {% for report in history %}
+    <tr>
+        <td>{{ report.id }}</td>
+        <td>{{ report.biopsie_id }}</td>
+        <td>{{ report.patient_nom }}</td>
+        <td>{{ report.patient_prenom }}</td>
+        <td><a class="btn btn-success" role="button" href="historeport/new?id={{report.id}}">Resume</a>
+            <form action="{{ url_for('historeport.delete_report', id_report=report.id) }}" method="post"
+                style="display: inline;">
+                {{ form.hidden_tag() }}
+                {{ form.submit }}
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<script>
+
+
+    function delete_image(report_id) {
+        var dict = {
+            "report_id": report_id,
+        };
+
+        var myJSON = JSON.stringify(dict);
+        console.log(myJSON)
+        $.ajax({
+            type: "DELETE",
+            url: "{{url_for('historeport.historeport')}}",
+            data: myJSON,
+            success: function () {
+                console.log("Report deleted in Database Successfully");
+                location.reload();
+            },
+            dataType: "text"
+        });
+    }
+</script>
+{% endblock %}

@@ -1,6 +1,6 @@
 import os
-import app.src.common as Common
 from dotenv import load_dotenv
+import app.src.common as Common
 
 # Get base working directory and load env variables
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -8,6 +8,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 
 class Config(object):
+    """Class to load all config parameters of the Flask App"""
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'myverylongsecretkey'
     ALLOWED_EXTENSIONS = [
         "tif", "tiff", "png", "jpg", "jpeg", "svs", "vms", "vmu", "ndpi",

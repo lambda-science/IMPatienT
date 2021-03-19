@@ -1,11 +1,9 @@
-from app import db
-from app.ontocreate import bp
-from app.ontocreate.forms import OntologyDescript
-
 import os
 import json
-from flask import Flask, render_template, session, current_app, send_from_directory, request
-from flask_login import current_user, login_required
+from flask import render_template, current_app, send_from_directory, request
+from flask_login import login_required
+from app.ontocreate import bp
+from app.ontocreate.forms import OntologyDescript
 
 
 @bp.route("/config/<path:filename>")
@@ -20,8 +18,6 @@ def onto_json(filename):
 def ontocreate():
     """palceholder"""
     form = OntologyDescript()
-    if form.validate_on_submit():
-        print(form.data)
     return render_template("ontocreate/ontocreate.html", form=form)
 
 

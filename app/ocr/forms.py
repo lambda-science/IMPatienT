@@ -1,12 +1,10 @@
-from app.models import Patient, Pdf
-from flask import current_app
+import os
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField, SelectField, TextAreaField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Regexp, Length
-
+from wtforms import StringField, SubmitField, SelectField, TextAreaField
+from wtforms.validators import ValidationError, DataRequired
 import app.src.common as Common
-import os
+from app.models import Patient
 
 
 class PdfForm(FlaskForm):

@@ -7,5 +7,6 @@
         "--load-plugins",
         "pylint_flask_sqlalchemy",
         "pylint_flask",
+        "--extension-pkg-whitelist=cv2",
     ]
 }

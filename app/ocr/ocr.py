@@ -1,8 +1,7 @@
-import pytesseract
 import cv2
 import numpy as np
-import glob
-from pdf2image import convert_from_bytes, convert_from_path
+import pytesseract
+from pdf2image import convert_from_path
 
 
 def get_grayscale(image):
@@ -17,7 +16,6 @@ def thresholding(image):
 
 def pdf_to_text(path, lang):
     """Convert PDF path to image to text using Tesseract with langage setting. OEM 1 PSM 1"""
-    #images = convert_from_bytes(bytes_pdf)
     images = convert_from_path(path)
     text = []
     # Loop on each image (page) of the PDF file
