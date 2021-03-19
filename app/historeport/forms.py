@@ -57,7 +57,7 @@ class ReportForm(FlaskForm):
             "placeholder": "Date de naissance YYYY-MM-DD",
             "class": "form-control"
         })
-    biopsie_ID = StringField('biopsie_ID',
+    biopsie_id = StringField('biopsie_id',
                              render_kw={
                                  "placeholder": "Numéro de Biopsie",
                                  "class": "form-control"
@@ -88,8 +88,8 @@ class ReportForm(FlaskForm):
             "placeholder": "Date d'envoie rapport YYYY-MM-DD",
         })
 
-    json_ontology_tree = JSONField("Json Ontolgoy Tree",
-                                   render_kw={"type": "hidden"})
+    ontology_tree = JSONField("Json Ontolgoy Tree",
+                              render_kw={"type": "hidden"})
 
     comment = TextAreaField("Commentaire",
                             render_kw={
@@ -110,21 +110,9 @@ class ReportForm(FlaskForm):
 
 
 class OntologyDescriptPreAbs(FlaskForm):
-    onto_id_ext = StringField('ID Ontologie Externe',
-                              render_kw={
-                                  "placeholder": "ID Ontologie Externe",
-                                  "class": "form-control",
-                                  "readonly": ""
-                              })
     onto_name = StringField('Nom Terme Ontologique',
                             render_kw={
                                 "placeholder": "Nom Terme Ontologique",
-                                "class": "form-control",
-                                "readonly": ""
-                            })
-    parent_id = StringField('ID Parent',
-                            render_kw={
-                                "placeholder": "ID Parent",
                                 "class": "form-control",
                                 "readonly": ""
                             })

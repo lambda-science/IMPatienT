@@ -28,12 +28,12 @@
             {{ form.patient_nom }}
             {{ form.patient_prenom }}
             {{ form.naissance }}
-            {{ form.biopsie_ID }}
+            {{ form.biopsie_id }}
             {{ form.muscle_prelev }}
             {{ form.age_biopsie.label() }}
             {{ form.age_biopsie }}
             {{ form.date_envoie }}
-            {{ form.json_ontology_tree }}
+            {{ form.ontology_tree }}
         </div>
         <div class="row">
             <div class="col">
@@ -51,17 +51,24 @@
                 {% endfor %}
                 {{ form2.hidden_tag() }}
                 <div id="radio_feature">
-                    {% for subfield in form2.presence_absence %}
                     <tr>
-                        <td>{{ subfield(onchange="update_node_data();") }}</td>
-                        <td>{{ subfield.label }}</td>
+                        <td>
+                            {{radio_field[0](class="btn-check", onchange="update_node_data();")}}
+                            {{radio_field[0].label(class="btn btn-outline-success")}}</td>
                     </tr>
-                    {% endfor %}
+                    <tr>
+                        <td>
+                            {{radio_field[1](class="btn-check", onchange="update_node_data();")}}
+                            {{radio_field[1].label(class="btn btn-outline-danger")}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{radio_field[2](class="btn-check", onchange="update_node_data();")}}
+                            {{radio_field[2].label(class="btn btn-outline-info")}}</td>
+                    </tr>
                 </div>
                 <h3>Info. sur la feature</h3>
-                {{ form2.onto_id_ext }}
                 {{ form2.onto_name }}
-                {{ form2.parent_id }}
                 {{ form2.synonymes }}
                 {{ form2.gene }}
                 {{ form2.description }}
@@ -142,7 +149,7 @@
             $("#jstree").jstree(true).set_icon(node, true)
         }
         var v = $("#jstree").jstree(true).get_json('#', { 'flat': true });
-        $("input[id=json_ontology_tree]").val(JSON.stringify(v));
+        $("input[id=ontology_tree]").val(JSON.stringify(v));
     };
 </script>
 {% endblock %}
