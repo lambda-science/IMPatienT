@@ -7,6 +7,7 @@ from app.historeport.forms import ReportForm, OntologyDescriptPreAbs, DeleteButt
 
 
 @bp.route("/historeport", methods=["GET", "POST"])
+@login_required
 def histoindex():
     """Page for management of reports registered in database."""
     form = DeleteButton()
