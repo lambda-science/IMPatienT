@@ -99,7 +99,7 @@
             "check_callback": true,
             'data':
                 {% if ontology_tree_exist %}
-        {{ form.ontology_tree.data | tojson | safe }}
+                {{ form.ontology_tree.data | tojson | safe }}
         {% else %}
         {
             "url": "{{url_for('ontocreate.onto_json', filename='ontology.json')}}",

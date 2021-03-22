@@ -150,3 +150,9 @@ flask_session/
 config/ontology.json
 # Data in notebook folder
 notebooks/*.pdf
+
+# JS NPM stuff
+node_modules/
+package.json
+package-lock.json
+.eslintrc.js
