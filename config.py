@@ -10,13 +10,8 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
     """Class to load all config parameters of the Flask App"""
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'myverylongsecretkey'
-    ALLOWED_EXTENSIONS = [
-        "tif", "tiff", "png", "jpg", "jpeg", "svs", "vms", "vmu", "ndpi",
-        "scn", "mrxs", "bif", "svslide"
-    ]
     TEMP_FOLDER = os.path.join(basedir, "temp")
     DATA_FOLDER = os.path.join("/", "data")
-    #DATA_FOLDER = os.path.join(basedir, "data")
     CONFIG_FOLDER = os.path.join(basedir, "config")
     SEND_FILE_MAX_AGE_DEFAULT = 0
     SESSION_COOKIE_SAMESITE = 'Lax'

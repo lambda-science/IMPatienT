@@ -67,7 +67,7 @@ class AnnotForm(FlaskForm):
                          render_kw={"class": "btn btn-primary mb-2"})
     type_coloration = SelectField('type_coloration',
                                   validators=[DataRequired()],
-                                  choices=Common.create_color_list(
+                                  choices=Common.create_list(
                                       os.path.join("config",
                                                    "config_coloration.txt")),
                                   render_kw={

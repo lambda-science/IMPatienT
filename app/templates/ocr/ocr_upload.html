@@ -9,24 +9,15 @@
             <div class="col-sm">
                 <form method=post enctype=multipart/form-data>
                     {{ form.hidden_tag() }}
+                    {% for error in form.errors %}
+                    <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
+                    </br>
+                    {% endfor %}
                     {{ form.patient_ID }}
                     {{ form.patient_nom }}
-                    {% for error in form.patient_nom.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-
                     {{ form.patient_prenom }}
-                    {% for error in form.patient_prenom.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-
                     <h4>Select a pdf file</h4>
                     {{ form.pdf }}
-                    <p>
-                        {% for error in form.pdf.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
-                    </p>
                     <h4>Document Langugage</h4>
                     {{form.lang}}
                     {{ form.submit }}
@@ -38,47 +29,23 @@
     <h1>PDF History</h1>
     <table>
         <thead>
+            <td>PDF ID</td>
             <td>PDF</td>
             <td>Patient ID</td>
-            <td>Langage</td>
             <td>Action</td>
         </thead>
         {% for pdf in pdf_history %}
         <tr>
+            <td>{{ pdf.id }}</td>
             <td>{{ pdf.pdf_name }}</td>
             <td>{{ pdf.patient_id }}</td>
-            <td>{{ pdf.lang }}</td>
-            <td><a class="btn btn-success" role="button"
-                    href="ocr_results?filename={{pdf.pdf_name}}&patient_ID={{pdf.patient_id}}">Resume</a>
-                <button type="button" class="btn btn-danger"
-                    onclick="delete_pdf('{{pdf.pdf_name}}', '{{pdf.patient_id}}')">Delete</button>
-            </td>
+            <td><a class="btn btn-success" role="button" href="ocr_results?id={{pdf.id}}">Resume</a>
+                <form action="{{ url_for('ocr.delete_pdf', id_pdf=pdf.id) }}" method="post" style="display: inline;">
+                    {{ delete_button.hidden_tag() }}
+                    {{ delete_button.submit }}
+                </form>
         </tr>
         {% endfor %}
     </table>
 </div>
-
-<script>
-    function delete_pdf(pdf_name, patient_id) {
-        var dict = {
-            "pdf_name": pdf_name,
-            "patient_id": patient_id,
-        };
-
-        var myJSON = JSON.stringify(dict);
-        console.log(myJSON)
-        $.ajax({
-            type: "DELETE",
-            url: "{{url_for('ocr.delete_pdf')}}",
-            data: myJSON,
-            success: function () {
-                console.log("PDF deleted in Database Successfully");
-                location.reload();
-            },
-            dataType: "text"
-        });
-    }
-</script>
-
-
 {% endblock %}

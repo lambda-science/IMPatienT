@@ -84,7 +84,14 @@ class ReportForm(FlaskForm):
             "class": "form-control",
             "placeholder": "Date d'envoie rapport YYYY-MM-DD",
         })
-
+    gene_diag = SelectField('Gene diagnosed',
+                            validators=[DataRequired()],
+                            choices=Common.create_list(
+                                os.path.join("config", "config_gene.txt")),
+                            render_kw={
+                                "placeholder": "Gene diagnosed",
+                                "class": "form-control custom-select"
+                            })
     ontology_tree = JSONField("Json Ontolgoy Tree",
                               render_kw={"type": "hidden"})
 

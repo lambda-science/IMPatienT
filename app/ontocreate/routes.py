@@ -16,7 +16,7 @@ def onto_json(filename):
 @bp.route("/ontocreate", methods=["GET", "POST"])
 @login_required
 def ontocreate():
-    """palceholder"""
+    """View used to show and modify ontology tree"""
     form = OntologyDescript()
     return render_template("ontocreate/ontocreate.html", form=form)
 

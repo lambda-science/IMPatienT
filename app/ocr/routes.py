@@ -9,49 +9,34 @@ from werkzeug.utils import secure_filename
 
 from app import db
 from app.ocr import bp
-from app.ocr.forms import PdfForm, OcrForm
+from app.ocr.forms import PdfForm, OcrForm, DeleteButton
 from app.models import Patient, Pdf
-import app.ocr.ocr as Ocr
+from app.ocr.ocr import Rapport
 
 
 @bp.route("/data/<path:filename>")
 @login_required
 def data_folder(filename):
     """Serve files located in patient subfolder inside folder"""
-    pdf_requested = Pdf.query.filter_by(
-        pdf_name=filename.split("/")[-1],
-        patient_id=filename.split("/")[-1].split("_")[0]).first()
-    if pdf_requested is not None and pdf_requested.expert_id == current_user.id:
-        return send_from_directory(current_app.config["DATA_FOLDER"], filename)
-    else:
-        return "Unauthorized !", 401
+    return send_from_directory(current_app.config["DATA_FOLDER"], filename)
 
 
 @bp.route("/upload_pdf", methods=["GET", "POST"])
 @login_required
 def upload_pdf():
-    """Index page that is used to upload the PDF to the app and register patient ID.
-    Redirect to the OCR results page after a succesful upload.
-    Also show the availiable PDF files that already have been uploaded"""
+    """Page to upload a new PDF file."""
     form = PdfForm()
-    # Wipe old temporary data form user
-    temp_user_dir = os.path.join(current_app.config["TEMP_FOLDER"],
-                                 current_user.username)
-    try:
-        shutil.rmtree(temp_user_dir)
-    except Exception:
-        pass
+    delete_button = DeleteButton()
+    pdf_history = Pdf.query.all()
 
-    # Show PDF File History linked to current user
-    pdf_history = Pdf.query.filter_by(expert_id=current_user.id)
+    # if valid file uploaded: save it and create db entry
     if form.validate_on_submit():
         file = form.pdf.data
-        patient_id = form.patient_ID.data
-        filename = secure_filename(patient_id + "_" + file.filename)
+        filename = secure_filename(form.patient_ID.data + "_" + file.filename)
 
         # Create a data folder for patient
         data_patient_dir = os.path.join(current_app.config["DATA_FOLDER"],
-                                        patient_id)
+                                        form.patient_ID.data)
         if not os.path.exists(data_patient_dir):
             os.makedirs(data_patient_dir)
 
@@ -67,7 +52,8 @@ def upload_pdf():
         patient = Patient(id=form.patient_ID.data,
                           patient_name=form.patient_nom.data,
                           patient_firstname=form.patient_prenom.data)
-        # Check if the image or patient already exist in DB (same filename & patient ID)
+
+        # Check if the PDF or patient already exist in DB (same filename & patient ID)
         # If not: add it to DB
         if not patient.exist_already():
             db.session.add(patient)
@@ -78,45 +64,39 @@ def upload_pdf():
         db.session.commit()
 
         # Finally redirect to annotation
-        return redirect(
-            url_for("ocr.ocr_results",
-                    filename=filename,
-                    patient_id=patient_id))
+        return redirect(url_for("ocr.ocr_results", id=pdf.id))
     return render_template("ocr/ocr_upload.html",
                            form=form,
-                           pdf_history=pdf_history)
+                           pdf_history=pdf_history,
+                           delete_button=delete_button)
 
 
 @bp.route("/ocr_results", methods=["GET", "POST"])
 @login_required
 def ocr_results():
-    """Render the OCR results page after the upload of the initial PDF.
-    Render submit PDF and OCR to database button."""
+    """Perform OCR on PDF and render form to edit OCR results."""
     form = OcrForm()
     # Query the database from arg in get request
-    pdf_requested = Pdf.query.filter_by(
-        pdf_name=request.args.get("filename"),
-        patient_id=request.args.get("patient_id")).first()
+    pdf_requested = Pdf.query.get(request.args.get("id"))
 
-    # If PDF exist and is associated to current user: serve it
-    if pdf_requested is not None and not form.validate_on_submit(
-    ) and pdf_requested.expert_id == current_user.id:
-
-        rel_filepath = os.path.join("data", request.args.get("patient_id"),
+    # If PDF exist in database: serve it
+    if pdf_requested is not None and not form.validate_on_submit():
+        pdf_object = Rapport(path=pdf_requested.pdf_path,
+                             lang=pdf_requested.lang)
+        rel_filepath = os.path.join("data", pdf_requested.patient_id,
                                     pdf_requested.pdf_name)
+
         # Perform OCR on the PDF file if no text registered in DB
         if pdf_requested.ocr_text is None:
-            ocr_text_list = Ocr.pdf_to_text(pdf_requested.pdf_path,
-                                            pdf_requested.lang)
-            # Join per page text with NEW PAGE tag between elements
-            ocr_text = '\n##### NEW PAGE #####\n'.join(ocr_text_list)
+            pdf_object.pdf_to_text()
+            ocr_text = pdf_object.raw_text
         else:
             ocr_text = pdf_requested.ocr_text
 
         form.ocr_text.data = ocr_text
 
-    elif pdf_requested is not None and form.validate_on_submit(
-    ) and pdf_requested.expert_id == current_user.id:
+    # If OCR is finished and submitted: update database entry
+    elif pdf_requested is not None and form.validate_on_submit():
         pdf_requested.ocr_text = form.ocr_text.data
         db.session.commit()
         return redirect(url_for('ocr.upload_pdf'))
@@ -125,9 +105,8 @@ def ocr_results():
     elif pdf_requested is None:
         flash('PDF doesn\'t exist!', "error")
         return redirect(url_for('ocr.upload_pdf'))
-    elif pdf_requested.expert_id != current_user.id:
-        flash('User not authorized for this PDF!', "error")
-        return redirect(url_for('ocr.upload_pdf'))
+
+    # Base Page
     return render_template("ocr/ocr_results.html",
                            form=form,
                            ocr_text=ocr_text,
@@ -135,25 +114,20 @@ def ocr_results():
                            rel_filepath=rel_filepath)
 
 
-@bp.route("/delete_pdf", methods=["DELETE"])
+@bp.route('/delete_pdf/<id_pdf>', methods=['POST'])
 @login_required
-def delete_pdf():
-    """Page to delete an PDF record from database from AJAX request"""
-    # Get AJAX JSON data and parse it
-    raw_data = request.get_data()
-    parsed = json.loads(raw_data)
-    pdf_requested = Pdf.query.filter_by(
-        pdf_name=parsed["pdf_name"], patient_id=parsed["patient_id"]).first()
-    # If current user is the creator of PDF: delete from DB
-    if pdf_requested is not None and pdf_requested.expert_id == current_user.id:
-        if os.path.exists(pdf_requested.pdf_path):
-            os.remove(pdf_requested.pdf_path)
-        db.session.delete(pdf_requested)
+def delete_pdf(id_pdf):
+    """Page delete a histology report from database with delete button."""
+    form = DeleteButton()
+    # Retrieve database entry and delete it if existing
+    if form.validate_on_submit():
+        report_form = Pdf.query.get(id_pdf)
+        if report_form is None:
+            flash('PDF {} not found.'.format(id), "danger")
+            return redirect(url_for('ocr.upload_pdf'))
+        db.session.delete(report_form)
         db.session.commit()
-        return json.dumps({"success": True}), 200, {
-            "ContentType": "application/json"
-        }
-    # Error message if not the right user for given PDF
+        flash('Deleted PDF entry {}!'.format(id_pdf), "success")
+        return redirect(url_for('ocr.upload_pdf'))
     else:
-        flash('Unautorized database manipulation (delete_pdf)', "error")
-        return redirect(url_for('ocr.upload_file'))
+        return redirect(url_for('ocr.upload_pdf'))

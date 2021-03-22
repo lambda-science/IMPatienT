@@ -207,52 +207,43 @@ def modify_annot():
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
-    # If current user is the creator of image: proceed
-    if session["image_expert_id"] == current_user.id:
-        # If no annotations yet: json file is created
-        if not os.path.exists(
-                os.path.join(temp_user_dir, session["filename"] + ".json")):
-            with open(
-                    os.path.join(temp_user_dir, session["filename"] + ".json"),
-                    "w") as json_file:
-                annot_list.append(parsed)
-                json_file.write(json.dumps(annot_list, indent=4))
-        # If there are already some annotation: we write/delete/update depending on request type
-        else:
-            # First open as read only to load existing JSON
-            with open(
-                    os.path.join(temp_user_dir, session["filename"] + ".json"),
-                    "r") as json_file:
-                old_data = json.load(json_file)
-                if request.method == 'POST':
-                    old_data.append(parsed)
-                    updated_list = old_data
-                elif request.method == 'PATCH':
-                    # Compare ID of annotation and replace the old annotations
-                    # with the new one when there is a match in IDs.
-                    for anot in old_data:
-                        if parsed["id"] != anot["id"]:
-                            updated_list.append(anot)
-                        elif parsed["id"] == anot["id"]:
-                            updated_list.append(parsed)
-                elif request.method == 'DELETE':
-                    # If annotation ID is different from the ID of deletion
-                    # command we save them to a list. Matching ID will be
-                    # skipped and erased.
-                    for anot in old_data:
-                        if parsed["id"] != anot["id"]:
-                            updated_list.append(anot)
-            with open(
-                    os.path.join(temp_user_dir, session["filename"] + ".json"),
-                    "w") as json_file:
-                json_file.write(json.dumps(updated_list, indent=4))
-        return json.dumps({"success": True}), 200, {
-            "ContentType": "application/json"
-        }
-    # Error message if not the right user for given image
+    # If no annotations yet: json file is created
+    if not os.path.exists(
+            os.path.join(temp_user_dir, session["filename"] + ".json")):
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
+                  "w") as json_file:
+            annot_list.append(parsed)
+            json_file.write(json.dumps(annot_list, indent=4))
+    # If there are already some annotation: we write/delete/update depending on request type
     else:
-        flash('Unautorized database manipulation (write_annot)', "error")
-        return redirect(url_for('imgannot.upload_file'))
+        # First open as read only to load existing JSON
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
+                  "r") as json_file:
+            old_data = json.load(json_file)
+            if request.method == 'POST':
+                old_data.append(parsed)
+                updated_list = old_data
+            elif request.method == 'PATCH':
+                # Compare ID of annotation and replace the old annotations
+                # with the new one when there is a match in IDs.
+                for anot in old_data:
+                    if parsed["id"] != anot["id"]:
+                        updated_list.append(anot)
+                    elif parsed["id"] == anot["id"]:
+                        updated_list.append(parsed)
+            elif request.method == 'DELETE':
+                # If annotation ID is different from the ID of deletion
+                # command we save them to a list. Matching ID will be
+                # skipped and erased.
+                for anot in old_data:
+                    if parsed["id"] != anot["id"]:
+                        updated_list.append(anot)
+        with open(os.path.join(temp_user_dir, session["filename"] + ".json"),
+                  "w") as json_file:
+            json_file.write(json.dumps(updated_list, indent=4))
+    return json.dumps({"success": True}), 200, {
+        "ContentType": "application/json"
+    }
 
 
 @bp.route("/results", methods=["GET", "POST"])

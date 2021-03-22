@@ -28,26 +28,4 @@
     </tr>
     {% endfor %}
 </table>
-<script>
-
-
-    function delete_image(report_id) {
-        var dict = {
-            "report_id": report_id,
-        };
-
-        var myJSON = JSON.stringify(dict);
-        console.log(myJSON)
-        $.ajax({
-            type: "DELETE",
-            url: "{{url_for('historeport.historeport')}}",
-            data: myJSON,
-            success: function () {
-                console.log("Report deleted in Database Successfully");
-                location.reload();
-            },
-            dataType: "text"
-        });
-    }
-</script>
 {% endblock %}

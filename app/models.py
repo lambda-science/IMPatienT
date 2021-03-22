@@ -133,6 +133,7 @@ class ReportHisto(db.Model):
     muscle_prelev = db.Column(db.String(140))
     age_biopsie = db.Column(db.Integer)
     date_envoie = db.Column(db.String(10))
+    gene_diag = db.Column(db.String(140))
     ontology_tree = db.Column(db.JSON, default=[])
     comment = db.Column(db.Text)
     conclusion = db.Column(db.String(140), index=True)

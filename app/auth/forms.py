@@ -13,6 +13,21 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 
+class ResetPasswordRequestForm(FlaskForm):
+    """The form used to ask for password reset"""
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+
+class ResetPasswordForm(FlaskForm):
+    """The form used to create a new password"""
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Repeat Password',
+                              validators=[DataRequired(),
+                                          EqualTo('password')])
+    submit = SubmitField('Request Password Reset')
+
+
 #class RegistrationForm(FlaskForm):
 #    """The form used for registration"""
 #    username = StringField('Username',
@@ -39,18 +54,3 @@ class LoginForm(FlaskForm):
 #        user = User.query.filter_by(email=email.data).first()
 #        if user is not None:
 #            raise ValidationError('Email already used.')
-
-
-class ResetPasswordRequestForm(FlaskForm):
-    """The form used to ask for password reset"""
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
-
-
-class ResetPasswordForm(FlaskForm):
-    """The form used to create a new password"""
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Repeat Password',
-                              validators=[DataRequired(),
-                                          EqualTo('password')])
-    submit = SubmitField('Request Password Reset')

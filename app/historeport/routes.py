@@ -21,6 +21,7 @@ def histoindex():
 def historeport():
     """Page to create new histology report of modify already existing one."""
     # If args in URL, try to retrive report from DB and pre-fill it
+    ontology_tree_exist = False
     if request.args:
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
@@ -32,17 +33,21 @@ def historeport():
                               muscle_prelev=report_request.muscle_prelev,
                               age_biopsie=report_request.age_biopsie,
                               date_envoie=report_request.date_envoie,
+                              gene_diag=report_request.gene_diag,
                               ontology_tree=report_request.ontology_tree,
                               comment=report_request.comment,
                               conclusion=report_request.conclusion)
+            if form.ontology_tree.data:
+                ontology_tree_exist = True
         else:
             form = ReportForm()
-    # Else: empty form
+    # If no args: empty form
     else:
         form = ReportForm()
-
+    # Form for panel on the right with node description
     form2 = OntologyDescriptPreAbs()
     radio_field = list(form2.presence_absence)
+
     # On validation, save to database
     if form.validate_on_submit():
         # Update existing DB entry or create a new one (else)
@@ -63,7 +68,8 @@ def historeport():
     return render_template("historeport/historeport.html",
                            form=form,
                            form2=form2,
-                           radio_field=radio_field)
+                           radio_field=radio_field,
+                           ontology_tree_exist=ontology_tree_exist)
 
 
 @bp.route('/delete_report/<id_report>', methods=['POST'])

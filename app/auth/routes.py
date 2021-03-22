@@ -38,24 +38,6 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-#@bp.route('/register', methods=['GET', 'POST'])
-#def register():
-#    """View page to register"""
-#    # Redirect if already logged
-#    if current_user.is_authenticated:
-#        return redirect(url_for('index.index'))
-#    form = RegistrationForm()
-#    # If form validated, register user to database
-#    if form.validate_on_submit():
-#        user = User(username=form.username.data, email=form.email.data)
-#        user.set_password(form.password.data)
-#        db.session.add(user)
-#        db.session.commit()
-#        flash('Congratulations, you are now a registered user!', "success")
-#        return redirect(url_for('auth.login'))
-#    return render_template('auth/register.html', title='Register', form=form)
-
-
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
     """View page to request password reset"""
@@ -93,3 +75,21 @@ def reset_password(token):
         flash('Your password has been reset.')
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
+
+
+#@bp.route('/register', methods=['GET', 'POST'])
+#def register():
+#    """View page to register"""
+#    # Redirect if already logged
+#    if current_user.is_authenticated:
+#        return redirect(url_for('index.index'))
+#    form = RegistrationForm()
+#    # If form validated, register user to database
+#    if form.validate_on_submit():
+#        user = User(username=form.username.data, email=form.email.data)
+#        user.set_password(form.password.data)
+#        db.session.add(user)
+#        db.session.commit()
+#        flash('Congratulations, you are now a registered user!', "success")
+#        return redirect(url_for('auth.login'))
+#    return render_template('auth/register.html', title='Register', form=form)

@@ -30,7 +30,6 @@ Flask-Migrate==2.6.0
 Flask-Session==0.3.2
 Flask-SQLAlchemy==2.4.4
 Flask-WTF==0.14.3
-fr-dep-news-trf==3.0.0
 ftfy==5.9
 fuzzywuzzy==0.18.0
 gunicorn==20.0.4

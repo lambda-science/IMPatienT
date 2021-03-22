@@ -33,6 +33,8 @@
             {{ form.age_biopsie.label() }}
             {{ form.age_biopsie }}
             {{ form.date_envoie }}
+            {{ form.gene_diag.label() }}
+            {{ form.gene_diag }}
             {{ form.ontology_tree }}
         </div>
         <div class="row">
@@ -95,10 +97,16 @@
     $('#jstree').jstree({
         'core': {
             "check_callback": true,
-            'data': {
-                "url": "{{url_for('ontocreate.onto_json', filename='ontology.json')}}",
-                "dataType": "json" // needed only if you do not supply JSON headers
-            }
+            'data':
+                {% if ontology_tree_exist %}
+        {{ form.ontology_tree.data | tojson | safe }}
+        {% else %}
+        {
+            "url": "{{url_for('ontocreate.onto_json', filename='ontology.json')}}",
+            "dataType": "json" // needed only if you do not supply JSON headers
+        }
+    {% endif %}  
+
         },
         "plugins": ["wholerow", "unique", "search", "changed"]
     });

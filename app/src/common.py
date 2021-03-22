@@ -26,8 +26,8 @@ def create_lang_list(config_file):
     return diag_list
 
 
-def create_color_list(config_file):
-    """Extract the list of coloration type and save as list"""
+def create_list(config_file):
+    """Extract the list of a file and save as list"""
     with open(config_file) as config_f:
-        color_list = config_f.read().splitlines()
-    return color_list
+        elem_list = config_f.read().splitlines()
+    return elem_list

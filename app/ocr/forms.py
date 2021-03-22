@@ -33,16 +33,14 @@ class PdfForm(FlaskForm):
                                      "class": "form-control"
                                  })
 
-    lang = SelectField(
-        'lang',
-        validators=[DataRequired()],
-        #choices=current_app.config["LANG_LIST"],
-        choices=Common.create_lang_list(
-            os.path.join("config", "config_lang_ocr.tsv")),
-        render_kw={
-            "placeholder": "PDF Langage",
-            "class": "form-control custom-select"
-        })
+    lang = SelectField('lang',
+                       validators=[DataRequired()],
+                       choices=Common.create_lang_list(
+                           os.path.join("config", "config_lang_ocr.tsv")),
+                       render_kw={
+                           "placeholder": "PDF Langage",
+                           "class": "form-control custom-select"
+                       })
     submit = SubmitField('Upload', render_kw={"class": "btn btn-primary mb-2"})
 
     def validate_patient_nom(self, patient_nom):
@@ -75,3 +73,8 @@ class OcrForm(FlaskForm):
     })
     submit = SubmitField('Submit text to database and\n return to upload page',
                          render_kw={"class": "btn btn-primary mb-2"})
+
+
+class DeleteButton(FlaskForm):
+    """Empty form for delete button"""
+    submit = SubmitField('Delete', render_kw={"class": "btn btn-danger"})
