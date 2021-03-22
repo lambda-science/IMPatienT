@@ -91,3 +91,8 @@ class AnnotForm(FlaskForm):
                                  "placeholder": "Disease diagnostic",
                                  "class": "form-control custom-select"
                              })
+
+
+class DeleteButton(FlaskForm):
+    """Empty form for delete button"""
+    submit = SubmitField('Delete', render_kw={"class": "btn btn-danger"})

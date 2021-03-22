@@ -121,11 +121,11 @@ def delete_pdf(id_pdf):
     form = DeleteButton()
     # Retrieve database entry and delete it if existing
     if form.validate_on_submit():
-        report_form = Pdf.query.get(id_pdf)
-        if report_form is None:
-            flash('PDF {} not found.'.format(id), "danger")
+        pdf = Pdf.query.get(id_pdf)
+        if pdf is None:
+            flash('PDF {} not found.'.format(id_pdf), "danger")
             return redirect(url_for('ocr.upload_pdf'))
-        db.session.delete(report_form)
+        db.session.delete(pdf)
         db.session.commit()
         flash('Deleted PDF entry {}!'.format(id_pdf), "success")
         return redirect(url_for('ocr.upload_pdf'))

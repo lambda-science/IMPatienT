@@ -47,36 +47,14 @@
       <td>{{ image.image_name }}</td>
       <td>{{ image.patient_id }}</td>
       <td>{{ image.diagnostic }}</td>
-      <td><a class="btn btn-success" role="button"
-          href="annot?filename={{image.image_name}}&patient_ID={{image.patient_id}}">Resume</a>
-        <button type="button" class="btn btn-danger"
-          onclick="delete_image('{{image.image_name}}', '{{image.patient_id}}')">Delete</button>
+      <td><a class="btn btn-success" role="button" href="annot?id={{image.id}}">Resume</a>
+        <form action="{{ url_for('imgannot.delete_img', id_img=image.id) }}" method="post" style="display: inline;">
+          {{ delete_button.hidden_tag() }}
+          {{ delete_button.submit }}
+        </form>
       </td>
     </tr>
     {% endfor %}
   </table>
 </div>
-<script>
-
-  function delete_image(image_name, patient_id) {
-    var dict = {
-      "image_name": image_name,
-      "patient_id": patient_id,
-    };
-
-    var myJSON = JSON.stringify(dict);
-    console.log(myJSON)
-    $.ajax({
-      type: "DELETE",
-      url: "{{url_for('imgannot.delete_image')}}",
-      data: myJSON,
-      success: function () {
-        console.log("Image deleted in Database Successfully");
-        location.reload();
-      },
-      dataType: "text"
-    });
-  }
-</script>
-
 {% endblock %}
