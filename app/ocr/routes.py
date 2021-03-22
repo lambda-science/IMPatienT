@@ -35,8 +35,9 @@ def upload_pdf():
         filename = secure_filename(form.patient_ID.data + "_" + file.filename)
 
         # Create a data folder for patient
-        data_patient_dir = os.path.join(current_app.config["DATA_FOLDER"],
-                                        form.patient_ID.data)
+        data_patient_dir = os.path.join(
+            current_app.config["DATA_FOLDER"], form.patient_ID.data
+        )
         if not os.path.exists(data_patient_dir):
             os.makedirs(data_patient_dir)
 
@@ -44,14 +45,18 @@ def upload_pdf():
         file.save(os.path.join(data_patient_dir, filename))
 
         # Create our new PDF & Patient database entry
-        pdf = Pdf(pdf_name=filename,
-                  patient_id=form.patient_ID.data,
-                  expert_id=current_user.id,
-                  lang=form.lang.data,
-                  pdf_path=os.path.join(data_patient_dir, filename))
-        patient = Patient(id=form.patient_ID.data,
-                          patient_name=form.patient_nom.data,
-                          patient_firstname=form.patient_prenom.data)
+        pdf = Pdf(
+            pdf_name=filename,
+            patient_id=form.patient_ID.data,
+            expert_id=current_user.id,
+            lang=form.lang.data,
+            pdf_path=os.path.join(data_patient_dir, filename),
+        )
+        patient = Patient(
+            id=form.patient_ID.data,
+            patient_name=form.patient_nom.data,
+            patient_firstname=form.patient_prenom.data,
+        )
 
         # Check if the PDF or patient already exist in DB (same filename & patient ID)
         # If not: add it to DB
@@ -65,10 +70,12 @@ def upload_pdf():
 
         # Finally redirect to annotation
         return redirect(url_for("ocr.ocr_results", id=pdf.id))
-    return render_template("ocr/ocr_upload.html",
-                           form=form,
-                           pdf_history=pdf_history,
-                           delete_button=delete_button)
+    return render_template(
+        "ocr/ocr_upload.html",
+        form=form,
+        pdf_history=pdf_history,
+        delete_button=delete_button,
+    )
 
 
 @bp.route("/ocr_results", methods=["GET", "POST"])
@@ -81,10 +88,10 @@ def ocr_results():
 
     # If PDF exist in database: serve it
     if pdf_requested is not None and not form.validate_on_submit():
-        pdf_object = Rapport(path=pdf_requested.pdf_path,
-                             lang=pdf_requested.lang)
-        rel_filepath = os.path.join("data", pdf_requested.patient_id,
-                                    pdf_requested.pdf_name)
+        pdf_object = Rapport(path=pdf_requested.pdf_path, lang=pdf_requested.lang)
+        rel_filepath = os.path.join(
+            "data", pdf_requested.patient_id, pdf_requested.pdf_name
+        )
 
         # Perform OCR on the PDF file if no text registered in DB
         if pdf_requested.ocr_text is None:
@@ -99,22 +106,24 @@ def ocr_results():
     elif pdf_requested is not None and form.validate_on_submit():
         pdf_requested.ocr_text = form.ocr_text.data
         db.session.commit()
-        return redirect(url_for('ocr.upload_pdf'))
+        return redirect(url_for("ocr.upload_pdf"))
 
     # Error handling
     elif pdf_requested is None:
-        flash('PDF doesn\'t exist!', "error")
-        return redirect(url_for('ocr.upload_pdf'))
+        flash("PDF doesn't exist!", "error")
+        return redirect(url_for("ocr.upload_pdf"))
 
     # Base Page
-    return render_template("ocr/ocr_results.html",
-                           form=form,
-                           ocr_text=ocr_text,
-                           patient_id=request.args.get("patient_id"),
-                           rel_filepath=rel_filepath)
+    return render_template(
+        "ocr/ocr_results.html",
+        form=form,
+        ocr_text=ocr_text,
+        patient_id=request.args.get("patient_id"),
+        rel_filepath=rel_filepath,
+    )
 
 
-@bp.route('/delete_pdf/<id_pdf>', methods=['POST'])
+@bp.route("/delete_pdf/<id_pdf>", methods=["POST"])
 @login_required
 def delete_pdf(id_pdf):
     """Page delete a histology report from database with delete button."""
@@ -123,11 +132,11 @@ def delete_pdf(id_pdf):
     if form.validate_on_submit():
         pdf = Pdf.query.get(id_pdf)
         if pdf is None:
-            flash('PDF {} not found.'.format(id_pdf), "danger")
-            return redirect(url_for('ocr.upload_pdf'))
+            flash("PDF {} not found.".format(id_pdf), "danger")
+            return redirect(url_for("ocr.upload_pdf"))
         db.session.delete(pdf)
         db.session.commit()
-        flash('Deleted PDF entry {}!'.format(id_pdf), "success")
-        return redirect(url_for('ocr.upload_pdf'))
+        flash("Deleted PDF entry {}!".format(id_pdf), "success")
+        return redirect(url_for("ocr.upload_pdf"))
     else:
-        return redirect(url_for('ocr.upload_pdf'))
+        return redirect(url_for("ocr.upload_pdf"))

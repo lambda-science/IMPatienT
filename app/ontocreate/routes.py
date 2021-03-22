@@ -29,9 +29,7 @@ def modify_onto():
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
     with open(
-            os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"),
-            "w") as json_file:
+        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "w"
+    ) as json_file:
         json_file.write(json.dumps(parsed, indent=4))
-    return json.dumps({"success": True}), 200, {
-        "ContentType": "application/json"
-    }
+    return json.dumps({"success": True}), 200, {"ContentType": "application/json"}

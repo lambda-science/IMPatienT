@@ -11,9 +11,9 @@ def histoindex():
     """Page for management of reports registered in database."""
     form = DeleteButton()
     report_history = ReportHisto.query.all()
-    return render_template("historeport/histo_index.html",
-                           history=report_history,
-                           form=form)
+    return render_template(
+        "historeport/histo_index.html", history=report_history, form=form
+    )
 
 
 @bp.route("/historeport/new", methods=["GET", "POST"])
@@ -25,18 +25,20 @@ def historeport():
     if request.args:
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
-            form = ReportForm(patient_nom=report_request.patient_nom,
-                              patient_prenom=report_request.patient_prenom,
-                              naissance=report_request.naissance,
-                              expert_id=report_request.expert_id,
-                              biopsie_id=report_request.biopsie_id,
-                              muscle_prelev=report_request.muscle_prelev,
-                              age_biopsie=report_request.age_biopsie,
-                              date_envoie=report_request.date_envoie,
-                              gene_diag=report_request.gene_diag,
-                              ontology_tree=report_request.ontology_tree,
-                              comment=report_request.comment,
-                              conclusion=report_request.conclusion)
+            form = ReportForm(
+                patient_nom=report_request.patient_nom,
+                patient_prenom=report_request.patient_prenom,
+                naissance=report_request.naissance,
+                expert_id=report_request.expert_id,
+                biopsie_id=report_request.biopsie_id,
+                muscle_prelev=report_request.muscle_prelev,
+                age_biopsie=report_request.age_biopsie,
+                date_envoie=report_request.date_envoie,
+                gene_diag=report_request.gene_diag,
+                ontology_tree=report_request.ontology_tree,
+                comment=report_request.comment,
+                conclusion=report_request.conclusion,
+            )
             if form.ontology_tree.data:
                 ontology_tree_exist = True
         else:
@@ -65,14 +67,16 @@ def historeport():
             db.session.add(report_entry)
             db.session.commit()
 
-    return render_template("historeport/historeport.html",
-                           form=form,
-                           form2=form2,
-                           radio_field=radio_field,
-                           ontology_tree_exist=ontology_tree_exist)
+    return render_template(
+        "historeport/historeport.html",
+        form=form,
+        form2=form2,
+        radio_field=radio_field,
+        ontology_tree_exist=ontology_tree_exist,
+    )
 
 
-@bp.route('/delete_report/<id_report>', methods=['POST'])
+@bp.route("/delete_report/<id_report>", methods=["POST"])
 @login_required
 def delete_report(id_report):
     """Page delete a histology report from database with delete button."""
@@ -81,11 +85,11 @@ def delete_report(id_report):
     if form.validate_on_submit():
         report_form = ReportHisto.query.get(id_report)
         if report_form is None:
-            flash('Report {} not found.'.format(id), "danger")
-            return redirect(url_for('histoindex'))
+            flash("Report {} not found.".format(id), "danger")
+            return redirect(url_for("histoindex"))
         db.session.delete(report_form)
         db.session.commit()
-        flash('Deleted entry {}!'.format(id_report), "success")
-        return redirect(url_for('historeport.histoindex'))
+        flash("Deleted entry {}!".format(id_report), "success")
+        return redirect(url_for("historeport.histoindex"))
     else:
-        return redirect(url_for('historeport.histoindex'))
+        return redirect(url_for("historeport.histoindex"))

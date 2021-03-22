@@ -11,10 +11,10 @@ app_context.push()
 def make_shell_context():
     """Add DB object in the flask shell"""
     return {
-        'db': db,
-        'User': User,
-        'Image': Image,
-        'Patient': Patient,
-        'Pdf:': Pdf,
-        "ReportHisto": ReportHisto
+        "db": db,
+        "User": User,
+        "Image": Image,
+        "Patient": Patient,
+        "Pdf:": Pdf,
+        "ReportHisto": ReportHisto,
     }

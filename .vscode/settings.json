@@ -1,7 +1,7 @@
 {
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "python.formatting.provider": "yapf",
+    "python.formatting.provider": "black",
     "jupyter.jupyterServerType": "local",
     "python.linting.pylintArgs": [
         "--load-plugins",

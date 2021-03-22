@@ -5,30 +5,36 @@ from wtforms.validators import DataRequired, Email, EqualTo
 
 class LoginForm(FlaskForm):
     """The form used for login"""
-    username = StringField('Username', validators=[
-        DataRequired(),
-    ])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+
+    username = StringField(
+        "Username",
+        validators=[
+            DataRequired(),
+        ],
+    )
+    password = PasswordField("Password", validators=[DataRequired()])
+    remember_me = BooleanField("Remember Me")
+    submit = SubmitField("Sign In")
 
 
 class ResetPasswordRequestForm(FlaskForm):
     """The form used to ask for password reset"""
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
+
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    submit = SubmitField("Request Password Reset")
 
 
 class ResetPasswordForm(FlaskForm):
     """The form used to create a new password"""
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Repeat Password',
-                              validators=[DataRequired(),
-                                          EqualTo('password')])
-    submit = SubmitField('Request Password Reset')
+
+    password = PasswordField("Password", validators=[DataRequired()])
+    password2 = PasswordField(
+        "Repeat Password", validators=[DataRequired(), EqualTo("password")]
+    )
+    submit = SubmitField("Request Password Reset")
 
 
-#class RegistrationForm(FlaskForm):
+# class RegistrationForm(FlaskForm):
 #    """The form used for registration"""
 #    username = StringField('Username',
 #                           validators=[

@@ -9,14 +9,15 @@ from app import login
 
 class User(UserMixin, db.Model):
     """Database table for Users"""
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    images = db.relationship('Image', backref='creator', lazy='dynamic')
+    images = db.relationship("Image", backref="creator", lazy="dynamic")
 
     def __repr__(self):
-        return '<User {} Email {}>'.format(self.username, self.email)
+        return "<User {} Email {}>".format(self.username, self.email)
 
     def set_password(self, password):
         """Method to hash password in DB"""
@@ -29,20 +30,18 @@ class User(UserMixin, db.Model):
     def get_reset_password_token(self, expires_in=600):
         """Method generate a password reset token"""
         return jwt.encode(
-            {
-                'reset_password': self.id,
-                'exp': time() + expires_in
-            },
-            current_app.config['SECRET_KEY'],
-            algorithm='HS256')
+            {"reset_password": self.id, "exp": time() + expires_in},
+            current_app.config["SECRET_KEY"],
+            algorithm="HS256",
+        )
 
     @staticmethod
     def verify_reset_password_token(token):
         """Method to check if token is valid"""
         try:
-            id = jwt.decode(token,
-                            current_app['SECRET_KEY'],
-                            algorithms=['HS256'])['reset_password']
+            id = jwt.decode(token, current_app["SECRET_KEY"], algorithms=["HS256"])[
+                "reset_password"
+            ]
         except:
             return
         return User.query.get(id)
@@ -56,10 +55,11 @@ def load_user(id):
 
 class Image(db.Model):
     """Database table for Image & annotations"""
+
     id = db.Column(db.Integer, primary_key=True)
     image_name = db.Column(db.String(140), index=True)
-    expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    patient_id = db.Column(db.String(100), db.ForeignKey('patient.id'))
+    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    patient_id = db.Column(db.String(100), db.ForeignKey("patient.id"))
     type_coloration = db.Column(db.String(140))
     age_at_biopsy = db.Column(db.Integer)
     image_path = db.Column(db.String(4096))
@@ -68,13 +68,16 @@ class Image(db.Model):
     annotation_json = db.Column(db.JSON, default=[])
 
     def __repr__(self):
-        return '<Image Name {} Patient {}>'.format(self.image_name,
-                                                   self.patient_id)
+        return "<Image Name {} Patient {}>".format(self.image_name, self.patient_id)
 
     def isduplicated(self):
         """Method to check if new entry already exist"""
-        if Image.query.filter_by(image_name=self.image_name,
-                                 patient_id=self.patient_id).first() is None:
+        if (
+            Image.query.filter_by(
+                image_name=self.image_name, patient_id=self.patient_id
+            ).first()
+            is None
+        ):
             return False
         else:
             return True
@@ -82,14 +85,16 @@ class Image(db.Model):
 
 class Patient(db.Model):
     """Database table for Patient informations"""
+
     id = db.Column(db.String(100), primary_key=True)
     patient_firstname = db.Column(db.String(140))
     patient_name = db.Column(db.String(140), index=True)
-    images = db.relationship('Image', backref='from_patient', lazy='dynamic')
+    images = db.relationship("Image", backref="from_patient", lazy="dynamic")
 
     def __repr__(self):
-        return '<Patient {} {} {}>'.format(self.id, self.patient_firstname,
-                                           self.patient_name)
+        return "<Patient {} {} {}>".format(
+            self.id, self.patient_firstname, self.patient_name
+        )
 
     def exist_already(self):
         """Method to check if new entry already exist"""
@@ -101,22 +106,26 @@ class Patient(db.Model):
 
 class Pdf(db.Model):
     """Database table for PDF and OCR Results"""
+
     id = db.Column(db.Integer, primary_key=True)
     pdf_name = db.Column(db.String(140), index=True)
-    expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    patient_id = db.Column(db.String(100), db.ForeignKey('patient.id'))
+    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    patient_id = db.Column(db.String(100), db.ForeignKey("patient.id"))
     pdf_path = db.Column(db.String(4096))
     lang = db.Column(db.String(140), index=True)
     ocr_text = db.Column(db.Text)
 
     def __repr__(self):
-        return '<Pdf Name {} Patient {}>'.format(self.pdf_name,
-                                                 self.patient_id)
+        return "<Pdf Name {} Patient {}>".format(self.pdf_name, self.patient_id)
 
     def isduplicated(self):
         """Method to check if new entry already exist"""
-        if Pdf.query.filter_by(pdf_name=self.pdf_name,
-                               patient_id=self.patient_id).first() is None:
+        if (
+            Pdf.query.filter_by(
+                pdf_name=self.pdf_name, patient_id=self.patient_id
+            ).first()
+            is None
+        ):
             return False
         else:
             return True
@@ -124,11 +133,12 @@ class Pdf(db.Model):
 
 class ReportHisto(db.Model):
     """Database table histology reports"""
+
     id = db.Column(db.Integer, primary_key=True)
     patient_nom = db.Column(db.String(140), index=True)
     patient_prenom = db.Column(db.String(140), index=True)
     naissance = db.Column(db.String(10))
-    expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     biopsie_id = db.Column(db.String(140), index=True)
     muscle_prelev = db.Column(db.String(140))
     age_biopsie = db.Column(db.Integer)
@@ -139,5 +149,6 @@ class ReportHisto(db.Model):
     conclusion = db.Column(db.String(140), index=True)
 
     def __repr__(self):
-        return '<ReportHisto ID {} Nom {} Biopsie {}>'.format(
-            self.id, self.patient_nom, self.biopsie_id)
+        return "<ReportHisto ID {} Nom {} Biopsie {}>".format(
+            self.id, self.patient_nom, self.biopsie_id
+        )
