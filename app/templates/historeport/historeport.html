@@ -98,7 +98,7 @@
         'core': {
             "check_callback": true,
             'data':
-                {% if ontology_tree_exist %}
+            {% if ontology_tree_exist %}
                 {{ form.ontology_tree.data | tojson | safe }}
         {% else %}
         {
