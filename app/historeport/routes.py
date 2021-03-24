@@ -1,3 +1,4 @@
+import json
 from flask_login import current_user, login_required
 from flask import render_template, request, flash, redirect, url_for
 from app import db
@@ -43,10 +44,12 @@ def historeport():
             if form.ontology_tree.data:
                 ontology_tree_exist = True
         else:
-            form = ReportForm()
+            return redirect(url_for("historeport.histoindex"))
     # If no args: empty form
     else:
-        form = ReportForm()
+        with open("config/ontology.json") as f:
+            empty_json_tree = json.load(f)
+        form = ReportForm(ontology_tree=empty_json_tree)
     # Form for panel on the right with node description
     form2 = OntologyDescriptPreAbs()
     radio_field = list(form2.presence_absence)
