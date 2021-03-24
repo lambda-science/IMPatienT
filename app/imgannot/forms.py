@@ -32,7 +32,7 @@ class ImageForm(FlaskForm):
                 "This file is not a valid image !",
             ),
         ],
-        render_kw={"class": "form-control-file"},
+        render_kw={"class": "form-control-file border"},
     )
     patient_ID = StringField(
         "patient_ID",
@@ -120,4 +120,4 @@ class AnnotForm(FlaskForm):
 class DeleteButton(FlaskForm):
     """Empty form for delete button"""
 
-    submit = SubmitField("Delete", render_kw={"class": "btn btn-danger"})
+    submit = SubmitField("Delete", render_kw={"class": "btn btn-danger btn-sm"})

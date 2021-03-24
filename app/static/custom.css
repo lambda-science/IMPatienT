@@ -1,15 +1,7 @@
-.feature_list_radio {
-    height:500px;
-  }
-
-table {
-  table-layout: fixed;
-  width: 100%;
-}
-
-table td {
-    word-wrap: break-word;         /* All browsers since IE 5.5+ */
-    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+.table tr {
+  line-height: 10px;
+  min-height: 10px;
+  height: 10px;
 }
 
 .footer {
@@ -27,25 +19,6 @@ table td {
   direction: rtl; 
 }
 
-table, thead, td, tr {
-  border: 0px solid black;
-  text-align: center;
-}
-
-thead {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #091f6871;
-  color: white;
-  font-weight: bold;
-}
-
-tr:nth-child(even){background-color: #f2f2f2;}
-
-tr:hover {background-color: #ddd;}
-
 #ocrtext{
-  height: 700px;
   overflow: scroll;
 }

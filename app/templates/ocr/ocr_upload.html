@@ -1,52 +1,54 @@
 {% extends "base.html"%}
 {% block content %}
-<div class="container center_div">
-    <div class="row">
-        <div class="col-lg">
-            <div class="row">
-                <h1>Upload New PDF</h1></br>
-            </div>
-            <div class="col-sm">
-                <form method=post enctype=multipart/form-data>
-                    {{ form.hidden_tag() }}
-                    {% for error in form.errors %}
-                    <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
-                    </br>
-                    {% endfor %}
-                    {{ form.patient_ID }}
-                    {{ form.patient_nom }}
-                    {{ form.patient_prenom }}
-                    <h4>Select a pdf file</h4>
-                    {{ form.pdf }}
-                    <h4>Document Langugage</h4>
-                    {{form.lang}}
-                    {{ form.submit }}
-            </div>
-            </form>
-
-        </div>
+<div class="row">
+    <div class="col-xl-3"></div>
+    <div class="col-xl-6">
+        <h1>Upload New PDF</h1></br>
+        <form method=post enctype=multipart/form-data>
+            {{ form.hidden_tag() }}
+            {% for error in form.errors %}
+            <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
+            </br>
+            {% endfor %}
+            {{ form.patient_ID }}
+            {{ form.patient_nom }}
+            {{ form.patient_prenom }}
+            <h4>Select a pdf file</h4>
+            {{ form.pdf }}
+            <h4>Document Langugage</h4>
+            {{form.lang}}
+            {{ form.submit }}
+        </form>
     </div>
-    <h1>PDF History</h1>
-    <table>
-        <thead>
-            <td>PDF ID</td>
-            <td>PDF</td>
-            <td>Patient ID</td>
-            <td>Action</td>
-        </thead>
-        {% for pdf in pdf_history %}
-        <tr>
-            <td>{{ pdf.id }}</td>
-            <td>{{ pdf.pdf_name }}</td>
-            <td>{{ pdf.patient_id }}</td>
-            <td><a class="btn btn-success" role="button" href="ocr_results?id={{pdf.id}}">Resume</a>
-                <form action="{{ url_for('ocr.delete_pdf', id_pdf=pdf.id) }}" method="post" style="display: inline;">
-                    {{ delete_button.hidden_tag() }}
-                    {{ delete_button.submit }}
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="col-xl-3"></div>
+</div>
+
+<div class="row">
+    <div class="col-xl">
+        <h1>PDF History</h1>
+        <table class="table table-striped table-bordered table-hover table-responsive">
+            <thead class="table-info">
+                <th class="align-middle text-center">PDF ID</th>
+                <th class="align-middle text-center">PDF</th>
+                <th class="align-middle text-center">Patient ID</th>
+                <th class="align-middle text-center">Action</th>
+            </thead>
+            {% for pdf in pdf_history %}
+            <tr>
+                <td class="align-middle text-center">{{ pdf.id }}</td>
+                <td class="align-middle text-center">{{ pdf.pdf_name }}</td>
+                <td class="align-middle text-center">{{ pdf.patient_id }}</td>
+                <td class="align-middle text-center"><a class="btn btn-success" role="button"
+                        href="ocr_results?id={{pdf.id}}">Resume</a>
+                    <form action="{{ url_for('ocr.delete_pdf', id_pdf=pdf.id) }}" method="post"
+                        style="display: inline;">
+                        {{ delete_button.hidden_tag() }}
+                        {{ delete_button.submit }}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 {% endblock %}

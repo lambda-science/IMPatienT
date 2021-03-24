@@ -9,59 +9,79 @@
 <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@latest/dist/annotorious.min.css">
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h1>Image Viewer</h1>
-      <p>Hold shift and click-and-drag with left mouse button over the image to create an annotation. Then fill the
-        form on the right and
-        submit with the button.</p>
+<div class="row">
+  <div class="col-xl-7">
+    <h1 class="text-center">Image Viewer</h1>
+    <div class="row">
+      <div class="col-xl-3"></div>
 
-      <input type="radio" class="btn-check" name="tool" id="annot_rect" autocomplete="off"
-        onclick="switch_tool(anno, 'rect')" checked>
-      <label class="btn btn-secondary" for="annot_rect">Rectangle Tool</label>
-      <input type="radio" class="btn-check" name="tool" id="annot_poly" autocomplete="off"
-        onclick="switch_tool(anno, 'polygon')">
-      <label class="btn btn-secondary" for="annot_poly">Polygon Tool</label>
-
-      <div id="seadragon-viewer" style="width:600px; height:600px;"></div>
+      <div class="col-xl-6 border text-center">
+        <p class="text-success">Hold <kbd>shift</kbd> and click-and-drag with <kbd>left mouse button</kbd>
+          over the image to create an
+          annotation. Then fill the
+          form on the right and
+          submit with the button. Double click to end polygon selection</p>
+      </div>
     </div>
+    <div class="col-xl-3"></div>
 
-    <div class="col">
-      <h1>Annotation</h1>
-      <form method="post">
-        <div class="form-group">
-          {{ form.hidden_tag() }}
-          <div class="feature_list_radio overflow-auto">
-            <table>
-              <thead>
-                <td>Feature</td>
-                <td>Present</td>
-                <td>Absent</td>
-                <td>Uncertain</td>
-              </thead>
-              {% for feat in feature_list %}
-              <tr>
-                <td><a href="#" data-toggle="tooltip" title="{{feat[2]}}">{{feat[1]}}</a></td>
-                {% for subfield in form[feat[0]] %}
-                <td>{{ subfield }}</td>
-                {% endfor %}
-              </tr>
-              {% endfor %}
-            </table>
-          </div>
-          <h4> Coloration Type</h4>
-          {{form.type_coloration}}
-          <h4>Patient Age at histology Sample (in years)</h4>
-          {{form.age_histo}}
-          <h4>Diagnostic & Infos</h4>
-          {{form.diagnostic}}
-          {{ form.submit }}
+    <div class="row">
+      <div class="col-xl-4"></div>
+      <div class="col-xl-4 p-1 text-center">
+        <div class="btn-group btn-group">
+          <input type="radio" class="btn-check" name="tool" id="annot_rect" autocomplete="off"
+            onclick="switch_tool(anno, 'rect')" checked>
+          <label class="btn btn-outline-dark" for="annot_rect">Rectangle Tool</label>
+          <input type="radio" class="btn-check" name="tool" id="annot_poly" autocomplete="off"
+            onclick="switch_tool(anno, 'polygon')">
+          <label class="btn btn-outline-dark" for="annot_poly">Polygon Tool</label>
         </div>
-      </form>
+      </div>
+      <div class="col-xl-4"></div>
     </div>
+
+
+
+    <div id="seadragon-viewer" style="width:100%; height:600px;"></div>
   </div>
 
+
+  <div class="col-xl-5">
+    <h1 class="text-center">Annotation</h1>
+    <form method="post">
+      <div class="form-group">
+        {{ form.hidden_tag() }}
+        <div class="overflow-auto" style="height:500px">
+          <table class="table table-striped table-bordered table-hover table-responsive">
+            <thead class="table-info">
+              <tr>
+                <th class="align-middle text-center">Feature</th>
+                <th class="align-middle text-center">Present</th>
+                <th class="align-middle text-center">Absent</th>
+                <th class="align-middle text-center">Uncertain</th>
+              </tr>
+            </thead>
+            {% for feat in feature_list %}
+            <tr>
+              <td class="align-middle text-center"><a href="#" data-toggle="tooltip" title="{{feat[2]}}">{{feat[1]}}</a>
+              </td>
+              {% for subfield in form[feat[0]] %}
+              <td class="align-middle text-center">{{ subfield }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <h4> Coloration Type</h4>
+        {{form.type_coloration}}
+        <h4>Patient Age at histology Sample (in years)</h4>
+        {{form.age_histo}}
+        <h4>Diagnostic & Infos</h4>
+        {{form.diagnostic}}
+        {{ form.submit }}
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>

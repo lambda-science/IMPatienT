@@ -1,45 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container center_div">
-    <h1 id="welcome">Welcome to the MYO-xIA application</h1>
-    <h2 id="context-">Context:</h2>
-    <p>This application was developed within the <strong>80-Prime MYO-xIA project.</strong>. The
-        MYO-xIA project aims to collect data from patients with <strong>congenital myopathies</strong> in order to
-        analyze them using <strong>explainable AI approaches.</strong>
-        This application is intended to complete
-        the missing functions of the patient management software:
-        <strong>Phenotips</strong>.<br>In the field of congenital myopathies research, there is an important need for
-        <strong>digitization and standardization of patient data</strong> in order to use modern data analysis methods.
-    </p>
-    <h2 id="functionalities">Functionalities:</h2>
-    <p>Two functionalities are now available:</p>
-    <ul>
-        <li>
-            <p><strong>Annotation of histological images</strong>: allows to record and annotate images of histological
-                sections of tissues of patients with congenital myopathy. It is possible to delimit areas on the images
-                and to associate them with labels. It is also possible to produce a histological report with a list of
-                absence/presence of histopathological features and to associate a diagnosis with it.</p>
-        </li>
-        <li>
-            <p><strong>Optical character recognition (OCR-PDF)</strong>: Allows you to save and automatically convert
-                PDF files to text format. This makes
-                it easier to scan and retrieve data from correspondence between patient, doctor and biologist.</p>
-        </li>
-    </ul>
-    <h2 id="how-to-use">How to use the application:</h2>
-    <ol>
-        <li><strong>Prerequisites</strong>: Register the patient with general information, pedigree, phenotype and
-            genetic diagnosis on the Phenotips
-            application available here: <a href="https://www.lbgi.fr/phenotips">https://www.lbgi.fr/phenotips</a></li>
-        <li>Login to your MYO-xIA account in the top right corner </li>
-        <li>Click in the top left menu on "Image Annot" to annotate histological sections or "OCR PDF" to scan a PDF
-            file </li>
-        <li>For both features it is necessary to fill in a form with the patient ID, first and last name. In terms of
-            ID, the
-            phenotips identifier must be used to link the two applications.</li>
-        <li>Let yourself be guided by what is displayed on the screen.</li>
-    </ol>
-
-</div>
+<h1 id="welcome">Welcome to the MYO-xIA application</h1>
+<h2 id="context-">Context:</h2>
+<p>This application was developed within the <strong>80-Prime MYO-xIA project.</strong>. The
+    MYO-xIA project aims to collect data from patients with <strong>congenital myopathies</strong> in order to
+    analyze them using <strong>explainable AI approaches.</strong>
+    This application is intended to complete
+    the missing functions of the patient management software:
+    <strong>Phenotips</strong>.<br>In the field of congenital myopathies research, there is an important need for
+    <strong>digitization and standardization of patient data</strong> in order to use modern data analysis methods.
+</p>
+<h2 id="functionalities">Functionalities:</h2>
+<p>Two functionalities are now available:</p>
+<ul>
+    <li>
+        <p><strong>Annotation of histological images</strong>: allows to record and annotate images of histological
+            sections of tissues of patients with congenital myopathy. It is possible to delimit areas on the images
+            and to associate them with labels. It is also possible to produce a histological report with a list of
+            absence/presence of histopathological features and to associate a diagnosis with it.</p>
+    </li>
+    <li>
+        <p><strong>Optical character recognition (OCR-PDF)</strong>: Allows you to save and automatically convert
+            PDF files to text format. This makes
+            it easier to scan and retrieve data from correspondence between patient, doctor and biologist.</p>
+    </li>
+</ul>
+<h2 id="how-to-use">How to use the application:</h2>
+<ol>
+    <li><strong>Prerequisites</strong>: Register the patient with general information, pedigree, phenotype and
+        genetic diagnosis on the Phenotips
+        application available here: <a href="https://www.lbgi.fr/phenotips">https://www.lbgi.fr/phenotips</a></li>
+    <li>Login to your MYO-xIA account in the top right corner </li>
+    <li>Click in the top left menu on "Image Annot" to annotate histological sections or "OCR PDF" to scan a PDF
+        file </li>
+    <li>For both features it is necessary to fill in a form with the patient ID, first and last name. In terms of
+        ID, the
+        phenotips identifier must be used to link the two applications.</li>
+    <li>Let yourself be guided by what is displayed on the screen.</li>
+</ol>
 {% endblock %}

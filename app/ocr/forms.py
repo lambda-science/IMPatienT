@@ -15,7 +15,7 @@ class PdfForm(FlaskForm):
             FileRequired(),
             FileAllowed(["pdf"], "This file is not a valid PDF File !"),
         ],
-        render_kw={"class": "form-control-file"},
+        render_kw={"class": "form-control-file border"},
     )
     patient_ID = StringField(
         "patient_ID",
@@ -73,8 +73,7 @@ class OcrForm(FlaskForm):
 
     ocr_text = TextAreaField(
         render_kw={
-            "cols": "3",
-            "rows": "30",
+            "rows": "25",
             "class": "form-control",
         }
     )

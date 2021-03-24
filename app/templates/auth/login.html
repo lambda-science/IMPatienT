@@ -1,25 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container center_div">
-    <h1>Sign In</h1>
-    <p>New User? Contact an admin to create an account !</a></p>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>
-            Forgot Your Password?
-            <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a>
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-</div>
+<h1>Sign In</h1>
+<p>New User? Contact an admin to create an account !</a></p>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}
+    </p>
+    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+    <p>
+        Forgot Your Password?
+        <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a>
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
 {% endblock %}

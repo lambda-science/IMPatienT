@@ -1,60 +1,60 @@
 {% extends "base.html"%}
 {% block content %}
-<div class="container center_div">
-  <div class="row">
-    <div class="col-lg">
-      <div class="row">
-        <h1>Upload New Image</h1></br>
-      </div>
-      <div class="col-sm">
-        <form method=post enctype=multipart/form-data>
-          {{ form.hidden_tag() }}
-          {{ form.patient_ID }}
-          {{ form.patient_nom }}
-          {% for error in form.patient_nom.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-          {% endfor %}
+<div class="row">
+  <div class="col-xl-3"></div>
+  <div class="col-xl-6">
+    <h1>Upload New Image</h1></br>
+    <form method=post enctype=multipart/form-data>
+      {{ form.hidden_tag() }}
+      {{ form.patient_ID }}
+      {{ form.patient_nom }}
+      {% for error in form.patient_nom.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
 
-          {{ form.patient_prenom }}
-          {% for error in form.patient_prenom.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-          {% endfor %}
+      {{ form.patient_prenom }}
+      {% for error in form.patient_prenom.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
 
-          <h4>Select an image file</h4>
-          {{ form.image }}
-          <p>
-            {% for error in form.image.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-          </p>
-          {{ form.submit }}
-      </div>
-      </form>
-
-    </div>
+      <h4>Select an image file</h4>
+      {{ form.image }}
+      <p>
+        {% for error in form.image.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+      {{ form.submit }}
+    </form>
   </div>
+  <div class="col-xl-3"></div>
+</div>
 
-  <h1>Image History</h1>
-  <table>
-    <thead>
-      <td>Image</td>
-      <td>Patient ID</td>
-      <td>Diagnostic</td>
-      <td>Action</td>
-    </thead>
-    {% for image in image_history %}
-    <tr>
-      <td>{{ image.image_name }}</td>
-      <td>{{ image.patient_id }}</td>
-      <td>{{ image.diagnostic }}</td>
-      <td><a class="btn btn-success" role="button" href="annot?id={{image.id}}">Resume</a>
-        <form action="{{ url_for('imgannot.delete_img', id_img=image.id) }}" method="post" style="display: inline;">
-          {{ delete_button.hidden_tag() }}
-          {{ delete_button.submit }}
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
+<div class="row">
+  <div class="col-xl">
+    <h1>Image History</h1>
+    <table class="table table-striped table-bordered table-hover table-responsive">
+      <thead class="table-info">
+        <th class="align-middle text-center">Image</th>
+        <th class="align-middle text-center">Patient ID</th>
+        <th class="align-middle text-center">Diagnostic</th>
+        <th class="align-middle text-center">Action</th>
+      </thead>
+      {% for image in image_history %}
+      <tr>
+        <td class="align-middle text-center">{{ image.image_name }}</td>
+        <td class="align-middle text-center">{{ image.patient_id }}</td>
+        <td class="align-middle text-center">{{ image.diagnostic }}</td>
+        <td class="align-middle text-center"><a class="btn btn-success btn-sm" role="button"
+            href="annot?id={{image.id}}">Resume</a>
+          <form action="{{ url_for('imgannot.delete_img', id_img=image.id) }}" method="post" style="display: inline;">
+            {{ delete_button.hidden_tag() }}
+            {{ delete_button.submit }}
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 </div>
 {% endblock %}

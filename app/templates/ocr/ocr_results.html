@@ -1,26 +1,25 @@
 {% extends "base.html"%}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h1>PDF Viewer</h1>
-            <embed src="{{rel_filepath}}" width="600px" height="700px" />
-        </div>
+<div class="row">
+    <div class="col-xl">
+        <h1>PDF Viewer</h1>
+        <embed src="{{rel_filepath}}" width="100%" height="700px" />
+    </div>
 
-        <div class="col">
-            <h1>OCR</h1>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="editSwitch" />
-                <label class="form-check-label" for="editSwitch">Edit OCR Text</label>
-            </div>
-            <form method=post>
-                {{ form.hidden_tag() }}
-                {{ form.ocr_text() }}
-                {{form.submit}}
-            </form>
+    <div class="col-xl">
+        <h1>OCR</h1>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="editSwitch" />
+            <label class="form-check-label" for="editSwitch">Edit OCR Text</label>
         </div>
+        <form method=post>
+            {{ form.hidden_tag() }}
+            {{ form.ocr_text() }}
+            {{form.submit}}
+        </form>
     </div>
 </div>
+
 <script>
     // Disable by default textarea
     $("#ocr_text").prop("readonly", true);
