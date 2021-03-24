@@ -63,6 +63,7 @@ def historeport():
                 form.populate_obj(report_entry)
                 report_entry.expert_id = current_user.id
                 db.session.commit()
+                return redirect(url_for("historeport.histoindex"))
 
         else:
             report_entry = ReportHisto()
@@ -70,6 +71,7 @@ def historeport():
             report_entry.expert_id = current_user.id
             db.session.add(report_entry)
             db.session.commit()
+            return redirect(url_for("historeport.histoindex"))
 
     return render_template(
         "historeport/historeport.html",
