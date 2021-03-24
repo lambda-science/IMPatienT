@@ -94,22 +94,34 @@
     var input_tag = new Tagify(input)
     var input2 = document.querySelector('input[id=gene]');
     var input2_tag = new Tagify(input2)
+
+    {% if ontology_tree_exist %}
+
+    var json_tree = $("input[id=ontology_tree]").val();
+    $('#jstree').jstree({
+        'core': {
+            "check_callback": true,
+            'data': JSON.parse(json_tree)
+        },
+        "plugins": ["wholerow", "unique", "search", "changed"]
+    });
+
+    {% else %}
+
     $('#jstree').jstree({
         'core': {
             "check_callback": true,
             'data':
-            {% if ontology_tree_exist %}
-                {{ form.ontology_tree.data | tojson | safe }}
-        {% else %}
-        {
-            "url": "{{url_for('ontocreate.onto_json', filename='ontology.json')}}",
-            "dataType": "json" // needed only if you do not supply JSON headers
-        }
-    {% endif %}  
 
+            {
+                "url": "{{url_for('ontocreate.onto_json', filename='ontology.json')}}",
+                "dataType": "json" // needed only if you do not supply JSON headers
+            }
         },
         "plugins": ["wholerow", "unique", "search", "changed"]
     });
+
+    {% endif %}
 
     var to = false;
     $('#plugins4_q').keyup(function () {
