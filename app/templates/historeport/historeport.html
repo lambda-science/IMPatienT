@@ -18,139 +18,175 @@
     crossorigin="anonymous"></script>
 
 <div class="row">
-    <h1>Histo report</h1>
-    <form method="post" id="histo_report">
-        <div class="form-group">
-            {% for error in form.errors %}
-            <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
-            {% endfor %}
-            {{ form.hidden_tag() }}
-            {{ form.patient_nom }}
-            {{ form.patient_prenom }}
-            {{ form.naissance }}
-            {{ form.biopsie_id }}
-            {{ form.muscle_prelev }}
-            {{ form.age_biopsie.label() }}
-            {{ form.age_biopsie }}
-            {{ form.date_envoie }}
-            {{ form.gene_diag.label() }}
-            {{ form.gene_diag }}
-            {{ form.ontology_tree }}
-        </div>
-        <div class="row">
-            <div class="col-xl">
-                <h1>Arbre Ontologie</h1>
-
-                <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control"
-                    placeholder="Rechercher">
-                <div id="jstree" class="demo" style="overflow:scroll; max-height: 600px;"></div>
-            </div>
-            <div class="col-xl">
-                <h1>Feature Présente/Absente</h1>
-
-                {% for error in form2.errors %}
-                <span style="color: red;">{{ error }}: {{form2.errors[error]}}</span>
+    <div class="col-xl-8 offset-md-2">
+        <h1>Info Patient</h1>
+        <form method="post" id="histo_report">
+            <div class="form-group">
+                {% for error in form.errors %}
+                <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
                 {% endfor %}
-                {{ form2.hidden_tag() }}
-                <div id="radio_feature">
-                    <tr>
-                        <td class="align-middle text-center">
-                            {{radio_field[0](class="btn-check", onchange="update_node_data();")}}
-                            {{radio_field[0].label(class="btn btn-outline-success")}}</td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                            {{radio_field[1](class="btn-check", onchange="update_node_data();")}}
-                            {{radio_field[1].label(class="btn btn-outline-danger")}}</td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                            {{radio_field[2](class="btn-check", onchange="update_node_data();")}}
-                            {{radio_field[2].label(class="btn btn-outline-info")}}</td>
-                    </tr>
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="col-xl">
+                        {{ form.patient_nom.label }}
+                        {{ form.patient_nom }}</div>
+                    <div class="col-xl">
+                        {{ form.patient_prenom.label }}
+                        {{ form.patient_prenom }}</div>
+                    <div class="col-xl">
+                        {{ form.naissance.label }}
+                        {{ form.naissance }}</div>
                 </div>
-                <h4>Info. sur la feature</h4>
-                {{ form2.onto_name }}
-                {{ form2.synonymes }}
-                {{ form2.gene }}
-                {{ form2.description }}
+                <div class="row">
+                    <div class="col-xl">
 
 
+                        {{ form.biopsie_id.label }}
+                        {{ form.biopsie_id }}</div>
+                    <div class="col-xl">
+                        {{ form.date_envoie.label }}
+                        {{ form.date_envoie }}</div>
+                    <div class="col-xl">
+                        {{ form.muscle_prelev.label }}
+                        {{ form.muscle_prelev }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xl">
+
+                        {{ form.age_biopsie.label() }}
+                        {{ form.age_biopsie }}</div>
+                    <div class="col-xl">
+                        {{ form.gene_diag.label() }}
+                        {{ form.gene_diag }}</div>
+                    {{ form.ontology_tree }}
+                </div>
             </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-5 mt-3 offset-md-1">
+            <h2>Arbre Ontologie</h2>
+
+            <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control"
+                placeholder="Rechercher">
+            <div id="jstree" class="demo" style="overflow:scroll; max-height: 600px;"></div>
         </div>
-        <div class="row">
+        <div class="col-xl-5 mt-3">
+            <h2>Feature</h2>
+
+            {% for error in form2.errors %}
+            <span style="color: red;">{{ error }}: {{form2.errors[error]}}</span>
+            {% endfor %}
+            {{ form2.hidden_tag() }}
+            <div id="radio_feature">
+                <tr>
+                    <td class="align-middle text-center">
+                        {{radio_field[0](class="btn-check", onchange="update_node_data();")}}
+                        {{radio_field[0].label(class="btn btn-outline-success btn-lg")}}</td>
+                </tr>
+                <tr>
+                    <td class="align-middle text-center">
+                        {{radio_field[1](class="btn-check", onchange="update_node_data();")}}
+                        {{radio_field[1].label(class="btn btn-outline-danger btn-lg")}}</td>
+                </tr>
+                <tr>
+                    <td class="align-middle text-center">
+                        {{radio_field[2](class="btn-check", onchange="update_node_data();")}}
+                        {{radio_field[2].label(class="btn btn-outline-info btn-lg")}}</td>
+                </tr>
+            </div>
+            </br>
+            <h4>Info. sur la feature</h4>
+            {{ form2.onto_name }}
+            <div class="row">
+                <div class="col-xl">
+                    {{ form2.synonymes.label }}
+                    {{ form2.synonymes }}</div>
+                <div class="col-xl">
+                    {{ form2.gene.label }}
+                    {{ form2.gene }}</div>
+            </div>
+            {{ form2.description.label }}
+            {{ form2.description }}
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-8 offset-md-2 mt-3">
             <h4>Commentaires & Conclusions</h4>
             {{form.comment}}
+            {{form.conclusion.label}}
             {{form.conclusion}}
             {{form.submit}}
-    </form>
-</div>
-</br>
-</br>
-</br>
+            </form>
+        </div>
+    </div>
+    </br>
+    </br>
+    </br>
 
-<script>
-    var input = document.querySelector('input[id=synonymes]');
-    var input_tag = new Tagify(input)
-    var input2 = document.querySelector('input[id=gene]');
-    var input2_tag = new Tagify(input2)
+    <script>
+        var input = document.querySelector('input[id=synonymes]');
+        var input_tag = new Tagify(input)
+        var input2 = document.querySelector('input[id=gene]');
+        var input2_tag = new Tagify(input2)
 
-    var json_tree = $("input[id=ontology_tree]").val();
-    $('#jstree').jstree({
-        'core': {
-            "check_callback": true,
-            'data': JSON.parse(json_tree)
-        },
-        "plugins": ["wholerow", "unique", "search", "changed"]
-    });
+        var json_tree = $("input[id=ontology_tree]").val();
+        $('#jstree').jstree({
+            'core': {
+                "check_callback": true,
+                'data': JSON.parse(json_tree)
+            },
+            "plugins": ["wholerow", "unique", "search", "changed"]
+        });
 
-    var to = false;
-    $('#plugins4_q').keyup(function () {
-        if (to) { clearTimeout(to); }
-        to = setTimeout(function () {
-            var v = $('#plugins4_q').val();
-            $('#jstree').jstree(true).search(v);
-        }, 250);
-    });
+        var to = false;
+        $('#plugins4_q').keyup(function () {
+            if (to) { clearTimeout(to); }
+            to = setTimeout(function () {
+                var v = $('#plugins4_q').val();
+                $('#jstree').jstree(true).search(v);
+            }, 250);
+        });
 
-    // Prefill Form from JSON
-    $('#jstree').on('select_node.jstree', function (e, data) {
-        $("input[id=onto_id_ext]").val(data.node.id);
-        $("input[id=onto_name]").val(data.node.text);
-        $("input[id=parent_id]").val(data.node.parent);
-        input_tag.removeAllTags()
-        input_tag.addTags(data.node.data.synonymes);
-        input2_tag.removeAllTags()
-        input2_tag.addTags(data.node.data.genes);
-        $("textarea[id=description]").val(data.node.data.description) || "";
-        if (data.node.data.presence === "1") {
-            $("#presence_absence-0").prop("checked", true);
-        } else if (data.node.data.presence === "-1") {
-            $("#presence_absence-1").prop("checked", true);
-        } else if (data.node.data.presence === "0") {
-            $("#presence_absence-2").prop("checked", true);
-        } else {
-            $("#presence_absence-2").prop("checked", true);
-        }
-    });
+        // Prefill Form from JSON
+        $('#jstree').on('select_node.jstree', function (e, data) {
+            $("input[id=onto_id_ext]").val(data.node.id);
+            $("input[id=onto_name]").val(data.node.text);
+            $("input[id=parent_id]").val(data.node.parent);
+            input_tag.removeAllTags()
+            input_tag.addTags(data.node.data.synonymes);
+            input2_tag.removeAllTags()
+            input2_tag.addTags(data.node.data.genes);
+            $("textarea[id=description]").val(data.node.data.description) || "";
+            if (data.node.data.presence === "1") {
+                $("#presence_absence-0").prop("checked", true);
+            } else if (data.node.data.presence === "-1") {
+                $("#presence_absence-1").prop("checked", true);
+            } else if (data.node.data.presence === "0") {
+                $("#presence_absence-2").prop("checked", true);
+            } else {
+                $("#presence_absence-2").prop("checked", true);
+            }
+        });
 
-    $('input[name=presence_absence]:checked', '#radio_feature').val(
-        update_node_data());
+        $('input[name=presence_absence]:checked', '#radio_feature').val(
+            update_node_data());
 
-    // placeholder
-    function update_node_data() {
-        var node_id = $("#jstree").jstree(true).get_selected();
-        var node = $("#jstree").jstree(true).get_node(node_id);
-        node.data.presence = $('input[name=presence_absence]:checked', '#radio_feature').val();
-        if ($('input[name=presence_absence]:checked', '#radio_feature').val() === "1") {
-            $("#jstree").jstree(true).set_icon(node, "/static/checkmark-32.png")
-        } else if ($('input[name=presence_absence]:checked', '#radio_feature').val() === "-1") {
-            $("#jstree").jstree(true).set_icon(node, "/static/x-mark-32.png")
-        } else {
-            $("#jstree").jstree(true).set_icon(node, true)
-        }
-        var v = $("#jstree").jstree(true).get_json('#', { 'flat': true });
-        $("input[id=ontology_tree]").val(JSON.stringify(v));
-    };
-</script>
-{% endblock %}
+        // placeholder
+        function update_node_data() {
+            var node_id = $("#jstree").jstree(true).get_selected();
+            var node = $("#jstree").jstree(true).get_node(node_id);
+            node.data.presence = $('input[name=presence_absence]:checked', '#radio_feature').val();
+            if ($('input[name=presence_absence]:checked', '#radio_feature').val() === "1") {
+                $("#jstree").jstree(true).set_icon(node, "/static/checkmark-32.png")
+            } else if ($('input[name=presence_absence]:checked', '#radio_feature').val() === "-1") {
+                $("#jstree").jstree(true).set_icon(node, "/static/x-mark-32.png")
+            } else {
+                $("#jstree").jstree(true).set_icon(node, true)
+            }
+            var v = $("#jstree").jstree(true).get_json('#', { 'flat': true });
+            $("input[id=ontology_tree]").val(JSON.stringify(v));
+        };
+    </script>
+    {% endblock %}

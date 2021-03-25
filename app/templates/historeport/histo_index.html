@@ -1,11 +1,13 @@
 {% extends "base.html"%}
 {% block content %}
 <div class="row">
-    <div class="col-xl-5"></div>
-    <div class="col-xl-2">
-        <a href="{{ url_for('historeport.historeport') }}" class="btn btn-info" role="button">Create New Report</a>
+    <div class="col-xl-3 offset-md-4">
+        <h1>Create a Histo Report</h1>
+        <div class="text-center">
+            <a href="{{ url_for('historeport.historeport') }}" class="btn btn-info btn-lg" role="button">Create New
+                Report</a>
+        </div>
     </div>
-    <div class="col-xl-5"></div>
 </div>
 <div class="row">
     <div class="col-xl">
@@ -24,7 +26,7 @@
                 <td class="align-middle text-center">{{ report.biopsie_id }}</td>
                 <td class="align-middle text-center">{{ report.patient_nom }}</td>
                 <td class="align-middle text-center">{{ report.patient_prenom }}</td>
-                <td class="align-middle text-center"><a class="btn btn-success" role="button"
+                <td class="align-middle text-center"><a class="btn btn-success btn-sm" role="button"
                         href="historeport/new?id={{report.id}}">Resume</a>
                     <form action="{{ url_for('historeport.delete_report', id_report=report.id) }}" method="post"
                         style="display: inline;">

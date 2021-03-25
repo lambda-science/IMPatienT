@@ -38,7 +38,7 @@
                 <td class="align-middle text-center">{{ pdf.id }}</td>
                 <td class="align-middle text-center">{{ pdf.pdf_name }}</td>
                 <td class="align-middle text-center">{{ pdf.patient_id }}</td>
-                <td class="align-middle text-center"><a class="btn btn-success" role="button"
+                <td class="align-middle text-center"><a class="btn btn-success btn-sm" role="button"
                         href="ocr_results?id={{pdf.id}}">Resume</a>
                     <form action="{{ url_for('ocr.delete_pdf', id_pdf=pdf.id) }}" method="post"
                         style="display: inline;">

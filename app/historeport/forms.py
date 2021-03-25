@@ -35,30 +35,30 @@ class ReportForm(FlaskForm):
     """Form used for report registration."""
 
     patient_nom = StringField(
-        "patient_nom", render_kw={"placeholder": "Nom Patient", "class": "form-control"}
+        "Nom Patient", render_kw={"placeholder": "Nom Patient", "class": "form-control"}
     )
     patient_prenom = StringField(
-        "patient_prenom",
+        "Prénom Patient",
         render_kw={"placeholder": "Prénom Patient", "class": "form-control"},
     )
     naissance = StringField(
-        "naissance",
+        "Date De Naissance",
         validators=[
             Regexp(r"(^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$)|(^$)"),
             Length(max=10),
         ],
         render_kw={
-            "placeholder": "Date de naissance YYYY-MM-DD",
+            "placeholder": "YYYY-MM-DD",
             "class": "form-control",
         },
     )
     biopsie_id = StringField(
-        "biopsie_id",
+        "Numéro de Biopsie",
         render_kw={"placeholder": "Numéro de Biopsie", "class": "form-control"},
     )
     muscle_prelev = StringField(
-        "muscle_prelev",
-        render_kw={"placeholder": "Muscle biopsie", "class": "form-control"},
+        "Muscle prélevé",
+        render_kw={"placeholder": "Muscle prélevé", "class": "form-control"},
     )
     age_biopsie = SelectField(
         "Age du patient lors de la biopsie:",
@@ -70,22 +70,22 @@ class ReportForm(FlaskForm):
         },
     )
     date_envoie = StringField(
-        "date_envoie",
+        "Date d'envoie ou de biopsie",
         validators=[
             Regexp(r"(^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$)|(^$)"),
             Length(max=10),
         ],
         render_kw={
             "class": "form-control",
-            "placeholder": "Date d'envoie rapport YYYY-MM-DD",
+            "placeholder": "YYYY-MM-DD",
         },
     )
     gene_diag = SelectField(
-        "Gene diagnosed",
+        "Gene diagnostiqué",
         validators=[DataRequired()],
         choices=Common.create_list(os.path.join("config", "config_gene.txt")),
         render_kw={
-            "placeholder": "Gene diagnosed",
+            "placeholder": "Gene diagnostiqué",
             "class": "form-control custom-select",
         },
     )
@@ -101,7 +101,7 @@ class ReportForm(FlaskForm):
         },
     )
     conclusion = SelectField(
-        "diagnostic",
+        "Diagnostic final",
         choices=Common.create_diag_list(os.path.join("config", "diagnostic.tsv")),
         render_kw={
             "placeholder": "Conclusion Diagnosis",
@@ -157,4 +157,4 @@ class OntologyDescriptPreAbs(FlaskForm):
 class DeleteButton(FlaskForm):
     """Empty form for delete button"""
 
-    submit = SubmitField("Delete", render_kw={"class": "btn btn-danger"})
+    submit = SubmitField("Delete", render_kw={"class": "btn btn-danger btn-sm"})
