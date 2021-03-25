@@ -90,13 +90,14 @@
     id: "seadragon-viewer",
     prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/images/",
     tileSources: "{{url_for('imgannot.data_folder', filename=deepzoom_path+'.dzi')}}",
-    animationTime: 0.5,
-    blendTime: 0.1,
-    constrainDuringPan: true,
-    maxZoomPixelRatio: 2,
-    minZoomLevel: 1,
-    visibilityRatio: 1,
-    zoomPerScroll: 2
+    animationTime: 0.1,
+    alwaysBlend: true,
+    maxZoomPixelRatio: 3,
+    minZoomLevel: 0.5,
+    visibilityRatio: 0.1,
+    zoomPerScroll: 1.8,
+    showNavigator: true,
+    navigatorBackground: "#000"
   });
 
   // Initialize the Annotorious plugin
