@@ -1,10 +1,8 @@
 from app import create_app, db
 from app.models import User, Image, Patient, Pdf, ReportHisto
 
-# Create instance of app and push app context
+# Create instance of app
 app = create_app()
-app_context = app.app_context()
-app_context.push()
 
 
 @app.shell_context_processor

@@ -65,7 +65,7 @@ def create_app(config_class=Config):
     # If app in production settings:
     # configure our SMTP mail connection
     # configure error-logging service
-    if not app.debug:
+    if not app.debug and not app.testing:
         # Mail service
         if app.config["MAIL_SERVER"]:
             auth = None
