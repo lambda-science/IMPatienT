@@ -24,6 +24,7 @@ def login():
             return redirect(url_for("auth.login"))
         # Log user if password matched, store username and redirect user
         login_user(user, remember=form.remember_me.data)
+        flash("Login successful", "success")
         next_page = request.args.get("next")
         if not next_page or url_parse(next_page).netloc != "":
             next_page = url_for("index.index")
@@ -34,6 +35,7 @@ def login():
 @bp.route("/logout")
 def logout():
     """View page to logout"""
+    flash("You were logged out", "info")
     logout_user()
     return redirect(url_for("auth.login"))
 
@@ -50,7 +52,12 @@ def reset_password_request():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash("Check your email for the instructions to reset your password")
+            flash(
+                "Check your email for the instructions to reset your password",
+                "success",
+            )
+        else:
+            flash("No account found for this email.", "danger")
         return redirect(url_for("auth.login"))
     return render_template(
         "reset_password_request.html", title="Reset Password", form=form
