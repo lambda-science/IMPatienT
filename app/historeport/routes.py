@@ -13,9 +13,7 @@ def histoindex():
     """Page for management of reports registered in database."""
     form = DeleteButton()
     report_history = ReportHisto.query.all()
-    return render_template(
-        "historeport/histo_index.html", history=report_history, form=form
-    )
+    return render_template("histo_index.html", history=report_history, form=form)
 
 
 @bp.route("/historeport/new", methods=["GET", "POST"])
@@ -74,7 +72,7 @@ def historeport():
             return redirect(url_for("historeport.histoindex"))
 
     return render_template(
-        "historeport/historeport.html",
+        "historeport.html",
         form=form,
         form2=form2,
         radio_field=radio_field,

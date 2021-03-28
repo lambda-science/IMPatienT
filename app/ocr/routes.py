@@ -71,7 +71,7 @@ def upload_pdf():
         # Finally redirect to annotation
         return redirect(url_for("ocr.ocr_results", id=pdf.id))
     return render_template(
-        "ocr/ocr_upload.html",
+        "ocr_upload.html",
         form=form,
         pdf_history=pdf_history,
         delete_button=delete_button,
@@ -115,7 +115,7 @@ def ocr_results():
 
     # Base Page
     return render_template(
-        "ocr/ocr_results.html",
+        "ocr_results.html",
         form=form,
         ocr_text=ocr_text,
         patient_id=request.args.get("patient_id"),

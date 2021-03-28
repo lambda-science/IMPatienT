@@ -78,7 +78,7 @@ def upload_file():
         # Finally redirect to annotation
         return redirect(url_for("imgannot.annot_page", id=image.id))
     return render_template(
-        "imgannot/upload_img.html",
+        "upload_img.html",
         form=form,
         delete_button=delete_button,
         image_history=image_history,
@@ -196,7 +196,7 @@ def annot_page():
         shutil.rmtree(temp_user_dir)
         return redirect(url_for("imgannot.upload_file"))
     return render_template(
-        "imgannot/annot.html",
+        "annot.html",
         deepzoom_path=deepzoom_path,
         annot_temp_path=annot_temp_path,
         feature_list=current_app.config["FEATURE_LIST"],

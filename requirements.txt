@@ -38,6 +38,7 @@ gunicorn==20.0.4
 hyperlink==21.0.0
 idna==2.10
 incremental==17.5.0
+iniconfig==1.1.1
 ipykernel==5.5.0
 ipython==7.21.0
 ipython-genutils==0.2.0
@@ -67,11 +68,13 @@ pdf2image==1.14.0
 pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==8.1.0
+pluggy==0.13.1
 preshed==3.0.5
 prompt-toolkit==3.0.17
 protobuf==3.15.6
 psycopg2-binary==2.8.6
 ptyprocess==0.7.0
+py==1.10.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
@@ -87,6 +90,7 @@ PyMySQL==1.0.2
 pyOpenSSL==20.0.1
 pyparsing==2.4.7
 pytesseract==0.3.7
+pytest==6.2.2
 python-dateutil==2.8.1
 python-dotenv==0.15.0
 python-editor==1.0.4

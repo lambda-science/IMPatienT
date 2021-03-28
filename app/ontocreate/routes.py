@@ -18,7 +18,7 @@ def onto_json(filename):
 def ontocreate():
     """View used to show and modify ontology tree"""
     form = OntologyDescript()
-    return render_template("ontocreate/ontocreate.html", form=form)
+    return render_template("ontocreate.html", form=form)
 
 
 @bp.route("/modify_onto", methods=["PATCH"])
