@@ -1,7 +1,5 @@
 import os
-import json
 import subprocess
-import shutil
 
 from flask import flash, request, redirect, url_for, render_template
 from flask import send_from_directory, session, current_app
@@ -13,13 +11,6 @@ from app.imgannot import bp
 from app.imgannot.forms import ImageForm, AnnotForm, DeleteButton
 from app.models import Image, Patient
 import app.imgannot.histo as Histo
-
-
-@bp.route("/temp/<path:filename>")
-@login_required
-def temp(filename):
-    """Serve files located in subfolder inside temp folder"""
-    return send_from_directory(current_app.config["TEMP_FOLDER"], filename)
 
 
 @bp.route("/data/<path:filename>")
@@ -120,20 +111,13 @@ def annot_page():
         Histo.generate_feature_form(
             AnnotForm, image_requested.report_text, feature_list
         )
-        form = AnnotForm()
+        form = AnnotForm(annotation_json=image_requested.annotation_json)
 
-    # Create temporary directory name
-    temp_user_dir = os.path.join(
-        current_app.config["TEMP_FOLDER"], current_user.username
-    )
-
-    # If image exist and is associated to current user: serve it
+    # If image exist: serve it
     if image_requested is not None and not form.validate_on_submit():
         # Filename to session for modify annot function.
         session["filename"] = image_requested.image_name
-        # Create temporary directory
-        if not os.path.exists(temp_user_dir):
-            os.makedirs(temp_user_dir)
+
         # Create the deep zoom image using deepzoom command (subprocess)
         basename = os.path.splitext(os.path.basename(image_requested.image_path))[0]
         process = subprocess.Popen(
@@ -156,13 +140,6 @@ def annot_page():
             current_user.username, image_requested.image_name
         )
         deepzoom_path = os.path.join(image_requested.patient_id, basename)
-        # Create the JSON File for annotation from data stored in DB
-        with open(
-            os.path.join(temp_user_dir, image_requested.image_name + ".json"), "w"
-        ) as json_file:
-            annotation_data = json.loads(json.dumps(image_requested.annotation_json))
-
-            json_file.write(json.dumps(annotation_data, indent=4))
 
     # Error handling.
     elif image_requested is None:
@@ -184,16 +161,10 @@ def annot_page():
         image_requested.diagnostic = form.diagnostic.data
         image_requested.age_at_biopsy = form.age_histo.data
         image_requested.type_coloration = form.type_coloration.data
+        image_requested.annotation_json = form.annotation_json.data
 
-        # Load annotation json file and attach it to DB entry
-        with open(
-            os.path.join(temp_user_dir, image_requested.image_name + ".json"), "r"
-        ) as json_file:
-            data_annot = json.load(json_file)
-            image_requested.annotation_json = data_annot
-            # Commit new DB entry
-            db.session.commit()
-        shutil.rmtree(temp_user_dir)
+        # Commit new DB entry
+        db.session.commit()
         return redirect(url_for("imgannot.upload_file"))
     return render_template(
         "annot.html",
@@ -203,59 +174,3 @@ def annot_page():
         form=form,
         tag_list=str(tag_list),
     )
-
-
-@bp.route("/modify_annot", methods=["POST", "PATCH", "DELETE"])
-@login_required
-def modify_annot():
-    """Write/Update/Delete existing annotations (json data) according to
-    JS Plugin Annotorious AJAX Request.
-    Command is coming from an AJAX Request based on the Anno JS Object
-    (see annot.html). (POST/PATCH/DELETE)"""
-
-    # Create temporary directory name
-    temp_user_dir = os.path.join(
-        current_app.config["TEMP_FOLDER"], current_user.username
-    )
-    annot_list = []
-    updated_list = []
-    # Get AJAX JSON data and parse it
-    raw_data = request.get_data()
-    parsed = json.loads(raw_data)
-    # If no annotations yet: json file is created
-    if not os.path.exists(os.path.join(temp_user_dir, session["filename"] + ".json")):
-        with open(
-            os.path.join(temp_user_dir, session["filename"] + ".json"), "w"
-        ) as json_file:
-            annot_list.append(parsed)
-            json_file.write(json.dumps(annot_list, indent=4))
-    # If there are already some annotation: we write/delete/update depending on request type
-    else:
-        # First open as read only to load existing JSON
-        with open(
-            os.path.join(temp_user_dir, session["filename"] + ".json"), "r"
-        ) as json_file:
-            old_data = json.load(json_file)
-            if request.method == "POST":
-                old_data.append(parsed)
-                updated_list = old_data
-            elif request.method == "PATCH":
-                # Compare ID of annotation and replace the old annotations
-                # with the new one when there is a match in IDs.
-                for anot in old_data:
-                    if parsed["id"] != anot["id"]:
-                        updated_list.append(anot)
-                    elif parsed["id"] == anot["id"]:
-                        updated_list.append(parsed)
-            elif request.method == "DELETE":
-                # If annotation ID is different from the ID of deletion
-                # command we save them to a list. Matching ID will be
-                # skipped and erased.
-                for anot in old_data:
-                    if parsed["id"] != anot["id"]:
-                        updated_list.append(anot)
-        with open(
-            os.path.join(temp_user_dir, session["filename"] + ".json"), "w"
-        ) as json_file:
-            json_file.write(json.dumps(updated_list, indent=4))
-    return json.dumps({"success": True}), 200, {"ContentType": "application/json"}

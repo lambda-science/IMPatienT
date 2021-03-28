@@ -78,6 +78,7 @@
         {{form.age_histo}}
         <h4>Diagnostic & Infos</h4>
         {{form.diagnostic}}
+        {{form.annotation_json}}
         {{ form.submit }}
       </div>
     </form>
@@ -104,55 +105,57 @@
   var anno = OpenSeadragon.Annotorious(viewer, {
     widgets: [
       { widget: 'TAG', vocabulary: {{ tag_list | safe }} }]
-    });
-  // Load annotations in W3C WebAnnotation format
-  anno.loadAnnotations("{{url_for('imgannot.temp', filename=annot_temp_path+'.json')}}");
+
+  });
+
+  // Load annotations from Form data
+  var my_annot_json = JSON.parse($("input[id=annotation_json]").val() || "[]");
+  for (const element of my_annot_json) {
+    anno.addAnnotation(element);
+  }
+
 
   // Handler to create annot
   anno.on('createAnnotation', function (annotation) {
-    var myJSON = JSON.stringify(annotation);
-    console.log(myJSON)
-    $.ajax({
-      type: "POST",
-      url: "{{url_for('imgannot.modify_annot')}}",
-      data: myJSON,
-      success: console.log("Annotation Sent to Backend Successfully"),
-      dataType: "text"
-    });
+    var my_annot_json = JSON.parse($("input[id=annotation_json]").val());
+    my_annot_json.push(annotation)
+    $("input[id=annotation_json]").val(JSON.stringify(my_annot_json));
+
   });
+
   // Handler to update annot
   anno.on('updateAnnotation', function (annotation) {
-    var myJSON = JSON.stringify(annotation);
-    console.log(myJSON)
-    $.ajax({
-      type: "PATCH",
-      url: "{{url_for('imgannot.modify_annot')}}",
-      data: myJSON,
-      success: console.log("Annotation Update to Backend Successfully"),
-      dataType: "text"
-    });
+    var my_annot_json = JSON.parse($("input[id=annotation_json]").val());
+    var new_annot_json = []
+    for (const element of my_annot_json) {
+      if (element.id === annotation.id) {
+        new_annot_json.push(annotation)
+      } else {
+        new_annot_json.push(element)
+      }
+    }
+    $("input[id=annotation_json]").val(JSON.stringify(new_annot_json));
   });
+
   // Handler to delete annot
   anno.on('deleteAnnotation', function (annotation) {
-    var myJSON = JSON.stringify(annotation);
-    console.log(myJSON)
-    $.ajax({
-      type: "DELETE",
-      url: "{{url_for('imgannot.modify_annot')}}",
-      data: myJSON,
-      success: console.log("Annotation Deleted to Backend Successfully"),
-      dataType: "text"
-    });
+    var my_annot_json = JSON.parse($("input[id=annotation_json]").val());
+    var new_annot_json = []
+    for (const element of my_annot_json) {
+      if (element.id === annotation.id) {
+        //pass
+      } else {
+        new_annot_json.push(element)
+      }
+    }
+    $("input[id=annotation_json]").val(JSON.stringify(new_annot_json));
   });
 
   // Switch tool (rect or polygon) function
   function switch_tool(anno, tool) {
     anno.setDrawingTool(tool);
   };
-</script>
 
-
-<script>
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
   });

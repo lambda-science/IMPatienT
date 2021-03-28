@@ -1,10 +1,35 @@
 import os
+import json
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, SubmitField, SelectField
+from wtforms import StringField, SubmitField, SelectField, fields
 from wtforms.validators import ValidationError, DataRequired
 from app.models import Patient
 import app.src.common as Common
+
+
+class JSONField(fields.StringField):
+    """Form Field for JSON Handeling"""
+
+    def _value(self):
+        return json.dumps(self.data) if self.data else ""
+
+    def process_formdata(self, valuelist):
+        if valuelist:
+            try:
+                self.data = json.loads(valuelist[0])
+            except ValueError:
+                raise ValueError("This field contains invalid JSON")
+        else:
+            self.data = None
+
+    def pre_validate(self, form):
+        super().pre_validate(form)
+        if self.data:
+            try:
+                json.dumps(self.data)
+            except TypeError:
+                raise ValueError("This field contains invalid JSON")
 
 
 class ImageForm(FlaskForm):
@@ -79,10 +104,12 @@ class ImageForm(FlaskForm):
 
 
 class AnnotForm(FlaskForm):
-    """Form used for image global annotation. Feature list are added later"""
+    """Form used for image annotation. Feature list are added later"""
 
     def __init__(self, *args, **kwargs):
         super(AnnotForm, self).__init__(*args, **kwargs)
+
+    annotation_json = JSONField("Annotation JSON Data", render_kw={"type": "hidden"})
 
     submit = SubmitField(
         "Submit report and annotations to the database",

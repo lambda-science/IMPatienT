@@ -1,6 +1,5 @@
 import os
 import json
-import shutil
 
 from flask import flash, request, redirect, url_for
 from flask import render_template, send_from_directory, current_app

@@ -11,7 +11,6 @@ class Config(object):
     """Class to load all config parameters of the Flask App"""
 
     SECRET_KEY = os.environ.get("SECRET_KEY") or "myverylongsecretkey"
-    TEMP_FOLDER = os.path.join(basedir, "temp")
     DATA_FOLDER = os.path.join("/", "data")
     CONFIG_FOLDER = os.path.join(basedir, "config")
     SEND_FILE_MAX_AGE_DEFAULT = 0
