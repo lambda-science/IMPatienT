@@ -1,12 +1,16 @@
 {
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.formatting.provider": "black",
-    "jupyter.jupyterServerType": "local",
-    "python.linting.pylintArgs": [
-        "--load-plugins",
-        "pylint_flask_sqlalchemy",
-        "pylint_flask",
-        "--extension-pkg-whitelist=cv2",
-    ]
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "python.formatting.provider": "black",
+  "jupyter.jupyterServerType": "local",
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_flask_sqlalchemy",
+    "pylint_flask",
+    "--extension-pkg-whitelist=cv2"
+  ],
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
