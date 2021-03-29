@@ -68,21 +68,6 @@ class PdfForm(FlaskForm):
                 )
 
 
-class OcrForm(FlaskForm):
-    """Form to save OCR results to database"""
-
-    ocr_text = TextAreaField(
-        render_kw={
-            "rows": "25",
-            "class": "form-control",
-        }
-    )
-    submit = SubmitField(
-        "Submit text to database and\n return to upload page",
-        render_kw={"class": "btn btn-primary mb-2"},
-    )
-
-
 class DeleteButton(FlaskForm):
     """Empty form for delete button"""
 

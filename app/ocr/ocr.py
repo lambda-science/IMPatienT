@@ -2,6 +2,9 @@ import pytesseract
 import cv2
 import numpy as np
 from pdf2image import convert_from_path
+import spacy
+from fuzzywuzzy import fuzz
+import collections
 
 
 class Rapport:
@@ -13,6 +16,27 @@ class Rapport:
         self.image_stack = []
         self.raw_text = ""
         self.text_as_list = []
+        self.nlp = spacy.load("fr_dep_news_trf")
+        self.section = collections.OrderedDict()
+        self.section_text = collections.OrderedDict()
+        self.section_names = [
+            "Hématéine-éosine et trichrome de Gomori",
+            "Activité myosine ATPasique",
+            "Différenciation des fibres :",
+            "Répartition numérique des fibres :",
+            "Répartition topographique des différents types de fibres",
+            "Activité myosine ATPasique",
+            "Activités oxydatives (SDH, NADH-TR",
+            "Cox :",
+            "PAS :",
+            "Phosphorylases :",
+            "Soudans :",
+            "Soudan :",
+            "Lipides :",
+            "Lipides soudan:",
+            "Technique de Koëlle",
+            "CONCLUSIONS :",
+        ]
 
     def get_grayscale(self, image):
         """Convert image to grayscale"""
@@ -41,3 +65,34 @@ class Rapport:
         self.raw_text = "\n".join(page_list)
         self.text_as_list = self.raw_text.split("\n")
         return self.raw_text
+
+    def detect_sections(self):
+        index = 0
+        non_sorted_dict = {}
+        for i in self.text_as_list:
+            for j in self.section_names:
+                if fuzz.partial_ratio(j, i) > 90:
+                    non_sorted_dict[j] = index
+            index += 1
+        sorted_tuple = sorted(
+            non_sorted_dict.items(), key=lambda x: x[1], reverse=False
+        )
+        for i in sorted_tuple:
+            self.section[i[0]] = i[1]
+
+    def extract_section_text(self):
+        self.section_text[list(self.section.items())[0][0]] = " ".join(
+            self.text_as_list[: list(self.section.items())[0][1]]
+        )
+
+        for i in range(len(self.section) - 1):
+            self.section_text[list(self.section.items())[i][0]] = " ".join(
+                self.text_as_list[
+                    list(self.section.items())[i][1] : list(self.section.items())[
+                        i + 1
+                    ][1]
+                ]
+            )
+        self.section_text[list(self.section.items())[-1][0]] = " ".join(
+            self.text_as_list[list(self.section.items())[-1][1] :]
+        )
