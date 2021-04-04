@@ -26,9 +26,7 @@ def historeport():
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
             form = ReportForm(
-                patient_nom=report_request.patient_nom,
-                patient_prenom=report_request.patient_prenom,
-                naissance=report_request.naissance,
+                patient_id=report_request.patient_id,
                 expert_id=report_request.expert_id,
                 biopsie_id=report_request.biopsie_id,
                 muscle_prelev=report_request.muscle_prelev,

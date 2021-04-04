@@ -37,6 +37,7 @@ $("#jstree").on("select_node.jstree", function (e, data) {
 });
 
 $("input[id=preabsProba]").on("input", function () {
+  $(".range-value").html(this.value);
   update_node_data();
 });
 

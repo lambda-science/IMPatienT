@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 from app import db
 from app.ocr import bp
 from app.ocr.forms import PdfForm, DeleteButton
-from app.models import Patient, Pdf
+from app.models import Pdf
 from app.ocr.ocr import Rapport
 
 
@@ -50,16 +50,9 @@ def upload_pdf():
             lang=form.lang.data,
             pdf_path=os.path.join(data_patient_dir, filename),
         )
-        patient = Patient(
-            id=form.patient_ID.data,
-            patient_name=form.patient_nom.data,
-            patient_firstname=form.patient_prenom.data,
-        )
 
         # Check if the PDF or patient already exist in DB (same filename & patient ID)
         # If not: add it to DB
-        if not patient.exist_already():
-            db.session.add(patient)
 
         if not pdf.isduplicated():
             db.session.add(pdf)

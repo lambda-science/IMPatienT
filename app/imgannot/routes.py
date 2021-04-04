@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 from app import db
 from app.imgannot import bp
 from app.imgannot.forms import ImageForm, AnnotForm, DeleteButton
-from app.models import Image, Patient
+from app.models import Image
 import app.imgannot.histo as Histo
 
 
@@ -51,15 +51,8 @@ def upload_file():
             expert_id=current_user.id,
             image_path=os.path.join(data_patient_dir, filename),
         )
-        patient = Patient(
-            id=form.patient_ID.data,
-            patient_name=form.patient_nom.data,
-            patient_firstname=form.patient_prenom.data,
-        )
-        # Check if the image or patient already exist in DB (same filename & patient ID)
+        # Check if the image already exist in DB (same filename & patient ID)
         # If not: add it to DB
-        if not patient.exist_already():
-            db.session.add(patient)
 
         if not image.isduplicated():
             db.session.add(image)

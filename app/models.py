@@ -15,6 +15,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     images = db.relationship("Image", backref="creator", lazy="dynamic")
+    pdf = db.relationship("Pdf", backref="creator", lazy="dynamic")
+    report = db.relationship("ReportHisto", backref="creator", lazy="dynamic")
 
     def __repr__(self):
         return "<User {} Email {}>".format(self.username, self.email)
@@ -59,7 +61,7 @@ class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image_name = db.Column(db.String(140), index=True)
     expert_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    patient_id = db.Column(db.String(100), db.ForeignKey("patient.id"))
+    patient_id = db.Column(db.String(100))
     type_coloration = db.Column(db.String(140))
     age_at_biopsy = db.Column(db.Integer)
     image_path = db.Column(db.String(4096))
@@ -83,34 +85,13 @@ class Image(db.Model):
             return True
 
 
-class Patient(db.Model):
-    """Database table for Patient informations"""
-
-    id = db.Column(db.String(100), primary_key=True)
-    patient_firstname = db.Column(db.String(140))
-    patient_name = db.Column(db.String(140), index=True)
-    images = db.relationship("Image", backref="from_patient", lazy="dynamic")
-
-    def __repr__(self):
-        return "<Patient {} {} {}>".format(
-            self.id, self.patient_firstname, self.patient_name
-        )
-
-    def exist_already(self):
-        """Method to check if new entry already exist"""
-        if Patient.query.get(str(self.id)) is None:
-            return False
-        else:
-            return True
-
-
 class Pdf(db.Model):
     """Database table for PDF and OCR Results"""
 
     id = db.Column(db.Integer, primary_key=True)
     pdf_name = db.Column(db.String(140), index=True)
     expert_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    patient_id = db.Column(db.String(100), db.ForeignKey("patient.id"))
+    patient_id = db.Column(db.String(100))
     pdf_path = db.Column(db.String(4096))
     lang = db.Column(db.String(140), index=True)
     ocr_text = db.Column(db.Text)
@@ -135,9 +116,7 @@ class ReportHisto(db.Model):
     """Database table histology reports"""
 
     id = db.Column(db.Integer, primary_key=True)
-    patient_nom = db.Column(db.String(140), index=True)
-    patient_prenom = db.Column(db.String(140), index=True)
-    naissance = db.Column(db.String(10))
+    patient_id = db.Column(db.String(100), index=True)
     expert_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     biopsie_id = db.Column(db.String(140), index=True)
     muscle_prelev = db.Column(db.String(140))
@@ -149,6 +128,6 @@ class ReportHisto(db.Model):
     conclusion = db.Column(db.String(140), index=True)
 
     def __repr__(self):
-        return "<ReportHisto ID {} Nom {} Biopsie {}>".format(
-            self.id, self.patient_nom, self.biopsie_id
+        return "<ReportHisto ID {} ID {} Biopsie {}>".format(
+            self.id, self.patient_id, self.biopsie_id
         )

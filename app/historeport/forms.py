@@ -41,23 +41,8 @@ class JSONField(fields.StringField):
 class ReportForm(FlaskForm):
     """Form used for report registration."""
 
-    patient_nom = StringField(
-        "Nom Patient", render_kw={"placeholder": "Nom Patient", "class": "form-control"}
-    )
-    patient_prenom = StringField(
-        "Prénom Patient",
-        render_kw={"placeholder": "Prénom Patient", "class": "form-control"},
-    )
-    naissance = StringField(
-        "Date De Naissance",
-        validators=[
-            Regexp(r"(^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$)|(^$)"),
-            Length(max=10),
-        ],
-        render_kw={
-            "placeholder": "YYYY-MM-DD",
-            "class": "form-control",
-        },
+    patient_id = StringField(
+        "ID Patient", render_kw={"placeholder": "ID Patient", "class": "form-control"}
     )
     biopsie_id = StringField(
         "Numéro de Biopsie",
@@ -157,7 +142,13 @@ class OntologyDescriptPreAbs(FlaskForm):
     preabsProba = DecimalRangeField(
         "Probability",
         validators=[NumberRange(min=-1, max=1)],
-        render_kw={"min": -1, "max": 1, "step": 0.25, "list": "tickmarks"},
+        render_kw={
+            "min": -1,
+            "max": 1,
+            "step": 0.25,
+            "list": "tickmarks",
+            "class": "form-range w-50",
+        },
     )
 
 

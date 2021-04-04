@@ -28,19 +28,10 @@
                 {{ form.hidden_tag() }}
                 <div class="row">
                     <div class="col-xl">
-                        {{ form.patient_nom.label }}
-                        {{ form.patient_nom }}</div>
+                        {{ form.patient_id.label }}
+                        {{ form.patient_id }}
+                    </div>
                     <div class="col-xl">
-                        {{ form.patient_prenom.label }}
-                        {{ form.patient_prenom }}</div>
-                    <div class="col-xl">
-                        {{ form.naissance.label }}
-                        {{ form.naissance }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xl">
-
-
                         {{ form.biopsie_id.label }}
                         {{ form.biopsie_id }}</div>
                     <div class="col-xl">
@@ -77,7 +68,21 @@
             <span style="color: red;">{{ error }}: {{form2.errors[error]}}</span>
             {% endfor %}
             {{ form2.hidden_tag() }}
-            Absente {{ form2.preabsProba }} Présente 
+            <div class="col-xl-6">
+                <div class="row">
+                    <div class="range">
+                        <span class="badge bg-danger">Absent</span>
+                        {{ form2.preabsProba }}
+                        <span class="badge badge bg-success">Présent</span>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-xl offset-md-4">
+                        <span class="badge bg-primary range-value">0</span>
+                    </div>
+                    </div>
+                
+            </div>
             <datalist id="tickmarks">
                 <option value="-1" label="-1"></option>
                 <option value="-0.75"></option>
@@ -88,7 +93,7 @@
                 <option value="0.50"></option>
                 <option value="0.75"></option>
                 <option value="1" label="1"></option>
-              </datalist>
+            </datalist>
             </br>
             <h4>Info. sur la feature</h4>
             {{ form2.onto_name }}
