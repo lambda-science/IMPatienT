@@ -77,23 +77,18 @@
             <span style="color: red;">{{ error }}: {{form2.errors[error]}}</span>
             {% endfor %}
             {{ form2.hidden_tag() }}
-            <div id="radio_feature">
-                <tr>
-                    <td class="align-middle text-center">
-                        {{radio_field[0](class="btn-check", onchange="update_node_data();")}}
-                        {{radio_field[0].label(class="btn btn-outline-success btn-lg")}}</td>
-                </tr>
-                <tr>
-                    <td class="align-middle text-center">
-                        {{radio_field[1](class="btn-check", onchange="update_node_data();")}}
-                        {{radio_field[1].label(class="btn btn-outline-danger btn-lg")}}</td>
-                </tr>
-                <tr>
-                    <td class="align-middle text-center">
-                        {{radio_field[2](class="btn-check", onchange="update_node_data();")}}
-                        {{radio_field[2].label(class="btn btn-outline-info btn-lg")}}</td>
-                </tr>
-            </div>
+            Absente {{ form2.preabsProba }} Présente 
+            <datalist id="tickmarks">
+                <option value="-1" label="-1"></option>
+                <option value="-0.75"></option>
+                <option value="-0.50"></option>
+                <option value="-0.25"></option>
+                <option value="0" label="0"></option>
+                <option value="0.25"></option>
+                <option value="0.50"></option>
+                <option value="0.75"></option>
+                <option value="1" label="1"></option>
+              </datalist>
             </br>
             <h4>Info. sur la feature</h4>
             {{ form2.onto_name }}

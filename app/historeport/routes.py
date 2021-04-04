@@ -50,7 +50,6 @@ def historeport():
         form = ReportForm(ontology_tree=empty_json_tree)
     # Form for panel on the right with node description
     form2 = OntologyDescriptPreAbs()
-    radio_field = list(form2.presence_absence)
 
     # On validation, save to database
     if form.validate_on_submit():
@@ -75,7 +74,6 @@ def historeport():
         "historeport.html",
         form=form,
         form2=form2,
-        radio_field=radio_field,
         ontology_tree_exist=ontology_tree_exist,
     )
 

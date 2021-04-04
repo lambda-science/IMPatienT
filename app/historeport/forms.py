@@ -1,8 +1,15 @@
 import os
 import json
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, RadioField, SelectField, TextAreaField
-from wtforms.validators import DataRequired, Regexp, Length
+from wtforms import (
+    StringField,
+    SubmitField,
+    #    RadioField,
+    SelectField,
+    TextAreaField,
+)
+from wtforms.fields.html5 import DecimalRangeField
+from wtforms.validators import DataRequired, Regexp, Length, NumberRange
 from wtforms import fields
 import app.src.common as Common
 
@@ -147,10 +154,10 @@ class OntologyDescriptPreAbs(FlaskForm):
             "readonly": "",
         },
     )
-    presence_absence = RadioField(
-        "Status_feature",
-        choices=[("1", "Present"), ("-1", "Absent"), ("0", "Unknown")],
-        validators=[DataRequired()],
+    preabsProba = DecimalRangeField(
+        "Probability",
+        validators=[NumberRange(min=-1, max=1)],
+        render_kw={"min": -1, "max": 1, "step": 0.25, "list": "tickmarks"},
     )
 
 

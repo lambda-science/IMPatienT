@@ -33,36 +33,21 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   input2_tag.removeAllTags();
   input2_tag.addTags(data.node.data.genes);
   $("textarea[id=description]").val(data.node.data.description) || "";
-  if (data.node.data.presence === "1") {
-    $("#presence_absence-0").prop("checked", true);
-  } else if (data.node.data.presence === "-1") {
-    $("#presence_absence-1").prop("checked", true);
-  } else if (data.node.data.presence === "0") {
-    $("#presence_absence-2").prop("checked", true);
-  } else {
-    $("#presence_absence-2").prop("checked", true);
-  }
+  $("input[id=preabsProba]").val(data.node.data.presence) || 0;
 });
 
-$("input[name=presence_absence]:checked", "#radio_feature").val(
-  update_node_data()
-);
+$("input[id=preabsProba]").on("input", function () {
+  update_node_data();
+});
 
 // placeholder
 function update_node_data() {
   var node_id = $("#jstree").jstree(true).get_selected();
   var node = $("#jstree").jstree(true).get_node(node_id);
-  node.data.presence = $(
-    "input[name=presence_absence]:checked",
-    "#radio_feature"
-  ).val();
-  if (
-    $("input[name=presence_absence]:checked", "#radio_feature").val() === "1"
-  ) {
+  node.data.presence = $("input[id=preabsProba]").val();
+  if ($("input[id=preabsProba]").val() > "0") {
     $("#jstree").jstree(true).set_icon(node, "/static/checkmark-32.png");
-  } else if (
-    $("input[name=presence_absence]:checked", "#radio_feature").val() === "-1"
-  ) {
+  } else if ($("input[id=preabsProba]").val() < "0") {
     $("#jstree").jstree(true).set_icon(node, "/static/x-mark-32.png");
   } else {
     $("#jstree").jstree(true).set_icon(node, true);
