@@ -13,7 +13,7 @@
    `pip install -r requirements.txt`
 
 5. Download NLP models:
-   `python -m spacy download fr_core_news_lg`
+   `python -m spacy download fr_dep_news_trf`
 
 6. Initialize databse:
    `flask db upgrade`
