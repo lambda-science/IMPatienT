@@ -34,6 +34,7 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   input2_tag.addTags(data.node.data.genes);
   $("textarea[id=description]").val(data.node.data.description) || "";
   $("input[id=preabsProba]").val(data.node.data.presence) || 0;
+  $(".range-value").html(data.node.data.presence || 0);
 });
 
 $("input[id=preabsProba]").on("input", function () {

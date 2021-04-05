@@ -16,16 +16,15 @@
             <thead class="table-info">
                 <th class="align-middle text-center">Report ID</th>
                 <th class="align-middle text-center">Biopsie ID</th>
-                <th class="align-middle text-center">Prénom Patient</th>
-                <th class="align-middle text-center">Nom Patient</th>
+                <th class="align-middle text-center">Patient ID</th>
+        
                 <th class="align-middle text-center">Action</th>
             </thead>
             {% for report in history %}
             <tr>
                 <td class="align-middle text-center">{{ report.id }}</td>
                 <td class="align-middle text-center">{{ report.biopsie_id }}</td>
-                <td class="align-middle text-center">{{ report.patient_nom }}</td>
-                <td class="align-middle text-center">{{ report.patient_prenom }}</td>
+                <td class="align-middle text-center">{{ report.patient_id }}</td>
                 <td class="align-middle text-center"><a class="btn btn-success btn-sm" role="button"
                         href="historeport/new?id={{report.id}}">Resume</a>
                     <form action="{{ url_for('historeport.delete_report', id_report=report.id) }}" method="post"
