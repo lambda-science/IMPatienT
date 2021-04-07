@@ -34,7 +34,7 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   input2_tag.addTags(data.node.data.genes);
   $("textarea[id=description]").val(data.node.data.description) || "";
   $("input[id=preabsProba]").val(data.node.data.presence) || 0;
-  $(".range-value").html(data.node.data.presence || 0);
+  $(".range-value").html(data.node.data.presence || -1);
 });
 
 $("input[id=preabsProba]").on("input", function () {
@@ -49,8 +49,10 @@ function update_node_data() {
   node.data.presence = $("input[id=preabsProba]").val();
   if ($("input[id=preabsProba]").val() > "0") {
     $("#jstree").jstree(true).set_icon(node, "/static/checkmark-32.png");
-  } else if ($("input[id=preabsProba]").val() < "0") {
+  } else if ($("input[id=preabsProba]").val() === "0") {
     $("#jstree").jstree(true).set_icon(node, "/static/x-mark-32.png");
+  } else if ($("input[id=preabsProba]").val() === "-1") {
+    $("#jstree").jstree(true).set_icon(node, true);
   } else {
     $("#jstree").jstree(true).set_icon(node, true);
   }

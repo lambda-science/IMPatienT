@@ -143,7 +143,7 @@ class OntologyDescriptPreAbs(FlaskForm):
         "Probability",
         validators=[NumberRange(min=-1, max=1)],
         render_kw={
-            "min": -1,
+            "min": 0,
             "max": 1,
             "step": 0.25,
             "list": "tickmarks",
