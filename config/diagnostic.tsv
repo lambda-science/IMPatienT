@@ -1,10 +1,17 @@
-NaM	Not a myopathy
-NCM	Non-congenital myopathy
-NM	Nemaline myopathy
-CM_CCM	Core myopathy: central-core myopathy
-CM_MmD	Core myopathy: multi-minicores disease
-CM_CCD	Core myopathy: central core disease
-CNM	Centronuclear myopathy
-MSM	Myosin storage myopathy
-CFTD	Congenital fibre type disproportion
-Other	Other or Unclear
+UNCLEAR	Unclear
+HEALTHY	Healthy
+NON_MYO	Not a Myopathy
+NON_CM	Non-congenital Myopathy
+CM	Congenital Myopathy
+NM	+--- Nemaline Myopathy
+NM_Z	      +--- Zebra Body Myopathy
+NM_CAP	      +--- Cap Disease
+NM_CR	      +--- Core-Rod Myopathy
+COM	+--- Core Myopathy
+COM_CCD	      +--- Central Core Disease
+COM_MMM	      +--- Multi-minicore Myopathy
+CNM	+--- Centronuclear Myopathy
+CNM_XLMTM	      +--- X-linked myotubular myopathy (XLMTM)
+CNM_NON_XLMTM	      +--- Non-XLMTM
+MSM	+--- Myosin Storage Myopathy
+CFTD	+--- Congenital Fibre Type Disproportion
