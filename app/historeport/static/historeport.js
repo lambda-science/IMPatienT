@@ -33,12 +33,12 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   input2_tag.removeAllTags();
   input2_tag.addTags(data.node.data.genes);
   $("textarea[id=description]").val(data.node.data.description) || "";
-  $("input[id=preabsProba]").val(data.node.data.presence) || 0;
-  $(".range-value").html(data.node.data.presence || -1);
+  $("input[id=preabsProba]").val(data.node.data.presence || -0.25);
+  set_slider_span(data.node.data.presence || "-0.25");
 });
 
-$("input[id=preabsProba]").on("input", function () {
-  $(".range-value").html(this.value);
+$("input[id=preabsProba]").on("input change", function () {
+  set_slider_span($("input[id=preabsProba]").val());
   update_node_data();
 });
 
@@ -51,11 +51,26 @@ function update_node_data() {
     $("#jstree").jstree(true).set_icon(node, "/static/checkmark-32.png");
   } else if ($("input[id=preabsProba]").val() === "0") {
     $("#jstree").jstree(true).set_icon(node, "/static/x-mark-32.png");
-  } else if ($("input[id=preabsProba]").val() === "-1") {
-    $("#jstree").jstree(true).set_icon(node, true);
+  } else if ($("input[id=preabsProba]").val() < "0") {
+    $("#jstree").jstree(true).set_icon(node, "/static/question-mark-16.png");
   } else {
     $("#jstree").jstree(true).set_icon(node, true);
   }
   var v = $("#jstree").jstree(true).get_json("#", { flat: true });
   $("input[id=ontology_tree]").val(JSON.stringify(v));
 }
+
+function set_slider_span(slide_value) {
+  var message = {
+    '-1':'<span class="badge bg-warning range-value">No Info: Difficile (-1)</span>',
+    '-0.75':'<span class="badge bg-warning range-value">No Info: Modéré (-0.75)</span>',
+    '-0.5':'<span class="badge bg-warning range-value">No Info: Facile (-0.5)</span>',
+    '-0.25':'<span class="badge bg-warning range-value">No Info (-0.25)</span>',
+    '0':'<span class="badge bg-danger range-value">Absent (0)</span>',
+    '0.25':'<span class="badge bg-success range-value">Présent Faible (0.25)</span>',
+    '0.5':'<span class="badge bg-success range-value">Présent Modéré (0.5)</span>',
+    '0.75':'<span class="badge bg-success range-value">Présent Fort (0.75)</span>',
+    '1':'<span class="badge bg-success range-value">Présent Total (1)</span>'
+  };
+  $('#sliderspan').html(message[slide_value]);
+};

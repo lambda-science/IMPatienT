@@ -5,17 +5,13 @@
   <div class="col-xl-6">
     <h1>Upload New Image</h1></br>
     <form method=post enctype=multipart/form-data>
+      {% for error in form.errors %}
+      <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
+      {% endfor %}
       {{ form.hidden_tag() }}
       {{ form.patient_ID }}
-
-
       <h4>Select an image file</h4>
       {{ form.image }}
-      <p>
-        {% for error in form.image.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-      </p>
       {{ form.submit }}
     </form>
   </div>

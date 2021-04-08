@@ -5,6 +5,9 @@
 <p>New User? Contact an admin to create an account !</a></p>
 <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
+    {% for error in form.errors %}
+    <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
+    {% endfor %}
     <p>
         {{ form.username.label }}<br>
         {{ form.username(size=32) }}

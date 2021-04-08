@@ -53,7 +53,7 @@ class ReportForm(FlaskForm):
         render_kw={"placeholder": "Muscle prélevé", "class": "form-control"},
     )
     age_biopsie = SelectField(
-        "Age du patient lors de la biopsie:",
+        "Âge du patient lors de la biopsie:",
         choices=["N/A"] + [i for i in range(101)],
         default="N/A",
         render_kw={
@@ -62,7 +62,7 @@ class ReportForm(FlaskForm):
         },
     )
     date_envoie = StringField(
-        "Date d'envoie ou de biopsie",
+        "Date d'envoi ou de biopsie",
         validators=[
             Regexp(r"(^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$)|(^$)"),
             Length(max=10),
@@ -73,7 +73,7 @@ class ReportForm(FlaskForm):
         },
     )
     gene_diag = SelectField(
-        "Gene diagnostiqué",
+        "Gène diagnostiqué",
         validators=[DataRequired()],
         choices=Common.create_list(os.path.join("config", "config_gene.txt")),
         render_kw={
@@ -81,7 +81,7 @@ class ReportForm(FlaskForm):
             "class": "form-control custom-select",
         },
     )
-    ontology_tree = JSONField("Json Ontolgoy Tree", render_kw={"type": "hidden"})
+    ontology_tree = JSONField("Json Ontology Tree", render_kw={"type": "hidden"})
 
     comment = TextAreaField(
         "Commentaire",
@@ -143,11 +143,10 @@ class OntologyDescriptPreAbs(FlaskForm):
         "Probability",
         validators=[NumberRange(min=-1, max=1)],
         render_kw={
-            "min": 0,
+            "min": -1,
             "max": 1,
             "step": 0.25,
-            "list": "tickmarks",
-            "class": "form-range w-50",
+            "class": "form-range",
         },
     )
 

@@ -17,6 +17,9 @@
     integrity="sha512-jb/SYEPmc1tGaJ3Yu6CZaOBhn8sqTpgTqVcXUm4udHGaUsBIOj6DsIc6aXZpsvXhtexnmIowmOVBHKuIwyB2Rw=="
     crossorigin="anonymous"></script>
 
+<!-- Custom files -->
+<link rel="stylesheet" type="text/css" href="{{url_for('historeport.static', filename='slider.css')}}">
+
 <div class="row">
     <div class="col-xl-8 offset-md-2">
         <h1>Info Patient</h1>
@@ -70,30 +73,18 @@
             {{ form2.hidden_tag() }}
             <div class="col-xl-6">
                 <div class="row">
-                    <div class="range">
-                        <span class="badge bg-danger">Absent</span>
+                    <div class="col-xl-6 range">
                         {{ form2.preabsProba }}
-                        <span class="badge badge bg-success">Présent</span>
                     </div>
                 </div>
-                    <div class="row">
-                        <div class="col-xl offset-md-4">
-                        <span class="badge bg-primary range-value">0</span>
+                <div class="row">
+                    <div class="col-xl offset-md-1">
+                        <div id="sliderspan">
+                        </div>
                     </div>
-                    </div>
-                
+                </div>
+
             </div>
-            <datalist id="tickmarks">
-                <option value="-1" label="-1"></option>
-                <option value="-0.75"></option>
-                <option value="-0.50"></option>
-                <option value="-0.25"></option>
-                <option value="0" label="0"></option>
-                <option value="0.25"></option>
-                <option value="0.50"></option>
-                <option value="0.75"></option>
-                <option value="1" label="1"></option>
-            </datalist>
             </br>
             <h4>Info. sur la feature</h4>
             {{ form2.onto_name }}
