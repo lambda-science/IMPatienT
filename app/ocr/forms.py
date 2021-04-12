@@ -34,4 +34,4 @@ class PdfForm(FlaskForm):
 class DeleteButton(FlaskForm):
     """Empty form for delete button"""
 
-    submit = SubmitField("Delete", render_kw={"class": "btn btn-danger btn-sm"})
+    submit = SubmitField("Confirm Deletion", render_kw={"class": "btn btn-danger"})

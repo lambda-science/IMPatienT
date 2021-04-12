@@ -38,11 +38,38 @@
                 <td class="align-middle text-center">{{ pdf.patient_id }}</td>
                 <td class="align-middle text-center"><a class="btn btn-success btn-sm" role="button"
                         href="ocr_results?id={{pdf.id}}">Resume</a>
-                    <form action="{{ url_for('ocr.delete_pdf', id_pdf=pdf.id) }}" method="post"
-                        style="display: inline;">
-                        {{ delete_button.hidden_tag() }}
-                        {{ delete_button.submit }}
-                    </form>
+                    <!-- Button Show Popup -->
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#DeletionPopup">
+                        Delete
+                    </button>
+
+                    <!-- Deletion Popup -->
+                    <div class="modal fade" id="DeletionPopup" tabindex="-1" aria-labelledby="DeletionPopupLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="DeletionPopupLabel">
+                                        Confirm Delete Popup
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{{ url_for('ocr.delete_pdf', id_pdf=pdf.id) }}" method="post"
+                                        style="display: inline;">
+                                        {{ delete_button.hidden_tag() }}
+                                        {{ delete_button.submit }}
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </td>
             </tr>
             {% endfor %}

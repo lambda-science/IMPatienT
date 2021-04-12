@@ -1,5 +1,4 @@
-{% extends "base.html"%}
-{% block content %}
+{% extends "base.html"%} {% block content %}
 <div class="row">
     <div class="col-xl-3 offset-md-4">
         <h1>Create a Histo Report</h1>
@@ -17,7 +16,7 @@
                 <th class="align-middle text-center">Report ID</th>
                 <th class="align-middle text-center">Biopsie ID</th>
                 <th class="align-middle text-center">Patient ID</th>
-        
+
                 <th class="align-middle text-center">Action</th>
             </thead>
             {% for report in history %}
@@ -25,13 +24,38 @@
                 <td class="align-middle text-center">{{ report.id }}</td>
                 <td class="align-middle text-center">{{ report.biopsie_id }}</td>
                 <td class="align-middle text-center">{{ report.patient_id }}</td>
-                <td class="align-middle text-center"><a class="btn btn-success btn-sm" role="button"
-                        href="historeport/new?id={{report.id}}">Resume</a>
-                    <form action="{{ url_for('historeport.delete_report', id_report=report.id) }}" method="post"
-                        style="display: inline;">
-                        {{ form.hidden_tag() }}
-                        {{ form.submit }}
-                    </form>
+                <td class="align-middle text-center">
+                    <a class="btn btn-success btn-sm" role="button" href="historeport/new?id={{report.id}}">Resume</a>
+                    <!-- Button Show Popup -->
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#DeletionPopup">
+                        Delete
+                    </button>
+
+                    <!-- Deletion Popup -->
+                    <div class="modal fade" id="DeletionPopup" tabindex="-1" aria-labelledby="DeletionPopupLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="DeletionPopupLabel">
+                                        Confirm Delete Popup
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{{ url_for('historeport.delete_report', id_report=report.id) }}"
+                                        method="post" style="display: inline">
+                                        {{ form.hidden_tag() }} {{ form.submit }}
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
             {% endfor %}
