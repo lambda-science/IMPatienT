@@ -126,6 +126,7 @@ class ReportHisto(db.Model):
     ontology_tree = db.Column(db.JSON, default=[])
     comment = db.Column(db.Text)
     conclusion = db.Column(db.String(140), index=True)
+    datetime = db.Column(db.DateTime())
 
     def __repr__(self):
         return "<ReportHisto ID {} ID {} Biopsie {}>".format(

@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from flask_login import current_user, login_required
 from flask import render_template, request, flash, redirect, url_for
 from app import db
@@ -57,6 +58,7 @@ def historeport():
             if report_entry is not None:
                 form.populate_obj(report_entry)
                 report_entry.expert_id = current_user.id
+                report_entry.datetime = datetime.utcnow()
                 db.session.commit()
                 return redirect(url_for("historeport.histoindex"))
 
@@ -64,6 +66,7 @@ def historeport():
             report_entry = ReportHisto()
             form.populate_obj(report_entry)
             report_entry.expert_id = current_user.id
+            report_entry.datetime = datetime.utcnow()
             db.session.add(report_entry)
             db.session.commit()
             return redirect(url_for("historeport.histoindex"))
