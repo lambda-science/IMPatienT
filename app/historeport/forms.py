@@ -140,10 +140,10 @@ class OntologyDescriptPreAbs(FlaskForm):
         },
     )
     preabsProba = DecimalRangeField(
-        "Probability",
+        "Obtainability / Presence",
         validators=[NumberRange(min=-1, max=1)],
         render_kw={
-            "min": -1,
+            "min": -1.25,
             "max": 1,
             "step": 0.25,
             "class": "form-range",

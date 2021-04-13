@@ -1,21 +1,20 @@
 /* Mozilla */
 input[type="range"]::-moz-range-track {
 /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f0ad4e+45,d9534f+45,d9534f+55,5cb85c+55 */
-background: -moz-linear-gradient(left,  rgba(240,173,78,1) 45%, rgba(217,83,79,1) 45%, rgba(217,83,79,1) 55%, rgba(92,184,92,1) 55%); /* FF3.6-15 */
-background: linear-gradient(to right,  rgba(240,173,78,1) 45%,rgba(217,83,79,1) 45%,rgba(217,83,79,1) 55%,rgba(92,184,92,1) 55%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#d9534f+5,f0ad4e+5,f0ad4e+5,f0ad4e+51,d2ffc9+51,0cf900+100 */
+background: -moz-linear-gradient(left,  rgba(217,83,79,1) 5%, rgba(240,173,78,1) 5%, rgba(240,173,78,1) 5%, rgba(240,173,78,1) 51%, rgba(210,255,201,1) 51%, rgba(12,249,0,1) 100%); /* FF3.6-15 */
+background: linear-gradient(to right,  rgba(217,83,79,1) 5%,rgba(240,173,78,1) 5%,rgba(240,173,78,1) 5%,rgba(240,173,78,1) 51%,rgba(210,255,201,1) 51%,rgba(12,249,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 /* Chrome */
 input[type='range']::-webkit-slider-runnable-track {
-    background: rgb(240,173,78); /* Old browsers */
-    background: -webkit-linear-gradient(left,  rgba(240,173,78,1) 45%,rgba(217,83,79,1) 45%,rgba(217,83,79,1) 55%,rgba(92,184,92,1) 55%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right,  rgba(240,173,78,1) 45%,rgba(217,83,79,1) 45%,rgba(217,83,79,1) 55%,rgba(92,184,92,1) 55%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: -webkit-linear-gradient(left,  rgba(217,83,79,1) 5%,rgba(240,173,78,1) 5%,rgba(240,173,78,1) 5%,rgba(240,173,78,1) 51%,rgba(210,255,201,1) 51%,rgba(12,249,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right,  rgba(217,83,79,1) 5%,rgba(240,173,78,1) 5%,rgba(240,173,78,1) 5%,rgba(240,173,78,1) 51%,rgba(210,255,201,1) 51%,rgba(12,249,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   }
 
 /* IE*/
 input[type="range"]::-ms-fill-lower, input[type="range"]::-ms-fill-upper {
-    background: rgb(240,173,78); /* Old browsers */
+  background: rgb(217,83,79); /* Old browsers */
     background: linear-gradient(to right,  rgba(240,173,78,1) 45%,rgba(217,83,79,1) 45%,rgba(217,83,79,1) 55%,rgba(92,184,92,1) 55%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   }
 
-  
