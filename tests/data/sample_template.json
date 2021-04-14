@@ -1,0 +1,86 @@
+[
+    {
+        "id": "5",
+        "text": "Coloration HE et TG",
+        "icon": true,
+        "li_attr": {
+            "id": "5"
+        },
+        "a_attr": {
+            "href": "#",
+            "id": "5_anchor"
+        },
+        "state": {
+            "loaded": true,
+            "opened": true,
+            "selected": false,
+            "disabled": false
+        },
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": ""
+        },
+        "parent": "#"
+    },
+    {
+        "id": "j1_1",
+        "text": "Modified Node 1",
+        "icon": true,
+        "li_attr": {
+            "id": "j1_1"
+        },
+        "a_attr": {
+            "href": "#",
+            "id": "j1_1_anchor"
+        },
+        "state": {
+            "loaded": true,
+            "opened": true,
+            "selected": true,
+            "disabled": false
+        },
+        "data": {},
+        "parent": "5"
+    },
+    {
+        "id": "j1_2",
+        "text": "Pr\u00e9l\u00e8vement Anormal",
+        "icon": true,
+        "li_attr": {
+            "id": "j1_2"
+        },
+        "a_attr": {
+            "href": "#",
+            "id": "j1_2_anchor"
+        },
+        "state": {
+            "loaded": true,
+            "opened": false,
+            "selected": false,
+            "disabled": false
+        },
+        "data": {},
+        "parent": "j1_1"
+    },
+    {
+        "id": "6e7558b5-4f8b-43aa-8dba-d35050f564f6",
+        "text": "Created Node 1",
+        "icon": true,
+        "li_attr": {
+            "id": "6e7558b5-4f8b-43aa-8dba-d35050f564f6"
+        },
+        "a_attr": {
+            "href": "#",
+            "id": "6e7558b5-4f8b-43aa-8dba-d35050f564f6_anchor"
+        },
+        "state": {
+            "loaded": true,
+            "opened": false,
+            "selected": false,
+            "disabled": false
+        },
+        "data": {},
+        "parent": "#"
+    }
+]

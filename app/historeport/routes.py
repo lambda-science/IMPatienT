@@ -6,6 +6,7 @@ from app import db
 from app.historeport import bp
 from app.models import ReportHisto
 from app.historeport.forms import ReportForm, OntologyDescriptPreAbs, DeleteButton
+from app.historeport.onto_func import update_from_template
 
 
 @bp.route("/historeport", methods=["GET", "POST"])
@@ -26,6 +27,10 @@ def historeport():
     if request.args:
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
+            template = json.load(open("config/ontology.json", "r"))
+            updated_onto_tree = update_from_template(
+                report_request.ontology_tree, template
+            )
             form = ReportForm(
                 patient_id=report_request.patient_id,
                 expert_id=report_request.expert_id,
@@ -34,7 +39,7 @@ def historeport():
                 age_biopsie=report_request.age_biopsie,
                 date_envoie=report_request.date_envoie,
                 gene_diag=report_request.gene_diag,
-                ontology_tree=report_request.ontology_tree,
+                ontology_tree=updated_onto_tree,
                 comment=report_request.comment,
                 conclusion=report_request.conclusion,
             )

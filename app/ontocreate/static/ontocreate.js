@@ -4,16 +4,29 @@ var input_tag = new Tagify(input);
 var input2 = document.querySelector("input[id=gene]");
 var input2_tag = new Tagify(input2);
 
-$("#jstree").jstree({
-  core: {
-    check_callback: true,
-    data: {
-      url: data_url.jstree,
-      dataType: "json", // needed only if you do not supply JSON headers
+function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+$("#jstree")
+  .bind("create_node.jstree", function (event, data) {
+    var newId = uuidv4();
+    $("#jstree").jstree().set_id(data.node, newId);
+  })
+  .jstree({
+    core: {
+      check_callback: true,
+      data: {
+        url: data_url.jstree,
+        dataType: "json", // needed only if you do not supply JSON headers
+      },
     },
-  },
-  plugins: ["contextmenu", "dnd", "wholerow", "unique", "search", "hotkeys"],
-});
+    plugins: ["contextmenu", "dnd", "wholerow", "unique", "search", "hotkeys"],
+  });
 
 var to = false;
 $("#plugins4_q").keyup(function () {

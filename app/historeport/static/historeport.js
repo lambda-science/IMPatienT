@@ -4,13 +4,26 @@ var input2 = document.querySelector("input[id=gene]");
 var input2_tag = new Tagify(input2);
 
 var json_tree = $("input[id=ontology_tree]").val();
-$("#jstree").jstree({
-  core: {
-    check_callback: true,
-    data: JSON.parse(json_tree),
-  },
-  plugins: ["wholerow", "unique", "search", "changed"],
-});
+function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+$("#jstree")
+  .bind("create_node.jstree", function (event, data) {
+    var newId = uuidv4();
+    $("#jstree").jstree().set_id(data.node, newId);
+  })
+  .jstree({
+    core: {
+      check_callback: true,
+      data: JSON.parse(json_tree),
+    },
+    plugins: ["contextmenu", "wholerow", "unique", "search", "changed"],
+  });
 
 var to = false;
 $("#plugins4_q").keyup(function () {
@@ -62,16 +75,21 @@ function update_node_data() {
 
 function set_slider_span(slide_value) {
   var message = {
-    '-1.25':'<span class="badge bg-danger range-value">No Info: Not Askable (-1.25)</span>',
-    '-1':'<span class="badge bg-warning range-value">No Info: Difficile (-1)</span>',
-    '-0.75':'<span class="badge bg-warning range-value">No Info: Modéré (-0.75)</span>',
-    '-0.5':'<span class="badge bg-warning range-value">No Info: Facile (-0.5)</span>',
-    '-0.25':'<span class="badge bg-warning range-value">No Info (-0.25)</span>',
-    '0':'<span class="badge bg-info range-value">Absent (0)</span>',
-    '0.25':'<span class="badge bg-success range-value">Présent Faible (0.25)</span>',
-    '0.5':'<span class="badge bg-success range-value">Présent Modéré (0.5)</span>',
-    '0.75':'<span class="badge bg-success range-value">Présent Fort (0.75)</span>',
-    '1':'<span class="badge bg-success range-value">Présent Total (1)</span>'
+    "-1.25":
+      '<span class="badge bg-danger range-value">No Info: Not Askable (-1.25)</span>',
+    "-1":
+      '<span class="badge bg-warning range-value">No Info: Difficile (-1)</span>',
+    "-0.75":
+      '<span class="badge bg-warning range-value">No Info: Modéré (-0.75)</span>',
+    "-0.5":
+      '<span class="badge bg-warning range-value">No Info: Facile (-0.5)</span>',
+    "-0.25":
+      '<span class="badge bg-warning range-value">No Info (-0.25)</span>',
+    0: '<span class="badge bg-info range-value">Absent (0)</span>',
+    0.25: '<span class="badge bg-success range-value">Présent Faible (0.25)</span>',
+    0.5: '<span class="badge bg-success range-value">Présent Modéré (0.5)</span>',
+    0.75: '<span class="badge bg-success range-value">Présent Fort (0.75)</span>',
+    1: '<span class="badge bg-success range-value">Présent Total (1)</span>',
   };
-  $('#sliderspan').html(message[slide_value]);
-};
+  $("#sliderspan").html(message[slide_value]);
+}
