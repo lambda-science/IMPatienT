@@ -15,6 +15,7 @@ function uuidv4() {
 $("#jstree")
   .bind("create_node.jstree", function (event, data) {
     var newId = uuidv4();
+    data.node.data = { synonymes: "", genes: "", description: "" };
     $("#jstree").jstree().set_id(data.node, newId);
   })
   .jstree({

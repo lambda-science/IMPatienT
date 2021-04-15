@@ -15,6 +15,7 @@ function uuidv4() {
 $("#jstree")
   .bind("create_node.jstree", function (event, data) {
     var newId = uuidv4();
+    data.node.data = { synonymes: "", genes: "", description: "" };
     $("#jstree").jstree().set_id(data.node, newId);
   })
   .jstree({
@@ -22,7 +23,22 @@ $("#jstree")
       check_callback: true,
       data: JSON.parse(json_tree),
     },
-    plugins: ["contextmenu", "wholerow", "unique", "search", "changed"],
+    plugins: ["contextmenu", "wholerow", "unique", "search", "changed", "dnd"],
+    //contextmenu: {
+    //  items: function ($node) {
+    //    return {
+    //      Create: {
+    //        separator_before: false,
+    //        separator_after: false,
+    //        label: "Create",
+    //        action: function (obj) {
+    //          $node = $("#jstree").jstree().create_node($node);
+    //          $("#jstree").jstree().edit($node);
+    //        },
+    //      },
+    //    };
+    //  },
+    //},
   });
 
 var to = false;

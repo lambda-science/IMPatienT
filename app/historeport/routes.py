@@ -24,10 +24,10 @@ def historeport():
     """Page to create new histology report of modify already existing one."""
     # If args in URL, try to retrive report from DB and pre-fill it
     ontology_tree_exist = False
+    template = json.load(open("config/ontology.json", "r"))
     if request.args:
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
-            template = json.load(open("config/ontology.json", "r"))
             updated_onto_tree = update_from_template(
                 report_request.ontology_tree, template
             )
@@ -64,6 +64,11 @@ def historeport():
                 form.populate_obj(report_entry)
                 report_entry.expert_id = current_user.id
                 report_entry.datetime = datetime.utcnow()
+                updated_onto_tree = update_from_template(
+                    template, report_entry.ontology_tree
+                )
+                with open("config/ontology.json", "w") as template:
+                    json.dump(updated_onto_tree, template, indent=4)
                 db.session.commit()
                 return redirect(url_for("historeport.histoindex"))
 
@@ -73,6 +78,11 @@ def historeport():
             report_entry.expert_id = current_user.id
             report_entry.datetime = datetime.utcnow()
             db.session.add(report_entry)
+            updated_onto_tree = update_from_template(
+                template, report_entry.ontology_tree
+            )
+            with open("config/ontology.json", "w") as template:
+                json.dump(updated_onto_tree, template, indent=4)
             db.session.commit()
             return redirect(url_for("historeport.histoindex"))
 
