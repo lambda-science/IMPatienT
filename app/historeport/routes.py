@@ -6,7 +6,7 @@ from app import db
 from app.historeport import bp
 from app.models import ReportHisto
 from app.historeport.forms import ReportForm, OntologyDescriptPreAbs, DeleteButton
-from app.historeport.onto_func import update_from_template
+from app.historeport.onto_func import Ontology
 
 
 @bp.route("/historeport", methods=["GET", "POST"])
@@ -28,8 +28,11 @@ def historeport():
     if request.args:
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
-            updated_onto_tree = update_from_template(
-                report_request.ontology_tree, template
+            # Update of report ontology
+            current_report_ontology = Ontology(report_request.ontology_tree)
+            template_ontology = Ontology(template)
+            updated_report_ontology = current_report_ontology.update_ontology(
+                template_ontology
             )
             form = ReportForm(
                 patient_id=report_request.patient_id,
@@ -39,7 +42,7 @@ def historeport():
                 age_biopsie=report_request.age_biopsie,
                 date_envoie=report_request.date_envoie,
                 gene_diag=report_request.gene_diag,
-                ontology_tree=updated_onto_tree,
+                ontology_tree=updated_report_ontology,
                 comment=report_request.comment,
                 conclusion=report_request.conclusion,
             )
@@ -64,11 +67,11 @@ def historeport():
                 form.populate_obj(report_entry)
                 report_entry.expert_id = current_user.id
                 report_entry.datetime = datetime.utcnow()
-                updated_onto_tree = update_from_template(
-                    template, report_entry.ontology_tree
-                )
-                with open("config/ontology.json", "w") as template:
-                    json.dump(updated_onto_tree, template, indent=4)
+                # Update of template ontology
+                template_ontology = Ontology(template)
+                current_report_ontology = Ontology(report_entry.ontology_tree)
+                template_ontology.update_ontology(current_report_ontology)
+                template_ontology.dump_to_file("config/ontology.json")
                 db.session.commit()
                 return redirect(url_for("historeport.histoindex"))
 
@@ -78,11 +81,11 @@ def historeport():
             report_entry.expert_id = current_user.id
             report_entry.datetime = datetime.utcnow()
             db.session.add(report_entry)
-            updated_onto_tree = update_from_template(
-                template, report_entry.ontology_tree
-            )
-            with open("config/ontology.json", "w") as template:
-                json.dump(updated_onto_tree, template, indent=4)
+            # Update of template ontology
+            template_ontology = Ontology(template)
+            current_report_ontology = Ontology(report_entry.ontology_tree)
+            template_ontology.update_ontology(current_report_ontology)
+            template_ontology.dump_to_file("config/ontology.json")
             db.session.commit()
             return redirect(url_for("historeport.histoindex"))
 

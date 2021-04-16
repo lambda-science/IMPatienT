@@ -7,8 +7,8 @@ topdir = os.path.join(os.path.dirname(__file__), "..")
 sys.path.append(topdir)
 
 from app import create_app, db
-from app.models import User, ReportHisto
-from app.historeport.onto_func import update_from_template
+from app.models import User
+from app.historeport.onto_func import Ontology
 from config import Config
 
 
@@ -51,9 +51,9 @@ class HistoReportCase(unittest.TestCase):
         assert b"Create a Histo Report" in rv.data
 
     def test_update_from_template(self):
-        template = json.load(open("tests/data/sample_template.json", "r"))
-        report = json.load(open("tests/data/sample_historeport.json", "r"))
-        result = update_from_template(report, template)
+        report = Ontology(json.load(open("tests/data/sample_historeport.json", "r")))
+        template = Ontology(json.load(open("tests/data/sample_template.json", "r")))
+        result = report.update_ontology(template)
         node_names = [i["text"] for i in result]
         assert "OUTDATED : Fibre Type 1" in node_names
         assert "Created Node 1" in node_names
