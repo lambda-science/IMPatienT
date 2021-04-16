@@ -26,7 +26,7 @@ $("#jstree")
         dataType: "json", // needed only if you do not supply JSON headers
       },
     },
-    plugins: ["contextmenu", "dnd", "wholerow", "unique", "search", "hotkeys"],
+    plugins: ["contextmenu", "dnd", "wholerow", "unique", "search", "changed"],
   });
 
 var to = false;

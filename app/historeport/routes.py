@@ -71,7 +71,7 @@ def historeport():
                 template_ontology = Ontology(template)
                 current_report_ontology = Ontology(report_entry.ontology_tree)
                 template_ontology.update_ontology(current_report_ontology)
-                template_ontology.dump_to_file("config/ontology.json")
+                template_ontology.dump_updated_to_file("config/ontology.json")
                 db.session.commit()
                 return redirect(url_for("historeport.histoindex"))
 
@@ -85,7 +85,7 @@ def historeport():
             template_ontology = Ontology(template)
             current_report_ontology = Ontology(report_entry.ontology_tree)
             template_ontology.update_ontology(current_report_ontology)
-            template_ontology.dump_to_file("config/ontology.json")
+            template_ontology.dump_updated_to_file("config/ontology.json")
             db.session.commit()
             return redirect(url_for("historeport.histoindex"))
 

@@ -56,6 +56,6 @@ class Ontology:
         self.updated_jstree_dict = updated_jstree_as_dict
         return updated_jstree_as_dict
 
-    def dump_to_file(self, file_path: str):
+    def dump_updated_to_file(self, file_path: str):
         with open(file_path, "w") as fp:
             json.dump(self.updated_jstree_dict, fp, indent=4)

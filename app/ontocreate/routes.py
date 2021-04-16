@@ -28,8 +28,21 @@ def modify_onto():
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
+    dirty_tree = {
+        i["id"]: {
+            "id": i["id"],
+            "text": i["text"],
+            "icon": i["icon"],
+            "data": i["data"],
+            "parent": i["parent"],
+        }
+        for i in parsed
+    }
+    clean_tree = []
+    for i in dirty_tree:
+        clean_tree.append(dirty_tree[i])
     with open(
         os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "w"
     ) as json_file:
-        json_file.write(json.dumps(parsed, indent=4))
+        json.dump(clean_tree, json_file, indent=4)
     return json.dumps({"success": True}), 200, {"ContentType": "application/json"}

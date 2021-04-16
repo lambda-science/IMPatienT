@@ -3,19 +3,6 @@
         "id": "5",
         "text": "Coloration HE et TG",
         "icon": true,
-        "li_attr": {
-            "id": "5"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "5_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": true,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -27,19 +14,6 @@
         "id": "j1_1",
         "text": "Aspect Global Pr\u00e9l\u00e8vement",
         "icon": true,
-        "li_attr": {
-            "id": "j1_1"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "j1_1_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {},
         "parent": "5"
     },
@@ -47,19 +21,6 @@
         "id": "j1_2",
         "text": "Pr\u00e9l\u00e8vement Anormal",
         "icon": true,
-        "li_attr": {
-            "id": "j1_2"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "j1_2_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {},
         "parent": "j1_1"
     },
@@ -67,19 +28,6 @@
         "id": "6",
         "text": "Fibre Type 1",
         "icon": true,
-        "li_attr": {
-            "id": "6"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "6_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -91,19 +39,6 @@
         "id": "50",
         "text": "Type 1 Hypertrophiques (grandes)",
         "icon": true,
-        "li_attr": {
-            "id": "50"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "50_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -115,19 +50,6 @@
         "id": "51",
         "text": "Type 1 Atrophi\u00e9es (petites)",
         "icon": true,
-        "li_attr": {
-            "id": "51"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "51_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -139,19 +61,6 @@
         "id": "52",
         "text": "Type  1 Taille h\u00e9t\u00e9rog\u00e8ne",
         "icon": true,
-        "li_attr": {
-            "id": "52"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "52_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -163,19 +72,6 @@
         "id": "7",
         "text": "Fibre Type 2",
         "icon": true,
-        "li_attr": {
-            "id": "7"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "7_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -187,19 +83,6 @@
         "id": "53",
         "text": "Type 2 Hypertrophiques (grandes)",
         "icon": true,
-        "li_attr": {
-            "id": "53"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "53_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -211,19 +94,6 @@
         "id": "54",
         "text": "Type 2 Atrophi\u00e9es (petites)",
         "icon": true,
-        "li_attr": {
-            "id": "54"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "54_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -235,19 +105,6 @@
         "id": "55",
         "text": "Type 2  Taille h\u00e9t\u00e9rog\u00e8ne",
         "icon": true,
-        "li_attr": {
-            "id": "55"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "55_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -259,19 +116,6 @@
         "id": "8",
         "text": "Taille Fibre",
         "icon": true,
-        "li_attr": {
-            "id": "8"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "8_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -283,19 +127,6 @@
         "id": "56",
         "text": "Taille In\u00e9gale",
         "icon": true,
-        "li_attr": {
-            "id": "56"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "56_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -307,19 +138,6 @@
         "id": "59",
         "text": "Taille Homog\u00e8ne",
         "icon": true,
-        "li_attr": {
-            "id": "59"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "59_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -331,19 +149,6 @@
         "id": "58",
         "text": "Sans Topographie",
         "icon": true,
-        "li_attr": {
-            "id": "58"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "58_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -355,19 +160,6 @@
         "id": "9",
         "text": "HETG: Apsect Fibre",
         "icon": true,
-        "li_attr": {
-            "id": "9"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "9_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -379,19 +171,6 @@
         "id": "65",
         "text": "HETG: En rayon de roue",
         "icon": true,
-        "li_attr": {
-            "id": "65"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "65_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -403,19 +182,6 @@
         "id": "60",
         "text": "HETG: Vacuolis\u00e9e bord\u00e9e",
         "icon": true,
-        "li_attr": {
-            "id": "60"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "60_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -427,19 +193,6 @@
         "id": "61",
         "text": "HETG: Lobul\u00e9e",
         "icon": true,
-        "li_attr": {
-            "id": "61"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "61_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -451,19 +204,6 @@
         "id": "62",
         "text": "HETG: Anguleuse",
         "icon": true,
-        "li_attr": {
-            "id": "62"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "62_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -475,19 +215,6 @@
         "id": "63",
         "text": "HETG: Bord arrondis",
         "icon": true,
-        "li_attr": {
-            "id": "63"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "63_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -499,19 +226,6 @@
         "id": "64",
         "text": "HETG: Segmentation de fibre",
         "icon": true,
-        "li_attr": {
-            "id": "64"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "64_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -523,19 +237,6 @@
         "id": "66",
         "text": "HETG: Tourbillon",
         "icon": true,
-        "li_attr": {
-            "id": "66"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "66_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -547,19 +248,6 @@
         "id": "67",
         "text": "HETG: Red-ragged fibers",
         "icon": true,
-        "li_attr": {
-            "id": "67"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "67_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -571,19 +259,6 @@
         "id": "68",
         "text": "HETG: Fibre  annulaire",
         "icon": true,
-        "li_attr": {
-            "id": "68"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "68_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -595,19 +270,6 @@
         "id": "11",
         "text": "Noyaux",
         "icon": true,
-        "li_attr": {
-            "id": "11"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "11_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -619,19 +281,6 @@
         "id": "69",
         "text": "Noyaux Centralis\u00e9",
         "icon": true,
-        "li_attr": {
-            "id": "69"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "69_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -643,19 +292,6 @@
         "id": "70",
         "text": "Noyaux Internalis\u00e9",
         "icon": true,
-        "li_attr": {
-            "id": "70"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "70_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -667,19 +303,6 @@
         "id": "71",
         "text": "Noyaux Sous-Sarcolemmique",
         "icon": true,
-        "li_attr": {
-            "id": "71"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "71_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -691,19 +314,6 @@
         "id": "73",
         "text": "Noyaux \u00e0 Aspects Myotubulaire",
         "icon": true,
-        "li_attr": {
-            "id": "73"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "73_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -715,19 +325,6 @@
         "id": "72",
         "text": "Augmentation du Nombre de Noyaux",
         "icon": true,
-        "li_attr": {
-            "id": "72"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "72_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -739,19 +336,6 @@
         "id": "12",
         "text": "Inclusions prot\u00e9iques",
         "icon": true,
-        "li_attr": {
-            "id": "12"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "12_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -763,19 +347,6 @@
         "id": "74",
         "text": "Inclusions Centralis\u00e9es",
         "icon": true,
-        "li_attr": {
-            "id": "74"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "74_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -787,19 +358,6 @@
         "id": "75",
         "text": "Inclusions P\u00e9riph\u00e9riques",
         "icon": true,
-        "li_attr": {
-            "id": "75"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "75_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -811,19 +369,6 @@
         "id": "13",
         "text": "Mat\u00e9riel Fuscinophile",
         "icon": true,
-        "li_attr": {
-            "id": "13"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "13_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -835,19 +380,6 @@
         "id": "76",
         "text": "Mat\u00e9riel Fuscinophile: Amas/Aggr\u00e9gat sombre",
         "icon": true,
-        "li_attr": {
-            "id": "76"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "76_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -859,19 +391,6 @@
         "id": "77",
         "text": "Mat\u00e9riel Fuscinophile: Granuleux",
         "icon": true,
-        "li_attr": {
-            "id": "77"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "77_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -883,19 +402,6 @@
         "id": "78",
         "text": "Mat\u00e9riel Fuscinophile: Radiant",
         "icon": true,
-        "li_attr": {
-            "id": "78"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "78_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -907,19 +413,6 @@
         "id": "79",
         "text": "Mat\u00e9riel Fuscinophile: Diffus",
         "icon": true,
-        "li_attr": {
-            "id": "79"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "79_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -931,19 +424,6 @@
         "id": "80",
         "text": "Mat\u00e9riel Fuscinophile: Centralis\u00e9s",
         "icon": true,
-        "li_attr": {
-            "id": "80"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "80_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -955,19 +435,6 @@
         "id": "81",
         "text": "Mat\u00e9riel Fuscinophile: P\u00e9riph\u00e9riques",
         "icon": true,
-        "li_attr": {
-            "id": "81"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "81_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -979,19 +446,6 @@
         "id": "82",
         "text": "Mat\u00e9riel Fuscinophile: Sous-Sarcolemmique",
         "icon": true,
-        "li_attr": {
-            "id": "82"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "82_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1003,19 +457,6 @@
         "id": "84",
         "text": "Mat\u00e9riel Fuscinophile: Bords r\u00e9guliers",
         "icon": true,
-        "li_attr": {
-            "id": "84"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "84_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1027,19 +468,6 @@
         "id": "85",
         "text": "Mat\u00e9riel Fuscinophile: Bords irr\u00e9guliers",
         "icon": true,
-        "li_attr": {
-            "id": "85"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "85_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1051,19 +479,6 @@
         "id": "86",
         "text": "Mat\u00e9riel Fuscinophile: Arrondis",
         "icon": true,
-        "li_attr": {
-            "id": "86"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "86_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1075,19 +490,6 @@
         "id": "83",
         "text": "Aspect violine (contour impr\u00e9cis)",
         "icon": true,
-        "li_attr": {
-            "id": "83"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "83_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1099,19 +501,6 @@
         "id": "16",
         "text": "B\u00e2tonnets - Rods et Nemaline Bodies",
         "icon": true,
-        "li_attr": {
-            "id": "16"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "16_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1123,19 +512,6 @@
         "id": "90",
         "text": "B\u00e2tonnets - Rods",
         "icon": true,
-        "li_attr": {
-            "id": "90"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "90_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": true,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1147,19 +523,6 @@
         "id": "91",
         "text": "Mini-rods",
         "icon": true,
-        "li_attr": {
-            "id": "91"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "91_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1171,19 +534,6 @@
         "id": "92",
         "text": "Piquet\u00e9 rouge (rod-like)",
         "icon": true,
-        "li_attr": {
-            "id": "92"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "92_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1195,19 +545,6 @@
         "id": "93",
         "text": "Inclusion poussi\u00e8re rouge",
         "icon": true,
-        "li_attr": {
-            "id": "93"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "93_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1219,19 +556,6 @@
         "id": "15",
         "text": "Zone Claire",
         "icon": true,
-        "li_attr": {
-            "id": "15"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "15_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1243,19 +567,6 @@
         "id": "87",
         "text": "Zone Claire en Croissant P\u00e9riph\u00e9rique",
         "icon": true,
-        "li_attr": {
-            "id": "87"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "87_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1267,19 +578,6 @@
         "id": "88",
         "text": "Zone Claire Centrale",
         "icon": true,
-        "li_attr": {
-            "id": "88"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "88_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1291,19 +589,6 @@
         "id": "89",
         "text": "Majorit\u00e9 de la Fibre",
         "icon": true,
-        "li_attr": {
-            "id": "89"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "89_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1315,19 +600,6 @@
         "id": "18",
         "text": "Fuseau Neuromusculaire",
         "icon": true,
-        "li_attr": {
-            "id": "18"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "18_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1339,19 +611,6 @@
         "id": "95",
         "text": "Fuseau Neuromusculaire Anormal",
         "icon": true,
-        "li_attr": {
-            "id": "95"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "95_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1363,19 +622,6 @@
         "id": "19",
         "text": "Tissu Conjonctif",
         "icon": true,
-        "li_attr": {
-            "id": "19"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "19_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1387,19 +633,6 @@
         "id": "96",
         "text": "Tissu Conjonctif Fibreux",
         "icon": true,
-        "li_attr": {
-            "id": "96"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "96_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1411,19 +644,6 @@
         "id": "97",
         "text": "Tissu Conjonctif Lipomateux",
         "icon": true,
-        "li_attr": {
-            "id": "97"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "97_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1435,19 +655,6 @@
         "id": "20",
         "text": "Alt\u00e9rations et L\u00e9sions Interstitielles",
         "icon": true,
-        "li_attr": {
-            "id": "20"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "20_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1459,19 +666,6 @@
         "id": "98",
         "text": "Alt\u00e9rations Interstitielles",
         "icon": true,
-        "li_attr": {
-            "id": "98"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "98_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1483,19 +677,6 @@
         "id": "99",
         "text": "Augmentation Tissu Conjonctif",
         "icon": true,
-        "li_attr": {
-            "id": "99"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "99_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1507,19 +688,6 @@
         "id": "100",
         "text": "Augmentation Tissu Adipeux",
         "icon": true,
-        "li_attr": {
-            "id": "100"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "100_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1531,19 +699,6 @@
         "id": "101",
         "text": "Entoure Compl\u00e8tement les Fibres",
         "icon": true,
-        "li_attr": {
-            "id": "101"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "101_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1555,19 +710,6 @@
         "id": "102",
         "text": "Bande \u00e9paisse entre Fascicules",
         "icon": true,
-        "li_attr": {
-            "id": "102"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "102_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1579,19 +721,6 @@
         "id": "21",
         "text": "Elements Inflammatoires",
         "icon": true,
-        "li_attr": {
-            "id": "21"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "21_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1603,19 +732,6 @@
         "id": "103",
         "text": "Inflammation",
         "icon": true,
-        "li_attr": {
-            "id": "103"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "103_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1627,19 +743,6 @@
         "id": "22",
         "text": "Collag\u00e8ne Endosymial",
         "icon": true,
-        "li_attr": {
-            "id": "22"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "22_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1651,19 +754,6 @@
         "id": "104",
         "text": "Augmentation du Collag\u00e8ne Endosymial",
         "icon": true,
-        "li_attr": {
-            "id": "104"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "104_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1675,19 +765,6 @@
         "id": "17",
         "text": "Aggr\u00e9gats Tubulaires",
         "icon": true,
-        "li_attr": {
-            "id": "17"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "17_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1699,19 +776,6 @@
         "id": "23",
         "text": "Necklace Fibers",
         "icon": true,
-        "li_attr": {
-            "id": "23"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "23_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": true,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1723,19 +787,6 @@
         "id": "24",
         "text": "Coup d'ongle p\u00e9riph\u00e9rique",
         "icon": true,
-        "li_attr": {
-            "id": "24"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "24_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": true,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1747,19 +798,6 @@
         "id": "25",
         "text": "Signe de N\u00e9crose",
         "icon": true,
-        "li_attr": {
-            "id": "25"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "25_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": true,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1771,19 +809,6 @@
         "id": "26",
         "text": "Signe de R\u00e9g\u00e9n\u00e9ration",
         "icon": true,
-        "li_attr": {
-            "id": "26"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "26_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": true,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1795,19 +820,6 @@
         "id": "4",
         "text": "Enzymologie ATPasique",
         "icon": true,
-        "li_attr": {
-            "id": "4"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "4_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1819,19 +831,6 @@
         "id": "27",
         "text": "Diff\u00e9rentiation des Fibres",
         "icon": true,
-        "li_attr": {
-            "id": "27"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "27_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1843,19 +842,6 @@
         "id": "110",
         "text": "Diff\u00e9renciation Anormale",
         "icon": true,
-        "li_attr": {
-            "id": "110"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "110_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1867,19 +853,6 @@
         "id": "111",
         "text": "Coloration P\u00e2le des Fibre Atrophiques",
         "icon": true,
-        "li_attr": {
-            "id": "111"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "111_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1891,19 +864,6 @@
         "id": "112",
         "text": "Zone sans activit\u00e9 ATPase",
         "icon": true,
-        "li_attr": {
-            "id": "112"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "112_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1915,19 +875,6 @@
         "id": "113",
         "text": "Uniformit\u00e9 de Type",
         "icon": true,
-        "li_attr": {
-            "id": "113"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "113_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1939,19 +886,6 @@
         "id": "28",
         "text": "R\u00e9partition Num\u00e9rique des Fibres",
         "icon": true,
-        "li_attr": {
-            "id": "28"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "28_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1963,19 +897,6 @@
         "id": "114",
         "text": "Pr\u00e9dominance Fibre Type 1",
         "icon": true,
-        "li_attr": {
-            "id": "114"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "114_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -1987,19 +908,6 @@
         "id": "115",
         "text": "Pr\u00e9dominance Fibre Type 2",
         "icon": true,
-        "li_attr": {
-            "id": "115"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "115_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2011,19 +919,6 @@
         "id": "29",
         "text": "R\u00e9partition Topographique des Types de Fibre",
         "icon": true,
-        "li_attr": {
-            "id": "29"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "29_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2035,19 +930,6 @@
         "id": "120",
         "text": "Regroupement des Fibres",
         "icon": true,
-        "li_attr": {
-            "id": "120"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "120_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2059,19 +941,6 @@
         "id": "121",
         "text": "Fibres 1 Group\u00e9es",
         "icon": true,
-        "li_attr": {
-            "id": "121"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "121_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2083,19 +952,6 @@
         "id": "122",
         "text": "Fibres 2 Group\u00e9es",
         "icon": true,
-        "li_attr": {
-            "id": "122"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "122_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2107,19 +963,6 @@
         "id": "30",
         "text": "Activit\u00e9 ATPasique",
         "icon": true,
-        "li_attr": {
-            "id": "30"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "30_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2131,19 +974,6 @@
         "id": "124",
         "text": "Activit\u00e9 Acide-R\u00e9sistant (Type 1)",
         "icon": true,
-        "li_attr": {
-            "id": "124"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "124_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2155,19 +985,6 @@
         "id": "126",
         "text": "Activit\u00e9 ATP Centrale",
         "icon": true,
-        "li_attr": {
-            "id": "126"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "126_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2179,19 +996,6 @@
         "id": "127",
         "text": "Activit\u00e9 ATP P\u00e9riph\u00e9rique",
         "icon": true,
-        "li_attr": {
-            "id": "127"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "127_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2203,19 +1007,6 @@
         "id": "128",
         "text": "Activit\u00e9 en Plage \u00e9tendue",
         "icon": true,
-        "li_attr": {
-            "id": "128"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "128_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2227,19 +1018,6 @@
         "id": "129",
         "text": "Activit\u00e9 en Halo",
         "icon": true,
-        "li_attr": {
-            "id": "129"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "129_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2251,19 +1029,6 @@
         "id": "125",
         "text": "Activit\u00e9 ATPasique Anormale",
         "icon": true,
-        "li_attr": {
-            "id": "125"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "125_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": true,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2275,19 +1040,6 @@
         "id": "j1_10",
         "text": "Activit\u00e9 ATPasique Anormale Localement (Zone Claire)",
         "icon": true,
-        "li_attr": {
-            "id": "j1_10"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "j1_10_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {},
         "parent": "30"
     },
@@ -2295,19 +1047,6 @@
         "id": "3",
         "text": "Enzymologie oxydative",
         "icon": true,
-        "li_attr": {
-            "id": "3"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "3_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2319,19 +1058,6 @@
         "id": "31",
         "text": "Activit\u00e9 Oxy: Aspect Fibre",
         "icon": true,
-        "li_attr": {
-            "id": "31"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "31_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2343,19 +1069,6 @@
         "id": "130",
         "text": "Activit\u00e9 Oxy: Myotubulaire",
         "icon": true,
-        "li_attr": {
-            "id": "130"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "130_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2367,19 +1080,6 @@
         "id": "131",
         "text": "Activit\u00e9 Oxy: Cern\u00e9",
         "icon": true,
-        "li_attr": {
-            "id": "131"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "131_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2391,19 +1091,6 @@
         "id": "132",
         "text": "Activit\u00e9 Oxy: Lobulation",
         "icon": true,
-        "li_attr": {
-            "id": "132"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "132_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2415,19 +1102,6 @@
         "id": "133",
         "text": "Activit\u00e9 Oxy: Multi-lobul\u00e9",
         "icon": true,
-        "li_attr": {
-            "id": "133"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "133_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2439,19 +1113,6 @@
         "id": "135",
         "text": "Activit\u00e9 Oxy: En rayon de roue",
         "icon": true,
-        "li_attr": {
-            "id": "135"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "135_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2463,19 +1124,6 @@
         "id": "136",
         "text": "Activit\u00e9 Oxy: Aspect targ\u00e9toide",
         "icon": true,
-        "li_attr": {
-            "id": "136"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "136_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2487,19 +1135,6 @@
         "id": "134",
         "text": "Activit\u00e9 Oxy: Alv\u00e9ole Core-like",
         "icon": true,
-        "li_attr": {
-            "id": "134"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "134_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2511,19 +1146,6 @@
         "id": "33",
         "text": "Remaniement Structurel",
         "icon": true,
-        "li_attr": {
-            "id": "33"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "33_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2535,19 +1157,6 @@
         "id": "137",
         "text": "D\u00e9sorganisation structurelle",
         "icon": true,
-        "li_attr": {
-            "id": "137"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "137_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2559,19 +1168,6 @@
         "id": "138",
         "text": "L\u00e9sion Sous-Sarcolemmique",
         "icon": true,
-        "li_attr": {
-            "id": "138"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "138_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2583,19 +1179,6 @@
         "id": "139",
         "text": "R\u00e9seau Intermyofibrillaire Irr\u00e9gulier",
         "icon": true,
-        "li_attr": {
-            "id": "139"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "139_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2607,19 +1190,6 @@
         "id": "140",
         "text": "Rimmed Sarcolemma",
         "icon": true,
-        "li_attr": {
-            "id": "140"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "140_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2631,19 +1201,6 @@
         "id": "34",
         "text": "R\u00e9partition Activit\u00e9",
         "icon": true,
-        "li_attr": {
-            "id": "34"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "34_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2655,19 +1212,6 @@
         "id": "141",
         "text": "Activit\u00e9 Oxy: Disproportion",
         "icon": true,
-        "li_attr": {
-            "id": "141"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "141_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2679,19 +1223,6 @@
         "id": "142",
         "text": "Activit\u00e9 Oxy: Zone Claire (p\u00e2le)",
         "icon": true,
-        "li_attr": {
-            "id": "142"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "142_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2703,19 +1234,6 @@
         "id": "143",
         "text": "Activit\u00e9 Oxy: Centrale",
         "icon": true,
-        "li_attr": {
-            "id": "143"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "143_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2727,19 +1245,6 @@
         "id": "144",
         "text": "Activit\u00e9 Oxy: P\u00e9riph\u00e9rique",
         "icon": true,
-        "li_attr": {
-            "id": "144"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "144_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2751,19 +1256,6 @@
         "id": "145",
         "text": "Activit\u00e9 Oxy: En Croissant",
         "icon": true,
-        "li_attr": {
-            "id": "145"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "145_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2775,19 +1267,6 @@
         "id": "146",
         "text": "Activit\u00e9 Oxy: Limites nettes",
         "icon": true,
-        "li_attr": {
-            "id": "146"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "146_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2799,19 +1278,6 @@
         "id": "147",
         "text": "Activit\u00e9 Oxy: Limites floues",
         "icon": true,
-        "li_attr": {
-            "id": "147"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "147_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2823,19 +1289,6 @@
         "id": "148",
         "text": "Activit\u00e9 Oxy: Coloration Fonc\u00e9 Sous-Sarcolemmique",
         "icon": true,
-        "li_attr": {
-            "id": "148"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "148_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2847,19 +1300,6 @@
         "id": "150",
         "text": "Activit\u00e9 Oxy: Liseret P\u00e9riph\u00e9rique Fonc\u00e9",
         "icon": true,
-        "li_attr": {
-            "id": "150"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "150_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2871,19 +1311,6 @@
         "id": "151",
         "text": "Activit\u00e9 Oxy: Zone Inclusion Non Color\u00e9e",
         "icon": true,
-        "li_attr": {
-            "id": "151"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "151_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2895,19 +1322,6 @@
         "id": "149",
         "text": "Accumulation Mitochondries P\u00e9riph\u00e9riques",
         "icon": true,
-        "li_attr": {
-            "id": "149"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "149_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2919,19 +1333,6 @@
         "id": "36",
         "text": "Core",
         "icon": true,
-        "li_attr": {
-            "id": "36"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "36_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2943,19 +1344,6 @@
         "id": "153",
         "text": "Core P\u00e9riph\u00e9riques",
         "icon": true,
-        "li_attr": {
-            "id": "153"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "153_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2967,19 +1355,6 @@
         "id": "154",
         "text": "Core Centraux Uniques",
         "icon": true,
-        "li_attr": {
-            "id": "154"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "154_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -2991,19 +1366,6 @@
         "id": "155",
         "text": "Core \u00e0 Limites Nettes",
         "icon": true,
-        "li_attr": {
-            "id": "155"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "155_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3015,19 +1377,6 @@
         "id": "156",
         "text": "Core \u00e0 Limites Floues",
         "icon": true,
-        "li_attr": {
-            "id": "156"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "156_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3039,19 +1388,6 @@
         "id": "157",
         "text": "Core sur toute la Section",
         "icon": true,
-        "li_attr": {
-            "id": "157"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "157_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3063,19 +1399,6 @@
         "id": "158",
         "text": "Minicores",
         "icon": true,
-        "li_attr": {
-            "id": "158"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "158_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3087,19 +1410,6 @@
         "id": "38",
         "text": "NADH",
         "icon": true,
-        "li_attr": {
-            "id": "38"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "38_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3111,19 +1421,6 @@
         "id": "159",
         "text": "NADH: Fibre Atrophique Fonc\u00e9e",
         "icon": true,
-        "li_attr": {
-            "id": "159"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "159_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3135,19 +1432,6 @@
         "id": "160",
         "text": "NADH: Halo Fonc\u00e9 Sous-Sarcolemmique",
         "icon": true,
-        "li_attr": {
-            "id": "160"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "160_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3159,19 +1443,6 @@
         "id": "1",
         "text": "Enzymologie Divers",
         "icon": true,
-        "li_attr": {
-            "id": "1"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "1_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "test",
@@ -3183,19 +1454,6 @@
         "id": "39",
         "text": "Activit\u00e9 COX",
         "icon": true,
-        "li_attr": {
-            "id": "39"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "39_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3207,19 +1465,6 @@
         "id": "161",
         "text": "Activit\u00e9 COX Anormale",
         "icon": true,
-        "li_attr": {
-            "id": "161"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "161_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3231,19 +1476,6 @@
         "id": "163",
         "text": "Activit\u00e9 COX Anormale Localement",
         "icon": true,
-        "li_attr": {
-            "id": "163"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "163_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3255,19 +1487,6 @@
         "id": "40",
         "text": "Activit\u00e9 Phospholipases",
         "icon": true,
-        "li_attr": {
-            "id": "40"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "40_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3279,19 +1498,6 @@
         "id": "166",
         "text": "Activit\u00e9 Phospholipases+AMP Anormale",
         "icon": true,
-        "li_attr": {
-            "id": "166"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "166_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3303,19 +1509,6 @@
         "id": "167",
         "text": "Activit\u00e9 Phospholipases Anormale",
         "icon": true,
-        "li_attr": {
-            "id": "167"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "167_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3327,19 +1520,6 @@
         "id": "j1_5",
         "text": "Activit\u00e9 Phospholipases Anormale Localement",
         "icon": true,
-        "li_attr": {
-            "id": "j1_5"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "j1_5_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {},
         "parent": "40"
     },
@@ -3347,19 +1527,6 @@
         "id": "j1_4",
         "text": "Activit\u00e9 Phospholipases Diffuse",
         "icon": true,
-        "li_attr": {
-            "id": "j1_4"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "j1_4_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {},
         "parent": "40"
     },
@@ -3367,19 +1534,6 @@
         "id": "41",
         "text": "Coloration PAS",
         "icon": true,
-        "li_attr": {
-            "id": "41"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "41_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3391,19 +1545,6 @@
         "id": "j1_7",
         "text": "Coloration PAS Anormale (Surcharge)",
         "icon": true,
-        "li_attr": {
-            "id": "j1_7"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "j1_7_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {},
         "parent": "41"
     },
@@ -3411,19 +1552,6 @@
         "id": "172",
         "text": "Coloration PAS Anormale Localement (Surcharge)",
         "icon": true,
-        "li_attr": {
-            "id": "172"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "172_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3435,19 +1563,6 @@
         "id": "175",
         "text": "Coloration PAS: Irr\u00e9guli\u00e8re / In\u00e9gale",
         "icon": true,
-        "li_attr": {
-            "id": "175"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "175_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3459,19 +1574,6 @@
         "id": "174",
         "text": "Coloration PAS: Surcharge Diffuse",
         "icon": true,
-        "li_attr": {
-            "id": "174"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "174_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3483,19 +1585,6 @@
         "id": "177",
         "text": "Coloration PAS: Surchage dans Fibre Anormales",
         "icon": true,
-        "li_attr": {
-            "id": "177"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "177_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3507,19 +1596,6 @@
         "id": "176",
         "text": "Coloration PAS: Contraste Fort Type I et II",
         "icon": true,
-        "li_attr": {
-            "id": "176"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "176_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3531,19 +1607,6 @@
         "id": "j1_9",
         "text": "Coloration PAS Teneur Faible",
         "icon": true,
-        "li_attr": {
-            "id": "j1_9"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "j1_9_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {},
         "parent": "41"
     },
@@ -3551,19 +1614,6 @@
         "id": "43",
         "text": "Coloration Soudan",
         "icon": true,
-        "li_attr": {
-            "id": "43"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "43_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3575,19 +1625,6 @@
         "id": "j1_8",
         "text": "Coloration Soudan: Anormale (Surchage en Lipides)",
         "icon": true,
-        "li_attr": {
-            "id": "j1_8"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "j1_8_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {},
         "parent": "43"
     },
@@ -3595,19 +1632,6 @@
         "id": "180",
         "text": "Coloration Soudan: Goutelettes Lipidiques",
         "icon": true,
-        "li_attr": {
-            "id": "180"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "180_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3619,19 +1643,6 @@
         "id": "179",
         "text": "Coloration Soudan: Surchage dans Fibre Type I",
         "icon": true,
-        "li_attr": {
-            "id": "179"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "179_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3643,19 +1654,6 @@
         "id": "181",
         "text": "Coloration Soudan: Surchage dans les Fibres Remani\u00e9es",
         "icon": true,
-        "li_attr": {
-            "id": "181"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "181_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3667,19 +1665,6 @@
         "id": "182",
         "text": "Coloration Soudan: Fibres Type II plus riche que Type I",
         "icon": true,
-        "li_attr": {
-            "id": "182"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "182_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3691,19 +1676,6 @@
         "id": "2",
         "text": "Microscopie Electronique (ME)",
         "icon": true,
-        "li_attr": {
-            "id": "2"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "2_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3715,19 +1687,6 @@
         "id": "44",
         "text": "ME: Structure sarcom\u00e9rique",
         "icon": true,
-        "li_attr": {
-            "id": "44"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "44_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3739,19 +1698,6 @@
         "id": "183",
         "text": "ME: Structure sarcom\u00e9rique Remani\u00e9",
         "icon": true,
-        "li_attr": {
-            "id": "183"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "183_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3763,19 +1709,6 @@
         "id": "184",
         "text": "ME: Structure sarcom\u00e9rique en Croissant",
         "icon": true,
-        "li_attr": {
-            "id": "184"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "184_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3787,19 +1720,6 @@
         "id": "45",
         "text": "ME: Bande A",
         "icon": true,
-        "li_attr": {
-            "id": "45"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "45_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3811,19 +1731,6 @@
         "id": "46",
         "text": "ME: Materiel Z",
         "icon": true,
-        "li_attr": {
-            "id": "46"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "46_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3835,19 +1742,6 @@
         "id": "186",
         "text": "Materiel Z: Elargissement",
         "icon": true,
-        "li_attr": {
-            "id": "186"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "186_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3859,19 +1753,6 @@
         "id": "187",
         "text": "Materiel Z: Streaming",
         "icon": true,
-        "li_attr": {
-            "id": "187"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "187_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3883,19 +1764,6 @@
         "id": "47",
         "text": "ME: Vacuoles Autophagiques",
         "icon": true,
-        "li_attr": {
-            "id": "47"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "47_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3907,19 +1775,6 @@
         "id": "48",
         "text": "ME: Citerne",
         "icon": true,
-        "li_attr": {
-            "id": "48"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "48_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3931,19 +1786,6 @@
         "id": "189",
         "text": "Dilatation de Citerne",
         "icon": true,
-        "li_attr": {
-            "id": "189"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "189_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
@@ -3955,19 +1797,6 @@
         "id": "49",
         "text": "ME: L\u00e9sions de type CAPS",
         "icon": true,
-        "li_attr": {
-            "id": "49"
-        },
-        "a_attr": {
-            "href": "#",
-            "id": "49_anchor"
-        },
-        "state": {
-            "loaded": true,
-            "opened": false,
-            "selected": false,
-            "disabled": false
-        },
         "data": {
             "description": "",
             "genes": "",
