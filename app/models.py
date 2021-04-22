@@ -5,15 +5,16 @@ from flask_login import UserMixin
 from flask import current_app
 from app import db
 from app import login
+import datetime
 
 
 class User(UserMixin, db.Model):
     """Database table for Users"""
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
+    username = db.Column(db.String(64), index=True, unique=True, nullable=False)
+    email = db.Column(db.String(120), index=True, unique=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
     images = db.relationship("Image", backref="creator", lazy="dynamic")
     pdf = db.relationship("Pdf", backref="creator", lazy="dynamic")
     report = db.relationship("ReportHisto", backref="creator", lazy="dynamic")
@@ -59,14 +60,14 @@ class Image(db.Model):
     """Database table for Image & annotations"""
 
     id = db.Column(db.Integer, primary_key=True)
-    image_name = db.Column(db.String(140), index=True)
-    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    patient_id = db.Column(db.String(100))
+    image_name = db.Column(db.String(140), nullable=False)
+    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    patient_id = db.Column(db.String(100), index=True, nullable=False)
     type_coloration = db.Column(db.String(140))
-    age_at_biopsy = db.Column(db.Integer)
-    image_path = db.Column(db.String(4096))
+    age_at_biopsy = db.Column(db.Integer, default=-1)
+    image_path = db.Column(db.String(4096), unique=True, nullable=False)
     diagnostic = db.Column(db.String(140), index=True)
-    report_text = db.Column(db.Text)
+    report_text = db.Column(db.Text, default="")
     annotation_json = db.Column(db.JSON, default=[])
 
     def __repr__(self):
@@ -89,12 +90,12 @@ class Pdf(db.Model):
     """Database table for PDF and OCR Results"""
 
     id = db.Column(db.Integer, primary_key=True)
-    pdf_name = db.Column(db.String(140), index=True)
-    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    patient_id = db.Column(db.String(100))
-    pdf_path = db.Column(db.String(4096))
-    lang = db.Column(db.String(140), index=True)
-    ocr_text = db.Column(db.Text)
+    pdf_name = db.Column(db.String(140), index=True, nullable=False)
+    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    patient_id = db.Column(db.String(100), index=True, nullable=False)
+    pdf_path = db.Column(db.String(4096), unique=True, nullable=False)
+    lang = db.Column(db.String(140), nullable=False)
+    ocr_text = db.Column(db.Text, default="")
 
     def __repr__(self):
         return "<Pdf Name {} Patient {}>".format(self.pdf_name, self.patient_id)
@@ -117,16 +118,20 @@ class ReportHisto(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.String(100), index=True)
-    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    biopsie_id = db.Column(db.String(140), index=True)
+    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    biopsie_id = db.Column(db.String(140))
     muscle_prelev = db.Column(db.String(140))
     age_biopsie = db.Column(db.Integer)
     date_envoie = db.Column(db.String(10))
-    gene_diag = db.Column(db.String(140))
-    ontology_tree = db.Column(db.JSON, default=[])
-    comment = db.Column(db.Text)
+    gene_diag = db.Column(db.String(140), index=True)
+    ontology_tree = db.Column(db.JSON, default=[], nullable=False)
+    comment = db.Column(db.Text, default="")
     conclusion = db.Column(db.String(140), index=True)
-    datetime = db.Column(db.DateTime())
+    datetime = db.Column(
+        db.DateTime(),
+        onupdate=datetime.datetime.utcnow,
+        default=datetime.datetime.utcnow,
+    )
 
     def __repr__(self):
         return "<ReportHisto ID {} ID {} Biopsie {}>".format(

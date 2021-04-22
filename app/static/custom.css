@@ -14,7 +14,11 @@
   text-align: center;
 }
 
-.obfuscate { 
-  unicode-bidi: bidi-override; 
-  direction: rtl; 
+.obfuscate {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
 }
