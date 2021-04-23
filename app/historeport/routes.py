@@ -27,12 +27,6 @@ def historeport():
     if request.args:
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
-            # Update of report ontology
-            current_report_ontology = Ontology(report_request.ontology_tree)
-            template_ontology = Ontology(template)
-            updated_report_ontology = current_report_ontology.update_ontology(
-                template_ontology
-            )
             form = ReportForm(
                 patient_id=report_request.patient_id,
                 expert_id=report_request.expert_id,
@@ -41,7 +35,7 @@ def historeport():
                 age_biopsie=report_request.age_biopsie,
                 date_envoie=report_request.date_envoie,
                 gene_diag=report_request.gene_diag,
-                ontology_tree=updated_report_ontology,
+                ontology_tree=report_request.ontology_tree,
                 comment=report_request.comment,
                 conclusion=report_request.conclusion,
             )
@@ -64,25 +58,29 @@ def historeport():
             report_entry = ReportHisto.query.get(request.args.get("id"))
             if report_entry is not None:
                 form.populate_obj(report_entry)
+                onto_jstree = Ontology(report_entry.ontology_tree)
+                report_entry.ontology_tree = onto_jstree.clean_tree()
                 report_entry.expert_id = current_user.id
                 # Update of template ontology
-                template_ontology = Ontology(template)
-                current_report_ontology = Ontology(report_entry.ontology_tree)
-                template_ontology.update_ontology(current_report_ontology)
-                template_ontology.dump_updated_to_file("config/ontology.json")
+                # template_ontology = Ontology(template)
+                # current_report_ontology = Ontology(report_entry.ontology_tree)
+                # template_ontology.update_ontology(current_report_ontology)
+                # template_ontology.dump_updated_to_file("config/ontology.json")
                 db.session.commit()
                 return redirect(url_for("historeport.histoindex"))
 
         else:
             report_entry = ReportHisto()
             form.populate_obj(report_entry)
+            onto_jstree = Ontology(report_entry.ontology_tree)
+            report_entry.ontology_tree = onto_jstree.clean_tree()
             report_entry.expert_id = current_user.id
             db.session.add(report_entry)
             # Update of template ontology
-            template_ontology = Ontology(template)
-            current_report_ontology = Ontology(report_entry.ontology_tree)
-            template_ontology.update_ontology(current_report_ontology)
-            template_ontology.dump_updated_to_file("config/ontology.json")
+            # template_ontology = Ontology(template)
+            # current_report_ontology = Ontology(report_entry.ontology_tree)
+            # template_ontology.update_ontology(current_report_ontology)
+            # template_ontology.dump_updated_to_file("config/ontology.json")
             db.session.commit()
             return redirect(url_for("historeport.histoindex"))
 

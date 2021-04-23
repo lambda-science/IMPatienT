@@ -23,7 +23,8 @@ $("#jstree")
       check_callback: true,
       data: JSON.parse(json_tree),
     },
-    plugins: ["contextmenu", "wholerow", "unique", "search", "changed", "dnd"],
+    // plugins: ["contextmenu", "wholerow", "unique", "search", "changed", "dnd"],
+    plugins: ["wholerow", "unique", "search", "changed"],
     //contextmenu: {
     //  items: function ($node) {
     //    return {

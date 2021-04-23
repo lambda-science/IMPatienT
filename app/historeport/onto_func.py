@@ -59,3 +59,9 @@ class Ontology:
     def dump_updated_to_file(self, file_path: str):
         with open(file_path, "w") as fp:
             json.dump(self.updated_jstree_dict, fp, indent=4)
+
+    def clean_tree(self):
+        clean_tree_list = []
+        for i in self.jstree_as_dict:
+            clean_tree_list.append(self.jstree_as_dict[i])
+        return clean_tree_list
