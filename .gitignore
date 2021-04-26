@@ -156,3 +156,4 @@ node_modules/
 package.json
 package-lock.json
 .eslintrc.js
+*.xlsx

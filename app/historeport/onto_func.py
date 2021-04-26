@@ -5,7 +5,7 @@ class Ontology:
     """A class to handle transformation of ontology"""
 
     def __init__(self, json_content: list):
-        self.raw_jstree = json_content
+        self.jstree_as_list = json_content
         self.jstree_as_dict = {
             i["id"]: {
                 "id": i["id"],
@@ -14,23 +14,22 @@ class Ontology:
                 "data": i["data"],
                 "parent": i["parent"],
             }
-            for i in self.raw_jstree
+            for i in self.jstree_as_list
         }
-        self.updated_jstree_dict = {}
 
     def update_ontology(self, dest_onto: object) -> dict:
         """Function to update the current ontology tree
         used for anotation with latest modifications of the destination
         (template) of the ontology tree (delete, update, create new)"""
-        updated_jstree_as_dict = []
+        updated_jstree_as_list = []
 
-        for i in self.raw_jstree:
+        for i in self.jstree_as_list:
             if i["id"] not in dest_onto.jstree_as_dict.keys():
                 # If destination is missing a node: mark the node as outdated
                 i["data"]["outdated"] = True
                 if "OUTDATED" not in i["text"]:
                     i["text"] = "OUTDATED : " + i["text"]
-                updated_jstree_as_dict.append(i)
+                updated_jstree_as_list.append(i)
             elif i["id"] in dest_onto.jstree_as_dict.keys():
                 if (
                     i["text"] != dest_onto.jstree_as_dict[i["id"]]["text"]
@@ -48,20 +47,32 @@ class Ontology:
                     i["data"]["synonymes"] = dest_onto.jstree_as_dict[i["id"]][
                         "data"
                     ].get("synonymes", "")
-                updated_jstree_as_dict.append(i)
+                updated_jstree_as_list.append(i)
         # If destination has new entry: add them
         for i in dest_onto.jstree_as_dict.keys():
             if i not in self.jstree_as_dict.keys():
-                updated_jstree_as_dict.append(dest_onto.jstree_as_dict[i])
-        self.updated_jstree_dict = updated_jstree_as_dict
-        return updated_jstree_as_dict
+                updated_jstree_as_list.append(dest_onto.jstree_as_dict[i])
+        self.jstree_as_dict = {
+            j["id"]: {
+                "id": j["id"],
+                "text": j["text"],
+                "icon": j["icon"],
+                "data": j["data"],
+                "parent": j["parent"],
+            }
+            for j in updated_jstree_as_list
+        }
+        self.jstree_as_list = updated_jstree_as_list
+        self.clean_tree()
+        return self.jstree_as_list
 
     def dump_updated_to_file(self, file_path: str):
         with open(file_path, "w") as fp:
-            json.dump(self.updated_jstree_dict, fp, indent=4)
+            json.dump(self.jstree_as_dict, fp, indent=4)
 
-    def clean_tree(self):
+    def clean_tree(self) -> list:
         clean_tree_list = []
         for i in self.jstree_as_dict:
             clean_tree_list.append(self.jstree_as_dict[i])
-        return clean_tree_list
+        self.jstree_as_list = clean_tree_list
+        return self.jstree_as_list
