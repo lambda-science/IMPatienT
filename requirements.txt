@@ -86,7 +86,6 @@ pylint==2.6.0
 pylint-flask==0.6
 pylint-flask-sqlalchemy==0.2.0
 pylint-plugin-utils==0.6
-PyMySQL==1.0.2
 pyOpenSSL==20.0.1
 pyparsing==2.4.7
 pytesseract==0.3.7
