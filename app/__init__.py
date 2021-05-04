@@ -73,6 +73,10 @@ def create_app(config_class=Config):
 
     app.register_blueprint(historeport_bp)
 
+    from app.histostats import bp as histostats_bp
+
+    app.register_blueprint(histostats_bp)
+
     # If app in production settings:
     # configure our SMTP mail connection
     # configure error-logging service

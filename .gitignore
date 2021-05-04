@@ -157,3 +157,4 @@ package.json
 package-lock.json
 .eslintrc.js
 *.xlsx
+*.csv
