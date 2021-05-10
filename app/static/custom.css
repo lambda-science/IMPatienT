@@ -18,7 +18,3 @@
   unicode-bidi: bidi-override;
   direction: rtl;
 }
-
-* {
-  font-family: "Roboto", sans-serif;
-}
