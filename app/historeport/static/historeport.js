@@ -2,6 +2,7 @@ var input = document.querySelector("input[id=synonymes]");
 var input_tag = new Tagify(input);
 var input2 = document.querySelector("input[id=gene]");
 var input2_tag = new Tagify(input2);
+var data_url = $("#data-url").data();
 
 var json_tree = $("input[id=ontology_tree]").val();
 function uuidv4() {
@@ -88,6 +89,7 @@ function update_node_data() {
   }
   var v = $("#jstree").jstree(true).get_json("#", { flat: true });
   $("input[id=ontology_tree]").val(JSON.stringify(v));
+  predict_diag();
 }
 
 function set_slider_span(slide_value) {
@@ -109,4 +111,19 @@ function set_slider_span(slide_value) {
     1: '<span class="badge bg-success range-value">Présent Total (1)</span>',
   };
   $("#sliderspan").html(message[slide_value]);
+}
+
+function predict_diag() {
+  var json_tree = $("input[id=ontology_tree]").val();
+  $.ajax({
+    type: "POST",
+    url: data_url.predict,
+    data: json_tree,
+    success: function (data) {
+      var results = JSON.parse(data);
+      $("div.predict_diag").html("Class: " + results.class);
+      $("div.predict_proba").html("Probability: " + results.proba);
+    },
+    dataType: "text",
+  });
 }

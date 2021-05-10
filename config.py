@@ -1,4 +1,5 @@
 import os
+import pickle
 from dotenv import load_dotenv
 import app.src.common as Common
 
@@ -43,3 +44,7 @@ class Config(object):
 
     # Heroku to STDOut
     LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT")
+
+    # ML Histo Prediction Model
+    MODEL = pickle.load(open(os.path.join("models", "random_forest.sav"), "rb"))
+    FEATURE_LIST = pickle.load(open(os.path.join("models", "features_col.list"), "rb"))
