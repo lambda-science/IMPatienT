@@ -18,3 +18,7 @@
   unicode-bidi: bidi-override;
   direction: rtl;
 }
+
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
