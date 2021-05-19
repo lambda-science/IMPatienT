@@ -16,6 +16,7 @@ from app.historeport import bp
 from app.models import ReportHisto
 from app.historeport.forms import ReportForm, OntologyDescriptPreAbs, DeleteButton
 from app.historeport.onto_func import Ontology
+from app.historeport.boqa import *
 
 
 @bp.route("/historeport", methods=["GET", "POST"])
@@ -167,3 +168,26 @@ def predict_diag():
             200,
             {"ContentType": "application/json"},
         )
+
+
+@bp.route("/predict_diag_boqa/", methods=["POST"])
+@login_required
+def predict_diag_boqa():
+    class_label = {
+        "CNM": "Centronuclear Myopathy",
+        "COM": "Core Myopathy",
+        "NM": "Nemaline Myopathy",
+    }
+    raw_data = request.get_data()
+    results = get_boqa_pred(raw_data)
+    return (
+        json.dumps(
+            {
+                "success": True,
+                "class": class_label[results[0]],
+                "proba": round(results[1], 2),
+            }
+        ),
+        200,
+        {"ContentType": "application/json"},
+    )

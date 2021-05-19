@@ -103,16 +103,18 @@
         <div class="col-xl-8 offset-md-2 mt-3">
             <h4>Commentaires & Conclusions</h4>
             {{form.comment}}
-            <b>Diagnosis Prediction:</b>
-            <div class="predict_diag badge bg-primary"></div>
+            <b>Diagnosis Prediction:</b> <button id="predictbutton" type="button" class="btn btn-info btn-sm">Predict !</button></br>
+            SVM (IA): <div class="predict_diag badge bg-primary"></div>
             <div class="predict_proba badge bg-primary"></div></br>
+            BOQA (Stats): <div class="predict_diag_boqa badge bg-primary"></div>
+            <div class="predict_proba_boqa badge bg-primary"></div></br>
             {{form.conclusion.label}}
             {{form.conclusion}}
             {{form.submit}}
             </form>
         </div>
     </div>
-    <meta id="data-url" data-predict="{{url_for('historeport.predict_diag') }}">
+    <meta id="data-url" data-predict="{{url_for('historeport.predict_diag') }}" data-boqa="{{url_for('historeport.predict_diag_boqa') }}">
     <script src="{{ url_for('historeport.static', filename='historeport.js') }}"></script>
     
     {% endblock %}

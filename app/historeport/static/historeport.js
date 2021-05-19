@@ -89,7 +89,6 @@ function update_node_data() {
   }
   var v = $("#jstree").jstree(true).get_json("#", { flat: true });
   $("input[id=ontology_tree]").val(JSON.stringify(v));
-  predict_diag();
 }
 
 function set_slider_span(slide_value) {
@@ -127,3 +126,22 @@ function predict_diag() {
     dataType: "text",
   });
 }
+
+function predict_diag_boqa() {
+  var json_tree = $("input[id=ontology_tree]").val();
+  $.ajax({
+    type: "POST",
+    url: data_url.boqa,
+    data: json_tree,
+    success: function (data) {
+      var results = JSON.parse(data);
+      $("div.predict_diag_boqa").html("Class: " + results.class);
+      $("div.predict_proba_boqa").html("Probability: " + results.proba);
+    },
+    dataType: "text",
+  });
+}
+$("#predictbutton").on("click", function () {
+  predict_diag();
+  predict_diag_boqa();
+});
