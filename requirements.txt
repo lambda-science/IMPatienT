@@ -33,8 +33,8 @@ diskcache==5.2.1
 distro==1.5.0
 dnspython==2.1.0
 dpath==2.0.1
-dulwich==0.20.21
-dvc==2.1.0
+dulwich==0.20.23
+dvc==2.3.0
 email-validator==1.1.2
 et-xmlfile==1.0.1
 filelock==3.0.12
@@ -48,7 +48,7 @@ Flask-SQLAlchemy==2.4.4
 Flask-WTF==0.14.3
 flatten-dict==0.3.0
 flufl.lock==3.2
-fsspec==0.9.0
+fsspec==2021.5.0
 ftfy==5.9
 funcy==1.16
 future==0.18.2
@@ -77,6 +77,7 @@ kiwisolver==1.3.1
 lazy-object-proxy==1.4.3
 mailchecker==4.0.7
 Mako==1.1.4
+mando==0.6.4
 MarkupSafe==1.1.1
 matplotlib==3.4.1
 mccabe==0.6.1
@@ -140,6 +141,7 @@ python-slugify==5.0.2
 pytz==2020.5
 PyYAML==5.4.1
 pyzmq==22.0.3
+radon==4.5.0
 regex==2021.3.17
 requests==2.25.1
 rich==10.1.0

@@ -1,0 +1,4 @@
+outs:
+- md5: dd1815870d46150d1455e301c89e5fb7
+  size: 14323
+  path: stat_per_diag.json
