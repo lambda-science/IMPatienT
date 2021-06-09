@@ -18,8 +18,12 @@ def statsindex():
     stat_per_diag = json.load(stat_per_diag_file)
     stat_per_gene = sorted(stat_per_gene.items())
     stat_per_diag = sorted(stat_per_diag.items())
+
+    graphJSON = json.load(open("config/correlation_matrix.json", "r"))
+
     return render_template(
         "histostats_index.html",
         stat_per_gene=stat_per_gene,
         stat_per_diag=stat_per_diag,
+        graphJSON=graphJSON,
     )

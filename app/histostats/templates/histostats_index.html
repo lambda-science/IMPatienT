@@ -1,4 +1,9 @@
 {% extends "base.html"%} {% block content %}
+<div class="row justify-content-md-center">
+  <div class="col-xl-8">
+  <div id="chart" class="chart"></div>
+</div>
+</div>
 <div class="row">
   <div class="col-xl-6">
     <h1>Traits Histologiques par Gène</h1>
@@ -74,5 +79,15 @@
 </div>
 </br>
 </br>
+
+<meta id="data-graph" data-jsongraph='{{graphJSON|tojson|safe}}'>
+
+
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+  var graphs = $("#data-graph").data();
+
+  Plotly.plot('chart',graphs.jsongraph,{});
+</script>
 
 {% endblock %}
