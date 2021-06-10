@@ -4,7 +4,7 @@ import skimage
 import skimage.util
 import skimage.io
 import skimage.color
-import shape_utils
+import app.dashapp.shape_utils as shape_utils
 from app.dashapp.trainable_segmentation import fit_segmenter
 import plotly.express as px
 from sklearn.ensemble import RandomForestClassifier
@@ -63,7 +63,7 @@ def grey_labels(img):
 
 def compute_segmentations(
     shapes,
-    img_path="assets/segmentation_img.jpg",
+    img_path=None,
     features=None,
     shape_layers=None,
     label_to_colors_args={},

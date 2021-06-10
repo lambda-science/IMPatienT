@@ -135,7 +135,12 @@ def create_app(config_class=Config):
 
 
 def register_dashapps(app):
-    from app.dashapp.layout import layout
+    from app.dashapp.layout import (
+        layout,
+        get_external_stylesheets,
+        get_assets_folder,
+        get_assets_url,
+    )
     from app.dashapp.callbacks import register_callbacks
 
     # Meta tags for viewport responsiveness
@@ -143,20 +148,20 @@ def register_dashapps(app):
         "name": "viewport",
         "content": "width=device-width, initial-scale=1, shrink-to-fit=no",
     }
-
     dashapp = dash.Dash(
         __name__,
         server=app,
         url_base_pathname="/dashboard/",
-        assets_folder=get_root_path(__name__) + "/dashboard/assets/",
+        # assets_folder=get_assets_folder(),
+        # assets_url_path=get_assets_url(),
         meta_tags=[meta_viewport],
+        external_stylesheets=get_external_stylesheets(),
     )
 
     with app.app_context():
         dashapp.title = "Dashapp 1"
         dashapp.layout = layout
         register_callbacks(dashapp)
-
     _protect_dashviews(dashapp)
 
 
