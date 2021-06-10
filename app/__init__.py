@@ -1,4 +1,5 @@
 import logging
+import dash
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
 from flask import Flask, current_app
@@ -10,6 +11,8 @@ from flask_session import Session
 from config import Config
 from sqlalchemy import MetaData
 
+from flask.helpers import get_root_path
+from flask_login import login_required
 
 convention = {
     "ix": "ix_%(column_0_label)s",
@@ -43,6 +46,7 @@ def create_app(config_class=Config):
     login.init_app(app)
     mail.init_app(app)
     session.init_app(app)
+    register_dashapps(app)
 
     # Configuration of our various flask-blueprint folders
     from app.errors import bp as errors_bp
@@ -76,6 +80,10 @@ def create_app(config_class=Config):
     from app.histostats import bp as histostats_bp
 
     app.register_blueprint(histostats_bp)
+
+    from app.dashapp import bp as dashapp_bp
+
+    app.register_blueprint(dashapp_bp)
 
     # If app in production settings:
     # configure our SMTP mail connection
@@ -124,6 +132,40 @@ def create_app(config_class=Config):
         app.logger.info("MYO-xIA startup")
 
     return app
+
+
+def register_dashapps(app):
+    from app.dashapp.layout import layout
+    from app.dashapp.callbacks import register_callbacks
+
+    # Meta tags for viewport responsiveness
+    meta_viewport = {
+        "name": "viewport",
+        "content": "width=device-width, initial-scale=1, shrink-to-fit=no",
+    }
+
+    dashapp = dash.Dash(
+        __name__,
+        server=app,
+        url_base_pathname="/dashboard/",
+        assets_folder=get_root_path(__name__) + "/dashboard/assets/",
+        meta_tags=[meta_viewport],
+    )
+
+    with app.app_context():
+        dashapp.title = "Dashapp 1"
+        dashapp.layout = layout
+        register_callbacks(dashapp)
+
+    _protect_dashviews(dashapp)
+
+
+def _protect_dashviews(dashapp):
+    for view_func in dashapp.server.view_functions:
+        if view_func.startswith(dashapp.config.url_base_pathname):
+            dashapp.server.view_functions[view_func] = login_required(
+                dashapp.server.view_functions[view_func]
+            )
 
 
 from app import models
