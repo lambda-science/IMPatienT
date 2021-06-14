@@ -76,7 +76,6 @@ def make_default_figure(
             "margin": dict(l=0, r=0, b=0, t=0, pad=4),
         }
     )
-    print(fig.__dict__)
     return fig
 
 
