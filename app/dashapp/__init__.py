@@ -8,4 +8,4 @@ bp = Blueprint(
     static_url_path="/static/dashapp",
 )
 
-# from app.dashapp import routes
+from app.dashapp import routes

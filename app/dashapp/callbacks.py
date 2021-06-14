@@ -26,8 +26,8 @@ compute_features = memory.cache(multiscale_basic_features)
 DEFAULT_LABEL_CLASS = 0
 NUM_LABEL_CLASSES = 5
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
-DEFAULT_IMAGE_PATH = os.path.join(bp.static_folder, "segmentation_img.jpg")
-DEFAULT_IMAGE_URL = os.path.join(bp.static_url_path, "segmentation_img.jpg")
+DEFAULT_IMAGE_PATH = os.path.join(bp.static_folder, "sample.png")
+DEFAULT_IMAGE_URL = os.path.join(bp.static_url_path, "sample.png")
 img = skio.imread(DEFAULT_IMAGE_PATH)
 class_label_colormap = ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"]
 class_labels = list(range(NUM_LABEL_CLASSES))

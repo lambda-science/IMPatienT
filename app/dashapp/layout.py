@@ -14,15 +14,15 @@ compute_features = memory.cache(multiscale_basic_features)
 
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
 
-DEFAULT_IMAGE_PATH = os.path.join(bp.static_folder, "segmentation_img.jpg")
-DEFAULT_IMAGE_URL = os.path.join(bp.static_url_path, "segmentation_img.jpg")
+DEFAULT_IMAGE_PATH = os.path.join(bp.static_folder, "sample.png")
+DEFAULT_IMAGE_URL = os.path.join(bp.static_url_path, "sample.png")
 SEG_FEATURE_TYPES = ["intensity", "edges", "texture"]
 
 # the number of different classes for labels
 NUM_LABEL_CLASSES = 5
 DEFAULT_LABEL_CLASS = 0
 class_label_colormap = ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"]
-class_labels = list(range(NUM_LABEL_CLASSES))
+class_labels = ["Rods", "Core", "Cytoplasme", "Noyaux", "Autre"]
 # we can't have less colors than classes
 assert NUM_LABEL_CLASSES <= len(class_label_colormap)
 
@@ -76,6 +76,7 @@ def make_default_figure(
             "margin": dict(l=0, r=0, b=0, t=0, pad=4),
         }
     )
+    print(fig.__dict__)
     return fig
 
 
@@ -92,38 +93,12 @@ modal_overlay = dbc.Modal(
     size="lg",
 )
 
-button_howto = dbc.Button(
-    "Learn more",
-    id="howto-open",
-    outline=True,
-    color="info",
-    # Turn off lowercase transformation for class .button in stylesheet
-    style={"textTransform": "none"},
-)
-
-button_github = dbc.Button(
-    "View Code on github",
-    outline=True,
-    color="primary",
-    href="https://github.com/plotly/dash-sample-apps/tree/master/apps/dash-image-segmentation",
-    id="gh-link",
-    style={"text-transform": "none"},
-)
-
 # Header
 header = dbc.Navbar(
     dbc.Container(
         [
             dbc.Row(
                 [
-                    dbc.Col(
-                        html.Img(
-                            id="logo",
-                            src=os.path.join(bp.static_url_path, "dash-logo-new.png"),
-                            height="30px",
-                        ),
-                        md="auto",
-                    ),
                     dbc.Col(
                         [
                             html.Div(
@@ -145,17 +120,6 @@ header = dbc.Navbar(
                     dbc.Col(
                         [
                             dbc.NavbarToggler(id="navbar-toggler"),
-                            dbc.Collapse(
-                                dbc.Nav(
-                                    [
-                                        dbc.NavItem(button_howto),
-                                        dbc.NavItem(button_github),
-                                    ],
-                                    navbar=True,
-                                ),
-                                id="navbar-collapse",
-                                navbar=True,
-                            ),
                             modal_overlay,
                         ],
                         md=2,
@@ -182,18 +146,6 @@ description = dbc.Col(
                     [
                         dbc.Row(
                             [
-                                dbc.Col(
-                                    [
-                                        html.Img(
-                                            src=os.path.join(
-                                                bp.static_url_path,
-                                                "segmentation_img_example_marks.jpg",
-                                            ),
-                                            width="200px",
-                                        )
-                                    ],
-                                    md="auto",
-                                ),
                                 dbc.Col(
                                     html.P(
                                         "This is an example of interactive machine learning for image classification. "
@@ -300,9 +252,9 @@ sidebar = [
                         id="label-class-buttons",
                         children=[
                             dbc.Button(
-                                "%2d" % (n,),
+                                c,
                                 id={"type": "label-class-button", "index": n},
-                                style={"background-color": class_to_color(c)},
+                                style={"background-color": class_to_color(n)},
                             )
                             for n, c in enumerate(class_labels)
                         ],
