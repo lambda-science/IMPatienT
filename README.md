@@ -23,7 +23,7 @@
 
 8. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and use the application.
 
-#### Optional:
+### Optional:
 
 You can register a base user using flask shell:
 
@@ -34,3 +34,5 @@ flask shell
 > db.session.add(user)
 > db.session.commit()
 ```
+
+# Looking to deploy and maintain MYO-xIA ? [See the wiki page: Deploy and maintain](https://github.com/lambda-science/MYO-xIA-App/wiki/MYO-xIA-Deployment,-update-and-maintainability.)
