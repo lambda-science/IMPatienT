@@ -6,32 +6,36 @@ class OntologyDescript(FlaskForm):
     """Form used to save modification of nodes in the onotlogy create tool"""
 
     onto_id_ext = StringField(
-        "ID Ontologie Externe",
+        "Vocabulary ID",
         render_kw={
-            "placeholder": "ID Ontologie Externe",
+            "placeholder": "Vocabulary ID",
             "class": "form-control",
             "readonly": "",
         },
     )
     onto_name = StringField(
-        "Nom Terme Ontologique",
+        "Vocabulary Name",
         render_kw={
-            "placeholder": "Nom Terme Ontologique",
+            "placeholder": "Vocabulary Name",
             "class": "form-control",
             "readonly": "",
         },
     )
     parent_id = StringField(
-        "ID Parent",
-        render_kw={"placeholder": "ID Parent", "class": "form-control", "readonly": ""},
+        "Parent Vocabulary ID",
+        render_kw={
+            "placeholder": "Parent Vocabulary ID",
+            "class": "form-control",
+            "readonly": "",
+        },
     )
 
     synonymes = StringField(
-        "Synonymes", render_kw={"placeholder": "Synonymes", "class": "form-control"}
+        "Synonyms", render_kw={"placeholder": "Synonyms", "class": "form-control"}
     )
     gene = StringField(
-        "Gene associé",
-        render_kw={"placeholder": "Gene associé", "class": "form-control"},
+        "Associated Genes",
+        render_kw={"placeholder": "Associated Genes", "class": "form-control"},
     )
     description = TextAreaField(
         "Description",

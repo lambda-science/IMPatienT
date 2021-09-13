@@ -1,5 +1,4 @@
 import os
-import pickle
 from dotenv import load_dotenv
 import app.src.common as Common
 
@@ -25,7 +24,6 @@ class Config(object):
     MAX_CONTENT_LENGTH = 1024 * 1024 * 1024
     # Create various list from config file
     DIAG_LIST = Common.create_diag_list(os.path.join("config", "diagnostic.tsv"))
-    LANG_LIST = Common.create_lang_list(os.path.join("config", "config_lang_ocr.tsv"))
 
     # DB connection settings
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "app.db")
@@ -41,7 +39,3 @@ class Config(object):
 
     # Heroku to STDOut
     LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT")
-
-    # ML Histo Prediction Model
-    MODEL = pickle.load(open(os.path.join("models", "random_forest.sav"), "rb"))
-    FEATURE_LIST = pickle.load(open(os.path.join("models", "features_col.list"), "rb"))

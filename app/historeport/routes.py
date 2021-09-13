@@ -122,54 +122,6 @@ def delete_report(id_report):
         return redirect(url_for("historeport.histoindex"))
 
 
-@bp.route("/predict_diag/", methods=["POST"])
-@login_required
-def predict_diag():
-    class_label = {
-        0: "Centronuclear Myopathy",
-        1: "Core Myopathy",
-        2: "Nemaline Myopathy",
-    }
-    raw_data = request.get_data()
-    my_tree = json.loads(raw_data)
-    clf = current_app.config["MODEL"]
-    tree_as_dict = {}
-    for feature in my_tree:
-        tree_as_dict.setdefault(feature["text"], []).append(
-            float(feature["data"].get("presence", -0.25))
-        )
-    X = pd.DataFrame.from_dict(tree_as_dict)
-    X = X.replace({-0.25: 0, 0.25: 1, 0.5: 1, 0.75: 1})
-    X = X[current_app.config["FEATURE_LIST"]]
-    class_predict = clf.predict(X)
-    proba_class = np.amax(clf.predict_proba(X))
-    if proba_class > 0.5:
-        # return jsonify(class_predict[0], proba_class)
-        return (
-            json.dumps(
-                {
-                    "success": True,
-                    "class": class_label[class_predict[0]],
-                    "proba": str(round(proba_class, 2)),
-                }
-            ),
-            200,
-            {"ContentType": "application/json"},
-        )
-    else:
-        return (
-            json.dumps(
-                {
-                    "success": True,
-                    "class": "N/A",
-                    "proba": "0",
-                }
-            ),
-            200,
-            {"ContentType": "application/json"},
-        )
-
-
 @bp.route("/predict_diag_boqa/", methods=["POST"])
 @login_required
 def predict_diag_boqa():

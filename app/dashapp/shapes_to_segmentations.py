@@ -88,7 +88,7 @@ def compute_segmentations(
     )
     seg, clf = fit_segmenter(mask, features, clf)
     t2 = time()
-    print(t2 - t1)
+    #print(t2 - t1)
     color_seg = label_to_colors(seg, **label_to_colors_args)
     # color_seg is a 3d tensor representing a colored image whereas seg is a
     # matrix whose entries represent the classes

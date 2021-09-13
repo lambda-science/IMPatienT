@@ -8,47 +8,46 @@
         collect data from patients with <strong>congenital myopathies</strong> in order to analyse them using
         <strong>explainable AI approaches</strong>. In the field of congenital myopathies research, there is an
         important need for <strong>digitization and standardization of patient data</strong> in order to use modern data
-        analysis methods.<br>This application has three main objectives:</p>
+        analysis methods.<br>This application has three main objectives:
+    </p>
     <ul>
         <li><strong>Gather and format patient data</strong> to be ready for automatic exploitation (patient
             histology-report form, image annotation, OCR)</li>
         <li>Help the <strong>discovery of new phenotype-genotype-histology association</strong> for each congenital
-            myopathy subtype (ontology creation tool, per gene and class histologic feature statistics)</li>
-        <li>Provide tools for <strong>automatic diagnosis</strong> based on histologic features (live prediction of
+            myopathy subtype (standard vocabulary creation tool, per gene and class histology feature statistics)</li>
+        <li>Provide tools for <strong>automatic diagnosis</strong> based on histology features (live prediction of
             congenital myopathy subtype in the histology-report form)</li>
     </ul>
     <h3 id="functionalities-">Functionalities:</h3>
     <ul>
+
         <li>
-            <p><strong>Annotation of histologic images</strong>: allows recording and annotation of histologic images of
+            <p><strong>Module 1: Standard Vocabulary Tool</strong>: A tools to create standard vocabulary tree. Used to
+                create the
+                histology standard vocabulary based on Institut de Myologie de Paris reports. This vocublary can be
+                explored and modify to help
+                format free-text histology report in a structured format.</p>
+        </li>
+        <li>
+            <p><strong>Module 2: Report Digitization</strong>: a form to digitalize histology reports based on the
+                histology
+                standard vocabulary.</p>
+        </li>
+        <li>
+            <p><strong>Module 3: Image Annotation</strong>: allows recording and annotation of histology images of
                 tissues from patients with congenital myopathy. It is possible to delimit areas on the images and to
-                associate them with labels. It is also possible to produce a histologic report with a list of
-                absence/presence of histopathologic features and to associate a diagnosis with it.</p>
+                associate them with labels..</p>
         </li>
         <li>
-            <p><strong>Optical character recognition (OCR-PDF)</strong>: Automatically detect text from images and
-                convert PDF to text files. This makes it easier to scan and retrieve data from histologic reports
-                correspondence between patient, doctor and biologists. <strong>Work-In Progress</strong>: integration of
-                the OCR and histology-report form to pre-fill the form based on detected terms and ontology matching.
-            </p>
-        </li>
-        <li>
-            <p><strong>Ontology viewer and modification tool</strong>: An ontology for histologic report has been
-                created based on Institut de Myologie de Paris reports. This ontology can be explored and modify to help
-                format free-text histologic report in a structured format.</p>
-        </li>
-        <li>
-            <p><strong>Histolgic-Report form</strong>: a form to digitalize histologic reports based on the histologic
-                feature ontology.</p>
-        </li>
-        <li>
-            <p><strong>Histoligic Statistics</strong>: a page to view most common histologic features in congenital
-                myopathies per gene and per disease subtype.</p>
+            <p><strong>Module 4: Statistics and Visualisation</strong>: a page to view most common histology features in
+                congenital myopathies per gene and per disease subtype. Also show general graph about repartition of
+                data by age, genes and diagnosis and a correlation matrix between standard vocubulary terms.</p>
         </li>
     </ul>
     <h3 id="how-to-use-">How to Use:</h3>
-    <p>Statistics and ontology are viewable without an account. In order to perform OCR, Image annotation or use the
-        histo-report form, you will need an account. Please contact the email in the footer to request an account.</p>
+    <p>Statistics and standard vocabulary are viewable without an account. In order to perform Report digitization,
+        Image annotation or modify the standard vocabulary, you will need an account. Please contact the email in the
+        footer to request an account.</p>
     </br>
 </div>
 {% endblock %}

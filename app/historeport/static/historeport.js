@@ -93,38 +93,15 @@ function update_node_data() {
 
 function set_slider_span(slide_value) {
   var message = {
-    //"-1.25":
-    //  '<span class="badge bg-danger range-value">No Info: Not Askable (-1.25)</span>',
-    //"-1":
-    //  '<span class="badge bg-warning range-value">No Info: Difficile (-1)</span>',
-    //"-0.75":
-    //  '<span class="badge bg-warning range-value">No Info: Modéré (-0.75)</span>',
-    //"-0.5":
-    //  '<span class="badge bg-warning range-value">No Info: Facile (-0.5)</span>',
     "-0.25":
-      '<span class="badge bg-warning range-value">No Info (-0.25)</span>',
-    0: '<span class="badge bg-danger range-value">Absent (0)</span>',
-    0.25: '<span class="badge bg-success range-value">Présent Faible (0.25)</span>',
-    0.5: '<span class="badge bg-success range-value">Présent Modéré (0.5)</span>',
-    0.75: '<span class="badge bg-success range-value">Présent Fort (0.75)</span>',
-    1: '<span class="badge bg-success range-value">Présent Total (1)</span>',
+      '<span class="badge bg-warning range-value">N/A</span>',
+    0: '<span class="badge bg-danger range-value">Absent</span>',
+    0.25: '<span class="badge bg-success range-value">Present (Low)</span>',
+    0.5: '<span class="badge bg-success range-value">Present (Moderate)</span>',
+    0.75: '<span class="badge bg-success range-value">Present (High)</span>',
+    1: '<span class="badge bg-success range-value">Present (Total)</span>',
   };
   $("#sliderspan").html(message[slide_value]);
-}
-
-function predict_diag() {
-  var json_tree = $("input[id=ontology_tree]").val();
-  $.ajax({
-    type: "POST",
-    url: data_url.predict,
-    data: json_tree,
-    success: function (data) {
-      var results = JSON.parse(data);
-      $("div.predict_diag").html("Class: " + results.class);
-      $("div.predict_proba").html("Probability: " + results.proba);
-    },
-    dataType: "text",
-  });
 }
 
 function predict_diag_boqa() {
@@ -142,6 +119,5 @@ function predict_diag_boqa() {
   });
 }
 $("#predictbutton").on("click", function () {
-  predict_diag();
   predict_diag_boqa();
 });
