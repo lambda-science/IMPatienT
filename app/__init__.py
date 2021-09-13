@@ -57,14 +57,6 @@ def create_app(config_class=Config):
 
     app.register_blueprint(auth_bp)
 
-    from app.imgannot import bp as imgannot_bp
-
-    app.register_blueprint(imgannot_bp)
-
-    from app.ocr import bp as ocr_bp
-
-    app.register_blueprint(ocr_bp)
-
     from app.index import bp as index_bp
 
     app.register_blueprint(index_bp)

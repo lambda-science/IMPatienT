@@ -1,33 +1,23 @@
 {% extends "base.html"%} {% block content %}
 <div class="row justify-content-md-center">
   <div class="col-xl-8">
-  <div id="chart" class="chart"></div>
-</div>
+    <div id="chart" class="chart"></div>
+  </div>
 </div>
 <div class="row">
   <div class="col-xl-6">
-    <h1>Traits Histologiques par Gène</h1>
+    <h1>Vocabulary Frenquencies Per Genes</h1>
     <div class="accordion" id="accordionGENE">
       {% for gene in stat_per_gene %}
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingGene{{gene[0]}}">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseGene{{gene[0]}}"
-            aria-expanded="true"
-            aria-controls="collapseGene{{gene[0]}}"
-          >
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseGene{{gene[0]}}" aria-expanded="true" aria-controls="collapseGene{{gene[0]}}">
             {{gene[0]}} (n={{gene[1].n}})
           </button>
         </h2>
-        <div
-          id="collapseGene{{gene[0]}}"
-          class="accordion-collapse collapse"
-          aria-labelledby="headingGene{{gene[0]}}"
-          data-bs-parent="#accordionGENE"
-        >
+        <div id="collapseGene{{gene[0]}}" class="accordion-collapse collapse" aria-labelledby="headingGene{{gene[0]}}"
+          data-bs-parent="#accordionGENE">
           <div class="accordion-body">
             <ul>
               {% for key,value in gene[1].feature.items()%}
@@ -42,28 +32,18 @@
   </div>
 
   <div class="col-xl-6">
-    <h1>Traits Histologiques par Classe de Myopathie</h1>
+    <h1>Vocabulary Frenquencies Per Diagnosis</h1>
     <div class="accordion" id="accordionDIAG">
       {% for diag in stat_per_diag %}
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingDiag{{diag[0]}}">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseDiag{{diag[0]}}"
-            aria-expanded="true"
-            aria-controls="collapseDiag{{diag[0]}}"
-          >
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseDiag{{diag[0]}}" aria-expanded="true" aria-controls="collapseDiag{{diag[0]}}">
             {{diag[0]}} (n={{diag[1].n}})
           </button>
         </h2>
-        <div
-          id="collapseDiag{{diag[0]}}"
-          class="accordion-collapse collapse"
-          aria-labelledby="headingDiag{{diag[0]}}"
-          data-bs-parent="#accordionDIAG"
-        >
+        <div id="collapseDiag{{diag[0]}}" class="accordion-collapse collapse" aria-labelledby="headingDiag{{diag[0]}}"
+          data-bs-parent="#accordionDIAG">
           <div class="accordion-body">
             <ul>
               {% for key,value in diag[1].feature.items()%}
@@ -87,7 +67,7 @@
 <script type='text/javascript'>
   var graphs = $("#data-graph").data();
 
-  Plotly.plot('chart',graphs.jsongraph,{});
+  Plotly.plot('chart', graphs.jsongraph, {});
 </script>
 
 {% endblock %}

@@ -120,9 +120,7 @@ def register_callbacks(dashapp):
             Input("segmentation-features", "value"),
             Input("sigma-range-slider", "value"),
         ],
-        [
-            State("masks", "data"),
-        ],
+        [State("masks", "data"),],
     )
     def annotation_react(
         graph_relayoutData,
@@ -157,7 +155,7 @@ def register_callbacks(dashapp):
                 sigma_max=sigma_range_slider_value[1],
             )
             t2 = time()
-            print(t2 - t1)
+            # print(t2 - t1)
         if cbcontext == "graph.relayoutData":
             if "shapes" in graph_relayoutData.keys():
                 masks_data["shapes"] = graph_relayoutData["shapes"]

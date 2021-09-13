@@ -1,0 +1,28 @@
+name: myoxia
+channels:
+  - defaults
+dependencies:
+  - python=3.8.10
+  - flask
+  - python-dotenv
+  - dash
+  - flask-sqlalchemy
+  - flask-migrate
+  - flask-login
+  - flask-mail
+  - pyjwt
+  - flask-wtf
+  - pillow
+  - joblib
+  - dash-html-components
+  - dash-bootstrap-components
+  - dash-core-components
+  - scikit-image
+  - pylint
+  - black
+  - cairosvg
+  - scikit-learn
+  - pandas
+  - pytest
+  - email_validator
+prefix: /home/corentin/anaconda3/envs/myoxia
