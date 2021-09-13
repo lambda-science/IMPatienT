@@ -1,4 +1,4 @@
-# How To Use For Developpement Purpose (Using CONDA):
+# How To Use For Developpement Purpose (using Conda):
 
 1. Clone the repository and create the conda environnement:  
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
