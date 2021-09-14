@@ -2,6 +2,7 @@ import os
 import json
 from flask import render_template, current_app, send_from_directory, request
 from flask_login import login_required
+from sqlalchemy.orm.attributes import flag_modified
 from app import db
 from app.ontocreate import bp
 from app.ontocreate.forms import OntologyDescript
@@ -50,13 +51,15 @@ def modify_onto():
         json.dump(clean_tree, json_file, indent=4)
 
     # Update All Reports to the latest Version of ontology
-    reports = ReportHisto.query.all()
     template_ontology = Ontology(clean_tree)
-    for i in reports:
-        current_report_ontology = Ontology(i.ontology_tree)
-        updated_report_ontology = current_report_ontology.update_ontology(
-            template_ontology
+    for report in ReportHisto.query.all():
+        current_report_ontology = Ontology(report.ontology_tree)
+        updated_report_ontology = json.loads(
+            json.dumps(current_report_ontology.update_ontology(template_ontology))
         )
-        i.ontology_tree = updated_report_ontology
+        # Issue: SQLAlchemy not updating JSON https://stackoverflow.com/questions/42559434/updates-to-json-field-dont-persist-to-db
+
+        report.ontology_tree = updated_report_ontology
+        flag_modified(report, "ontology_tree")
     db.session.commit()
     return json.dumps({"success": True}), 200, {"ContentType": "application/json"}
