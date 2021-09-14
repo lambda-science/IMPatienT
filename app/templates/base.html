@@ -38,24 +38,19 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('imgannot.upload_file') }}">Image-Annot</a>
+          <li class="nav-item ">
+            <a class="nav-link" href="{{ url_for('ontocreate.ontocreate') }}">Standard Vocabulary</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{{ url_for('ocr.upload_pdf') }}">OCR-PDF</a>
+            <a class="nav-link" href="{{ url_for('historeport.histoindex') }}">Report Digitalization</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{{ url_for('ontocreate.ontocreate') }}">Ontology</a>
+            <a class="nav-link" href="dashboard/">Image Annotation</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{{ url_for('historeport.histoindex') }}">Histo-Report</a>
+            <a class="nav-link" href="{{ url_for('histostats.statsindex') }}">Visualization</a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url_for('histostats.statsindex') }}">Stats</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="dashboard/">Dash</a>
-          </li>
+
         </ul>
       </div>
 
@@ -112,7 +107,7 @@
   <footer class="footer d-none d-xl-block">
     <div class="container">
       <p>Created by: Corentin Meyer at CSTB Team @ ICube, CNRS, Unistra. <a
-          href="https://gitlab.com/Corentin_7/myoxia">Code availiable here</a>
+          href="https://github.com/lambda-science/MYO-xIA-App">Code availiable here</a>
         Contact: <span class="obfuscate">rf.artsinu.ute@reyem.nitneroc</span></p>
     </div>
   </footer>

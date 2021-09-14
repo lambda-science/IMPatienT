@@ -42,27 +42,27 @@ class ReportForm(FlaskForm):
     """Form used for report registration."""
 
     patient_id = StringField(
-        "ID Patient", render_kw={"placeholder": "ID Patient", "class": "form-control"}
+        "Patient ID", render_kw={"placeholder": "Patient ID", "class": "form-control"}
     )
     biopsie_id = StringField(
-        "Numéro de Biopsie",
-        render_kw={"placeholder": "Numéro de Biopsie", "class": "form-control"},
+        "Biopsy ID",
+        render_kw={"placeholder": "Biopsy ID", "class": "form-control"},
     )
     muscle_prelev = StringField(
-        "Muscle prélevé",
-        render_kw={"placeholder": "Muscle prélevé", "class": "form-control"},
+        "Muscle",
+        render_kw={"placeholder": "Muscle", "class": "form-control"},
     )
     age_biopsie = SelectField(
-        "Âge du patient lors de la biopsie:",
+        "Patient age at biopsy:",
         choices=["N/A"] + [i for i in range(101)],
         default="N/A",
         render_kw={
-            "placeholder": "Age du patient lors de la biopsie",
+            "placeholder": "Patient age at biopsy",
             "class": "form-control custom-select",
         },
     )
     date_envoie = StringField(
-        "Date d'envoi ou de biopsie",
+        "Biopsy Date",
         validators=[
             Regexp(r"(^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$)|(^$)"),
             Length(max=10),
@@ -73,35 +73,35 @@ class ReportForm(FlaskForm):
         },
     )
     gene_diag = SelectField(
-        "Gène diagnostiqué",
+        "Diagnosed Gene ",
         validators=[DataRequired()],
         choices=Common.create_list(os.path.join("config", "config_gene.txt")),
         render_kw={
-            "placeholder": "Gene diagnostiqué",
+            "placeholder": "Diagnosed Gene",
             "class": "form-control custom-select",
         },
     )
     ontology_tree = JSONField("Json Ontology Tree", render_kw={"type": "hidden"})
 
     comment = TextAreaField(
-        "Commentaire",
+        "Commentary",
         render_kw={
             "cols": "3",
             "rows": "3",
             "class": "form-control",
-            "placeholder": "Commentaires Divers",
+            "placeholder": "Commentary",
         },
     )
     conclusion = SelectField(
-        "Diagnostic final",
+        "Final Diagnosis",
         choices=Common.create_diag_list(os.path.join("config", "diagnostic.tsv")),
         render_kw={
-            "placeholder": "Conclusion Diagnosis",
+            "placeholder": "Final Diagnosis",
             "class": "form-control custom-select",
         },
     )
     submit = SubmitField(
-        "Submit report to the database", render_kw={"class": "btn btn-primary mb-2"}
+        "Save report to the database", render_kw={"class": "btn btn-primary mb-2"}
     )
 
 
@@ -109,22 +109,22 @@ class OntologyDescriptPreAbs(FlaskForm):
     """Form used to show node informations from ontology tree"""
 
     onto_name = StringField(
-        "Nom Terme Ontologique",
+        "Vocabulary Name",
         render_kw={
-            "placeholder": "Nom Terme Ontologique",
+            "placeholder": "Vocabulary Name",
             "class": "form-control",
             "readonly": "",
         },
     )
 
     synonymes = StringField(
-        "Synonymes",
-        render_kw={"placeholder": "Synonymes", "class": "form-control", "readonly": ""},
+        "Synonyms",
+        render_kw={"placeholder": "Synonyms", "class": "form-control", "readonly": ""},
     )
     gene = StringField(
-        "Gene associé",
+        "Associated Genes",
         render_kw={
-            "placeholder": "Gene associé",
+            "placeholder": "Associated Genes",
             "class": "form-control",
             "readonly": "",
         },

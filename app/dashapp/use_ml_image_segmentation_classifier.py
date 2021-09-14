@@ -31,7 +31,7 @@ def getenv(e):
     try:
         return os.environ[e]
     except KeyError:
-        print(__doc__)
+        # print(__doc__)
         raise
 
 

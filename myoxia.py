@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.models import User, Image, Pdf, ReportHisto
+from app.models import User, Image, ReportHisto
 
 # Create instance of app
 app = create_app()
@@ -12,7 +12,6 @@ def make_shell_context():
         "db": db,
         "User": User,
         "Image": Image,
-        "Pdf:": Pdf,
         "ReportHisto": ReportHisto,
     }
 

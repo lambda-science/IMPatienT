@@ -1,27 +1,21 @@
-# How To Use For Developpement Purpose:
+# How To Use For Developpement Purpose (using Conda):
 
-1. Install the Tesseract dependencies for OCR. Ubuntu example using apt:
-   `sudo apt install tesseract-ocr tesseract-ocr-fra tesseract-ocr-deu tesseract-ocr-spa tesseract-ocr-eng libgl1 libpq-dev python3-venv python3-dev python3-openslide openslide-tools build-essential poppler-utils`
+1. Clone the repository and create the conda environnement:  
+   `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
+   `conda env create -f environment_full.yml`  
+   Use `environment_simple.yml` if full is throwing errors.
 
-2. Create Python virtual environment
-   `python3 -m venv venv`
+2. Activate the environnement  
+   `conda activate myoxia`
 
-3. Activate the environnement
-   `source venv/bin/activate`
-
-4. Install the python dependencies
-   `pip install -r requirements.txt`
-
-5. Download NLP models:
-   `python -m spacy download fr_dep_news_trf`
-
-6. Initialize databse:
+3. Initialize empty database:  
    `flask db upgrade`
 
-7. Launch the app
+4. Set Flask in development mode and launch the app  
+   `export FLASK_ENV=development`  
    `flask run`
 
-8. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and use the application.
+5. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and use the application.
 
 ### Optional:
 
@@ -29,7 +23,7 @@ You can register a base user using flask shell:
 
 ```bash
 flask shell
-> user = User(username=demo, email=demo@demo.demo)
+> user = User(username="demo", email="demo@demo.demo")
 > user.set_password("demo")
 > db.session.add(user)
 > db.session.commit()

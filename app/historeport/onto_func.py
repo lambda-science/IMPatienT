@@ -20,7 +20,7 @@ class Ontology:
     def update_ontology(self, dest_onto: object) -> dict:
         """Function to update the current ontology tree
         used for anotation with latest modifications of the destination
-        (template) of the ontology tree (delete, update, create new)"""
+        (template) of the ontology tree (delete, update, create new, check parents)"""
         updated_jstree_as_list = []
 
         for i in self.jstree_as_list:
@@ -62,7 +62,16 @@ class Ontology:
             }
             for j in updated_jstree_as_list
         }
-        self.jstree_as_list = updated_jstree_as_list
+
+        # If destination has different parent ID: change it.
+        for i in dest_onto.jstree_as_dict.keys():
+            if (
+                dest_onto.jstree_as_dict[i]["parent"]
+                != self.jstree_as_dict[i]["parent"]
+            ):
+                self.jstree_as_dict[i]["parent"] = dest_onto.jstree_as_dict[i]["parent"]
+
+        self.jstree_as_list = list(self.jstree_as_dict.values())
         self.clean_tree()
         return self.jstree_as_list
 

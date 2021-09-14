@@ -16,7 +16,6 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
     images = db.relationship("Image", backref="creator", lazy="dynamic")
-    pdf = db.relationship("Pdf", backref="creator", lazy="dynamic")
     report = db.relationship("ReportHisto", backref="creator", lazy="dynamic")
 
     def __repr__(self):
@@ -78,33 +77,6 @@ class Image(db.Model):
         if (
             Image.query.filter_by(
                 image_name=self.image_name, patient_id=self.patient_id
-            ).first()
-            is None
-        ):
-            return False
-        else:
-            return True
-
-
-class Pdf(db.Model):
-    """Database table for PDF and OCR Results"""
-
-    id = db.Column(db.Integer, primary_key=True)
-    pdf_name = db.Column(db.String(140), index=True, nullable=False)
-    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    patient_id = db.Column(db.String(100), index=True, nullable=False)
-    pdf_path = db.Column(db.String(4096), unique=True, nullable=False)
-    lang = db.Column(db.String(140), nullable=False)
-    ocr_text = db.Column(db.Text, default="")
-
-    def __repr__(self):
-        return "<Pdf Name {} Patient {}>".format(self.pdf_name, self.patient_id)
-
-    def isduplicated(self):
-        """Method to check if new entry already exist"""
-        if (
-            Pdf.query.filter_by(
-                pdf_name=self.pdf_name, patient_id=self.patient_id
             ).first()
             is None
         ):
