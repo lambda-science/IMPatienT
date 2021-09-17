@@ -1,6 +1,5 @@
 import json
-import pandas as pd
-import numpy as np
+
 from flask_login import current_user, login_required
 from flask import (
     render_template,
@@ -8,7 +7,6 @@ from flask import (
     flash,
     redirect,
     url_for,
-    current_app,
     jsonify,
 )
 from app import db
@@ -34,7 +32,6 @@ def historeport():
     """Page to create new histology report of modify already existing one."""
     # If args in URL, try to retrive report from DB and pre-fill it
     ontology_tree_exist = False
-    template = json.load(open("config/ontology.json", "r"))
     if request.args:
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
