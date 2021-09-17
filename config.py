@@ -13,6 +13,7 @@ class Config(object):
     SECRET_KEY = os.environ.get("SECRET_KEY") or "myverylongsecretkey"
     DATA_FOLDER = os.path.join("/", "data")
     CONFIG_FOLDER = os.path.join(basedir, "config")
+    VIZ_FOLDER = os.path.join(basedir, "app", "static", "viz")
     SEND_FILE_MAX_AGE_DEFAULT = 0
     SESSION_COOKIE_SAMESITE = "Lax"
     SESSION_COOKIE_SECURE = "True"

@@ -1,9 +1,17 @@
-import pandas as pd
-import sqlite3
 import json
+import os
+import matplotlib
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
 import numpy as np
+import plotly.graph_objs as go
+from flask import current_app
+
+from app import db
+from app.models import ReportHisto
 
 
 def table_to_df(df):
@@ -24,63 +32,108 @@ def table_to_df(df):
         tree_as_dict.setdefault("conclusion", []).append(row[10])
         tree_as_dict.setdefault("datetime", []).append(row[11])
 
-        my_tree = json.loads(row[8])
+        my_tree = row[8]
         for feature in my_tree:
             tree_as_dict.setdefault(feature["text"], []).append(
                 float(feature["data"].get("presence", -0.25))
             )
             if index == 0:
                 features_col.append(feature["text"])
-    return tree_as_dict, features_col
+    df_return = pd.DataFrame.from_dict(tree_as_dict)
+    return df_return, features_col
 
 
 def db_to_df():
-    con = sqlite3.connect("app.db")
-    df = pd.read_sql_query("SELECT * from report_histo", con)
+    df = pd.read_sql(db.session.query(ReportHisto).statement, db.session.bind)
+    return df
+
+
+def process_df(df):
+    df = df.replace(
+        {
+            "COM_CCD": "COM",
+            "COM_MMM": "COM",
+            "NM_CAP": "NM",
+            "CFTD": "OTHER",
+            "NON_CM": "OTHER",
+            "CM": "UNCLEAR",
+        }
+    )
+    df = df.replace({-0.25: np.nan, 0.25: 1, 0.5: 1, 0.75: 1})
     return df
 
 
 def create_basic_viz(df):
+    df["age_biopsie"].replace({"N/A": -1}, inplace=True)
+
     muscle_prelev = df["muscle_prelev"].value_counts()
-    # Empty index to N/A
     as_list = muscle_prelev.index.tolist()
     idx = as_list.index("")
     as_list[idx] = "N/A"
     muscle_prelev.index = as_list
-    sns.barplot(x=muscle_prelev.index, y=muscle_prelev)
-    var = plt.xticks(rotation=25)
+    sns_plot = sns.barplot(x=muscle_prelev.index, y=muscle_prelev)
+    fig = sns_plot.get_figure()
+    plt.xticks(rotation=25)
+    fig.savefig(
+        os.path.join(current_app.config["VIZ_FOLDER"], "fig1.jpg"),
+        dpi=300,
+        bbox_inches="tight",
+    )
+    plt.clf()
 
     age_biopsie = df["age_biopsie"].value_counts()
     bebe = age_biopsie.where(age_biopsie.index <= 2).sum()
     enfant = age_biopsie.where((age_biopsie.index > 2) & (age_biopsie.index < 18)).sum()
     adulte = age_biopsie.where(age_biopsie.index >= 18).sum()
-    g = sns.barplot(
-        x=["Bébé (<=2ans)", "Enfant (3-17ans)", "Adulte (>=18ans)"],
+    sns_plot2 = sns.barplot(
+        x=["Newborn (<=2 years)", "Child (3-17 years)", "Adult (>=18 years)"],
         y=[bebe, enfant, adulte],
     )
     for i in range(3):
-        g.text(
+        sns_plot2.text(
             i,
             [bebe, enfant, adulte][i] + 0.1,
             int([bebe, enfant, adulte][i]),
             color="black",
             ha="center",
         )
+    fig2 = sns_plot.get_figure()
+    fig2.savefig(
+        os.path.join(current_app.config["VIZ_FOLDER"], "fig2.jpg"),
+        dpi=300,
+        bbox_inches="tight",
+    )
+    plt.clf()
 
-    gene_diag = df["gene_diag"].value_counts()[0:4]
-    gene_diag["Other"] = 89 - (14 + 11 + 8 + 7)
-    fig_dims = (8, 4)
-    fig, ax = plt.subplots(figsize=fig_dims)
-    g = sns.barplot(x=gene_diag.index, y=gene_diag, ax=ax)
+    gene_diag = df["gene_diag"].value_counts()
+    # gene_diag = df["gene_diag"].value_counts()[0:4]
+    # gene_diag["Other"] = len(df) - (df["gene_diag"].value_counts()[0:4].sum())
+
+    sns_plot3 = sns.barplot(x=gene_diag.index, y=gene_diag)
     for i in range(len(gene_diag)):
-        g.text(i, gene_diag[i] + 0.1, gene_diag[i], color="black", ha="center")
-    # var = plt.xticks(rotation=90)
+        sns_plot3.text(i, gene_diag[i] + 0.1, gene_diag[i], color="black", ha="center")
+    fig3 = sns_plot3.get_figure()
+    plt.xticks(rotation=90)
+    fig3.savefig(
+        os.path.join(current_app.config["VIZ_FOLDER"], "fig3.jpg"),
+        dpi=300,
+        bbox_inches="tight",
+    )
+    plt.clf()
 
-    # Merge sub types for stats
     conclusion = df["conclusion"].value_counts()
-    g = sns.barplot(x=conclusion.index, y=conclusion)
+    sns_plot4 = sns.barplot(x=conclusion.index, y=conclusion)
     for i in range(len(conclusion)):
-        g.text(i, conclusion[i] + 0.1, conclusion[i], color="black", ha="center")
+        sns_plot4.text(
+            i, conclusion[i] + 0.1, conclusion[i], color="black", ha="center"
+        )
+    fig4 = sns_plot4.get_figure()
+    fig4.savefig(
+        os.path.join(current_app.config["VIZ_FOLDER"], "fig4.jpg"),
+        dpi=300,
+        bbox_inches="tight",
+    )
+    plt.clf()
 
 
 def generate_stat_per(df, features_col):
@@ -103,9 +156,13 @@ def generate_stat_per(df, features_col):
         stat_per_diag[i] = {}
         stat_per_diag[i]["n"] = nrow
         stat_per_diag[i]["feature"] = ds[ds > 0].round().to_dict()
-    with open("data/stat_per_gene.json", "w") as f:
+    with open(
+        os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.json"), "w"
+    ) as f:
         json.dump(stat_per_gene, f, indent=4, ensure_ascii=False)
-    with open("data/stat_per_diag.json", "w") as f:
+    with open(
+        os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_diag.json"), "w"
+    ) as f:
         json.dump(stat_per_diag, f, indent=4, ensure_ascii=False)
 
 
@@ -124,21 +181,22 @@ def generate_corr_matrix(df):
     corrMatrix.drop(col_row_to_drop, axis=1, inplace=True)
     corrMatrix.drop(col_row_to_drop, axis=0, inplace=True)
     # Use Seaborn to cluster data
-    g = sns.clustermap(corrMatrix, cmap="coolwarm", figsize=(20, 20))
-    plt.close()
+    # g = sns.clustermap(corrMatrix, cmap="coolwarm", figsize=(20, 20))
+    # plt.close()
     # trace_heatmap = go.Heatmap(x=g.data2d.columns, y=g.data2d.columns,
     #                    z=g.data2d, colorscale="RdBu")
     trace_heatmap = go.Heatmap(
-        x=corrMatrix.columns, y=corrMatrix.columns, z=corrMatrix, colorscale="RdBu"
+        x=corrMatrix.columns, y=corrMatrix.columns, z=corrMatrix, colorscale="RdBu",
     )
     data = [trace_heatmap]
     layout = go.Layout(
-        title="Histology ontology terms correlation matrix (threshold n>10)",
+        title="Standard Vocabulary terms correlation matrix (threshold n>=10)",
         showlegend=True,
         width=1000,
         height=1000,
         yaxis={"scaleanchor": "x"},
     )
     figure = go.Figure(data=data, layout=layout)
-    figure.show()
-    figure.write_json("data/correlation_matrix.json")
+    figure.write_json(
+        os.path.join(current_app.config["VIZ_FOLDER"], "correlation_matrix.json")
+    )
