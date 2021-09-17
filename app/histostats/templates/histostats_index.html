@@ -2,18 +2,18 @@
 <div class="row justify-content-md-center">
   <div class="col-xl-8">
     <div class="row">
-      <div class="col-xl align-self-end"><img src="{{ url_for('static', filename='/viz/fig1.jpg') }}" alt="Fig 1"
+      <div class="col-xl align-self-end"><img src="{{ url_for('static', filename='viz/fig1.jpg') }}" alt="Fig 1"
           width="480" height="320">
       </div>
-      <div class="col-xl align-self-start"><img src="{{ url_for('static', filename='/viz/fig2.jpg') }}" alt="Fig 2"
+      <div class="col-xl align-self-start"><img src="{{ url_for('static', filename='viz/fig2.jpg') }}" alt="Fig 2"
           width="480" height="320">
       </div>
     </div>
     <div class="row">
-      <div class="col-xl align-self-end"><img src="{{ url_for('static', filename='/viz/fig3.jpg') }}" alt="Fig 3"
+      <div class="col-xl align-self-end"><img src="{{ url_for('static', filename='viz/fig3.jpg') }}" alt="Fig 3"
           width="480" height="320">
       </div>
-      <div class="col-xl align-self-start"><img src="{{ url_for('static', filename='/viz/fig4.jpg') }}" alt="Fig 4"
+      <div class="col-xl align-self-start"><img src="{{ url_for('static', filename='viz/fig4.jpg') }}" alt="Fig 4"
           width="480" height="320">
       </div>
     </div>
@@ -27,7 +27,7 @@
 <div class="row">
   <div class="col-xl-6">
     <h1>Vocabulary Frenquencies Per Genes</h1>
-    <a href="{{ url_for('static', filename='/viz/stat_per_gene.json') }}" download>Download Table (.JSON)</a>
+    <a href="{{ url_for('static', filename='viz/stat_per_gene.json') }}" download>Download Table (.JSON)</a>
     <div class="accordion" id="accordionGENE">
       {% for gene in stat_per_gene %}
       <div class="accordion-item">
@@ -54,7 +54,7 @@
 
   <div class="col-xl-6">
     <h1>Vocabulary Frenquencies Per Diagnosis</h1>
-    <a href="{{ url_for('static', filename='/viz/stat_per_diag.json') }}" download>Download Table (.JSON)</a>
+    <a href="{{ url_for('static', filename='viz/stat_per_diag.json') }}" download>Download Table (.JSON)</a>
     <div class="accordion" id="accordionDIAG">
       {% for diag in stat_per_diag %}
       <div class="accordion-item">
