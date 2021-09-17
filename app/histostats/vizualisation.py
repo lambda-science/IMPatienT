@@ -82,22 +82,24 @@ def create_basic_viz(df):
     plt.clf()
 
     age_biopsie = df["age_biopsie"].value_counts()
+    NA_age = age_biopsie.where(age_biopsie.index == -1).sum()
     bebe = age_biopsie.where(age_biopsie.index <= 2).sum()
     enfant = age_biopsie.where((age_biopsie.index > 2) & (age_biopsie.index < 18)).sum()
     adulte = age_biopsie.where(age_biopsie.index >= 18).sum()
     sns_plot2 = sns.barplot(
-        x=["Newborn (<=2 years)", "Child (3-17 years)", "Adult (>=18 years)"],
-        y=[bebe, enfant, adulte],
+        x=["Newborn (<=2 years)", "Child (3-17 years)", "Adult (>=18 years)", "N/A"],
+        y=[bebe, enfant, adulte, NA_age],
     )
-    for i in range(3):
+    for i in range(4):
         sns_plot2.text(
             i,
-            [bebe, enfant, adulte][i] + 0.1,
-            int([bebe, enfant, adulte][i]),
+            [bebe, enfant, adulte, NA_age][i] + 0.1,
+            int([bebe, enfant, adulte, NA_age][i]),
             color="black",
             ha="center",
         )
     fig2 = sns_plot.get_figure()
+    plt.xticks(rotation=25)
     fig2.savefig(
         os.path.join(current_app.config["VIZ_FOLDER"], "fig2.jpg"),
         dpi=300,
