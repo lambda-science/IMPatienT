@@ -7,12 +7,23 @@ from app import db
 from app import login
 import datetime
 
+from sqlalchemy_utils import EncryptedType, StringEncryptedType
+from sqlalchemy_utils.types.encrypted.encrypted_type import FernetEngine
+
+
+key = b"IHEavz_oPFf7GYYz79Lt7PpdXugtl3IKK6FWyPwVAN8="  # This won't be the final key
+
 
 class User(UserMixin, db.Model):
     """Database table for Users"""
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True, nullable=False)
+    username = db.Column(
+        StringEncryptedType(db.String(64), key, FernetEngine),
+        index=True,
+        unique=True,
+        nullable=False,
+    )
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
     images = db.relationship("Image", backref="creator", lazy="dynamic")
