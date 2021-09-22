@@ -21,27 +21,7 @@
 </div>
 <div class="row justify-content-md-center">
   <div class="col-xl-8">
-    <div id="fig1" class="fig1"></div>
-  </div>
-</div>
-<div class="row justify-content-md-center">
-  <div class="col-xl-8">
-    <div id="fig2" class="fig2"></div>
-  </div>
-</div>
-<div class="row justify-content-md-center">
-  <div class="col-xl-8">
-    <div id="fig3" class="fig3"></div>
-  </div>
-</div>
-<div class="row justify-content-md-center">
-  <div class="col-xl-8">
-    <div id="fig4" class="fig4"></div>
-  </div>
-</div>
-<div class="row justify-content-md-center">
-  <div class="col-xl-8">
-    <div id="chart" class="chart"></div>
+    <div id="corrMatrixChart" class="corrMatrixChart"></div>
   </div>
 </div>
 <div class="row">
@@ -112,7 +92,7 @@
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <script type='text/javascript'>
   var graphs = $("#data-graph").data();
-  Plotly.plot('chart', graphs.jsongraph, {});
+  Plotly.plot('corrMatrixChart', graphs.jsongraph, {});
 
   var fig1 = $("#data-fig1").data();
   Plotly.plot('fig1', fig1.fig1, {});
