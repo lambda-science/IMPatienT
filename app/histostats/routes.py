@@ -15,7 +15,8 @@ def statsindex():
     df, features_col = table_to_df(df)
     df = process_df(df)
     generate_stat_per(df, features_col)
-    create_basic_viz(df)
+    graph_viz = create_plotly_viz(df)
+    # create_basic_viz(df)
     generate_corr_matrix(df)
     stat_per_gene_file = open(
         os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.json")
@@ -34,10 +35,10 @@ def statsindex():
             "r",
         )
     )
-
     return render_template(
         "histostats_index.html",
         stat_per_gene=stat_per_gene,
         stat_per_diag=stat_per_diag,
         graphJSON=graphJSON,
+        graph_viz=graph_viz,
     )

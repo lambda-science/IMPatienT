@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import numpy as np
+import plotly
+import plotly.express as px
 import plotly.graph_objs as go
 from flask import current_app
 
@@ -63,79 +65,111 @@ def process_df(df):
     return df
 
 
-def create_basic_viz(df):
+def create_plotly_viz(df):
     df["age_biopsie"].replace({"N/A": -1}, inplace=True)
-
     muscle_prelev = df["muscle_prelev"].value_counts()
     as_list = muscle_prelev.index.tolist()
     idx = as_list.index("")
     as_list[idx] = "N/A"
     muscle_prelev.index = as_list
-    sns_plot = sns.barplot(x=muscle_prelev.index, y=muscle_prelev)
-    fig = sns_plot.get_figure()
-    plt.xticks(rotation=25)
-    fig.savefig(
-        os.path.join(current_app.config["VIZ_FOLDER"], "fig1.jpg"),
-        dpi=300,
-        bbox_inches="tight",
-    )
-    plt.clf()
+    fig1 = px.bar(x=muscle_prelev.index, y=muscle_prelev)
+    graphJSON1 = json.loads(fig1.to_json())
 
     age_biopsie = df["age_biopsie"].value_counts()
     NA_age = age_biopsie.where(age_biopsie.index == -1).sum()
     bebe = age_biopsie.where(age_biopsie.index <= 2).sum()
     enfant = age_biopsie.where((age_biopsie.index > 2) & (age_biopsie.index < 18)).sum()
     adulte = age_biopsie.where(age_biopsie.index >= 18).sum()
-    sns_plot2 = sns.barplot(
+    fig2 = px.bar(
         x=["Newborn (<=2 years)", "Child (3-17 years)", "Adult (>=18 years)", "N/A"],
         y=[bebe, enfant, adulte, NA_age],
     )
-    for i in range(4):
-        sns_plot2.text(
-            i,
-            [bebe, enfant, adulte, NA_age][i] + 0.1,
-            int([bebe, enfant, adulte, NA_age][i]),
-            color="black",
-            ha="center",
-        )
-    fig2 = sns_plot.get_figure()
-    plt.xticks(rotation=25)
-    fig2.savefig(
-        os.path.join(current_app.config["VIZ_FOLDER"], "fig2.jpg"),
-        dpi=300,
-        bbox_inches="tight",
-    )
-    plt.clf()
+    graphJSON2 = json.loads(fig2.to_json())
 
     gene_diag = df["gene_diag"].value_counts()
-    # gene_diag = df["gene_diag"].value_counts()[0:4]
-    # gene_diag["Other"] = len(df) - (df["gene_diag"].value_counts()[0:4].sum())
-
-    sns_plot3 = sns.barplot(x=gene_diag.index, y=gene_diag)
-    for i in range(len(gene_diag)):
-        sns_plot3.text(i, gene_diag[i] + 0.1, gene_diag[i], color="black", ha="center")
-    fig3 = sns_plot3.get_figure()
-    plt.xticks(rotation=90)
-    fig3.savefig(
-        os.path.join(current_app.config["VIZ_FOLDER"], "fig3.jpg"),
-        dpi=300,
-        bbox_inches="tight",
-    )
-    plt.clf()
+    fig3 = px.bar(x=gene_diag.index, y=gene_diag)
+    graphJSON3 = json.loads(fig3.to_json())
 
     conclusion = df["conclusion"].value_counts()
-    sns_plot4 = sns.barplot(x=conclusion.index, y=conclusion)
-    for i in range(len(conclusion)):
-        sns_plot4.text(
-            i, conclusion[i] + 0.1, conclusion[i], color="black", ha="center"
-        )
-    fig4 = sns_plot4.get_figure()
-    fig4.savefig(
-        os.path.join(current_app.config["VIZ_FOLDER"], "fig4.jpg"),
-        dpi=300,
-        bbox_inches="tight",
-    )
-    plt.clf()
+    fig4 = px.bar(x=conclusion.index, y=conclusion)
+    graphJSON4 = json.loads(fig4.to_json())
+
+    return [graphJSON1, graphJSON2, graphJSON3, graphJSON4]
+
+
+# def create_basic_viz(df):
+#     df["age_biopsie"].replace({"N/A": -1}, inplace=True)
+
+#     muscle_prelev = df["muscle_prelev"].value_counts()
+#     as_list = muscle_prelev.index.tolist()
+#     idx = as_list.index("")
+#     as_list[idx] = "N/A"
+#     muscle_prelev.index = as_list
+#     sns_plot = sns.barplot(x=muscle_prelev.index, y=muscle_prelev)
+#     fig = sns_plot.get_figure()
+#     plt.xticks(rotation=25)
+#     fig.savefig(
+#         os.path.join(current_app.config["VIZ_FOLDER"], "fig1.jpg"),
+#         dpi=300,
+#         bbox_inches="tight",
+#     )
+#     plt.clf()
+
+#     age_biopsie = df["age_biopsie"].value_counts()
+#     NA_age = age_biopsie.where(age_biopsie.index == -1).sum()
+#     bebe = age_biopsie.where(age_biopsie.index <= 2).sum()
+#     enfant = age_biopsie.where((age_biopsie.index > 2) & (age_biopsie.index < 18)).sum()
+#     adulte = age_biopsie.where(age_biopsie.index >= 18).sum()
+#     sns_plot2 = sns.barplot(
+#         x=["Newborn (<=2 years)", "Child (3-17 years)", "Adult (>=18 years)", "N/A"],
+#         y=[bebe, enfant, adulte, NA_age],
+#     )
+#     for i in range(4):
+#         sns_plot2.text(
+#             i,
+#             [bebe, enfant, adulte, NA_age][i] + 0.1,
+#             int([bebe, enfant, adulte, NA_age][i]),
+#             color="black",
+#             ha="center",
+#         )
+#     fig2 = sns_plot.get_figure()
+#     plt.xticks(rotation=25)
+#     fig2.savefig(
+#         os.path.join(current_app.config["VIZ_FOLDER"], "fig2.jpg"),
+#         dpi=300,
+#         bbox_inches="tight",
+#     )
+#     plt.clf()
+
+#     gene_diag = df["gene_diag"].value_counts()
+#     # gene_diag = df["gene_diag"].value_counts()[0:4]
+#     # gene_diag["Other"] = len(df) - (df["gene_diag"].value_counts()[0:4].sum())
+
+#     sns_plot3 = sns.barplot(x=gene_diag.index, y=gene_diag)
+#     for i in range(len(gene_diag)):
+#         sns_plot3.text(i, gene_diag[i] + 0.1, gene_diag[i], color="black", ha="center")
+#     fig3 = sns_plot3.get_figure()
+#     plt.xticks(rotation=90)
+#     fig3.savefig(
+#         os.path.join(current_app.config["VIZ_FOLDER"], "fig3.jpg"),
+#         dpi=300,
+#         bbox_inches="tight",
+#     )
+#     plt.clf()
+
+#     conclusion = df["conclusion"].value_counts()
+#     sns_plot4 = sns.barplot(x=conclusion.index, y=conclusion)
+#     for i in range(len(conclusion)):
+#         sns_plot4.text(
+#             i, conclusion[i] + 0.1, conclusion[i], color="black", ha="center"
+#         )
+#     fig4 = sns_plot4.get_figure()
+#     fig4.savefig(
+#         os.path.join(current_app.config["VIZ_FOLDER"], "fig4.jpg"),
+#         dpi=300,
+#         bbox_inches="tight",
+#     )
+#     plt.clf()
 
 
 def generate_stat_per(df, features_col):

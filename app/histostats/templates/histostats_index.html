@@ -2,21 +2,41 @@
 <div class="row justify-content-md-center">
   <div class="col-xl-8">
     <div class="row">
-      <div class="col-xl align-self-end"><img src="{{ url_for('static', filename='viz/fig1.jpg') }}" alt="Fig 1"
-          width="480" height="320">
+      <div class="col-xl align-self-end">
+        <div id="fig1" class="fig1"></div>
       </div>
-      <div class="col-xl align-self-start"><img src="{{ url_for('static', filename='viz/fig2.jpg') }}" alt="Fig 2"
-          width="480" height="320">
+      <div class="col-xl align-self-end">
+        <div id="fig2" class="fig2"></div>
       </div>
     </div>
     <div class="row">
-      <div class="col-xl align-self-end"><img src="{{ url_for('static', filename='viz/fig3.jpg') }}" alt="Fig 3"
-          width="480" height="320">
+      <div class="col-xl align-self-end">
+        <div id="fig3" class="fig3"></div>
       </div>
-      <div class="col-xl align-self-start"><img src="{{ url_for('static', filename='viz/fig4.jpg') }}" alt="Fig 4"
-          width="480" height="320">
+      <div class="col-xl align-self-end">
+        <div id="fig4" class="fig4"></div>
       </div>
     </div>
+  </div>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-xl-8">
+    <div id="fig1" class="fig1"></div>
+  </div>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-xl-8">
+    <div id="fig2" class="fig2"></div>
+  </div>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-xl-8">
+    <div id="fig3" class="fig3"></div>
+  </div>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-xl-8">
+    <div id="fig4" class="fig4"></div>
   </div>
 </div>
 <div class="row justify-content-md-center">
@@ -83,13 +103,26 @@
 </br>
 
 <meta id="data-graph" data-jsongraph='{{graphJSON|tojson|safe}}'>
+<meta id="data-fig1" data-fig1='{{graph_viz[0]|tojson|safe}}'>
+<meta id="data-fig2" data-fig2='{{graph_viz[1]|tojson|safe}}'>
+<meta id="data-fig3" data-fig3='{{graph_viz[2]|tojson|safe}}'>
+<meta id="data-fig4" data-fig4='{{graph_viz[3]|tojson|safe}}'>
 
 
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <script type='text/javascript'>
   var graphs = $("#data-graph").data();
-
   Plotly.plot('chart', graphs.jsongraph, {});
+
+  var fig1 = $("#data-fig1").data();
+  Plotly.plot('fig1', fig1.fig1, {});
+  var fig2 = $("#data-fig2").data();
+  Plotly.plot('fig2', fig2.fig2, {});
+  var fig3 = $("#data-fig3").data();
+  Plotly.plot('fig3', fig3.fig3, {});
+  var fig4 = $("#data-fig4").data();
+  Plotly.plot('fig4', fig4.fig4, {});
+
 </script>
 
 {% endblock %}
