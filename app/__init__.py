@@ -77,6 +77,10 @@ def create_app(config_class=Config):
 
     app.register_blueprint(dashapp_bp)
 
+    from app.imgupload import bp as imgupload_bp
+
+    app.register_blueprint(imgupload_bp)
+
     # If app in production settings:
     # configure our SMTP mail connection
     # configure error-logging service
