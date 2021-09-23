@@ -62,12 +62,11 @@ class Image(db.Model):
     image_name = db.Column(db.String(140), nullable=False)
     expert_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     patient_id = db.Column(db.String(100), index=True, nullable=False)
+    biopsy_id = db.Column(db.String(100), index=True)
     type_coloration = db.Column(db.String(140))
     age_at_biopsy = db.Column(db.Integer, default=-1)
     image_path = db.Column(db.String(4096), unique=True, nullable=False)
     diagnostic = db.Column(db.String(140), index=True)
-    report_text = db.Column(db.Text, default="")
-    annotation_json = db.Column(db.JSON, default=[])
 
     def __repr__(self):
         return "<Image Name {} Patient {}>".format(self.image_name, self.patient_id)
