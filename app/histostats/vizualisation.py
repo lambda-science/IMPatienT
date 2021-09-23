@@ -72,7 +72,17 @@ def create_plotly_viz(df):
     idx = as_list.index("")
     as_list[idx] = "N/A"
     muscle_prelev.index = as_list
-    fig1 = px.bar(x=muscle_prelev.index, y=muscle_prelev)
+    fig1 = px.bar(
+        x=muscle_prelev.index,
+        y=muscle_prelev,
+        text=muscle_prelev,
+        color=muscle_prelev.index.astype(str),
+        color_discrete_sequence=px.colors.qualitative.G10,
+        title="Cohort repartition by muscle",
+    )
+    fig1.update_layout(
+        xaxis_title="Biopsy muscle", yaxis_title="Number of reports", showlegend=False
+    )
     graphJSON1 = json.loads(fig1.to_json())
 
     age_biopsie = df["age_biopsie"].value_counts()
@@ -83,15 +93,47 @@ def create_plotly_viz(df):
     fig2 = px.bar(
         x=["Newborn (<=2 years)", "Child (3-17 years)", "Adult (>=18 years)", "N/A"],
         y=[bebe, enfant, adulte, NA_age],
+        text=[bebe, enfant, adulte, NA_age],
+        color=[
+            "Newborn (<=2 years)",
+            "Child (3-17 years)",
+            "Adult (>=18 years)",
+            "N/A",
+        ],
+        color_discrete_sequence=px.colors.qualitative.G10,
+        title="Cohort repartition by age group",
+    )
+    fig2.update_layout(
+        xaxis_title="Age Group", yaxis_title="Number of reports", showlegend=False
     )
     graphJSON2 = json.loads(fig2.to_json())
 
     gene_diag = df["gene_diag"].value_counts()
-    fig3 = px.bar(x=gene_diag.index, y=gene_diag)
+    fig3 = px.bar(
+        x=gene_diag.index,
+        y=gene_diag,
+        text=gene_diag,
+        color=gene_diag.index.astype(str),
+        color_discrete_sequence=px.colors.qualitative.G10,
+        title="Cohort repartition by gene diagnosis",
+    )
+    fig3.update_layout(
+        xaxis_title="Gene diagnosed", yaxis_title="Number of reports", showlegend=False,
+    )
     graphJSON3 = json.loads(fig3.to_json())
 
     conclusion = df["conclusion"].value_counts()
-    fig4 = px.bar(x=conclusion.index, y=conclusion)
+    fig4 = px.bar(
+        x=conclusion.index,
+        y=conclusion,
+        text=conclusion,
+        color=conclusion.index.astype(str),
+        color_discrete_sequence=px.colors.qualitative.G10,
+        title="Cohort repartition by myopathy diagnosis",
+    )
+    fig4.update_layout(
+        xaxis_title="Myopathy class", yaxis_title="Number of reports", showlegend=False
+    )
     graphJSON4 = json.loads(fig4.to_json())
 
     return [graphJSON1, graphJSON2, graphJSON3, graphJSON4]
