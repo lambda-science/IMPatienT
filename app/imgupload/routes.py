@@ -39,13 +39,13 @@ def delete_img(id_img):
         image = Image.query.get(id_img)
         if image is None:
             flash("Image {} not found.".format(id_img), "danger")
-            return redirect(url_for("imgannot.upload_file"))
+            return redirect(url_for("imgupload.img_index"))
         db.session.delete(image)
         db.session.commit()
         flash("Deleted Image entry {}!".format(id_img), "success")
-        return redirect(url_for("imgannot.upload_file"))
+        return redirect(url_for("imgupload.img_index"))
     else:
-        return redirect(url_for("imgannot.upload_file"))
+        return redirect(url_for("imgupload.img_index"))
 
 
 @bp.route("/create_img", methods=["GET", "POST"])
@@ -66,6 +66,7 @@ def create_img():
                 age_histo=image_request.age_at_biopsy,
                 diagnostic=image_request.diagnostic,
             )
+
         else:
             return redirect(url_for("imgupload.img_index"))
     # If no args: empty form
