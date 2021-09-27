@@ -2,7 +2,7 @@ import os
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, SubmitField, SelectField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Regexp
 import app.src.common as Common
 
 
@@ -18,12 +18,12 @@ class ImageForm(FlaskForm):
     )
     patient_ID = StringField(
         "patient_ID",
-        validators=[DataRequired()],
+        validators=[Regexp(r"^[\w.-_]+$"), DataRequired()],
         render_kw={"placeholder": "Patient ID", "class": "form-control"},
     )
     biopsy_report_ID = StringField(
         "biopsy_report_ID",
-        validators=[DataRequired()],
+        validators=[DataRequired(), Regexp(r"^[\w.-_]*$")],
         render_kw={"placeholder": "Biopsy Report ID", "class": "form-control"},
     )
     type_coloration = SelectField(

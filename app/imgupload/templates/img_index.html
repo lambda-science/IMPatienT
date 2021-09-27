@@ -25,6 +25,7 @@
                 <td class="align-middle text-center">{{ image.image_name }}</td>
                 <td class="align-middle text-center">{{ image.conclusion }}</td>
                 <td class="align-middle text-center">
+                    <a class="btn btn-warning btn-sm" role="button" href="dashboard?id={{image.id}}">Anotate</a>
                     <a class="btn btn-success btn-sm" role="button" href="create_img?id={{image.id}}">Modify</a>
                     <!-- Button Show Popup -->
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
