@@ -26,7 +26,7 @@ def img_index():
     form = DeleteButton()
     image_history = Image.query.all()
 
-    return render_template("img_index.html", form=form, image_history=image_history,)
+    return render_template("img_index.html", form=form, image_history=image_history)
 
 
 @bp.route("/delete_img/<id_img>", methods=["POST"])

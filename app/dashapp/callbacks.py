@@ -1,6 +1,11 @@
+from urllib import parse
+from app.models import Image
 import dash
+import dash_html_components as html
+import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
-
+import dash_core_components as dcc
 
 import app.dashapp.plot_common as plot_common
 
@@ -8,7 +13,7 @@ from app.dashapp.shapes_to_segmentations import (
     compute_segmentations,
     blend_image_and_classified_regions_pil,
 )
-
+from flask import current_app
 from app.dashapp.trainable_segmentation import multiscale_basic_features
 import io
 import base64
@@ -28,7 +33,6 @@ NUM_LABEL_CLASSES = 5
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
 DEFAULT_IMAGE_PATH = os.path.join(bp.static_folder, "sample.png")
 DEFAULT_IMAGE_URL = os.path.join(bp.static_url_path, "sample.png")
-img = skio.imread(DEFAULT_IMAGE_PATH)
 class_label_colormap = ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"]
 class_labels = list(range(NUM_LABEL_CLASSES))
 # we can't have less colors than classes
@@ -48,6 +52,7 @@ def make_default_figure(
     stroke_color=class_to_color(DEFAULT_LABEL_CLASS),
     stroke_width=DEFAULT_STROKE_WIDTH,
     shapes=[],
+    source_img=None,
 ):
     fig = plot_common.dummy_fig()
     plot_common.add_layout_images_to_fig(fig, images)
@@ -60,6 +65,8 @@ def make_default_figure(
             "margin": dict(l=0, r=0, b=0, t=0, pad=4),
         }
     )
+    if source_img:
+        fig._layout_obj.images[0].source = source_img
     return fig
 
 
@@ -108,6 +115,7 @@ def register_callbacks(dashapp):
             Output("classified-image-store", "data"),
         ],
         [
+            Input("url", "href"),
             Input("graph", "relayoutData"),
             Input(
                 {"type": "label-class-button", "index": dash.dependencies.ALL},
@@ -123,6 +131,7 @@ def register_callbacks(dashapp):
         [State("masks", "data"),],
     )
     def annotation_react(
+        href,
         graph_relayoutData,
         any_label_class_button_value,
         stroke_width_value,
@@ -136,6 +145,22 @@ def register_callbacks(dashapp):
         classified_image_store_data = dash.no_update
         classifier_store_data = dash.no_update
         cbcontext = [p["prop_id"] for p in dash.callback_context.triggered][0]
+
+        # Ugly Source Building to Refactor
+        key_params = dict(parse.parse_qsl(parse.urlsplit(href).query))
+        url_splited = parse.urlsplit(href)
+        image = Image.query.get(key_params["id"])
+        image_split_path = image.image_path.split("/")
+        img = skio.imread(image.image_path)
+        source = "/".join(
+            [
+                "http:/",
+                url_splited.netloc,
+                "data",
+                image_split_path[-2],
+                image_split_path[-1],
+            ]
+        )
         if cbcontext in ["segmentation-features.value", "sigma-range-slider.value"] or (
             ("Show segmentation" in show_segmentation_value)
             and (len(masks_data["shapes"]) > 0)
@@ -170,12 +195,14 @@ def register_callbacks(dashapp):
                 enumerate(any_label_class_button_value),
                 key=lambda t: 0 if t[1] is None else t[1],
             )[0]
-
         fig = make_default_figure(
+            images=[image.image_path],
             stroke_color=class_to_color(label_class_value),
             stroke_width=stroke_width,
             shapes=masks_data["shapes"],
+            source_img=source,
         )
+
         # We want the segmentation to be computed
         if ("Show segmentation" in show_segmentation_value) and (
             len(masks_data["shapes"]) > 0
@@ -188,14 +215,14 @@ def register_callbacks(dashapp):
                 feature_opts["sigma_min"] = sigma_range_slider_value[0]
                 feature_opts["sigma_max"] = sigma_range_slider_value[1]
                 segimgpng, clf = show_segmentation(
-                    DEFAULT_IMAGE_PATH, masks_data["shapes"], features, feature_opts
+                    image.image_path, masks_data["shapes"], features, feature_opts
                 )
                 if cbcontext == "download-button.n_clicks":
                     classifier_store_data = clf
                 if cbcontext == "download-image-button.n_clicks":
                     classified_image_store_data = plot_common.pil_image_to_uri(
                         blend_image_and_classified_regions_pil(
-                            PIL.Image.open(DEFAULT_IMAGE_PATH), segimgpng
+                            PIL.Image.open(image.image_path), segimgpng
                         )
                     )
             except ValueError:

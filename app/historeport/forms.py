@@ -42,14 +42,18 @@ class ReportForm(FlaskForm):
     """Form used for report registration."""
 
     patient_id = StringField(
-        "Patient ID", render_kw={"placeholder": "Patient ID", "class": "form-control"}
+        "Patient ID",
+        validators=[Regexp(r"^[\w.-_]*$")],
+        render_kw={"placeholder": "Patient ID", "class": "form-control"},
     )
     biopsie_id = StringField(
         "Biopsy ID",
+        validators=[Regexp(r"^[\w.-_]*$")],
         render_kw={"placeholder": "Biopsy ID", "class": "form-control"},
     )
     muscle_prelev = StringField(
         "Muscle",
+        validators=[Regexp(r"^[\w.-_]*$")],
         render_kw={"placeholder": "Muscle", "class": "form-control"},
     )
     age_biopsie = SelectField(
@@ -67,10 +71,7 @@ class ReportForm(FlaskForm):
             Regexp(r"(^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$)|(^$)"),
             Length(max=10),
         ],
-        render_kw={
-            "class": "form-control",
-            "placeholder": "YYYY-MM-DD",
-        },
+        render_kw={"class": "form-control", "placeholder": "YYYY-MM-DD",},
     )
     gene_diag = SelectField(
         "Diagnosed Gene ",
@@ -142,12 +143,7 @@ class OntologyDescriptPreAbs(FlaskForm):
     preabsProba = DecimalRangeField(
         "Absence / Presence",
         validators=[NumberRange(min=-0.25, max=1)],
-        render_kw={
-            "min": -0.25,
-            "max": 1,
-            "step": 0.25,
-            "class": "form-range",
-        },
+        render_kw={"min": -0.25, "max": 1, "step": 0.25, "class": "form-range",},
     )
 
 

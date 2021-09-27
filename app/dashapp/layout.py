@@ -2,6 +2,7 @@ import dash_html_components as html
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import os
+from dash_html_components.H6 import H6
 from skimage import io as skio
 from app.dashapp import bp
 from joblib import Memory
@@ -14,8 +15,6 @@ compute_features = memory.cache(multiscale_basic_features)
 
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
 
-DEFAULT_IMAGE_PATH = os.path.join(bp.static_folder, "sample.png")
-DEFAULT_IMAGE_URL = os.path.join(bp.static_url_path, "sample.png")
 SEG_FEATURE_TYPES = ["intensity", "edges", "texture"]
 
 # the number of different classes for labels
@@ -39,10 +38,6 @@ def color_to_class(c):
     return class_label_colormap.index(c)
 
 
-img = skio.imread(DEFAULT_IMAGE_PATH)
-features_dict = {}
-
-
 def get_assets_folder():
     return bp.static_folder
 
@@ -57,26 +52,6 @@ def get_external_stylesheets():
         os.path.join(bp.static_url_path, "segmentation-style.css"),
     ]
     return external_stylesheets
-
-
-def make_default_figure(
-    images=[DEFAULT_IMAGE_PATH],
-    stroke_color=class_to_color(DEFAULT_LABEL_CLASS),
-    stroke_width=DEFAULT_STROKE_WIDTH,
-    shapes=[],
-):
-    fig = plot_common.dummy_fig()
-    plot_common.add_layout_images_to_fig(fig, images)
-    fig.update_layout(
-        {
-            "dragmode": "drawopenpath",
-            "shapes": shapes,
-            "newshape.line.color": stroke_color,
-            "newshape.line.width": stroke_width,
-            "margin": dict(l=0, r=0, b=0, t=0, pad=4),
-        }
-    )
-    return fig
 
 
 # Modal
@@ -117,11 +92,7 @@ header = dbc.Navbar(
             dbc.Row(
                 [
                     dbc.Col(
-                        [
-                            dbc.NavbarToggler(id="navbar-toggler"),
-                            modal_overlay,
-                        ],
-                        md=2,
+                        [dbc.NavbarToggler(id="navbar-toggler"), modal_overlay,], md=2,
                     ),
                 ],
                 align="center",
@@ -165,9 +136,9 @@ description = dbc.Col(
     ],
     md=12,
 )
-
 # Image Segmentation
 segmentation = [
+    html.Div([dcc.Location(id="url")]),
     dbc.Card(
         id="segmentation-card",
         children=[
@@ -185,7 +156,7 @@ segmentation = [
                                     # Graph
                                     dcc.Graph(
                                         id="graph",
-                                        figure=make_default_figure(),
+                                        figure=plot_common.dummy_fig(),
                                         config={
                                             "modeBarButtonsToAdd": [
                                                 "drawrect",
@@ -203,10 +174,7 @@ segmentation = [
             dbc.CardFooter(
                 [
                     # Download links
-                    html.A(
-                        id="download",
-                        download="classifier.json",
-                    ),
+                    html.A(id="download", download="classifier.json",),
                     html.Div(
                         children=[
                             dbc.ButtonGroup(
@@ -227,14 +195,11 @@ segmentation = [
                             ),
                         ],
                     ),
-                    html.A(
-                        id="download-image",
-                        download="classified-image.png",
-                    ),
+                    html.A(id="download-image", download="classified-image.png",),
                 ]
             ),
         ],
-    )
+    ),
 ]
 
 # sidebar
