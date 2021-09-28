@@ -67,6 +67,10 @@ class Image(db.Model):
     age_at_biopsy = db.Column(db.Integer, default=-1)
     image_path = db.Column(db.String(4096), unique=True, nullable=False)
     diagnostic = db.Column(db.String(140), index=True)
+    seg_matrix_path = db.Column(db.String(4096), unique=True)
+    mask_image_path = db.Column(db.String(4096), unique=True)
+    bland_image_path = db.Column(db.String(4096), unique=True)
+    classifier_path = db.Column(db.String(4096), unique=True)
 
     def __repr__(self):
         return "<Image Name {} Patient {}>".format(self.image_name, self.patient_id)
