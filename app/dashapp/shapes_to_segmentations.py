@@ -62,11 +62,7 @@ def grey_labels(img):
 
 
 def compute_segmentations(
-    shapes,
-    img_path=None,
-    features=None,
-    shape_layers=None,
-    label_to_colors_args={},
+    shapes, img_path=None, features=None, shape_layers=None, label_to_colors_args={},
 ):
 
     # load original image
@@ -80,19 +76,18 @@ def compute_segmentations(
     if (shape_layers is None) or (len(shape_layers) != len(shapes)):
         shape_layers = [(n + 1) for n, _ in enumerate(shapes)]
     mask = shape_utils.shapes_to_mask(shape_args, shape_layers)
-
     # do segmentation and return this
     t1 = time()
     clf = RandomForestClassifier(
         n_estimators=50, n_jobs=-1, max_depth=8, max_samples=0.05
     )
-    seg, clf = fit_segmenter(mask, features, clf)
+    seg_matrix, clf = fit_segmenter(mask, features, clf)
     t2 = time()
-    #print(t2 - t1)
-    color_seg = label_to_colors(seg, **label_to_colors_args)
+    # print(t2 - t1)
+    color_seg = label_to_colors(seg_matrix, **label_to_colors_args)
     # color_seg is a 3d tensor representing a colored image whereas seg is a
     # matrix whose entries represent the classes
-    return (color_seg, seg, clf)
+    return (color_seg, seg_matrix, clf)
 
 
 def blend_image_and_classified_regions(img, classr):
