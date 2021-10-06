@@ -1,21 +1,23 @@
 # How To Use For Developpement Purpose (using Conda):
+1. Install Tesseract package:    
+   `sudo apt install tesseract-ocr tesseract-ocr-fra`  
 
-1. Clone the repository and create the conda environnement:  
+2. Clone the repository and create the conda environnement:  
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
    `conda env create -f environment_full.yml`  
    Use `environment_simple.yml` if full is throwing errors.
    
-2. Activate the environnement  
+3. Activate the environnement  
    `conda activate myoxia`
 
-3. Initialize empty database:  
+4. Initialize empty database:  
    `flask db upgrade`
 
-4. Set Flask in development mode and launch the app  
+5. Set Flask in development mode and launch the app  
    `export FLASK_ENV=development`  
    `flask run`
 
-5. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and use the application.
+6. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and use the application.
 
 ### Optional:
 

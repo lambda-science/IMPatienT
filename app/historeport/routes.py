@@ -15,6 +15,7 @@ from app.models import ReportHisto
 from app.historeport.forms import ReportForm, OntologyDescriptPreAbs, DeleteButton
 from app.historeport.onto_func import Ontology
 from app.historeport.boqa import *
+from app.historeport.ocr import Rapport
 
 
 @bp.route("/historeport", methods=["GET", "POST"])
@@ -140,3 +141,19 @@ def predict_diag_boqa():
         200,
         {"ContentType": "application/json"},
     )
+
+
+@bp.route("/ocr_pdf", methods=["POST"])
+@login_required
+def ocr_pdf():
+    if request.method == "POST":
+        file_val = request.files["file"]
+        print("yay file !")
+        print(file_val)
+        pdf_object = Rapport(file_obj=file_val)
+        pdf_object.pdf_to_text()
+        pdf_object.detect_sections()
+        pdf_object.extract_section_text()
+        print(pdf_object.header_text)
+        print(pdf_object.section_text)
+    return json.dumps({"success": True}), 200, {"ContentType": "application/json"}
