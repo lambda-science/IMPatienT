@@ -121,3 +121,22 @@ function predict_diag_boqa() {
 $("#predictbutton").on("click", function () {
   predict_diag_boqa();
 });
+
+$(function() {
+  $('#upload-file-btn').click(function() {
+      var form_data = new FormData($('#upload-file')[0]);
+      $.ajax({
+          type: 'POST',
+          url: '/ocr_pdf',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(data) {
+              console.log('Success!');
+              let accordion = document.getElementById('divAccordion');
+              accordion.removeAttribute("hidden");
+          },
+      });
+  });
+});
