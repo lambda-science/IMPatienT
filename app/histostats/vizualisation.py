@@ -1,11 +1,7 @@
 import json
 import os
-import matplotlib
-
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
+# import seaborn as sns
 import numpy as np
 import plotly
 import plotly.express as px
