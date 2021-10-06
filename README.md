@@ -4,7 +4,7 @@
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
    `conda env create -f environment_full.yml`  
    Use `environment_simple.yml` if full is throwing errors.
-
+   
 2. Activate the environnement  
    `conda activate myoxia`
 
