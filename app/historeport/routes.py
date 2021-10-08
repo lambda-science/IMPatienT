@@ -148,12 +148,14 @@ def predict_diag_boqa():
 def ocr_pdf():
     if request.method == "POST":
         file_val = request.files["file"]
-        print("yay file !")
-        print(file_val)
         pdf_object = Rapport(file_obj=file_val)
         pdf_object.pdf_to_text()
         pdf_object.detect_sections()
         pdf_object.extract_section_text()
-        print(pdf_object.header_text)
-        print(pdf_object.section_text)
-    return json.dumps({"success": True}), 200, {"ContentType": "application/json"}
+        pdf_object.analyze_all_sections()
+        print(pdf_object.results_match_dict)
+    return (
+        json.dumps({"success": True, "results": pdf_object.results_match_dict}),
+        200,
+        {"ContentType": "application/json"},
+    )
