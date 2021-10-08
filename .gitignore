@@ -165,3 +165,4 @@ joblib*
 *.back
 app/static/viz/*
 data/
+*.ipynb
