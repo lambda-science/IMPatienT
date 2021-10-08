@@ -1,10 +1,14 @@
+from shlex import join
 import pytesseract
 import cv2
 import numpy as np
 from pdf2image import convert_from_bytes
 import spacy
-from fuzzywuzzy import fuzz
+from thefuzz import fuzz
 import collections
+import json
+from flask import current_app
+import os
 
 
 class Rapport:
@@ -13,6 +17,9 @@ class Rapport:
     def __init__(self, file_obj):
         self.file_obj = file_obj
         self.lang = "fra"
+        self.ontology_path = os.path.join(
+            current_app.config["CONFIG_FOLDER"], "ontology.json"
+        )
         self.image_stack = []
         self.raw_text = ""
         self.text_as_list = []
@@ -38,6 +45,7 @@ class Rapport:
             "Technique de Koëlle",
             "CONCLUSIONS :",
         ]
+        self.results_match_dict = {}
 
     def get_grayscale(self, image):
         """Convert image to grayscale"""
@@ -68,6 +76,7 @@ class Rapport:
         return self.raw_text
 
     def detect_sections(self):
+        """ "Detect the line number where each section starts"""
         index = 0
         non_sorted_dict = {}
         for i in self.text_as_list:
@@ -82,6 +91,7 @@ class Rapport:
             self.section[i[0]] = i[1]
 
     def extract_section_text(self):
+        """ "Use the list of line number section start to separate text between hearder, section and conclusion"""
         self.header_text = self.text_as_list[: list(self.section.items())[0][1]]
 
         for i in range(len(self.section) - 1):
@@ -95,3 +105,54 @@ class Rapport:
         self.section_text[list(self.section.items())[-1][0]] = " ".join(
             self.text_as_list[list(self.section.items())[-1][1] :]
         )
+
+    def _spacy_ngrams(self, text_section: str) -> dict:
+        """ "Extract 1,2,3 ngrams for a block of text using spacy."""
+        doc = self.nlp(text_section)
+        final_one_ngrams = []
+        final_two_ngrams = []
+        final_three_ngrams = []
+        for sent in doc.sents:
+            temp_token_list = []
+            for token in sent:
+                if not token.is_stop and not token.is_punct and token.is_alpha:
+                    final_one_ngrams.append(token.text)
+                    temp_token_list.append(token.text)
+            if len(temp_token_list) > 1:
+                for i in range(len(temp_token_list) - 1):
+                    final_two_ngrams.append(
+                        " ".join([temp_token_list[i], temp_token_list[i + 1]])
+                    )
+            if len(temp_token_list) > 2:
+                for i in range(len(temp_token_list) - 2):
+                    final_three_ngrams.append(
+                        " ".join(
+                            [
+                                temp_token_list[i],
+                                temp_token_list[i + 1],
+                                temp_token_list[i + 2],
+                            ]
+                        )
+                    )
+        full_ngrams = final_one_ngrams + final_two_ngrams + final_three_ngrams
+        return full_ngrams
+
+    def _match_ngram_ontology(self, full_ngrams) -> list:
+        ontology_terms = []
+        match_list = []
+        json_onto = json.load(open(self.ontology_path, "rb"))
+        for i in json_onto:
+            ontology_terms.append(i["text"])
+        for i in full_ngrams:
+            for j in ontology_terms:
+                score = fuzz.ratio(i, j)
+                if score >= 80:
+                    match_list.append([score, i, j])
+        return match_list
+
+    def analyze_all_sections(self) -> dict:
+        for section in self.section_text.keys():
+            text_block = self.section_text[section]
+            full_ngrams = self._spacy_ngrams(text_block)
+            match_list = self._match_ngram_ontology(full_ngrams)
+            self.results_match_dict[section] = match_list
