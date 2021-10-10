@@ -163,3 +163,5 @@ package-lock.json
 *.json
 joblib*
 *.back
+app/static/viz/*
+data/

@@ -121,3 +121,30 @@ function predict_diag_boqa() {
 $("#predictbutton").on("click", function () {
   predict_diag_boqa();
 });
+
+$(function() {
+  $('#upload-file-btn').click(function() {
+      var form_data = new FormData($('#upload-file')[0]);
+      $.ajax({
+          type: 'POST',
+          url: '/ocr_pdf',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(data) {
+              console.log('Success!');
+              let json_ans = JSON.parse(data);
+              let accordion = document.getElementById('divAccordion');
+              accordion.removeAttribute("hidden");
+              let text_results_field = document.getElementById("resultsOCRNLP");
+              console.log(json_ans.results)
+              for (const [key, value] of Object.entries(json_ans.results)) {
+                text_results_field.innerHTML += "<h3>" + key + "</h3>"
+                for (const element of value)
+                  text_results_field.innerHTML += "<span class='badge badge-pill badge-primary'>"+element[0] +" "+element[1]+ "</span></br>"
+            }
+          },
+      });
+  });
+});

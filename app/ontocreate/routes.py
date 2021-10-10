@@ -63,3 +63,12 @@ def modify_onto():
         flag_modified(report, "ontology_tree")
     db.session.commit()
     return json.dumps({"success": True}), 200, {"ContentType": "application/json"}
+
+
+@bp.route("/download_onto", methods=["GET"])
+@login_required
+def download_onto():
+    """Download ontology tree"""
+    return send_from_directory(
+        current_app.config["CONFIG_FOLDER"], "ontology.json", as_attachment=True
+    )

@@ -44,6 +44,15 @@ class Ontology:
                     i["data"]["genes"] = dest_onto.jstree_as_dict[i["id"]]["data"].get(
                         "genes", ""
                     )
+                    i["data"]["phenotype"] = dest_onto.jstree_as_dict[i["id"]][
+                        "data"
+                    ].get("phenotype", "")
+                    i["data"]["phenotype_datamined"] = dest_onto.jstree_as_dict[
+                        i["id"]
+                    ]["data"].get("phenotype_datamined", "")
+                    i["data"]["gene_datamined"] = dest_onto.jstree_as_dict[i["id"]][
+                        "data"
+                    ].get("gene_datamined", "")
                     i["data"]["synonymes"] = dest_onto.jstree_as_dict[i["id"]][
                         "data"
                     ].get("synonymes", "")

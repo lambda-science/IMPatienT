@@ -2,53 +2,20 @@ import dash_html_components as html
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import os
-from skimage import io as skio
 from app.dashapp import bp
-from joblib import Memory
-from app.dashapp.trainable_segmentation import multiscale_basic_features
 import app.dashapp.plot_common as plot_common
-
-memory = Memory("./joblib_cache", bytes_limit=3000000000, verbose=3)
-
-compute_features = memory.cache(multiscale_basic_features)
 
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
 
-DEFAULT_IMAGE_PATH = os.path.join(bp.static_folder, "sample.png")
-DEFAULT_IMAGE_URL = os.path.join(bp.static_url_path, "sample.png")
 SEG_FEATURE_TYPES = ["intensity", "edges", "texture"]
 
-# the number of different classes for labels
-NUM_LABEL_CLASSES = 5
-DEFAULT_LABEL_CLASS = 0
 class_label_colormap = ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"]
 class_labels = ["Rods", "Core", "Cytoplasme", "Noyaux", "Autre"]
-# we can't have less colors than classes
-assert NUM_LABEL_CLASSES <= len(class_label_colormap)
-
-# Font and background colors associated with each theme
-text_color = {"dark": "#95969A", "light": "#595959"}
-card_color = {"dark": "#2D3038", "light": "#FFFFFF"}
+assert len(class_labels) <= len(class_label_colormap)
 
 
 def class_to_color(n):
     return class_label_colormap[n]
-
-
-def color_to_class(c):
-    return class_label_colormap.index(c)
-
-
-img = skio.imread(DEFAULT_IMAGE_PATH)
-features_dict = {}
-
-
-def get_assets_folder():
-    return bp.static_folder
-
-
-def get_assets_url():
-    return bp.static_url_path
 
 
 def get_external_stylesheets():
@@ -59,38 +26,9 @@ def get_external_stylesheets():
     return external_stylesheets
 
 
-def make_default_figure(
-    images=[DEFAULT_IMAGE_PATH],
-    stroke_color=class_to_color(DEFAULT_LABEL_CLASS),
-    stroke_width=DEFAULT_STROKE_WIDTH,
-    shapes=[],
-):
-    fig = plot_common.dummy_fig()
-    plot_common.add_layout_images_to_fig(fig, images)
-    fig.update_layout(
-        {
-            "dragmode": "drawopenpath",
-            "shapes": shapes,
-            "newshape.line.color": stroke_color,
-            "newshape.line.width": stroke_width,
-            "margin": dict(l=0, r=0, b=0, t=0, pad=4),
-        }
-    )
-    return fig
-
-
 # Modal
 with open(os.path.join(bp.static_folder, "explanations.md"), "r") as f:
     howto_md = f.read()
-
-modal_overlay = dbc.Modal(
-    [
-        dbc.ModalBody(html.Div([dcc.Markdown(howto_md)], id="howto-md")),
-        dbc.ModalFooter(dbc.Button("Close", id="howto-close", className="howto-bn")),
-    ],
-    id="modal",
-    size="lg",
-)
 
 # Header
 header = dbc.Navbar(
@@ -101,27 +39,15 @@ header = dbc.Navbar(
                     dbc.Col(
                         [
                             html.Div(
-                                [
-                                    html.H3("Interactive Machine Learning"),
-                                    html.P("Image segmentation"),
-                                ],
-                                id="app-title",
+                                [html.H3("Image Annotation Module"),], id="app-title",
                             )
                         ],
-                        md=True,
                         align="center",
                     ),
-                ],
-                align="center",
-            ),
-            dbc.Row(
-                [
                     dbc.Col(
-                        [
-                            dbc.NavbarToggler(id="navbar-toggler"),
-                            modal_overlay,
-                        ],
-                        md=2,
+                        dbc.Nav(
+                            [html.Div([html.A("Return To Index", href="/img_index",),])]
+                        )
                     ),
                 ],
                 align="center",
@@ -133,7 +59,6 @@ header = dbc.Navbar(
     color="dark",
     sticky="top",
 )
-
 # Description
 description = dbc.Col(
     [
@@ -147,12 +72,12 @@ description = dbc.Col(
                             [
                                 dbc.Col(
                                     html.P(
-                                        "This is an example of interactive machine learning for image classification. "
-                                        "To train the classifier, draw some marks on the picture using different colors for "
-                                        'different parts, like in the example image. Then enable "Show segmentation" to see the '
-                                        "classes a Random Forest Classifier gave to regions of the image, based on the marks you "
-                                        "used as a guide. You may add more marks to clarify parts of the image where the "
-                                        "classifier was not successful and the classification will update."
+                                        "This is the image annotation tool interface. "
+                                        "Select the label and draw on the image to annotate parts of the image. "
+                                        'Then check the "Show Segmentation" tickbox to automatically expands your annotations to the whole image. '
+                                        "You may add more marks to clarify parts of the image where the classifier was not successful and the classification"
+                                        "classifier was not successful and the classification will update. Once satisfied with the annotations area you can click the"
+                                        '"Save Annotation To Database" to save your annotations.'
                                     ),
                                     md=True,
                                 ),
@@ -165,9 +90,9 @@ description = dbc.Col(
     ],
     md=12,
 )
-
 # Image Segmentation
 segmentation = [
+    html.Div([dcc.Location(id="url")]),
     dbc.Card(
         id="segmentation-card",
         children=[
@@ -185,7 +110,7 @@ segmentation = [
                                     # Graph
                                     dcc.Graph(
                                         id="graph",
-                                        figure=make_default_figure(),
+                                        figure=plot_common.dummy_fig(),
                                         config={
                                             "modeBarButtonsToAdd": [
                                                 "drawrect",
@@ -203,38 +128,28 @@ segmentation = [
             dbc.CardFooter(
                 [
                     # Download links
-                    html.A(
-                        id="download",
-                        download="classifier.json",
-                    ),
+                    html.A(id="download", download="classifier.json",),
                     html.Div(
                         children=[
+                            html.Div(id="alertbox"),
                             dbc.ButtonGroup(
                                 [
                                     dbc.Button(
-                                        "Download classified image",
-                                        id="download-image-button",
-                                        outline=True,
-                                    ),
-                                    dbc.Button(
-                                        "Download classifier",
+                                        "Save Annotation to Databse",
                                         id="download-button",
-                                        outline=True,
-                                    ),
+                                        color="success",
+                                    )
                                 ],
                                 size="lg",
                                 style={"width": "100%"},
                             ),
                         ],
                     ),
-                    html.A(
-                        id="download-image",
-                        download="classified-image.png",
-                    ),
+                    html.A(id="download-image", download="classified-image.png",),
                 ]
             ),
         ],
-    )
+    ),
 ]
 
 # sidebar

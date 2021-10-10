@@ -77,6 +77,10 @@ def create_app(config_class=Config):
 
     app.register_blueprint(dashapp_bp)
 
+    from app.imgupload import bp as imgupload_bp
+
+    app.register_blueprint(imgupload_bp)
+
     # If app in production settings:
     # configure our SMTP mail connection
     # configure error-logging service
@@ -130,8 +134,6 @@ def register_dashapps(app):
     from app.dashapp.layout import (
         layout,
         get_external_stylesheets,
-        get_assets_folder,
-        get_assets_url,
     )
     from app.dashapp.callbacks import register_callbacks
 
@@ -144,8 +146,6 @@ def register_dashapps(app):
         __name__,
         server=app,
         url_base_pathname="/dashboard/",
-        # assets_folder=get_assets_folder(),
-        # assets_url_path=get_assets_url(),
         meta_tags=[meta_viewport],
         external_stylesheets=get_external_stylesheets(),
     )

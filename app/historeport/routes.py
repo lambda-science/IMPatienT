@@ -1,6 +1,5 @@
 import json
-import pandas as pd
-import numpy as np
+
 from flask_login import current_user, login_required
 from flask import (
     render_template,
@@ -8,7 +7,6 @@ from flask import (
     flash,
     redirect,
     url_for,
-    current_app,
     jsonify,
 )
 from app import db
@@ -17,6 +15,7 @@ from app.models import ReportHisto
 from app.historeport.forms import ReportForm, OntologyDescriptPreAbs, DeleteButton
 from app.historeport.onto_func import Ontology
 from app.historeport.boqa import *
+from app.historeport.ocr import Rapport
 
 
 @bp.route("/historeport", methods=["GET", "POST"])
@@ -34,7 +33,6 @@ def historeport():
     """Page to create new histology report of modify already existing one."""
     # If args in URL, try to retrive report from DB and pre-fill it
     ontology_tree_exist = False
-    template = json.load(open("config/ontology.json", "r"))
     if request.args:
         report_request = ReportHisto.query.get(request.args.get("id"))
         if report_request is not None:
@@ -140,6 +138,24 @@ def predict_diag_boqa():
                 "proba": round(results[1], 2),
             }
         ),
+        200,
+        {"ContentType": "application/json"},
+    )
+
+
+@bp.route("/ocr_pdf", methods=["POST"])
+@login_required
+def ocr_pdf():
+    if request.method == "POST":
+        file_val = request.files["file"]
+        pdf_object = Rapport(file_obj=file_val)
+        pdf_object.pdf_to_text()
+        pdf_object.detect_sections()
+        pdf_object.extract_section_text()
+        pdf_object.analyze_all_sections()
+        print(pdf_object.results_match_dict)
+    return (
+        json.dumps({"success": True, "results": pdf_object.results_match_dict}),
         200,
         {"ContentType": "application/json"},
     )

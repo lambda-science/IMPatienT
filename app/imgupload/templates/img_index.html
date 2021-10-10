@@ -1,0 +1,66 @@
+{% extends "base.html"%} {% block content %}
+<div class="row">
+    <div class="col-xl-3 offset-md-4">
+        <h1>Upload a new image</h1>
+        <div class="text-center">
+            <a href="{{ url_for('imgupload.create_img') }}" class="btn btn-info btn-lg" role="button">New Image</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl">
+        <h1>Image Database</h1>
+        <table class="table table-striped table-bordered table-hover table-responsive">
+            <thead class="table-info">
+                <th class="align-middle text-center">Biopsy ID</th>
+                <th class="align-middle text-center">Patient ID</th>
+                <th class="align-middle text-center">Image Name</th>
+                <th class="align-middle text-center">Diagnostic</th>
+                <th class="align-middle text-center">Action</th>
+            </thead>
+            {% for image in image_history %}
+            <tr>
+                <td class="align-middle text-center">{{ image.biopsie_id }}</td>
+                <td class="align-middle text-center">{{ image.patient_id }}</td>
+                <td class="align-middle text-center">{{ image.image_name }}</td>
+                <td class="align-middle text-center">{{ image.conclusion }}</td>
+                <td class="align-middle text-center">
+                    <a class="btn btn-warning btn-sm" role="button" href="dashboard?id={{image.id}}">Anotate</a>
+                    <a class="btn btn-success btn-sm" role="button" href="create_img?id={{image.id}}">Modify</a>
+                    <!-- Button Show Popup -->
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#DeletionPopup">
+                        Delete
+                    </button>
+
+                    <!-- Deletion Popup -->
+                    <div class="modal fade" id="DeletionPopup" tabindex="-1" aria-labelledby="DeletionPopupLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="DeletionPopupLabel">
+                                        Confirm Delete Popup
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{{ url_for('imgupload.delete_img', id_img=image.id) }}" method="post"
+                                        style="display: inline">
+                                        {{ form.hidden_tag() }} {{ form.submit }}
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -2,6 +2,8 @@ from math import pow
 import json
 import random
 import numpy as np
+import os
+from flask import current_app
 
 
 def boqa(alpha, beta, query, items_stat):
@@ -75,7 +77,9 @@ def boqa_monte_carlo(query, items_stat, n_indiv=50, alpha=0.0001, beta=0.3):
 
 
 def get_boqa_pred(tree: str):
-    items_stat = json.load(open("config/stat_per_diag.json", "r"))
+    items_stat = json.load(
+        open(os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_diag.json"), "r")
+    )
     items_stat.pop("OTHER", None)
     my_tree = json.loads(tree)
     query = {}

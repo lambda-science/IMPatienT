@@ -1,34 +1,37 @@
+import io
+import base64
+
+import os
 import dash
+import pickle
+
+from flask import current_app
+from urllib import parse
+from joblib import Memory
+
+import PIL.Image
+from skimage import io as skio
 from dash.dependencies import Input, Output, State
+import dash_html_components as html
+import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 
-
+from app import db
 import app.dashapp.plot_common as plot_common
-
+from app.models import Image
 from app.dashapp.shapes_to_segmentations import (
     compute_segmentations,
     blend_image_and_classified_regions_pil,
 )
 
 from app.dashapp.trainable_segmentation import multiscale_basic_features
-import io
-import base64
-import PIL.Image
-import os
-from app.dashapp import bp
-import pickle
-from time import time
-from joblib import Memory
-from skimage import io as skio
+
 
 memory = Memory("./joblib_cache", bytes_limit=3000000000, verbose=3)
-
 compute_features = memory.cache(multiscale_basic_features)
 DEFAULT_LABEL_CLASS = 0
 NUM_LABEL_CLASSES = 5
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
-DEFAULT_IMAGE_PATH = os.path.join(bp.static_folder, "sample.png")
-DEFAULT_IMAGE_URL = os.path.join(bp.static_url_path, "sample.png")
-img = skio.imread(DEFAULT_IMAGE_PATH)
 class_label_colormap = ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"]
 class_labels = list(range(NUM_LABEL_CLASSES))
 # we can't have less colors than classes
@@ -44,10 +47,11 @@ def color_to_class(c):
 
 
 def make_default_figure(
-    images=[DEFAULT_IMAGE_PATH],
+    images=None,
     stroke_color=class_to_color(DEFAULT_LABEL_CLASS),
     stroke_width=DEFAULT_STROKE_WIDTH,
     shapes=[],
+    source_img=None,
 ):
     fig = plot_common.dummy_fig()
     plot_common.add_layout_images_to_fig(fig, images)
@@ -60,6 +64,8 @@ def make_default_figure(
             "margin": dict(l=0, r=0, b=0, t=0, pad=4),
         }
     )
+    if source_img:
+        fig._layout_obj.images[0].source = source_img
     return fig
 
 
@@ -85,7 +91,7 @@ def show_segmentation(image_path, mask_shapes, features, segmenter_args):
         "colormap": class_label_colormap,
         "color_class_offset": -1,
     }
-    segimg, _, clf = compute_segmentations(
+    segimg, seg_matrix, clf = compute_segmentations(
         mask_shapes,
         img_path=image_path,
         shape_layers=shape_layers,
@@ -95,7 +101,7 @@ def show_segmentation(image_path, mask_shapes, features, segmenter_args):
     # get the classifier that we can later store in the Store
     classifier = save_img_classifier(clf, label_to_colors_args, segmenter_args)
     segimgpng = plot_common.img_array_to_pil_image(segimg)
-    return (segimgpng, classifier)
+    return (segimgpng, seg_matrix, classifier)
 
 
 def register_callbacks(dashapp):
@@ -106,8 +112,10 @@ def register_callbacks(dashapp):
             Output("stroke-width-display", "children"),
             Output("classifier-store", "data"),
             Output("classified-image-store", "data"),
+            Output("alertbox", "children"),
         ],
         [
+            Input("url", "href"),
             Input("graph", "relayoutData"),
             Input(
                 {"type": "label-class-button", "index": dash.dependencies.ALL},
@@ -116,26 +124,42 @@ def register_callbacks(dashapp):
             Input("stroke-width", "value"),
             Input("show-segmentation", "value"),
             Input("download-button", "n_clicks"),
-            Input("download-image-button", "n_clicks"),
             Input("segmentation-features", "value"),
             Input("sigma-range-slider", "value"),
         ],
         [State("masks", "data"),],
     )
     def annotation_react(
+        href,
         graph_relayoutData,
         any_label_class_button_value,
         stroke_width_value,
         show_segmentation_value,
         download_button_n_clicks,
-        download_image_button_n_clicks,
         segmentation_features_value,
         sigma_range_slider_value,
         masks_data,
     ):
         classified_image_store_data = dash.no_update
         classifier_store_data = dash.no_update
+        alertbox = html.Div()
         cbcontext = [p["prop_id"] for p in dash.callback_context.triggered][0]
+        print(cbcontext)
+        # Ugly Source Building to Refactor
+        key_params = dict(parse.parse_qsl(parse.urlsplit(href).query))
+        url_splited = parse.urlsplit(href)
+        image = Image.query.get(key_params["id"])
+        image_split_path = image.image_path.split("/")
+        img = skio.imread(image.image_path)
+        source = "/".join(
+            [
+                "http:/",
+                url_splited.netloc,
+                "data",
+                image_split_path[-2],
+                image_split_path[-1],
+            ]
+        )
         if cbcontext in ["segmentation-features.value", "sigma-range-slider.value"] or (
             ("Show segmentation" in show_segmentation_value)
             and (len(masks_data["shapes"]) > 0)
@@ -147,15 +171,12 @@ def register_callbacks(dashapp):
             }
             for feat in segmentation_features_value:
                 segmentation_features_dict[feat] = True
-            t1 = time()
             features = compute_features(
                 img,
                 **segmentation_features_dict,
                 sigma_min=sigma_range_slider_value[0],
                 sigma_max=sigma_range_slider_value[1],
             )
-            t2 = time()
-            # print(t2 - t1)
         if cbcontext == "graph.relayoutData":
             if "shapes" in graph_relayoutData.keys():
                 masks_data["shapes"] = graph_relayoutData["shapes"]
@@ -170,12 +191,14 @@ def register_callbacks(dashapp):
                 enumerate(any_label_class_button_value),
                 key=lambda t: 0 if t[1] is None else t[1],
             )[0]
-
         fig = make_default_figure(
+            images=[image.image_path],
             stroke_color=class_to_color(label_class_value),
             stroke_width=stroke_width,
             shapes=masks_data["shapes"],
+            source_img=source,
         )
+
         # We want the segmentation to be computed
         if ("Show segmentation" in show_segmentation_value) and (
             len(masks_data["shapes"]) > 0
@@ -187,20 +210,48 @@ def register_callbacks(dashapp):
                 )
                 feature_opts["sigma_min"] = sigma_range_slider_value[0]
                 feature_opts["sigma_max"] = sigma_range_slider_value[1]
-                segimgpng, clf = show_segmentation(
-                    DEFAULT_IMAGE_PATH, masks_data["shapes"], features, feature_opts
+                segimgpng, seg_matrix, clf = show_segmentation(
+                    image.image_path, masks_data["shapes"], features, feature_opts
                 )
                 if cbcontext == "download-button.n_clicks":
                     classifier_store_data = clf
-                if cbcontext == "download-image-button.n_clicks":
                     classified_image_store_data = plot_common.pil_image_to_uri(
                         blend_image_and_classified_regions_pil(
-                            PIL.Image.open(DEFAULT_IMAGE_PATH), segimgpng
+                            PIL.Image.open(image.image_path), segimgpng
                         )
                     )
-            except ValueError:
-                # if segmentation fails, draw nothing
-                pass
+                    image.seg_matrix_path = os.path.join(
+                        current_app.config["DATA_FOLDER"],
+                        image.patient_id,
+                        image.image_name + "_seq_matrix.numpy",
+                    )
+                    seg_matrix.tofile(image.seg_matrix_path)
+                    image.mask_image_path = os.path.join(
+                        current_app.config["DATA_FOLDER"],
+                        image.patient_id,
+                        image.image_name + "_mask_image.png",
+                    )
+                    segimgpng.save(image.mask_image_path)
+                    image.bland_image_path = os.path.join(
+                        current_app.config["DATA_FOLDER"],
+                        image.patient_id,
+                        image.image_name + "_bland_image.png",
+                    )
+                    blend_image_and_classified_regions_pil(
+                        PIL.Image.open(image.image_path), segimgpng
+                    ).save(image.bland_image_path)
+                    image.classifier_path = os.path.join(
+                        current_app.config["DATA_FOLDER"],
+                        image.patient_id,
+                        image.image_name + "_classifier.pkl",
+                    )
+                    with open(image.classifier_path, "wb") as file:
+                        pickle.dump(clf, file)
+                    db.session.commit()
+                    alertbox = dbc.Alert("Annotation Saved to Database !", color="info")
+
+            except:
+                alertbox = dbc.Alert("Issues Saving to Database...", color="error")
             images_to_draw = []
             if segimgpng is not None:
                 images_to_draw = [segimgpng]
@@ -212,4 +263,5 @@ def register_callbacks(dashapp):
             "Current paintbrush width: %d" % (stroke_width,),
             classifier_store_data,
             classified_image_store_data,
+            alertbox,
         )
