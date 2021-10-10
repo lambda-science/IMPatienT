@@ -4,11 +4,11 @@
 
 2. Clone the repository and create the conda environnement:  
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
-   `conda env create -f environment_full.yml`  
-   Use `environment_simple.yml` if full is throwing errors.
+   `conda env create -f environment.yml`  
    
-3. Activate the environnement  
-   `conda activate myoxia`
+3. Activate the environnement  & install NLP model
+   `conda activate myoxia`  
+   Aditionally install Spacy NLP Model using: `python -m spacy download fr_core_news_lg`
 
 4. Initialize empty database:  
    `flask db upgrade`
