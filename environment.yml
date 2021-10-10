@@ -10,6 +10,9 @@ dependencies:
   - alsa-lib=1.2.3
   - appdirs=1.4.4
   - astroid=2.8.0
+  - backcall=0.2.0
+  - backports=1.0
+  - backports.functools_lru_cache=1.6.4
   - black=21.9b0
   - blas=1.0
   - blinker=1.4
@@ -22,12 +25,12 @@ dependencies:
   - brunsli=0.1
   - bzip2=1.0.8
   - c-ares=1.17.2
-  - ca-certificates=2021.7.5
+  - ca-certificates=2021.10.8
   - cairo=1.16.0
   - cairocffi=1.2.0
   - cairosvg=2.5.2
   - catalogue=2.0.6
-  - certifi=2021.5.30
+  - certifi=2021.10.8
   - cffi=1.14.6
   - cfitsio=3.470
   - charls=2.2.0
@@ -50,11 +53,13 @@ dependencies:
   - dask-core=2021.9.1
   - dataclasses=0.8
   - dbus=1.13.18
+  - debugpy=1.4.1
   - decorator=4.4.2
   - defusedxml=0.7.1
   - dnspython=2.1.0
   - email-validator=1.1.3
   - email_validator=1.1.3
+  - entrypoints=0.3
   - expat=2.4.1
   - ffmpeg=4.3.2
   - flask=2.0.2
@@ -86,13 +91,19 @@ dependencies:
   - imageio=2.9.0
   - importlib-metadata=4.8.1
   - importlib_resources=5.2.2
+  - ipykernel=6.4.1
+  - ipython=7.28.0
+  - ipython_genutils=0.2.0
   - isort=5.9.3
   - itsdangerous=2.0.1
   - jasper=1.900.1
   - jbig=2.1
+  - jedi=0.18.0
   - jinja2=3.0.1
   - joblib=1.0.1
   - jpeg=9d
+  - jupyter_client=7.0.6
+  - jupyter_core=4.8.1
   - jxrlib=1.1
   - kiwisolver=1.3.2
   - krb5=1.19.2
@@ -132,6 +143,7 @@ dependencies:
   - libpng=1.6.37
   - libpq=13.3
   - libprotobuf=3.16.0
+  - libsodium=1.0.18
   - libssh2=1.10.0
   - libstdcxx-ng=11.2.0
   - libtasn1=4.16.0
@@ -152,12 +164,14 @@ dependencies:
   - mako=1.1.5
   - markupsafe=2.0.1
   - matplotlib-base=3.4.3
+  - matplotlib-inline=0.1.3
   - mccabe=0.6.1
   - murmurhash=1.0.5
   - mypy_extensions=0.4.3
   - mysql-common=8.0.25
   - mysql-libs=8.0.25
   - ncurses=6.2
+  - nest-asyncio=1.5.1
   - nettle=3.7.3
   - networkx=2.6.2
   - nspr=4.30
@@ -173,11 +187,13 @@ dependencies:
   - openssl=1.1.1l
   - packaging=21.0
   - pandas=1.3.3
+  - parso=0.8.2
   - partd=1.2.0
-  - pathspec=0.9.0
   - pathy=0.6.0
   - pcre=8.45
   - pdf2image=1.16.0
+  - pexpect=4.8.0
+  - pickleshare=0.7.5
   - pillow=8.3.2
   - pip=21.2.4
   - pixman=0.40.0
@@ -185,9 +201,12 @@ dependencies:
   - plotly=5.3.1
   - pooch=1.5.1
   - preshed=3.0.5
+  - prompt-toolkit=3.0.20
+  - ptyprocess=0.7.0
   - py-opencv=4.5.3
   - pycparser=2.20
   - pydantic=1.8.2
+  - pygments=2.10.0
   - pyjwt=2.1.0
   - pylint=2.11.1
   - pylint-flask=0.6
@@ -204,6 +223,7 @@ dependencies:
   - pytz=2021.1
   - pywavelets=1.1.1
   - pyyaml=5.4.1
+  - pyzmq=22.3.0
   - qt=5.12.9
   - readline=8.1
   - regex=2021.9.30
@@ -232,6 +252,7 @@ dependencies:
   - toolz=0.11.1
   - tornado=6.1
   - tqdm=4.62.3
+  - traitlets=5.1.0
   - typed-ast=1.4.3
   - typer=0.4.0
   - typing-extensions=3.10.0.2
@@ -239,6 +260,7 @@ dependencies:
   - tzdata=2021a
   - urllib3=1.26.6
   - wasabi=0.8.2
+  - wcwidth=0.2.5
   - webencodings=0.5.1
   - werkzeug=2.0.1
   - wheel=0.37.0
@@ -256,17 +278,68 @@ dependencies:
   - xorg-xproto=7.0.31
   - xz=5.2.5
   - yaml=0.2.5
+  - zeromq=4.3.4
   - zfp=0.5.5
   - zipp=3.6.0
   - zlib=1.2.11
   - zstd=1.5.0
   - pip:
+    - aiohttp==3.7.4.post0
+    - aiohttp-retry==2.4.5
     - argparse==1.4.0
+    - async-timeout==3.0.1
+    - asyncssh==2.7.0
+    - atpublic==2.3
+    - attrs==21.2.0
     - cachelib==0.4.1
+    - chardet==4.0.0
+    - commonmark==0.9.1
+    - configobj==5.0.6
+    - dictdiffer==0.9.0
+    - diskcache==5.2.1
+    - distro==1.6.0
+    - dpath==2.0.5
+    - dulwich==0.20.25
+    - dvc==2.7.4
     - flask-session==0.4.0
+    - flatten-dict==0.4.2
+    - flufl-lock==3.2
+    - fr-core-news-lg==3.1.0
+    - ftfy==6.0.3
+    - funcy==1.16
+    - gitdb==4.0.7
+    - gitpython==3.1.24
+    - grandalf==0.6
     - linecache2==1.0.0
+    - mailchecker==4.0.12
+    - multidict==5.2.0
+    - nanotime==0.5.2
+    - pathspec==0.8.1
+    - phonenumbers==8.12.34
+    - ply==3.11
+    - psutil==5.8.0
+    - pyasn1==0.4.8
+    - pydot==1.4.2
+    - pygit2==1.7.0
+    - pygtrie==2.4.2
     - pylint-flask-sqlalchemy==0.2.0
+    - python-benedict==0.24.3
+    - python-fsutil==0.5.0
+    - python-slugify==5.0.2
+    - rich==10.12.0
+    - ruamel-yaml==0.17.16
+    - ruamel-yaml-clib==0.2.6
+    - shortuuid==1.0.1
+    - shtab==1.4.1
+    - smmap==4.0.0
+    - sshfs==2021.9.0
+    - tabulate==0.8.9
+    - text-unidecode==1.3
     - thefuzz==0.19.0
     - traceback2==1.4.0
     - unittest2==1.1.0
+    - voluptuous==0.12.2
+    - xmltodict==0.12.0
+    - yarl==1.7.0
+    - zc-lockfile==2.0
 prefix: /home/corentin/anaconda3/envs/myoxia
