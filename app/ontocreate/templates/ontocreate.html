@@ -36,6 +36,10 @@
                 {{ form.onto_name }}
                 {{ form.synonymes }}
                 {{ form.gene }}
+                {{ form.gene_datamined.label }}
+                {{ form.gene_datamined }}
+                {{ form.phenotype }}
+                {{ form.phenotype_datamined.label }}{{ form.phenotype_datamined }}
                 {{ form.description }}
                 <button type="button" class="btn btn-success" onclick="update_node_data()">Update Details</button>
             </div>
