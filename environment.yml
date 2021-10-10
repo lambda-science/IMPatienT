@@ -291,6 +291,7 @@ dependencies:
     - asyncssh==2.7.0
     - atpublic==2.3
     - attrs==21.2.0
+    - bcrypt==3.2.0
     - cachelib==0.4.1
     - chardet==4.0.0
     - commonmark==0.9.1
