@@ -165,3 +165,6 @@ joblib*
 *.back
 app/static/viz/*
 data/
+*.jar
+*.pdf
+git-filter-repo
