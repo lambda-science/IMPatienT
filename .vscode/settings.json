@@ -9,10 +9,6 @@
     "pylint_flask",
     "--extension-pkg-whitelist=cv2"
   ],
-
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "python.testing.pytestArgs": [
     "tests"
   ],
@@ -20,5 +16,5 @@
   "python.testing.nosetestsEnabled": false,
   "python.testing.pytestEnabled": true,
   "editor.fontFamily": "Roboto Mono",
-  "sqlite.logLevel":"DEBUG"
+  "sqlite.logLevel": "DEBUG"
 }
