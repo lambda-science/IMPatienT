@@ -304,7 +304,6 @@ dependencies:
     - flask-session==0.4.0
     - flatten-dict==0.4.2
     - flufl-lock==3.2
-    - fr-core-news-lg==3.1.0
     - ftfy==6.0.3
     - funcy==1.16
     - gitdb==4.0.7
