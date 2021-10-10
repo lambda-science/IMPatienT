@@ -37,6 +37,30 @@ class OntologyDescript(FlaskForm):
         "Associated Genes",
         render_kw={"placeholder": "Associated Genes", "class": "form-control"},
     )
+
+    gene_datamined = StringField(
+        "Associated Genes (Datamined)",
+        render_kw={
+            "placeholder": "Associated Genes (Datamined)",
+            "class": "form-control",
+            "readonly": "",
+        },
+    )
+
+    phenotype = StringField(
+        "Associated Phenotype",
+        render_kw={"placeholder": "Associated Phenotype", "class": "form-control"},
+    )
+
+    phenotype_datamined = StringField(
+        "Associated Phenotype (Datamined)",
+        render_kw={
+            "placeholder": "Associated Phenotype (Datamined)",
+            "class": "form-control",
+            "readonly": "",
+        },
+    )
+
     description = TextAreaField(
         "Description",
         render_kw={
