@@ -153,7 +153,7 @@ $(function () {
         for (const [key, value] of Object.entries(json_ans.results)) {
           text_results_field.innerHTML += "<h3>" + key + "</h3>"
           for (const element of value)
-            text_results_field.innerHTML += "<span class='badge badge-pill badge-primary'>" + element[0] + " " + element[1] + "</span></br>"
+            text_results_field.innerHTML += "<span class='badge bg-success'>" + element[0] + " " + element[1] + "</span>  "
         }
       },
     });
