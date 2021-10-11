@@ -153,7 +153,6 @@ def ocr_pdf():
         pdf_object.detect_sections()
         pdf_object.extract_section_text()
         pdf_object.analyze_all_sections()
-        print(pdf_object.results_match_dict)
     return (
         json.dumps({"success": True, "results": pdf_object.results_match_dict}),
         200,
