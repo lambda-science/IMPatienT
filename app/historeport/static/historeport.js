@@ -1,8 +1,14 @@
+var data_url = $("#data-url").data();
 var input = document.querySelector("input[id=synonymes]");
 var input_tag = new Tagify(input);
 var input2 = document.querySelector("input[id=gene]");
 var input2_tag = new Tagify(input2);
-var data_url = $("#data-url").data();
+var input3 = document.querySelector("input[id=gene_datamined]");
+var input3_tag = new Tagify(input3);
+var input4 = document.querySelector("input[id=phenotype]");
+var input4_tag = new Tagify(input4);
+var input5 = document.querySelector("input[id=phenotype_datamined]");
+var input5_tag = new Tagify(input5);
 
 var json_tree = $("input[id=ontology_tree]").val();
 function uuidv4() {
@@ -16,7 +22,7 @@ function uuidv4() {
 $("#jstree")
   .bind("create_node.jstree", function (event, data) {
     var newId = uuidv4();
-    data.node.data = { synonymes: "", genes: "", description: "" };
+    data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "" };
     $("#jstree").jstree().set_id(data.node, newId);
   })
   .jstree({
@@ -63,6 +69,12 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   input_tag.addTags(data.node.data.synonymes);
   input2_tag.removeAllTags();
   input2_tag.addTags(data.node.data.genes);
+  input3_tag.removeAllTags();
+  input3_tag.addTags(data.node.data.gene_datamined);
+  input4_tag.removeAllTags();
+  input4_tag.addTags(data.node.data.phenotype);
+  input5_tag.removeAllTags();
+  input5_tag.addTags(data.node.data.phenotype_datamined);
   $("textarea[id=description]").val(data.node.data.description) || "";
   $("input[id=preabsProba]").val(data.node.data.presence || -0.25);
   set_slider_span(data.node.data.presence || "-0.25");
@@ -122,29 +134,28 @@ $("#predictbutton").on("click", function () {
   predict_diag_boqa();
 });
 
-$(function() {
-  $('#upload-file-btn').click(function() {
-      var form_data = new FormData($('#upload-file')[0]);
-      $.ajax({
-          type: 'POST',
-          url: '/ocr_pdf',
-          data: form_data,
-          contentType: false,
-          cache: false,
-          processData: false,
-          success: function(data) {
-              console.log('Success!');
-              let json_ans = JSON.parse(data);
-              let accordion = document.getElementById('divAccordion');
-              accordion.removeAttribute("hidden");
-              let text_results_field = document.getElementById("resultsOCRNLP");
-              console.log(json_ans.results)
-              for (const [key, value] of Object.entries(json_ans.results)) {
-                text_results_field.innerHTML += "<h3>" + key + "</h3>"
-                for (const element of value)
-                  text_results_field.innerHTML += "<span class='badge badge-pill badge-primary'>"+element[0] +" "+element[1]+ "</span></br>"
-            }
-          },
-      });
+$(function () {
+  $('#upload-file-btn').click(function () {
+    var form_data = new FormData($('#upload-file')[0]);
+    $.ajax({
+      type: 'POST',
+      url: '/ocr_pdf',
+      data: form_data,
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (data) {
+        let json_ans = JSON.parse(data);
+        let accordion = document.getElementById('divAccordion');
+        accordion.removeAttribute("hidden");
+        let text_results_field = document.getElementById("resultsOCRNLP");
+        console.log(json_ans.results)
+        for (const [key, value] of Object.entries(json_ans.results)) {
+          text_results_field.innerHTML += "<h3>" + key + "</h3>"
+          for (const element of value)
+            text_results_field.innerHTML += "<span class='badge badge-pill badge-primary'>" + element[0] + " " + element[1] + "</span></br>"
+        }
+      },
+    });
   });
 });
