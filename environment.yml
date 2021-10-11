@@ -1,6 +1,5 @@
 name: myoxia
 channels:
-  - philbrik
   - conda-forge
   - defaults
 dependencies:
@@ -83,6 +82,7 @@ dependencies:
   - greenlet=1.1.2
   - gst-plugins-base=1.18.5
   - gstreamer=1.18.5
+  - gunicorn=20.1.0
   - harfbuzz=2.9.1
   - hdf5=1.12.1
   - icu=68.1
