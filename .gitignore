@@ -164,7 +164,8 @@ package-lock.json
 joblib*
 *.back
 app/static/viz/*
-data/
+data/*
 *.jar
 *.pdf
 git-filter-repo
+!data/.gitkeep
