@@ -161,8 +161,9 @@ def register_callbacks(dashapp):
             ]
         )
         if cbcontext == "url.href":
-            with open(image.mask_annot_path, "r") as file:
-                masks_data["shapes"] = json.load(file)
+            if image.mask_annot_path is not None or image.mask_annot_path != []:
+                with open(image.mask_annot_path, "r") as file:
+                    masks_data["shapes"] = json.load(file)
         if cbcontext in ["segmentation-features.value", "sigma-range-slider.value"] or (
             ("Show segmentation" in show_segmentation_value)
             and (len(masks_data["shapes"]) > 0)
