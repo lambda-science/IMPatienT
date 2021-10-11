@@ -71,6 +71,7 @@ class Image(db.Model):
     mask_image_path = db.Column(db.String(4096), unique=True)
     bland_image_path = db.Column(db.String(4096), unique=True)
     classifier_path = db.Column(db.String(4096), unique=True)
+    mask_annot_path = db.Column(db.String(4096), unique=True)
 
     def __repr__(self):
         return "<Image Name {} Patient {}>".format(self.image_name, self.patient_id)

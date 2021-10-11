@@ -1,6 +1,6 @@
 import io
 import base64
-
+import json
 import os
 import dash
 import pickle
@@ -144,7 +144,7 @@ def register_callbacks(dashapp):
         classifier_store_data = dash.no_update
         alertbox = html.Div()
         cbcontext = [p["prop_id"] for p in dash.callback_context.triggered][0]
-        print(cbcontext)
+        # print(cbcontext)
         # Ugly Source Building to Refactor
         key_params = dict(parse.parse_qsl(parse.urlsplit(href).query))
         url_splited = parse.urlsplit(href)
@@ -160,6 +160,9 @@ def register_callbacks(dashapp):
                 image_split_path[-1],
             ]
         )
+        if cbcontext == "url.href":
+            with open(image.mask_annot_path, "r") as file:
+                masks_data["shapes"] = json.load(file)
         if cbcontext in ["segmentation-features.value", "sigma-range-slider.value"] or (
             ("Show segmentation" in show_segmentation_value)
             and (len(masks_data["shapes"]) > 0)
@@ -225,6 +228,11 @@ def register_callbacks(dashapp):
                         image.patient_id,
                         image.image_name + "_seq_matrix.numpy",
                     )
+                    image.mask_annot_path = os.path.join(
+                        current_app.config["DATA_FOLDER"],
+                        image.patient_id,
+                        image.image_name + "_mask_annot.json",
+                    )
                     seg_matrix.tofile(image.seg_matrix_path)
                     image.mask_image_path = os.path.join(
                         current_app.config["DATA_FOLDER"],
@@ -245,12 +253,15 @@ def register_callbacks(dashapp):
                         image.patient_id,
                         image.image_name + "_classifier.pkl",
                     )
+                    with open(image.mask_annot_path, "w") as file:
+                        json.dump(masks_data["shapes"], file, indent=4)
                     with open(image.classifier_path, "wb") as file:
                         pickle.dump(clf, file)
                     db.session.commit()
                     alertbox = dbc.Alert("Annotation Saved to Database !", color="info")
 
-            except:
+            except Exception as e:
+                print(e)
                 alertbox = dbc.Alert("Issues Saving to Database...", color="error")
             images_to_draw = []
             if segimgpng is not None:
