@@ -48,7 +48,7 @@ class ReportForm(FlaskForm):
     )
     biopsie_id = StringField(
         "Biopsy ID",
-        validators=[Regexp(r"^[\w.-_]*$")],
+        #validators=[Regexp(r"^[\w.-_]*$")],
         render_kw={"placeholder": "Biopsy ID", "class": "form-control"},
     )
     muscle_prelev = StringField(
@@ -131,9 +131,9 @@ class OntologyDescriptPreAbs(FlaskForm):
         },
     )
     gene_datamined = StringField(
-        "Associated Genes (Datamined)",
+        "Associated Genes (Extracted from reports)",
         render_kw={
-            "placeholder": "Associated Genes (Datamined)",
+            "placeholder": "Associated Genes (Extracted from reports)",
             "class": "form-control",
             "readonly": "",
         },
@@ -145,9 +145,9 @@ class OntologyDescriptPreAbs(FlaskForm):
     )
 
     phenotype_datamined = StringField(
-        "Associated Phenotype (Datamined)",
+        "Associated Phenotype (Extracted from reports)",
         render_kw={
-            "placeholder": "Associated Phenotype (Datamined)",
+            "placeholder": "Associated Phenotype (Extracted from reports)",
             "class": "form-control",
             "readonly": "",
         },

@@ -18,6 +18,7 @@ def statsindex():
     graph_viz = create_plotly_viz(df)
     # create_basic_viz(df)
     generate_corr_matrix(df)
+    update_phenotype_gene(df)
     stat_per_gene_file = open(
         os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.json")
     )

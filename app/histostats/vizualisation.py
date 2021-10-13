@@ -60,7 +60,6 @@ def process_df(df):
     df = df.replace({-0.25: np.nan, 0.25: 1, 0.5: 1, 0.75: 1})
     return df
 
-
 def create_plotly_viz(df):
     df["age_biopsie"].replace({"N/A": -1}, inplace=True)
     muscle_prelev = df["muscle_prelev"].value_counts()
@@ -274,3 +273,21 @@ def generate_corr_matrix(df):
     figure.write_json(
         os.path.join(current_app.config["VIZ_FOLDER"], "correlation_matrix.json")
     )
+
+def update_phenotype_gene(df):
+    with open(os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "r") as fp:
+        onto = json.load(fp)
+    for term in onto:
+        df_temp = df[df[term["text"]]==1]
+        gene_datamined_temp = list(df_temp["gene_diag"].value_counts().index)
+        phenotype_datamined_temp = list(df_temp["conclusion"].value_counts().index)
+        if gene_datamined_temp == []:
+            term["data"]["gene_datamined"] = ""
+        else:
+            term["data"]["gene_datamined"] = ",".join(gene_datamined_temp)
+        if phenotype_datamined_temp == []:
+            term["data"]["phenotype_datamined"] = ""
+        else:
+            term["data"]["phenotype_datamined"] = ",".join(phenotype_datamined_temp)
+    with open(os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "w") as fp:
+        json.dump(onto, fp, indent=4)
