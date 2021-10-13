@@ -4,6 +4,7 @@ import json
 import os
 import dash
 import pickle
+import traceback
 
 from flask import current_app
 from urllib import parse
@@ -261,8 +262,8 @@ def register_callbacks(dashapp):
                     db.session.commit()
                     alertbox = dbc.Alert("Annotation Saved to Database !", color="info")
 
-            except Exception as e:
-                print(e)
+            except Exception:
+                print(traceback.format_exc())
                 alertbox = dbc.Alert("Issues Saving to Database...", color="error")
             images_to_draw = []
             if segimgpng is not None:

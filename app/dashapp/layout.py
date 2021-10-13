@@ -111,9 +111,8 @@ segmentation = [
                                     dcc.Graph(
                                         id="graph",
                                         figure=plot_common.dummy_fig(),
-                                        config={
+                                        config={"scrollZoom":True,
                                             "modeBarButtonsToAdd": [
-                                                "drawrect",
                                                 "drawopenpath",
                                                 "eraseshape",
                                             ]
