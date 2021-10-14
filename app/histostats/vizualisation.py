@@ -274,7 +274,7 @@ def generate_confusion_BOQA(df):
     return graph_matrixboqa
 
 def generate_corr_matrix(df):
-    onto_values = df.iloc[:, 11:]
+    onto_values = df.iloc[:, 13:]
     onto_values = onto_values.dropna(axis=1, thresh=10)
     onto_values = onto_values.replace({0: -1})
     # onto_values = onto_values.fillna(0)
