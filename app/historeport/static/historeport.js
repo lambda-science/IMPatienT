@@ -1,12 +1,12 @@
 var data_url = $("#data-url").data();
 var input = document.querySelector("input[id=synonymes]");
 var input_tag = new Tagify(input);
-var input2 = document.querySelector("input[id=gene]");
-var input2_tag = new Tagify(input2);
+// var input2 = document.querySelector("input[id=gene]");
+// var input2_tag = new Tagify(input2);
 var input3 = document.querySelector("input[id=gene_datamined]");
 var input3_tag = new Tagify(input3);
-var input4 = document.querySelector("input[id=phenotype]");
-var input4_tag = new Tagify(input4);
+// var input4 = document.querySelector("input[id=phenotype]");
+// var input4_tag = new Tagify(input4);
 var input5 = document.querySelector("input[id=phenotype_datamined]");
 var input5_tag = new Tagify(input5);
 
@@ -67,12 +67,12 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   $("input[id=parent_id]").val(data.node.parent);
   input_tag.removeAllTags();
   input_tag.addTags(data.node.data.synonymes);
-  input2_tag.removeAllTags();
-  input2_tag.addTags(data.node.data.genes);
+  // input2_tag.removeAllTags();
+  // input2_tag.addTags(data.node.data.genes);
   input3_tag.removeAllTags();
   input3_tag.addTags(data.node.data.gene_datamined);
-  input4_tag.removeAllTags();
-  input4_tag.addTags(data.node.data.phenotype);
+  // input4_tag.removeAllTags();
+  // input4_tag.addTags(data.node.data.phenotype);
   input5_tag.removeAllTags();
   input5_tag.addTags(data.node.data.phenotype_datamined);
   $("textarea[id=description]").val(data.node.data.description) || "";

@@ -122,14 +122,14 @@ class OntologyDescriptPreAbs(FlaskForm):
         "Synonyms",
         render_kw={"placeholder": "Synonyms", "class": "form-control", "readonly": ""},
     )
-    gene = StringField(
-        "Associated Genes",
-        render_kw={
-            "placeholder": "Associated Genes",
-            "class": "form-control",
-            "readonly": "",
-        },
-    )
+    # gene = StringField(
+    #     "Associated Genes (Reviewed)",
+    #     render_kw={
+    #         "placeholder": "Associated Genes (Reviewed)",
+    #         "class": "form-control",
+    #         "readonly": "",
+    #     },
+    # )
     gene_datamined = StringField(
         "Associated Genes (Extracted from reports)",
         render_kw={
@@ -139,15 +139,15 @@ class OntologyDescriptPreAbs(FlaskForm):
         },
     )
 
-    phenotype = StringField(
-        "Associated Phenotype",
-        render_kw={"placeholder": "Associated Phenotype", "class": "form-control", "readonly": "",},
-    )
+    # phenotype = StringField(
+    #     "Associated Phenotype (Reviewed)",
+    #     render_kw={"placeholder": "Associated Phenotype (Reviewed)", "class": "form-control", "readonly": "",},
+    # )
 
     phenotype_datamined = StringField(
-        "Associated Phenotype (Extracted from reports)",
+        "Associated Disease (Extracted from reports)",
         render_kw={
-            "placeholder": "Associated Phenotype (Extracted from reports)",
+            "placeholder": "Associated Disease (Extracted from reports)",
             "class": "form-control",
             "readonly": "",
         },

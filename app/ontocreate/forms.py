@@ -33,29 +33,29 @@ class OntologyDescript(FlaskForm):
     synonymes = StringField(
         "Synonyms", render_kw={"placeholder": "Synonyms", "class": "form-control"}
     )
-    gene = StringField(
-        "Associated Genes",
-        render_kw={"placeholder": "Associated Genes", "class": "form-control"},
-    )
+    # gene = StringField(
+    #     "Associated Genes (Reviewed)",
+    #     render_kw={"placeholder": "Associated Genes (Reviewed)", "class": "form-control"},
+    # )
 
     gene_datamined = StringField(
-        "Associated Genes (Datamined)",
+        "Associated Genes (Extracted from reports)",
         render_kw={
-            "placeholder": "Associated Genes (Datamined)",
+            "placeholder": "Associated Genes (Extracted from reports)",
             "class": "form-control",
             "readonly": "",
         },
     )
 
-    phenotype = StringField(
-        "Associated Phenotype",
-        render_kw={"placeholder": "Associated Phenotype", "class": "form-control"},
-    )
+    # phenotype = StringField(
+    #     "Associated Phenotype",
+    #     render_kw={"placeholder": "Associated Phenotype", "class": "form-control"},
+    # )
 
     phenotype_datamined = StringField(
-        "Associated Phenotype (Datamined)",
+        "Associated Disease (Extracted from reports)",
         render_kw={
-            "placeholder": "Associated Phenotype (Datamined)",
+            "placeholder": "Associated Disease (Extracted from reports)",
             "class": "form-control",
             "readonly": "",
         },
