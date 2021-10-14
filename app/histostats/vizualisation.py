@@ -318,10 +318,10 @@ def update_phenotype_gene(df):
         if gene_datamined_temp == []:
             term["data"]["gene_datamined"] = ""
         else:
-            term["data"]["gene_datamined"] = ",".join(gene_datamined_temp)
+            term["data"]["gene_datamined"] = ",".join(sorted(gene_datamined_temp))
         if phenotype_datamined_temp == []:
             term["data"]["phenotype_datamined"] = ""
         else:
-            term["data"]["phenotype_datamined"] = ",".join(phenotype_datamined_temp)
+            term["data"]["phenotype_datamined"] = ",".join(sorted(phenotype_datamined_temp))
     with open(os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "w") as fp:
         json.dump(onto, fp, indent=4)
