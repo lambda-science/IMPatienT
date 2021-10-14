@@ -16,8 +16,11 @@ def statsindex():
     df = process_df(df)
     generate_stat_per(df, features_col)
     graph_viz = create_plotly_viz(df)
+    graph_UNCLEAR = generate_UNCLEAR(df)
+    graph_matrixboqa = generate_confusion_BOQA(df)
     # create_basic_viz(df)
     generate_corr_matrix(df)
+    update_phenotype_gene(df)
     stat_per_gene_file = open(
         os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.json")
     )
@@ -41,4 +44,6 @@ def statsindex():
         stat_per_diag=stat_per_diag,
         graphJSON=graphJSON,
         graph_viz=graph_viz,
+        graph_UNCLEAR=graph_UNCLEAR,
+        matrixboqa=graph_matrixboqa
     )

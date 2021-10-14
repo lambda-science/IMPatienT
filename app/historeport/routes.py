@@ -70,6 +70,13 @@ def historeport():
                 onto_jstree = Ontology(report_entry.ontology_tree)
                 report_entry.ontology_tree = onto_jstree.clean_tree()
                 report_entry.expert_id = current_user.id
+                results = get_boqa_pred(json.dumps(report_entry.ontology_tree))
+                if results[1] > 0.5:
+                    report_entry.BOQA_prediction = results[0]
+                    report_entry.BOQA_prediction_score = results[1]
+                else:
+                    report_entry.BOQA_prediction = "No_Pred"
+                    report_entry.BOQA_prediction_score = 0
                 # Update of template ontology
                 # template_ontology = Ontology(template)
                 # current_report_ontology = Ontology(report_entry.ontology_tree)
@@ -85,6 +92,13 @@ def historeport():
             report_entry.ontology_tree = onto_jstree.clean_tree()
             report_entry.expert_id = current_user.id
             db.session.add(report_entry)
+            results = get_boqa_pred(json.dumps(report_entry.ontology_tree))
+            if results[1] > 0.5:
+                report_entry.BOQA_prediction = results[0]
+                report_entry.BOQA_prediction_score = results[1]
+            else:
+                report_entry.BOQA_prediction = "No_Pred"
+                report_entry.BOQA_prediction_score = 0
             # Update of template ontology
             # template_ontology = Ontology(template)
             # current_report_ontology = Ontology(report_entry.ontology_tree)

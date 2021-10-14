@@ -103,6 +103,8 @@ class ReportHisto(db.Model):
     ontology_tree = db.Column(db.JSON, default=[], nullable=False)
     comment = db.Column(db.Text, default="")
     conclusion = db.Column(db.String(140), index=True)
+    BOQA_prediction = db.Column(db.String(140), index=True)
+    BOQA_prediction_score = db.Column(db.Float())
     datetime = db.Column(
         db.DateTime(),
         onupdate=datetime.datetime.utcnow,

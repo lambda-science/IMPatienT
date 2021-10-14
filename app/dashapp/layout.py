@@ -134,7 +134,7 @@ segmentation = [
                             dbc.ButtonGroup(
                                 [
                                     dbc.Button(
-                                        "Save Annotation to Databse",
+                                        "Save Annotation to Database",
                                         id="download-button",
                                         color="success",
                                     )
@@ -206,7 +206,7 @@ sidebar = [
                                         min=0.01,
                                         max=20,
                                         step=0.01,
-                                        value=[0.5, 16],
+                                        value=[0.5, 4],
                                     ),
                                 ]
                             ),

@@ -24,9 +24,19 @@
     <div id="corrMatrixChart" class="corrMatrixChart"></div>
   </div>
 </div>
+
+<div class="row justify-content-md-center">
+  <div class="col-xl-4">
+    <div id="matrixboqa" class="matrixboqa"></div>
+  </div>
+  <div class="col-xl-4">
+    <div id="unclear" class="unclear"></div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-xl-6">
-    <h1>Vocabulary Frenquencies Per Genes</h1>
+    <h1>Vocabulary Frequencies Per Genes</h1>
     <a href="{{ url_for('static', filename='viz/stat_per_gene.json') }}" download>Download Table (.JSON)</a>
     <div class="accordion" id="accordionGENE">
       {% for gene in stat_per_gene %}
@@ -53,7 +63,7 @@
   </div>
 
   <div class="col-xl-6">
-    <h1>Vocabulary Frenquencies Per Diagnosis</h1>
+    <h1>Vocabulary Frequencies Per Diagnosis</h1>
     <a href="{{ url_for('static', filename='viz/stat_per_diag.json') }}" download>Download Table (.JSON)</a>
     <div class="accordion" id="accordionDIAG">
       {% for diag in stat_per_diag %}
@@ -87,7 +97,8 @@
 <meta id="data-fig2" data-fig2='{{graph_viz[1]|tojson|safe}}'>
 <meta id="data-fig3" data-fig3='{{graph_viz[2]|tojson|safe}}'>
 <meta id="data-fig4" data-fig4='{{graph_viz[3]|tojson|safe}}'>
-
+<meta id="data-unclear" data-unclear='{{graph_UNCLEAR|tojson|safe}}'>
+<meta id="data-matrixboqa" data-matrixboqa='{{matrixboqa|tojson|safe}}'>
 
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <script type='text/javascript'>
@@ -102,7 +113,10 @@
   Plotly.plot('fig3', fig3.fig3, {});
   var fig4 = $("#data-fig4").data();
   Plotly.plot('fig4', fig4.fig4, {});
-
+  var unclear = $("#data-unclear").data();
+  Plotly.plot('unclear', unclear.unclear, {});
+  var matrixboqa = $("#data-matrixboqa").data();
+  Plotly.plot('matrixboqa', matrixboqa.matrixboqa, {});
 </script>
 
 {% endblock %}
