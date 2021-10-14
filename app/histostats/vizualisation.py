@@ -10,7 +10,8 @@ from flask import current_app
 
 from app import db
 from app.models import ReportHisto
-
+from sklearn.metrics import confusion_matrix
+import plotly.figure_factory as ff
 
 def table_to_df(df):
     # Transformation de la table SQLite en dataframe en parsant l'arbre JSON
@@ -28,7 +29,10 @@ def table_to_df(df):
         tree_as_dict.setdefault("gene_diag", []).append(row[7])
         tree_as_dict.setdefault("comment", []).append(row[9])
         tree_as_dict.setdefault("conclusion", []).append(row[10])
-        tree_as_dict.setdefault("datetime", []).append(row[11])
+        tree_as_dict.setdefault("BOQA_prediction", []).append(row[11])
+        tree_as_dict.setdefault("BOQA_prediction_score", []).append(row[12])
+        tree_as_dict.setdefault("datetime", []).append(row[13])
+
 
         my_tree = row[8]
         for feature in my_tree:
@@ -238,6 +242,36 @@ def generate_stat_per(df, features_col):
     ) as f:
         json.dump(stat_per_diag, f, indent=4, ensure_ascii=False)
 
+def generate_UNCLEAR(df):
+    df_unclear = df[df["conclusion"]=="UNCLEAR"]
+    conclusion_boqa = df_unclear["BOQA_prediction"].value_counts()
+    fig = px.bar(
+        x=conclusion_boqa.index,
+        y=conclusion_boqa,
+        text=conclusion_boqa,
+        color=conclusion_boqa.index.astype(str),
+        color_discrete_sequence=px.colors.qualitative.G10,
+        title="Prediction of UNCLEAR reports by BOQA",
+    )
+    fig.update_layout(
+        xaxis_title="BOQA Myopathy Class Prediction", yaxis_title="Number of reports", showlegend=False
+    )
+    graph_UNCLEAR = json.loads(fig.to_json())
+    return graph_UNCLEAR
+
+def generate_confusion_BOQA(df):
+    df_no_unclear = df[(df["conclusion"]!="UNCLEAR") & (df["conclusion"]!="OTHER")]
+    y_true = df_no_unclear["conclusion"].to_list()
+    y_pred = df_no_unclear["BOQA_prediction"].to_list()
+    matrix_results = confusion_matrix(y_true, y_pred, labels=["No_Pred","CNM","COM","NM"])
+    fig = ff.create_annotated_heatmap(z=matrix_results,x=["No_Pred","CNM","COM","NM"], y=["No_Pred","CNM","COM","NM"],colorscale='Viridis')
+    fig.update_layout(title="Confusion matrix of histologic reports classification by BOQA",
+    xaxis_title="Predicted Class (BOQA)", yaxis_title="True Class", showlegend=False
+)
+    fig['layout']['yaxis']['autorange'] = "reversed"
+    fig['layout']['xaxis']['side'] = "bottom"
+    graph_matrixboqa = json.loads(fig.to_json())
+    return graph_matrixboqa
 
 def generate_corr_matrix(df):
     onto_values = df.iloc[:, 11:]

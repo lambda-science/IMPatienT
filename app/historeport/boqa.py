@@ -81,6 +81,7 @@ def get_boqa_pred(tree: str):
         open(os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_diag.json"), "r")
     )
     items_stat.pop("OTHER", None)
+    items_stat.pop("UNCLEAR", None)
     my_tree = json.loads(tree)
     query = {}
     replace_dict = {-0.25: 0, 0.25: 1, 0.5: 1, 0.75: 1, 1: 1, 0: 0}

@@ -17,6 +17,8 @@
                 <th class="align-middle text-center">Patient ID</th>
                 <th class="align-middle text-center">Gene</th>
                 <th class="align-middle text-center">Diagnostic</th>
+                <th class="align-middle text-center">BOQA Prediction</th>
+                <th class="align-middle text-center">BOQA Score (0-1)</th>
                 <th class="align-middle text-center">Action</th>
             </thead>
             {% for report in history %}
@@ -25,6 +27,8 @@
                 <td class="align-middle text-center">{{ report.patient_id }}</td>
                 <td class="align-middle text-center">{{ report.gene_diag }}</td>
                 <td class="align-middle text-center">{{ report.conclusion }}</td>
+                <td class="align-middle text-center">{{ report.BOQA_prediction }}</td>
+                <td class="align-middle text-center">{{ report.BOQA_prediction_score }}</td>
                 <td class="align-middle text-center">
                     <a class="btn btn-success btn-sm" role="button" href="historeport/new?id={{report.id}}">Resume</a>
                     <!-- Button Show Popup -->
