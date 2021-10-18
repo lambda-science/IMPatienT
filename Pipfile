@@ -36,6 +36,7 @@ spacy = "*"
 thefuzz = "*"
 email-validator = "*"
 dash-html-components = "*"
+gunicorn = "*"
 opencv-python-headless = "*"
 
 [dev-packages]
