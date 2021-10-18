@@ -13,8 +13,8 @@ from joblib import Memory
 import PIL.Image
 from skimage import io as skio
 from dash.dependencies import Input, Output, State
-import dash_html_components as html
-import dash_core_components as dcc
+from dash import html
+from dash import dcc
 import dash_bootstrap_components as dbc
 
 from app import db
@@ -85,7 +85,7 @@ def save_img_classifier(clf, label_to_colors_args, segmenter_args):
 
 
 def show_segmentation(image_path, mask_shapes, features, segmenter_args):
-    """ adds an image showing segmentations to a figure's layout """
+    """adds an image showing segmentations to a figure's layout"""
     # add 1 because classifier takes 0 to mean no mask
     shape_layers = [color_to_class(shape["line"]["color"]) + 1 for shape in mask_shapes]
     label_to_colors_args = {
@@ -128,7 +128,9 @@ def register_callbacks(dashapp):
             Input("segmentation-features", "value"),
             Input("sigma-range-slider", "value"),
         ],
-        [State("masks", "data"),],
+        [
+            State("masks", "data"),
+        ],
     )
     def annotation_react(
         href,

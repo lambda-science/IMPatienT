@@ -1,5 +1,5 @@
-import dash_html_components as html
-import dash_core_components as dcc
+from dash import dcc
+from dash import html
 import dash_bootstrap_components as dbc
 import os
 from app.dashapp import bp
@@ -39,14 +39,26 @@ header = dbc.Navbar(
                     dbc.Col(
                         [
                             html.Div(
-                                [html.H3("Image Annotation Module"),], id="app-title",
+                                [
+                                    html.H3("Image Annotation Module"),
+                                ],
+                                id="app-title",
                             )
                         ],
                         align="center",
                     ),
                     dbc.Col(
                         dbc.Nav(
-                            [html.Div([html.A("Return To Index", href="/img_index",),])]
+                            [
+                                html.Div(
+                                    [
+                                        html.A(
+                                            "Return To Index",
+                                            href="/img_index",
+                                        ),
+                                    ]
+                                )
+                            ]
                         )
                     ),
                 ],
@@ -111,11 +123,12 @@ segmentation = [
                                     dcc.Graph(
                                         id="graph",
                                         figure=plot_common.dummy_fig(),
-                                        config={"scrollZoom":True,
+                                        config={
+                                            "scrollZoom": True,
                                             "modeBarButtonsToAdd": [
                                                 "drawopenpath",
                                                 "eraseshape",
-                                            ]
+                                            ],
                                         },
                                     ),
                                 ],
@@ -127,7 +140,10 @@ segmentation = [
             dbc.CardFooter(
                 [
                     # Download links
-                    html.A(id="download", download="classifier.json",),
+                    html.A(
+                        id="download",
+                        download="classifier.json",
+                    ),
                     html.Div(
                         children=[
                             html.Div(id="alertbox"),
@@ -144,7 +160,10 @@ segmentation = [
                             ),
                         ],
                     ),
-                    html.A(id="download-image", download="classified-image.png",),
+                    html.A(
+                        id="download-image",
+                        download="classified-image.png",
+                    ),
                 ]
             ),
         ],
