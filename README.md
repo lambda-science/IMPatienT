@@ -1,13 +1,15 @@
-# How To Use For Developpement Purpose (using Conda):
+# How To Use For Developpement Purpose (using PipEnv):
 1. Install Tesseract package:    
    `sudo apt install tesseract-ocr tesseract-ocr-fra`  
 
-2. Clone the repository and create the conda environnement:  
+2. Clone the repository and create the environnement:  
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
-   `conda env create -f environment.yml`  
+   `python -m pip install pip --upgrade --user`  
+   `python -m pip install pipenv --user` 
+   `pipenv install`
    
 3. Activate the environnement  & install NLP model
-   `conda activate myoxia`  
+   `pipenv shell`  
    Aditionally install Spacy NLP Model using: `python -m spacy download fr_core_news_lg`
 
 4. Initialize empty database:  
