@@ -5,7 +5,7 @@
 2. Clone the repository and create the environnement:  
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
    `python -m pip install pip --upgrade --user`  
-   `python -m pip install pipenv --user` 
+   `python -m pip install pipenv --user`  
    `pipenv install`
    
 3. Activate the environnement  & install NLP model
