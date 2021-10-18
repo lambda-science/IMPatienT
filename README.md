@@ -8,7 +8,7 @@
    `python -m pip install pipenv --user`  
    `pipenv install`
    
-3. Activate the environnement  & install NLP model
+3. Activate the environnement  & install NLP model  
    `pipenv shell`  
    Aditionally install Spacy NLP Model using: `python -m spacy download fr_core_news_lg`
 
