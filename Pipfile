@@ -36,7 +36,9 @@ spacy = "*"
 thefuzz = "*"
 email-validator = "*"
 dash-html-components = "*"
+gunicorn = "*"
 opencv-python-headless = "*"
+dvc = {extras = ["ssh"], version = "*"}
 
 [dev-packages]
 ipykernel = "*"

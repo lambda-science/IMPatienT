@@ -53,6 +53,12 @@ class Ontology:
                     i["data"]["gene_datamined"] = dest_onto.jstree_as_dict[i["id"]][
                         "data"
                     ].get("gene_datamined", "")
+                    i["data"]["french_translation"] = dest_onto.jstree_as_dict[i["id"]][
+                        "data"
+                    ].get("french_translation", "")
+                    i["data"]["correlates_with"] = dest_onto.jstree_as_dict[i["id"]][
+                        "data"
+                    ].get("correlates_with", "")
                     i["data"]["synonymes"] = dest_onto.jstree_as_dict[i["id"]][
                         "data"
                     ].get("synonymes", "")

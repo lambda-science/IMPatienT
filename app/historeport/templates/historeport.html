@@ -115,28 +115,26 @@
             </div>
             </br>
             <h4>Vocabulary Term Details</h4>
-            {{ form2.onto_name }}
             <div class="row">
-                <!-- <div class="col-xl">
-                     form2.gene.label 
-                     form2.gene </div> -->
-                <div class="col-xl">
-                    {{ form2.gene_datamined.label }}
-                    {{ form2.gene_datamined }}</div>
+                <div class="col-xl-3 range">
+                    {{ form2.onto_id_ext.label }}
+                    {{ form2.onto_id_ext }}
+                </div>
+                <div class="col-xl-9 range">
+                    {{ form2.onto_name.label }}
+                    {{ form2.onto_name }}
+                </div>
             </div>
-            <div class="row">
-                <!-- <div class="col-xl">
-                     form2.phenotype.label 
-                     form2.phenotype </div> -->
-                <div class="col-xl">
-                    {{ form2.phenotype_datamined.label }}
-                    {{ form2.phenotype_datamined }}</div>
-            </div>
-            <div class="row">
-                <div class="col-xl">
-                    {{ form2.synonymes.label }}
-                    {{ form2.synonymes }}</div>
-            </div>
+            {{ form2.synonymes.label }}
+            {{ form2.synonymes }}
+            {{ form2.french_translation.label }}
+            {{ form2.french_translation }}
+            {{ form2.gene_datamined.label }}
+            {{ form2.gene_datamined }}
+            {{ form2.phenotype_datamined.label }}
+            {{ form2.phenotype_datamined }}
+            {{ form2.correlates_with.label }}
+            {{ form2.correlates_with }}
             {{ form2.description.label }}
             {{ form2.description }}
 

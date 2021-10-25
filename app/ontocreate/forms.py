@@ -60,7 +60,21 @@ class OntologyDescript(FlaskForm):
             "readonly": "",
         },
     )
-
+    french_translation = StringField(
+        "French Translation",
+        render_kw={
+            "placeholder": "French Translation",
+            "class": "form-control",
+        },
+    )
+    correlates_with = StringField(
+        "Positively Correlates with (Extracted from reports ; >0.5)",
+        render_kw={
+            "placeholder": "Positively Correlates with (Extracted from reports ; >0.5)",
+            "class": "form-control",
+            "readonly": "",
+        },
+    )
     description = TextAreaField(
         "Description",
         render_kw={

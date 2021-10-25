@@ -9,20 +9,27 @@ var input3_tag = new Tagify(input3);
 // var input4_tag = new Tagify(input4);
 var input5 = document.querySelector("input[id=phenotype_datamined]");
 var input5_tag = new Tagify(input5);
+var input6 = document.querySelector("input[id=french_translation]");
+var input6_tag = new Tagify(input6);
+var input7 = document.querySelector("input[id=correlates_with]");
+var input7_tag = new Tagify(input7);
 
 var json_tree = $("input[id=ontology_tree]").val();
-function uuidv4() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = (Math.random() * 16) | 0,
-      v = c == "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
+function ontology_ID(id_list) {
+  id = id_list.sort()[id_list.length - 2].substring(4);
+  id = parseInt(id);
+  id += 1;
+  id = "MHO" + id.toString().padStart(6, "0");
+  return id
+};
 
 $("#jstree")
   .bind("create_node.jstree", function (event, data) {
-    var newId = uuidv4();
-    data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "" };
+    var v = $("#jstree").jstree(true).get_json("#", { flat: true });
+    var id_list = v.map(({ id }) => id);
+    var newId = ontology_ID(id_list);
+    // data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "", french_translation: "", correlates_with: "" };
+    data.node.data = { description: "", synonymes: "", phenotype_datamined: "", gene_datamined: "", french_translation: "", correlates_with: "" };
     $("#jstree").jstree().set_id(data.node, newId);
   })
   .jstree({
@@ -31,7 +38,7 @@ $("#jstree")
       data: JSON.parse(json_tree),
     },
     // plugins: ["contextmenu", "wholerow", "unique", "search", "changed", "dnd"],
-    plugins: ["wholerow", "unique", "search", "changed"],
+    plugins: ["wholerow", "unique", "search", "changed", "sort"],
     //contextmenu: {
     //  items: function ($node) {
     //    return {
@@ -75,6 +82,10 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   // input4_tag.addTags(data.node.data.phenotype);
   input5_tag.removeAllTags();
   input5_tag.addTags(data.node.data.phenotype_datamined);
+  input6_tag.removeAllTags();
+  input6_tag.addTags(data.node.data.french_translation);
+  input7_tag.removeAllTags();
+  input7_tag.addTags(data.node.data.correlates_with);
   $("textarea[id=description]").val(data.node.data.description) || "";
   $("input[id=preabsProba]").val(data.node.data.presence || -0.25);
   set_slider_span(data.node.data.presence || "-0.25");
