@@ -6,6 +6,7 @@
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
    `pip install --upgrade pip`  
    `pip install pipenv`  
+   Optionally: add your python package to path: `export PATH=$HOME/.local/bin:$PATH`  
    `pipenv install`
    
 3. Activate the environnement  & install NLP model  
