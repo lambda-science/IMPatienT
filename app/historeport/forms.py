@@ -112,6 +112,14 @@ class ReportForm(FlaskForm):
 class OntologyDescriptPreAbs(FlaskForm):
     """Form used to show node informations from ontology tree"""
 
+    onto_id_ext = StringField(
+        "Vocabulary ID",
+        render_kw={
+            "placeholder": "Vocabulary ID",
+            "class": "form-control",
+            "readonly": "",
+        },
+    )
     onto_name = StringField(
         "Vocabulary Name",
         render_kw={
@@ -160,7 +168,6 @@ class OntologyDescriptPreAbs(FlaskForm):
         render_kw={
             "placeholder": "French Translation",
             "class": "form-control",
-            "readonly": "",
         },
     )
     correlates_with = StringField(

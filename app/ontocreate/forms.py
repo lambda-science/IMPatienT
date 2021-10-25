@@ -65,7 +65,6 @@ class OntologyDescript(FlaskForm):
         render_kw={
             "placeholder": "French Translation",
             "class": "form-control",
-            "readonly": "",
         },
     )
     correlates_with = StringField(
