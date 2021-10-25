@@ -35,15 +35,22 @@
                 {{ form.hidden_tag() }}
                 {{ form.onto_name.label }}
                 {{ form.onto_name }}
+                {{ form.french_translation.label }}
+                {{ form.french_translation }}
                 {{ form.synonymes.label }}
                 {{ form.synonymes }}
                 <!--  form.gene  -->
                 {{ form.gene_datamined.label }}
                 {{ form.gene_datamined }}
                 <!--  form.phenotype  -->
-                {{ form.phenotype_datamined.label }}{{ form.phenotype_datamined }}
+                {{ form.phenotype_datamined.label }}
+                {{ form.phenotype_datamined }}
+                {{ form.correlates_with.label }}
+                {{ form.correlates_with }}
                 {{ form.description.label }}
                 {{ form.description }}
+
+
                 <button type="button" class="btn btn-success" onclick="update_node_data()">Update Details</button>
             </div>
         </form>

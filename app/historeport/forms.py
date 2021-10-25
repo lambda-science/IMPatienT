@@ -48,7 +48,7 @@ class ReportForm(FlaskForm):
     )
     biopsie_id = StringField(
         "Biopsy ID",
-        #validators=[Regexp(r"^[\w.-_]*$")],
+        # validators=[Regexp(r"^[\w.-_]*$")],
         render_kw={"placeholder": "Biopsy ID", "class": "form-control"},
     )
     muscle_prelev = StringField(
@@ -71,7 +71,10 @@ class ReportForm(FlaskForm):
             Regexp(r"(^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$)|(^$)"),
             Length(max=10),
         ],
-        render_kw={"class": "form-control", "placeholder": "YYYY-MM-DD",},
+        render_kw={
+            "class": "form-control",
+            "placeholder": "YYYY-MM-DD",
+        },
     )
     gene_diag = SelectField(
         "Diagnosed Gene ",
@@ -152,6 +155,22 @@ class OntologyDescriptPreAbs(FlaskForm):
             "readonly": "",
         },
     )
+    french_translation = StringField(
+        "French Translation",
+        render_kw={
+            "placeholder": "French Translation",
+            "class": "form-control",
+            "readonly": "",
+        },
+    )
+    correlates_with = StringField(
+        "Positively Correlates with (Extracted from reports ; >0.5)",
+        render_kw={
+            "placeholder": "Positively Correlates with (Extracted from reports ; >0.5)",
+            "class": "form-control",
+            "readonly": "",
+        },
+    )
     description = TextAreaField(
         "Description",
         render_kw={
@@ -165,7 +184,12 @@ class OntologyDescriptPreAbs(FlaskForm):
     preabsProba = DecimalRangeField(
         "Absence / Presence",
         validators=[NumberRange(min=-0.25, max=1)],
-        render_kw={"min": -0.25, "max": 1, "step": 0.25, "class": "form-range",},
+        render_kw={
+            "min": -0.25,
+            "max": 1,
+            "step": 0.25,
+            "class": "form-range",
+        },
     )
 
 

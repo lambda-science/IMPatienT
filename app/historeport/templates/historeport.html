@@ -117,6 +117,16 @@
             <h4>Vocabulary Term Details</h4>
             {{ form2.onto_name }}
             <div class="row">
+                <div class="col-xl">
+                    {{ form2.synonymes.label }}
+                    {{ form2.synonymes }}</div>
+            </div>
+            <div class="row">
+                <div class="col-xl">
+                    {{ form2.french_translation.label }}
+                    {{ form2.french_translation }}</div>
+            </div>
+            <div class="row">
                 <!-- <div class="col-xl">
                      form2.gene.label 
                      form2.gene </div> -->
@@ -134,9 +144,10 @@
             </div>
             <div class="row">
                 <div class="col-xl">
-                    {{ form2.synonymes.label }}
-                    {{ form2.synonymes }}</div>
+                    {{ form2.correlates_with.label }}
+                    {{ form2.correlates_with }}</div>
             </div>
+
             {{ form2.description.label }}
             {{ form2.description }}
 
