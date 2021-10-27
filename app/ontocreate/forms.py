@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField
+from wtforms import StringField, TextAreaField, SubmitField
 
 
 class OntologyDescript(FlaskForm):
@@ -60,10 +60,10 @@ class OntologyDescript(FlaskForm):
             "readonly": "",
         },
     )
-    french_translation = StringField(
-        "French Translation",
+    alternative_language = StringField(
+        "Alternative Language",
         render_kw={
-            "placeholder": "French Translation",
+            "placeholder": "Alternative Language",
             "class": "form-control",
         },
     )
@@ -84,3 +84,9 @@ class OntologyDescript(FlaskForm):
             "rows": "5",
         },
     )
+
+
+class InvertLangButton(FlaskForm):
+    """Empty form for language inversion button"""
+
+    submit = SubmitField("Confirm Inversion", render_kw={"class": "btn btn-warning"})

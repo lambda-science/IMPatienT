@@ -24,6 +24,33 @@
         <div id="jstree" class="demo" style="overflow:scroll; max-height: 600px;"></div>
 
         <button type="button" class="btn btn-success" onclick="save_tree()">Save Tree</button>
+        <!-- Button Show Popup -->
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LangInvertPopup">
+            Invert Ontology Language
+        </button>
+
+        <!-- Deletion Popup -->
+        <div class="modal fade" id="LangInvertPopup" tabindex="-1" aria-labelledby="LangInvertPopupLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="LangInvertPopupLabel">
+                            Confirm Ontology Lang Inversion
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{ url_for('ontocreate.invert_lang') }}" method="post" style="display: inline">
+                            {{ form2.hidden_tag() }} {{ form2.submit }}
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-xl">
         <h1>Vocubulary Details</h1>
@@ -37,8 +64,8 @@
                 {{ form.onto_id_ext }}
                 {{ form.onto_name.label }}
                 {{ form.onto_name }}
-                {{ form.french_translation.label }}
-                {{ form.french_translation }}
+                {{ form.alternative_language.label }}
+                {{ form.alternative_language }}
                 {{ form.synonymes.label }}
                 {{ form.synonymes }}
                 {{ form.gene_datamined.label }}

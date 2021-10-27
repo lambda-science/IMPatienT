@@ -163,10 +163,10 @@ class OntologyDescriptPreAbs(FlaskForm):
             "readonly": "",
         },
     )
-    french_translation = StringField(
-        "French Translation",
+    alternative_language = StringField(
+        "Alternative Language",
         render_kw={
-            "placeholder": "French Translation",
+            "placeholder": "Alternative Language",
             "class": "form-control",
         },
     )

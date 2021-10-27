@@ -1,11 +1,18 @@
 import os
 import json
-from flask import render_template, current_app, send_from_directory, request
+from flask import (
+    render_template,
+    current_app,
+    send_from_directory,
+    request,
+    redirect,
+    url_for,
+)
 from flask_login import login_required
 from sqlalchemy.orm.attributes import flag_modified
 from app import db
 from app.ontocreate import bp
-from app.ontocreate.forms import OntologyDescript
+from app.ontocreate.forms import OntologyDescript, InvertLangButton
 from app.models import ReportHisto
 from app.historeport.onto_func import Ontology
 
@@ -22,7 +29,8 @@ def onto_json(filename):
 def ontocreate():
     """View used to show and modify ontology tree"""
     form = OntologyDescript()
-    return render_template("ontocreate.html", form=form)
+    form2 = InvertLangButton()
+    return render_template("ontocreate.html", form=form, form2=form2)
 
 
 @bp.route("/modify_onto", methods=["PATCH"])
@@ -72,3 +80,40 @@ def download_onto():
     return send_from_directory(
         current_app.config["CONFIG_FOLDER"], "ontology.json", as_attachment=True
     )
+
+
+@bp.route("/invert_lang", methods=["POST"])
+@login_required
+def invert_lang():
+    """Download ontology tree"""
+
+    # Open the ontology, invert text and alternative field, save it
+    with open(
+        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "r"
+    ) as fp:
+        onto = json.load(fp)
+
+    for term in onto:
+        if term["data"]["alternative_language"] != "":
+            temp_term = term["text"]
+            term["text"] = term["data"]["alternative_language"]
+            term["data"]["alternative_language"] = temp_term
+
+    with open(
+        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "w"
+    ) as fp:
+        json.dump(onto, fp, indent=4)
+
+    # After Switching lang, switch it for all patients onto_tree !
+    template_ontology = Ontology(onto)
+    for report in ReportHisto.query.all():
+        current_report_ontology = Ontology(report.ontology_tree)
+        updated_report_ontology = json.loads(
+            json.dumps(current_report_ontology.update_ontology(template_ontology))
+        )
+        # Issue: SQLAlchemy not updating JSON https://stackoverflow.com/questions/42559434/updates-to-json-field-dont-persist-to-db
+
+        report.ontology_tree = updated_report_ontology
+        flag_modified(report, "ontology_tree")
+    db.session.commit()
+    return redirect(url_for("ontocreate.ontocreate"))
