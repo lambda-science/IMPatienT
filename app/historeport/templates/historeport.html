@@ -1,6 +1,9 @@
 {% extends "base.html"%}
 {% block content %}
-
+<!-- MarkJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"
+    integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- JS Tree -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/themes/default/style.min.css"
     integrity="sha512-P8BwDSUInKMA7I116Z1RFg/Dfk85uFdliEUYO7vQlwtxLVMNvZimfMAQsaf++9EhlAGOVX6yhDQAIY3/70jDUg=="
@@ -44,7 +47,9 @@
                 </h2>
                 <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1"
                     data-bs-parent="#accordionOCR">
-                    <div class="accordion-body" id="resultsOCRNLP"></div>
+                    <div class="accordion-body" id="resultsOCRNLP">
+                        <div class="context"> </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,8 +132,8 @@
             </div>
             {{ form2.synonymes.label }}
             {{ form2.synonymes }}
-            {{ form2.french_translation.label }}
-            {{ form2.french_translation }}
+            {{ form2.alternative_language.label }}
+            {{ form2.alternative_language }}
             {{ form2.gene_datamined.label }}
             {{ form2.gene_datamined }}
             {{ form2.phenotype_datamined.label }}

@@ -1,9 +1,12 @@
-[[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
+[tool.poetry]
+name = "myoxia"
+version = "1.0.0"
+description = "My main application for the handling, cleaning and processing of myopathy patient health data"
+authors = ["Corentin Meyer <corentin.meyer@etu.unistra.fr>"]
+license = "MIT"
 
-[packages]
+[tool.poetry.dependencies]
+python = "^3.8"
 pip = "*"
 setuptools = "*"
 wheel = "*"
@@ -18,7 +21,6 @@ Flask-Login = "*"
 jwt = "*"
 Flask-SQLAlchemy = "*"
 Flask-Mail = "*"
-unittest2 = "*"
 python-dotenv = "*"
 pandas = "*"
 numpy = "*"
@@ -38,14 +40,15 @@ email-validator = "*"
 dash-html-components = "*"
 gunicorn = "*"
 opencv-python-headless = "*"
-dvc = {extras = ["ssh"], version = "*"}
 
-[dev-packages]
+[tool.poetry.dev-dependencies]
 ipykernel = "*"
 pylint = "*"
 pylint-flask-sqlalchemy = "*"
 pylint-flask = "*"
-black = "==21.9b0"
+black = "*"
+unittest2 = "*"
 
-[requires]
-python_version = "3.8"
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

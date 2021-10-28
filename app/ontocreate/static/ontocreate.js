@@ -9,7 +9,7 @@ var input3_tag = new Tagify(input3);
 // var input4_tag = new Tagify(input4);
 var input5 = document.querySelector("input[id=phenotype_datamined]");
 var input5_tag = new Tagify(input5);
-var input6 = document.querySelector("input[id=french_translation]");
+var input6 = document.querySelector("input[id=alternative_language]");
 var input6_tag = new Tagify(input6);
 var input7 = document.querySelector("input[id=correlates_with]");
 var input7_tag = new Tagify(input7);
@@ -27,8 +27,8 @@ $("#jstree")
     var v = $("#jstree").jstree(true).get_json("#", { flat: true });
     var id_list = v.map(({ id }) => id);
     var newId = ontology_ID(id_list);
-    // data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "", french_translation: "", correlates_with: "" };
-    data.node.data = { description: "", synonymes: "", phenotype_datamined: "", gene_datamined: "", french_translation: "", correlates_with: "" };
+    // data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "" };
+    data.node.data = { description: "", synonymes: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "" };
     $("#jstree").jstree().set_id(data.node, newId);
   })
   .jstree({
@@ -69,7 +69,7 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   input5_tag.removeAllTags();
   input5_tag.addTags(data.node.data.phenotype_datamined);
   input6_tag.removeAllTags();
-  input6_tag.addTags(data.node.data.french_translation);
+  input6_tag.addTags(data.node.data.alternative_language);
   input7_tag.removeAllTags();
   input7_tag.addTags(data.node.data.correlates_with);
   $("textarea[id=description]").val(data.node.data.description) || "";
@@ -84,7 +84,7 @@ function update_node_data() {
   node.data.gene_datamined = get_taglist("input[id=gene_datamined]");
   // node.data.phenotype = get_taglist("input[id=phenotype]");
   node.data.phenotype_datamined = get_taglist("input[id=phenotype_datamined]");
-  node.data.french_translation = get_taglist("input[id=french_translation]");
+  node.data.alternative_language = get_taglist("input[id=alternative_language]");
   node.data.correlates_with = get_taglist("input[id=correlates_with]");
   node.data.description = $("textarea[id=description]").val();
   save_tree();

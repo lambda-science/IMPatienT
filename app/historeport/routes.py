@@ -164,11 +164,12 @@ def ocr_pdf():
         file_val = request.files["file"]
         pdf_object = Rapport(file_obj=file_val)
         pdf_object.pdf_to_text()
-        pdf_object.detect_sections()
-        pdf_object.extract_section_text()
-        pdf_object.analyze_all_sections()
+        # pdf_object.detect_sections()
+        # pdf_object.extract_section_text()
+        match_list = pdf_object.analyze_text()
+        results = {"full_text": pdf_object.text_as_list, "match_list": match_list}
     return (
-        json.dumps({"success": True, "results": pdf_object.results_match_dict}),
+        json.dumps({"success": True, "results": results}),
         200,
         {"ContentType": "application/json"},
     )

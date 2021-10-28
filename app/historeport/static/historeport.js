@@ -9,7 +9,7 @@ var input3_tag = new Tagify(input3);
 // var input4_tag = new Tagify(input4);
 var input5 = document.querySelector("input[id=phenotype_datamined]");
 var input5_tag = new Tagify(input5);
-var input6 = document.querySelector("input[id=french_translation]");
+var input6 = document.querySelector("input[id=alternative_language]");
 var input6_tag = new Tagify(input6);
 var input7 = document.querySelector("input[id=correlates_with]");
 var input7_tag = new Tagify(input7);
@@ -28,8 +28,8 @@ $("#jstree")
     var v = $("#jstree").jstree(true).get_json("#", { flat: true });
     var id_list = v.map(({ id }) => id);
     var newId = ontology_ID(id_list);
-    // data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "", french_translation: "", correlates_with: "" };
-    data.node.data = { description: "", synonymes: "", phenotype_datamined: "", gene_datamined: "", french_translation: "", correlates_with: "" };
+    // data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "" };
+    data.node.data = { description: "", synonymes: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "" };
     $("#jstree").jstree().set_id(data.node, newId);
   })
   .jstree({
@@ -83,7 +83,7 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   input5_tag.removeAllTags();
   input5_tag.addTags(data.node.data.phenotype_datamined);
   input6_tag.removeAllTags();
-  input6_tag.addTags(data.node.data.french_translation);
+  input6_tag.addTags(data.node.data.alternative_language);
   input7_tag.removeAllTags();
   input7_tag.addTags(data.node.data.correlates_with);
   $("textarea[id=description]").val(data.node.data.description) || "";
@@ -145,6 +145,7 @@ $("#predictbutton").on("click", function () {
   predict_diag_boqa();
 });
 
+
 $(function () {
   $('#upload-file-btn').click(function () {
     var form_data = new FormData($('#upload-file')[0]);
@@ -156,17 +157,28 @@ $(function () {
       cache: false,
       processData: false,
       success: function (data) {
+        let text_results_field = document.querySelector("div.context");
+        text_results_field.innerHTML = ""
+        var instance = new Mark(document.querySelector("div.context"));
         let json_ans = JSON.parse(data);
         let accordion = document.getElementById('divAccordion');
         accordion.removeAttribute("hidden");
-        let text_results_field = document.getElementById("resultsOCRNLP");
-        console.log(json_ans.results)
-        for (const [key, value] of Object.entries(json_ans.results)) {
-          text_results_field.innerHTML += "<h3>" + key + "</h3>"
-          for (const element of value)
-            text_results_field.innerHTML += "<span class='badge bg-success'>" + element[0] + " " + element[1] + "</span>  "
+        options = { separateWordSearch: false, accurarcy: "exactly", ignorePunctuation: ":;.,-–—‒_(){}[]!'\"+=".split("") };
+        for (const [key, value] of Object.entries(json_ans.results.full_text)) {
+          text_results_field.innerHTML += value + "</br>";
         }
+        var keywords = [];
+        for (const [key, value] of Object.entries(json_ans.results.match_list)) {
+          keywords.push(value[1])
+        }
+        instance.mark(keywords, options);
+        // for (const [key, value] of Object.entries(json_ans.results)) {
+        //   text_results_field.innerHTML += "<h3>" + key + "</h3>"
+        //   for (const element of value)
+        //     text_results_field.innerHTML += "<span class='badge bg-success'>" + element[0] + " " + element[1] + "</span>  "
+        // }
       },
     });
   });
 });
+
