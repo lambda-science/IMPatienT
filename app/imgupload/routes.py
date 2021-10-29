@@ -12,11 +12,11 @@ from app.imgupload.forms import ImageForm, DeleteButton
 from app.models import Image
 
 
-@bp.route("/data/<path:filename>")
+@bp.route("/data/images/<path:filename>")
 @login_required
-def data_folder(filename):
+def images_folder(filename):
     """Serve files located in patient subfolder inside folder"""
-    return send_from_directory(current_app.config["DATA_FOLDER"], filename)
+    return send_from_directory(current_app.config["IMAGES_FOLDER"], filename)
 
 
 @bp.route("/img_index", methods=["GET", "POST"])
@@ -79,7 +79,7 @@ def create_img():
         filename = secure_filename(patient_id + "_" + file.filename)
 
         # Create a data folder for patient
-        data_patient_dir = os.path.join(current_app.config["DATA_FOLDER"], patient_id)
+        data_patient_dir = os.path.join(current_app.config["IMAGES_FOLDER"], patient_id)
         if not os.path.exists(data_patient_dir):
             os.makedirs(data_patient_dir)
         # Save the image to patient data folder

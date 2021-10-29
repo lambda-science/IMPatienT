@@ -62,6 +62,9 @@ class Ontology:
                     i["data"]["synonymes"] = dest_onto.jstree_as_dict[i["id"]][
                         "data"
                     ].get("synonymes", "")
+                    i["data"]["hex_color"] = dest_onto.jstree_as_dict[i["id"]][
+                        "data"
+                    ].get("hex_color", "")
                 updated_jstree_as_list.append(i)
         # If destination has new entry: add them
         for i in dest_onto.jstree_as_dict.keys():

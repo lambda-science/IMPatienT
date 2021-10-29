@@ -159,6 +159,7 @@ def register_callbacks(dashapp):
                 "http:/",
                 url_splited.netloc,
                 "data",
+                "images",
                 image_split_path[-2],
                 image_split_path[-1],
             ]
@@ -228,24 +229,24 @@ def register_callbacks(dashapp):
                         )
                     )
                     image.seg_matrix_path = os.path.join(
-                        current_app.config["DATA_FOLDER"],
+                        current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
                         image.image_name + "_seq_matrix.numpy",
                     )
                     image.mask_annot_path = os.path.join(
-                        current_app.config["DATA_FOLDER"],
+                        current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
                         image.image_name + "_mask_annot.json",
                     )
                     seg_matrix.tofile(image.seg_matrix_path)
                     image.mask_image_path = os.path.join(
-                        current_app.config["DATA_FOLDER"],
+                        current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
                         image.image_name + "_mask_image.png",
                     )
                     segimgpng.save(image.mask_image_path)
                     image.bland_image_path = os.path.join(
-                        current_app.config["DATA_FOLDER"],
+                        current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
                         image.image_name + "_bland_image.png",
                     )
@@ -253,7 +254,7 @@ def register_callbacks(dashapp):
                         PIL.Image.open(image.image_path), segimgpng
                     ).save(image.bland_image_path)
                     image.classifier_path = os.path.join(
-                        current_app.config["DATA_FOLDER"],
+                        current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
                         image.image_name + "_classifier.pkl",
                     )

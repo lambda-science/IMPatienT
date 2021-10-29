@@ -334,7 +334,7 @@ def generate_corr_matrix(df):
 
 def update_phenotype_gene(df):
     with open(
-        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "r"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
     ) as fp:
         onto = json.load(fp)
     for term in onto:
@@ -352,14 +352,14 @@ def update_phenotype_gene(df):
                 sorted(phenotype_datamined_temp)
             )
     with open(
-        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "w"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as fp:
         json.dump(onto, fp, indent=4)
 
 
 def update_correlation_data(corrMatrix):
     with open(
-        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "r"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
     ) as fp:
         onto = json.load(fp)
     for term in onto:
@@ -370,6 +370,6 @@ def update_correlation_data(corrMatrix):
         else:
             pass
     with open(
-        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "w"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as fp:
         json.dump(onto, fp, indent=4)

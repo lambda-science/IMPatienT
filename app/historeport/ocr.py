@@ -18,7 +18,7 @@ class Rapport:
         self.file_obj = file_obj
         self.lang = "fra"
         self.ontology_path = os.path.join(
-            current_app.config["CONFIG_FOLDER"], "ontology.json"
+            current_app.config["ONTOLOGY_FOLDER"], "ontology.json"
         )
         self.image_stack = []
         self.raw_text = ""
