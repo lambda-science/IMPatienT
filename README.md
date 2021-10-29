@@ -8,7 +8,8 @@
    chmod +x Miniconda3-latest-Linux-x86_64.sh
    ./Miniconda3-latest-Linux-x86_64.sh
    conda activate base
-   conda install -c conda-forge poetry dvc-ssh
+   conda install mamba
+   mamba install -c conda-forge poetry dvc-ssh
    ```
 4. Clone the repository and create the environnement:  
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
