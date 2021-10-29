@@ -1,6 +1,6 @@
 #!/bin/bash
 # this script is used to boot a Docker container
-python -m poetry shell
+source /home/myoxia/.venv/bin/activate
 while true; do
     flask db upgrade
     if [[ "$?" == "0" ]]; then
