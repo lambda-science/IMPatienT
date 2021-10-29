@@ -13,7 +13,6 @@
    ```
 4. Clone the repository and create the environnement:  
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
-   `conda install -c conda-forge poetry dvc-ssh`  
    `poetry config virtualenvs.in-project true`  
    `poetry install`
    
