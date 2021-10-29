@@ -13,7 +13,6 @@
    ```
 4. Clone the repository and create the environnement:  
    `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
-   `poetry config virtualenvs.in-project true`  
    `poetry install`
    
 4. Activate the environnement  & install NLP model  
