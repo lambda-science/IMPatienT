@@ -13,6 +13,6 @@ docker run --name myoxia -d -p $APP_PORT:5000 --rm -e SECRET_KEY=$SECRET_KEY \
     -e MAIL_USERNAME=$MAIL_USERNAME -e MAIL_PASSWORD=$MAIL_PASSWORD \
     -e DEFAULT_ADMIN_USERNAME=$DEFAULT_ADMIN_USERNAME \
     -e DEFAULT_ADMIN_EMAIL=$DEFAULT_ADMIN_EMAIL \
-    -e DEFAULT_ADMIN_PASSWORD=$DEFAULT_ADMIN_EMAIL \
+    -e DEFAULT_ADMIN_PASSWORD=$DEFAULT_ADMIN_PASSWORD \
     --mount 'type=volume,src=datamyoxia,dst=/home/myoxia/data' \
     myoxia:latest
