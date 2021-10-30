@@ -168,4 +168,3 @@ data/database/app.db
 data/images/*
 data/ontology/ontology.json
 !data/images/.gitkeep
-docker/run.sh
