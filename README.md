@@ -1,4 +1,4 @@
-# Develloper Mode Setup (Conda+Poetry):
+# Developper Mode Setup (Conda+Poetry):
 1. Install Tesseract package:    
    `sudo apt install tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra`  
 
@@ -35,6 +35,8 @@
 You can pull our dev-data using dvc (in conda base env):
 `dvc pull`
 
-# (DOCKER) Deploy & Maintain MYO-xIA [See the wiki page: Deploy and maintain](https://github.com/lambda-science/MYO-xIA-App/wiki/(DOCKER)-Deploy-&-Maintain-MYO-xIA)
+# (DOCKER) Deploy & Maintain MYO-xIA  
+[See the wiki page: Deploy and maintain (DOCKER)](https://github.com/lambda-science/MYO-xIA-App/wiki/(DOCKER)-Deploy-&-Maintain-MYO-xIA)
 
-# (LINUX) Deploy & Maintain MYO-xIA [See the wiki page: Deploy and maintain](https://github.com/lambda-science/MYO-xIA-App/wiki/(LINUX)-Deploy-&-Maintain-MYO-xIA)
+# (LINUX) Deploy & Maintain MYO-xIA  
+[See the wiki page: Deploy and maintain (LINUX)](https://github.com/lambda-science/MYO-xIA-App/wiki/(LINUX)-Deploy-&-Maintain-MYO-xIA)
