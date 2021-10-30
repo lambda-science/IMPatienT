@@ -1,0 +1,47 @@
+[
+    {
+        "id": "MHO:000001",
+        "text": "Sample Keyword",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Sample Keyword"
+        },
+        "parent": "#"
+    },
+    {
+        "id": "MHO:000002",
+        "text": "Image Annotations",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Image Annotations"
+        },
+        "parent": "#"
+    },
+    {
+        "id": "MHO:000003",
+        "text": "Sample Annotation Keyword",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Sample Annotation Keyword"
+        },
+        "parent": "MHO:000002"
+    }
+]

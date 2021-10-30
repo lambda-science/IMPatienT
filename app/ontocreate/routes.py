@@ -17,11 +17,11 @@ from app.models import ReportHisto
 from app.historeport.onto_func import Ontology
 
 
-@bp.route("/config/<path:filename>")
+@bp.route("/ontology/<path:filename>")
 @login_required
 def onto_json(filename):
-    """Serve files located in patient subfolder inside folder"""
-    return send_from_directory(current_app.config["CONFIG_FOLDER"], filename)
+    """Serve ontology json file"""
+    return send_from_directory(current_app.config["ONTOLOGY_FOLDER"], filename)
 
 
 @bp.route("/ontocreate", methods=["GET", "POST"])
@@ -54,7 +54,7 @@ def modify_onto():
     for i in dirty_tree:
         clean_tree.append(dirty_tree[i])
     with open(
-        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "w"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as json_file:
         json.dump(clean_tree, json_file, indent=4)
 
@@ -78,7 +78,7 @@ def modify_onto():
 def download_onto():
     """Download ontology tree"""
     return send_from_directory(
-        current_app.config["CONFIG_FOLDER"], "ontology.json", as_attachment=True
+        current_app.config["ONTOLOGY_FOLDER"], "ontology.json", as_attachment=True
     )
 
 
@@ -89,7 +89,7 @@ def invert_lang():
 
     # Open the ontology, invert text and alternative field, save it
     with open(
-        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "r"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
     ) as fp:
         onto = json.load(fp)
 
@@ -100,7 +100,7 @@ def invert_lang():
             term["data"]["alternative_language"] = temp_term
 
     with open(
-        os.path.join(current_app.config["CONFIG_FOLDER"], "ontology.json"), "w"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as fp:
         json.dump(onto, fp, indent=4)
 

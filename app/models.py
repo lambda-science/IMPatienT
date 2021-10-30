@@ -12,7 +12,12 @@ class User(UserMixin, db.Model):
     """Database table for Users"""
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True, nullable=False,)
+    username = db.Column(
+        db.String(64),
+        index=True,
+        unique=True,
+        nullable=False,
+    )
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
     images = db.relationship("Image", backref="creator", lazy="dynamic")
@@ -47,6 +52,19 @@ class User(UserMixin, db.Model):
         except:
             return
         return User.query.get(id)
+
+    @staticmethod
+    def create_admin_account():
+        # Create default admin account if user table is empty
+        user_entry = User.query.get(1)
+        if not user_entry:
+            user = User(
+                username=current_app.config["DEFAULT_ADMIN_USERNAME"],
+                email=current_app.config["DEFAULT_ADMIN_EMAIL"],
+            )
+            user.set_password(current_app.config["DEFAULT_ADMIN_PASSWORD"])
+            db.session.add(user)
+            db.session.commit()
 
 
 @login.user_loader

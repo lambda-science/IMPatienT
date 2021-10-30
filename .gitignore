@@ -137,17 +137,12 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# SQLite3 DB
-app.db
-
 #Flask-session
 flask_session/
 
 #Env File
 .env
 
-# Ontology current file
-config/ontology.json
 # Data in notebook folder
 notebooks/*.pdf
 
@@ -160,12 +155,16 @@ package-lock.json
 *.csv
 *.sav
 *.list
-*.json
 joblib*
 *.back
 app/static/viz/*
-data/*
 *.jar
 *.pdf
 git-filter-repo
-!data/.gitkeep
+
+
+# DataFolder
+data/database/app.db
+data/images/*
+data/ontology/ontology.json
+!data/images/.gitkeep

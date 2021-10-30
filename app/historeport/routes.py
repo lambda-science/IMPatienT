@@ -7,7 +7,7 @@ from flask import (
     flash,
     redirect,
     url_for,
-    jsonify,
+    current_app,
 )
 from app import db
 from app.historeport import bp
@@ -54,7 +54,9 @@ def historeport():
             return redirect(url_for("historeport.histoindex"))
     # If no args: empty form
     else:
-        with open("config/ontology.json") as f:
+        with open(
+            os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json")
+        ) as f:
             empty_json_tree = json.load(f)
         form = ReportForm(ontology_tree=empty_json_tree)
     # Form for panel on the right with node description

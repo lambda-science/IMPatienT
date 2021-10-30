@@ -27,8 +27,9 @@ $("#jstree")
     var v = $("#jstree").jstree(true).get_json("#", { flat: true });
     var id_list = v.map(({ id }) => id);
     var newId = ontology_ID(id_list);
+    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
     // data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "" };
-    data.node.data = { description: "", synonymes: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "" };
+    data.node.data = { description: "", synonymes: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "", hex_color: "#" + randomColor };
     $("#jstree").jstree().set_id(data.node, newId);
   })
   .jstree({

@@ -10,8 +10,8 @@ from app.dashapp import bp
 #     return send_from_directory(bp.static_folder, filename)
 
 
-@bp.route("/data/<path:filename>")
-#@login_required
-def data_folder(filename):
+@bp.route("/data/images/<path:filename>")
+# @login_required
+def images_folder(filename):
     """Serve files located in patient subfolder inside folder"""
-    return send_from_directory(current_app.config["DATA_FOLDER"], filename)
+    return send_from_directory(current_app.config["IMAGES_FOLDER"], filename)

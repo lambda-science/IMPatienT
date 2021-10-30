@@ -1,0 +1,4 @@
+outs:
+- md5: 33b1668997c46b8f6e1b1e2b40f7e288
+  size: 8986624
+  path: app.db
