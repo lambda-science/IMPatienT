@@ -1,37 +1,43 @@
-# How To Use For Developpement Purpose (using PipEnv):
+
+# (DOCKER) Deploy & Maintain MYO-xIA  
+[See the wiki page: Deploy and maintain (DOCKER)](https://github.com/lambda-science/MYO-xIA-App/wiki/(DOCKER)-Deploy-&-Maintain-MYO-xIA)
+
+# (LINUX) Deploy & Maintain MYO-xIA  
+[See the wiki page: Deploy and maintain (LINUX)](https://github.com/lambda-science/MYO-xIA-App/wiki/(LINUX)-Deploy-&-Maintain-MYO-xIA)
+
+# Developper Mode Setup (Conda+Poetry):
 1. Install Tesseract package:    
-   `sudo apt install tesseract-ocr tesseract-ocr-fra`  
+   `sudo apt install gcc tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra`  
 
-2. Clone the repository and create the environnement:  
-   `git clone https://github.com/lambda-science/MYO-xIA-App.git`  
-   `pip install --upgrade pip`  
-   `pip install pipenv`  
-   Optionally: add your python package to path: `export PATH=$HOME/.local/bin:$PATH`  
-   `pipenv install`
+2. Install Python if needed.
+   ```bash
+   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+   chmod +x Miniconda3-latest-Linux-x86_64.sh
+   ./Miniconda3-latest-Linux-x86_64.sh
+   conda activate base
+   ```
+   Install Poetry env manager (with dvc)  
+   ```bash
+   conda install mamba
+   mamba install -c conda-forge poetry dvc-ssh
+   ```
+4. Clone the repository and create the environnement:  
+   `git clone https://github.com/lambda-science/MYO-xIA-App.git myoxia`    
+   `cd myoxia`  
+   `poetry install`
    
-3. Activate the environnement  & install NLP model  
-   `pipenv shell`  
-   Aditionally install Spacy NLP Model using: `python -m spacy download fr_core_news_lg`
+4. Activate the environnement  & install NLP model  
+   `poetry shell`  
+   Aditionally install Spacy NLP Model using:  
+   `python -m spacy download fr_core_news_lg`  
 
-4. Initialize empty database:  
-   `flask db upgrade`
+5. Run the app with the boot developper script
+   `chmod +X dev_boot.sh`  
+   `./dev_boot.sh`
 
-5. Set Flask in development mode and launch the app  
-   `export FLASK_ENV=development`  
-   `flask run`
-
-6. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and use the application.
+6. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and use the application. Developper account is: username: admin password: admin
 
 ### Optional:
 
-You can register a base user using flask shell:
-
-```bash
-flask shell
-> user = User(username="demo", email="demo@demo.demo")
-> user.set_password("demo")
-> db.session.add(user)
-> db.session.commit()
-```
-
-# Looking to deploy and maintain MYO-xIA ? [See the wiki page: Deploy and maintain](https://github.com/lambda-science/MYO-xIA-App/wiki/MYO-xIA-Deployment,-update-and-maintainability.)
+You can pull our dev-data using dvc (in conda base env):
+`dvc pull`
