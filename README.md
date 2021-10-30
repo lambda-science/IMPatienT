@@ -31,7 +31,7 @@
    Aditionally install Spacy NLP Model using:  
    `python -m spacy download fr_core_news_lg`  
 
-5. Run the app with the boot developper script
+5. Run the app with the boot developper script  
    `chmod +X dev_boot.sh`  
    `./dev_boot.sh`
 
