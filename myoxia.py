@@ -17,4 +17,6 @@ def make_shell_context():
 
 
 if __name__ == "__main__":
-    app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)
+    with app.app_context():
+        User.create_admin_account()
+    # app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)
