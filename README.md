@@ -28,7 +28,7 @@
    `chmod +X dev_boot.sh`  
    `./dev_boot.sh`
 
-6. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and use the application.
+6. Go to [127.0.0.1:5000/](http://127.0.0.1:5000/) in your web-browser and use the application. Developper account is: username: admin password: admin
 
 ### Optional:
 
