@@ -10,6 +10,7 @@ load_dotenv(os.path.join(basedir, ".env"))
 class Config(object):
     """Class to load all config parameters of the Flask App"""
 
+    DEFAULT_ADMIN_USERNAME = os.environ.get("DEFAULT_ADMIN_USERNAME")
     DEFAULT_ADMIN_EMAIL = os.environ.get("DEFAULT_ADMIN_EMAIL")
     DEFAULT_ADMIN_PASSWORD = os.environ.get("DEFAULT_ADMIN_PASSWORD")
     SECRET_KEY = os.environ.get("SECRET_KEY") or "myverylongsecretkey"

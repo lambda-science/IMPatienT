@@ -59,7 +59,8 @@ class User(UserMixin, db.Model):
         user_entry = User.query.get(1)
         if not user_entry:
             user = User(
-                username="admin", email=current_app.config["DEFAULT_ADMIN_EMAIL"]
+                username=current_app.config["DEFAULT_ADMIN_USERNAME"],
+                email=current_app.config["DEFAULT_ADMIN_EMAIL"],
             )
             user.set_password(current_app.config["DEFAULT_ADMIN_PASSWORD"])
             db.session.add(user)
