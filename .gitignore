@@ -155,7 +155,6 @@ package-lock.json
 *.csv
 *.sav
 *.list
-*.json
 joblib*
 *.back
 app/static/viz/*
@@ -168,4 +167,5 @@ git-filter-repo
 data/database/app.db
 data/images/*
 data/ontology/ontology.json
+data/ontology/ontology_default.json
 !data/images/.gitkeep
