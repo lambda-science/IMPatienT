@@ -1,6 +1,6 @@
 # Developper Mode Setup (Conda+Poetry):
 1. Install Tesseract package:    
-   `sudo apt install tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra`  
+   `sudo apt install gcc tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra`  
 
 2. Install Python if needed.
    ```bash
