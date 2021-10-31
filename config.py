@@ -10,9 +10,9 @@ load_dotenv(os.path.join(basedir, ".env"))
 class Config(object):
     """Class to load all config parameters of the Flask App"""
 
-    DEFAULT_ADMIN_USERNAME = os.environ.get("DEFAULT_ADMIN_USERNAME")
-    DEFAULT_ADMIN_EMAIL = os.environ.get("DEFAULT_ADMIN_EMAIL")
-    DEFAULT_ADMIN_PASSWORD = os.environ.get("DEFAULT_ADMIN_PASSWORD")
+    DEFAULT_ADMIN_USERNAME = os.environ.get("DEFAULT_ADMIN_USERNAME") or "admin"
+    DEFAULT_ADMIN_EMAIL = os.environ.get("DEFAULT_ADMIN_EMAIL") or "admin@admin.admin"
+    DEFAULT_ADMIN_PASSWORD = os.environ.get("DEFAULT_ADMIN_PASSWORD") or "admin"
     SECRET_KEY = os.environ.get("SECRET_KEY") or "myverylongsecretkey"
     DATA_FOLDER = os.path.join(basedir, "data")
     ONTOLOGY_FOLDER = os.path.join(basedir, "data", "ontology")
@@ -43,7 +43,7 @@ class Config(object):
     MAIL_USE_TLS = os.environ.get("MAIL_USE_TLS") is not None
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
-    ADMINS = ["corentin.meyer@etu.unistra.fr"]
+    ADMINS_EMAIL = [os.environ.get("ADMINS_EMAIL")]
 
     # Heroku to STDOut
     LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT")
