@@ -19,8 +19,8 @@ function ontology_ID(id_list) {
   id = parseInt(id);
   id += 1;
   id = "MHO" + id.toString().padStart(6, "0");
-  return id
-};
+  return id;
+}
 
 $("#jstree")
   .bind("create_node.jstree", function (event, data) {
@@ -29,7 +29,15 @@ $("#jstree")
     var newId = ontology_ID(id_list);
     var randomColor = Math.floor(Math.random() * 16777215).toString(16);
     // data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "" };
-    data.node.data = { description: "", synonymes: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "", hex_color: "#" + randomColor };
+    data.node.data = {
+      description: "",
+      synonymes: "",
+      phenotype_datamined: "",
+      gene_datamined: "",
+      alternative_language: "",
+      correlates_with: "",
+      hex_color: "#" + randomColor,
+    };
     $("#jstree").jstree().set_id(data.node, newId);
   })
   .jstree({
@@ -40,7 +48,15 @@ $("#jstree")
         dataType: "json", // needed only if you do not supply JSON headers
       },
     },
-    plugins: ["contextmenu", "dnd", "wholerow", "unique", "search", "changed", "sort"],
+    plugins: [
+      "contextmenu",
+      "dnd",
+      "wholerow",
+      "unique",
+      "search",
+      "changed",
+      "sort",
+    ],
   });
 
 var to = false;
@@ -85,7 +101,9 @@ function update_node_data() {
   node.data.gene_datamined = get_taglist("input[id=gene_datamined]");
   // node.data.phenotype = get_taglist("input[id=phenotype]");
   node.data.phenotype_datamined = get_taglist("input[id=phenotype_datamined]");
-  node.data.alternative_language = get_taglist("input[id=alternative_language]");
+  node.data.alternative_language = get_taglist(
+    "input[id=alternative_language]"
+  );
   node.data.correlates_with = get_taglist("input[id=correlates_with]");
   node.data.description = $("textarea[id=description]").val();
   save_tree();

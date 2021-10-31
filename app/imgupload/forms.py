@@ -12,7 +12,10 @@ class ImageForm(FlaskForm):
     image = FileField(
         validators=[
             FileRequired(),
-            FileAllowed(["png", "jpg", "jpeg"], "This file is not a valid image !",),
+            FileAllowed(
+                ["png", "jpg", "jpeg"],
+                "This file is not a valid image !",
+            ),
         ],
         render_kw={"class": "form-control-file border"},
     )

@@ -1,20 +1,20 @@
 #app-title > * {
-    color: white;
-    margin: 0;
-    padding: 0;
+  color: white;
+  margin: 0;
+  padding: 0;
 }
 
 #howto-open {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 #gh-link {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .card {
-    margin: 1em 0 1em 0;
-    min-width: auto;
+  margin: 1em 0 1em 0;
+  min-width: auto;
 }
 
 label {
@@ -23,5 +23,5 @@ label {
 }
 
 #transparent-loader-wrapper > div {
-    visibility: visible !important;
+  visibility: visible !important;
 }

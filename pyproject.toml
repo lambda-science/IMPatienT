@@ -41,6 +41,7 @@ dash-html-components = "^2"
 gunicorn = "^20"
 opencv-python-headless = "^4"
 python-Levenshtein = "^0.12.2"
+black = {extras = ["jupyter"], version = "^21.9b0"}
 
 [tool.poetry.dev-dependencies]
 ipykernel = "^6"

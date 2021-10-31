@@ -62,7 +62,11 @@ def grey_labels(img):
 
 
 def compute_segmentations(
-    shapes, img_path=None, features=None, shape_layers=None, label_to_colors_args={},
+    shapes,
+    img_path=None,
+    features=None,
+    shape_layers=None,
+    label_to_colors_args={},
 ):
 
     # load original image
