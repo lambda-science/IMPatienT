@@ -4,8 +4,6 @@ FILE="data/ontology/ontology.json"
 if [ ! -f $FILE ]; then
     cp data/ontology/ontology_default.json data/ontology/ontology.json
 fi
-cp .env_sample .env
 source .venv/bin/activate
 flask db upgrade
-python myoxia.py
 flask run

@@ -56,7 +56,6 @@ $("#jstree")
     //  },
     //},
   });
-
 var to = false;
 $("#plugins4_q").keyup(function () {
   if (to) {
@@ -67,6 +66,7 @@ $("#plugins4_q").keyup(function () {
     $("#jstree").jstree(true).search(v);
   }, 250);
 });
+update_annotated_terms_overview()
 
 // Prefill Form from JSON
 $("#jstree").on("select_node.jstree", function (e, data) {
@@ -95,6 +95,7 @@ $("#jstree").on("select_node.jstree", function (e, data) {
 $("input[id=preabsProba]").on("input change", function () {
   set_slider_span($("input[id=preabsProba]").val());
   update_node_data();
+  update_annotated_terms_overview()
 });
 
 // placeholder
@@ -113,6 +114,30 @@ function update_node_data() {
   }
   var v = $("#jstree").jstree(true).get_json("#", { flat: true });
   $("input[id=ontology_tree]").val(JSON.stringify(v));
+}
+
+function update_annotated_terms_overview() {
+  // var v = $("#jstree").jstree(true).get_json("#", { flat: true });
+  var v = JSON.parse($("input[id=ontology_tree]").val());
+  var present_features = [];
+  var absent_features = [];
+  for (const [key, value] of Object.entries(v)) {
+    if (value.data.presence > "0") {
+      present_features.push(value.id + " " + value.text);
+    } else if (value.data.presence === "0") {
+      absent_features.push(value.id + " " + value.text);
+    }
+    let present_feat_overview = document.getElementById("feature-present");
+    let absent_feat_overview = document.getElementById("feature-absent");
+    present_feat_overview.innerHTML = "";
+    absent_feat_overview.innerHTML = "";
+    for (const [key, value] of Object.entries(present_features)) {
+      present_feat_overview.innerHTML += "<span style='color:green'>" + value + "</span></br>";
+    };
+    for (const [key, value] of Object.entries(absent_features)) {
+      absent_feat_overview.innerHTML += "<span style='color:red'>" + value + "</span></br>";
+    };
+  };
 }
 
 function set_slider_span(slide_value) {
@@ -173,11 +198,6 @@ $(function () {
           keywords.push(value[1])
         }
         instance.mark(keywords, options);
-        // for (const [key, value] of Object.entries(json_ans.results)) {
-        //   text_results_field.innerHTML += "<h3>" + key + "</h3>"
-        //   for (const element of value)
-        //     text_results_field.innerHTML += "<span class='badge bg-success'>" + element[0] + " " + element[1] + "</span>  "
-        // }
       },
     });
   });

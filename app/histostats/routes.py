@@ -14,23 +14,13 @@ def statsindex():
     df = db_to_df()
     df, features_col = table_to_df(df)
     df = process_df(df)
-    generate_stat_per(df, features_col)
+    df_per_gene, df_per_diag = generate_stat_per(df, features_col)
     graph_viz = create_plotly_viz(df)
     graph_UNCLEAR = generate_UNCLEAR(df)
     graph_matrixboqa = generate_confusion_BOQA(df)
     # create_basic_viz(df)
     generate_corr_matrix(df)
     update_phenotype_gene(df)
-    stat_per_gene_file = open(
-        os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.json")
-    )
-    stat_per_gene = json.load(stat_per_gene_file)
-    stat_per_diag_file = open(
-        os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_diag.json")
-    )
-    stat_per_diag = json.load(stat_per_diag_file)
-    stat_per_gene = sorted(stat_per_gene.items())
-    stat_per_diag = sorted(stat_per_diag.items())
 
     graphJSON = json.load(
         open(
@@ -40,10 +30,18 @@ def statsindex():
     )
     return render_template(
         "histostats_index.html",
-        stat_per_gene=stat_per_gene,
-        stat_per_diag=stat_per_diag,
+        df_per_gene=df_per_gene.to_html(
+            table_id="per-gene-table",
+            classes="table table-striped table-bordered table-hover table-responsive",
+            index=False,
+        ),
+        df_per_diag=df_per_diag.to_html(
+            table_id="per-diag-table",
+            classes="table table-striped table-bordered table-hover table-responsive",
+            index=False,
+        ),
         graphJSON=graphJSON,
         graph_viz=graph_viz,
         graph_UNCLEAR=graph_UNCLEAR,
-        matrixboqa=graph_matrixboqa
+        matrixboqa=graph_matrixboqa,
     )

@@ -16,7 +16,7 @@ def boqa(alpha, beta, query, items_stat):
         # On initialise de Hidden Layer avec les valeurs de stats
         for term in query:
             if term in items_stat[disease]["feature"].keys():
-                proba = items_stat[disease]["feature"][term] / 100
+                proba = items_stat[disease]["feature"][term]
                 hidden[term] = np.random.choice([1, 0], p=[proba, 1 - proba])
             else:
                 hidden[term] = 0

@@ -5,6 +5,11 @@ from app.models import User, Image, ReportHisto
 app = create_app()
 
 
+@app.before_first_request
+def create_admin():
+    User.create_admin_account()
+
+
 @app.shell_context_processor
 def make_shell_context():
     """Add DB object in the flask shell"""
@@ -17,6 +22,4 @@ def make_shell_context():
 
 
 if __name__ == "__main__":
-    with app.app_context():
-        User.create_admin_account()
-    # app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)
+    app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)
