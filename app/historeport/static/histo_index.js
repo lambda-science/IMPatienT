@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    $('#report-history').DataTable();
+  $("#report-history").DataTable();
 });

@@ -20,8 +20,8 @@ function ontology_ID(id_list) {
   id = parseInt(id);
   id += 1;
   id = "MHO" + id.toString().padStart(6, "0");
-  return id
-};
+  return id;
+}
 
 $("#jstree")
   .bind("create_node.jstree", function (event, data) {
@@ -30,7 +30,15 @@ $("#jstree")
     var newId = ontology_ID(id_list);
     var randomColor = Math.floor(Math.random() * 16777215).toString(16);
     // data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "" };
-    data.node.data = { description: "", synonymes: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "", hex_color: "#" + randomColor };
+    data.node.data = {
+      description: "",
+      synonymes: "",
+      phenotype_datamined: "",
+      gene_datamined: "",
+      alternative_language: "",
+      correlates_with: "",
+      hex_color: "#" + randomColor,
+    };
     $("#jstree").jstree().set_id(data.node, newId);
   })
   .jstree({
@@ -66,7 +74,7 @@ $("#plugins4_q").keyup(function () {
     $("#jstree").jstree(true).search(v);
   }, 250);
 });
-update_annotated_terms_overview()
+update_annotated_terms_overview();
 
 // Prefill Form from JSON
 $("#jstree").on("select_node.jstree", function (e, data) {
@@ -95,7 +103,7 @@ $("#jstree").on("select_node.jstree", function (e, data) {
 $("input[id=preabsProba]").on("input change", function () {
   set_slider_span($("input[id=preabsProba]").val());
   update_node_data();
-  update_annotated_terms_overview()
+  update_annotated_terms_overview();
 });
 
 // placeholder
@@ -132,18 +140,19 @@ function update_annotated_terms_overview() {
     present_feat_overview.innerHTML = "";
     absent_feat_overview.innerHTML = "";
     for (const [key, value] of Object.entries(present_features)) {
-      present_feat_overview.innerHTML += "<span style='color:green'>" + value + "</span></br>";
-    };
+      present_feat_overview.innerHTML +=
+        "<span style='color:green'>" + value + "</span></br>";
+    }
     for (const [key, value] of Object.entries(absent_features)) {
-      absent_feat_overview.innerHTML += "<span style='color:red'>" + value + "</span></br>";
-    };
-  };
+      absent_feat_overview.innerHTML +=
+        "<span style='color:red'>" + value + "</span></br>";
+    }
+  }
 }
 
 function set_slider_span(slide_value) {
   var message = {
-    "-0.25":
-      '<span class="badge bg-warning range-value">N/A</span>',
+    "-0.25": '<span class="badge bg-warning range-value">N/A</span>',
     0: '<span class="badge bg-danger range-value">Absent</span>',
     0.25: '<span class="badge bg-success range-value">Present (Low)</span>',
     0.5: '<span class="badge bg-success range-value">Present (Moderate)</span>',
@@ -171,35 +180,39 @@ $("#predictbutton").on("click", function () {
   predict_diag_boqa();
 });
 
-
 $(function () {
-  $('#upload-file-btn').click(function () {
-    var form_data = new FormData($('#upload-file')[0]);
+  $("#upload-file-btn").click(function () {
+    var form_data = new FormData($("#upload-file")[0]);
     $.ajax({
-      type: 'POST',
-      url: '/ocr_pdf',
+      type: "POST",
+      url: "/ocr_pdf",
       data: form_data,
       contentType: false,
       cache: false,
       processData: false,
       success: function (data) {
         let text_results_field = document.querySelector("div.context");
-        text_results_field.innerHTML = ""
+        text_results_field.innerHTML = "";
         var instance = new Mark(document.querySelector("div.context"));
         let json_ans = JSON.parse(data);
-        let accordion = document.getElementById('divAccordion');
+        let accordion = document.getElementById("divAccordion");
         accordion.removeAttribute("hidden");
-        options = { separateWordSearch: false, accurarcy: "exactly", ignorePunctuation: ":;.,-–—‒_(){}[]!'\"+=".split("") };
+        options = {
+          separateWordSearch: false,
+          accurarcy: "exactly",
+          ignorePunctuation: ":;.,-–—‒_(){}[]!'\"+=".split(""),
+        };
         for (const [key, value] of Object.entries(json_ans.results.full_text)) {
           text_results_field.innerHTML += value + "</br>";
         }
         var keywords = [];
-        for (const [key, value] of Object.entries(json_ans.results.match_list)) {
-          keywords.push(value[1])
+        for (const [key, value] of Object.entries(
+          json_ans.results.match_list
+        )) {
+          keywords.push(value[1]);
         }
         instance.mark(keywords, options);
       },
     });
   });
 });
-

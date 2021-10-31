@@ -62,7 +62,7 @@ def _pilim_if_path(im):
 
 
 def add_layout_images_to_fig(fig, images, update_ranges=True):
-    """ images is a sequence of PIL Image objects """
+    """images is a sequence of PIL Image objects"""
     if len(images) <= 0:
         return fig
     for im in images:
@@ -130,7 +130,7 @@ def pil_image_to_layout_image_fig(img):
 
 
 def img_array_to_layout_image_fig(ia):
-    """ Returns a figure containing a layout image for faster rendering in the browser. """
+    """Returns a figure containing a layout image for faster rendering in the browser."""
     img = img_array_to_pil_image(ia)
     return pil_image_to_layout_image_fig(img)
 
