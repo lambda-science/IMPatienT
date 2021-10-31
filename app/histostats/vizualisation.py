@@ -218,12 +218,52 @@ def create_plotly_viz(df):
 
 
 def generate_stat_per(df, features_col):
+    # Stats as Dataframe for HTML Template
+    list_per_gene = []
+    all_genes = list(set(df.gene_diag.to_list()))
+    for i in all_genes:
+        ds = df[df["gene_diag"] == i][features_col].sum().sort_values(ascending=False)
+        ds = ds[ds > 0]
+        nrow = len(df[df["gene_diag"] == i])
+        for index, value in ds.items():
+            list_per_gene.append([i, nrow, index, int(value), round(value / nrow, 2)])
+    df_per_gene = pd.DataFrame(
+        list_per_gene, columns=["Gene", "N", "Feature", "Count", "Frequency"]
+    )
+
+    list_per_diag = []
+    all_diag = list(set(df.conclusion.to_list()))
+    for i in all_diag:
+        ds = df[df["conclusion"] == i][features_col].sum().sort_values(ascending=False)
+        ds = ds[ds > 0]
+        nrow = len(df[df["conclusion"] == i])
+        for index, value in ds.items():
+            list_per_diag.append([i, nrow, index, int(value), round(value / nrow, 2)])
+    df_per_diag = pd.DataFrame(
+        list_per_diag, columns=["Diag", "N", "Feature", "Count", "Frequency"]
+    )
+    df_per_diag.replace(
+        {
+            "NM": "Nemaline Myopathy",
+            "CNM": "Centronuclear Myopathy",
+            "COM": "Core Myopathy",
+        },
+        inplace=True,
+    )
+    df_per_gene.to_csv(
+        os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.csv"), index=False
+    )
+    df_per_diag.to_csv(
+        os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_diag.csv"), index=False
+    )
+
+    # JSON Files for BOQA
     stat_per_gene = {}
     all_genes = list(set(df.gene_diag.to_list()))
     for i in all_genes:
         ds = df[df["gene_diag"] == i][features_col].sum().sort_values(ascending=False)
         nrow = len(df[df["gene_diag"] == i])
-        ds = ds / nrow * 100
+        ds = ds / nrow
         stat_per_gene[i] = {}
         stat_per_gene[i]["n"] = nrow
         stat_per_gene[i]["feature"] = ds[ds > 0].round().to_dict()
@@ -233,7 +273,7 @@ def generate_stat_per(df, features_col):
     for i in all_diag:
         ds = df[df["conclusion"] == i][features_col].sum().sort_values(ascending=False)
         nrow = len(df[df["conclusion"] == i])
-        ds = ds / nrow * 100
+        ds = ds / nrow
         stat_per_diag[i] = {}
         stat_per_diag[i]["n"] = nrow
         stat_per_diag[i]["feature"] = ds[ds > 0].round().to_dict()
@@ -245,6 +285,8 @@ def generate_stat_per(df, features_col):
         os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_diag.json"), "w"
     ) as f:
         json.dump(stat_per_diag, f, indent=4, ensure_ascii=False)
+
+    return df_per_gene, df_per_diag
 
 
 def generate_UNCLEAR(df):
