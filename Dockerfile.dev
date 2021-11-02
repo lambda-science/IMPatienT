@@ -1,0 +1,19 @@
+FROM python:3.9-slim
+
+WORKDIR /home/myoxia
+
+RUN apt update && apt install -y gcc tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra
+
+COPY pyproject.toml pyproject.toml
+COPY poetry.lock poetry.lock
+
+RUN python -m pip install poetry
+RUN python -m poetry config virtualenvs.in-project true
+RUN python -m poetry install
+RUN .venv/bin/python -m spacy download fr_core_news_lg
+
+ENV FLASK_ENV development
+ENV FLASK_APP myoxia.py
+
+EXPOSE 5000
+ENTRYPOINT ["./dev_boot.sh"]
