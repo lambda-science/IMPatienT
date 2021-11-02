@@ -1,6 +1,5 @@
 FROM python:3.9-slim as env
 
-SHELL ["/bin/bash", "-c"]
 RUN useradd myoxia
 WORKDIR /home/myoxia
 
@@ -15,23 +14,21 @@ RUN .venv/bin/python -m spacy download fr_core_news_lg
 
 FROM python:3.9-slim as release
 
-SHELL ["/bin/bash", "-c"]
 RUN useradd myoxia
 WORKDIR /home/myoxia
 
-RUN apt update && apt install -y gcc tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra
+RUN apt update && apt install -y gcc git tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra
 
 COPY --chown=myoxia:myoxia --from=env /home/myoxia/.venv .venv
-COPY --chown=myoxia:myoxia myoxia.py config.py docker/boot.sh ./
-COPY --chown=myoxia:myoxia app app
-COPY --chown=myoxia:myoxia migrations migrations
-COPY --chown=myoxia:myoxia config config
-
 RUN chown myoxia:myoxia /home/myoxia
-RUN chmod a+x boot.sh
 
+WORKDIR /home/myoxia/code
+
+ENV FLASK_ENV development
 ENV FLASK_APP myoxia.py
+ENV SHELL /bin/bash
+
 USER myoxia
 
 EXPOSE 5000
-ENTRYPOINT ["./boot.sh"]
+ENTRYPOINT ["./dev_boot.sh"]
