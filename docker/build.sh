@@ -1,1 +1,1 @@
-docker build -t myoxia:latest .
+docker build -t myoxia:latest -f Dockerfile .
