@@ -17,7 +17,7 @@ FROM python:3.9-slim as release
 RUN useradd myoxia
 WORKDIR /home/myoxia
 
-RUN apt update && apt install -y gcc git tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra
+RUN apt update && apt install -y gcc git tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra poppler-utils
 
 COPY --chown=myoxia:myoxia --from=env /home/myoxia/.venv .venv
 RUN chown myoxia:myoxia /home/myoxia

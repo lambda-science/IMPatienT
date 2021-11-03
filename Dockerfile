@@ -19,7 +19,7 @@ SHELL ["/bin/bash", "-c"]
 RUN useradd myoxia
 WORKDIR /home/myoxia
 
-RUN apt update && apt install -y gcc tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra
+RUN apt update && apt install -y gcc tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra poppler-utils
 
 COPY --chown=myoxia:myoxia --from=env /home/myoxia/.venv .venv
 COPY --chown=myoxia:myoxia myoxia.py config.py docker/boot.sh ./
