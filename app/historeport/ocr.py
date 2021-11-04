@@ -14,9 +14,9 @@ import os
 class Rapport:
     """PDF File class used to detect text and analyse it"""
 
-    def __init__(self, file_obj):
+    def __init__(self, file_obj, lang):
         self.file_obj = file_obj
-        self.lang = "fra"
+        self.lang = lang
         self.ontology_path = os.path.join(
             current_app.config["ONTOLOGY_FOLDER"], "ontology.json"
         )
@@ -24,7 +24,12 @@ class Rapport:
         self.raw_text = ""
         self.text_as_list = []
         self.header_text = []
-        self.nlp = spacy.load("fr_core_news_lg")
+        if self.lang == "fra":
+            self.nlp = spacy.load("fr_core_news_lg")
+            self.negexlist = current_app.config["NEGEX_LIST_FR"]
+        if self.lang == "eng":
+            self.nlp = spacy.load("en_core_web_lg")
+            self.negexlist = current_app.config["NEGEX_LIST_EN"]
         # self.section = collections.OrderedDict()
         # self.section_text = collections.OrderedDict()
         # self.section_names = [
@@ -113,27 +118,31 @@ class Rapport:
         final_two_ngrams = []
         final_three_ngrams = []
         for sent in doc.sents:
+            flag_neg = False
+            for negex_term in self.negexlist:
+                if negex_term in sent.text.lower():
+                    flag_neg = True
             temp_token_list = []
             for token in sent:
                 # if not token.is_stop and not token.is_punct and token.is_alpha:
                 if not token.is_punct and token.is_alpha:
-                    final_one_ngrams.append(token.text.lower())
+                    final_one_ngrams.append([token.text.lower(), 0 if flag_neg else 1])
                     temp_token_list.append(token.text.lower())
             if len(temp_token_list) > 1:
                 for i in range(len(temp_token_list) - 1):
                     final_two_ngrams.append(
-                        " ".join([temp_token_list[i], temp_token_list[i + 1]])
+                        [" ".join([temp_token_list[i], temp_token_list[i + 1]]), 0 if flag_neg else 1]
                     )
             if len(temp_token_list) > 2:
                 for i in range(len(temp_token_list) - 2):
-                    final_three_ngrams.append(
+                    final_three_ngrams.append([
                         " ".join(
                             [
                                 temp_token_list[i],
                                 temp_token_list[i + 1],
                                 temp_token_list[i + 2],
                             ]
-                        )
+                        ), 0 if flag_neg else 1]
                     )
         full_ngrams = final_one_ngrams + final_two_ngrams + final_three_ngrams
         return full_ngrams
@@ -146,9 +155,9 @@ class Rapport:
             ontology_terms.append(i["text"])
         for i in full_ngrams:
             for j in ontology_terms:
-                score = fuzz.ratio(i.lower(), j.lower())
+                score = fuzz.ratio(i[0].lower(), j.lower())
                 if score >= 80:
-                    match_list.append([score, i, j])
+                    match_list.append([i[1], i[0], j])
         return match_list
 
     # def analyze_all_sections(self) -> dict:

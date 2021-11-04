@@ -183,6 +183,11 @@ $("#predictbutton").on("click", function () {
 $(function () {
   $("#upload-file-btn").click(function () {
     var form_data = new FormData($("#upload-file")[0]);
+    form_data.append(
+      "lang",
+      $("#select-ocr-lang").find("option:selected").val()
+    );
+    console.log(form_data);
     $.ajax({
       type: "POST",
       url: "/ocr_pdf",
@@ -191,13 +196,21 @@ $(function () {
       cache: false,
       processData: false,
       success: function (data) {
+        console.log("sucess !");
         let text_results_field = document.querySelector("div.context");
         text_results_field.innerHTML = "";
         var instance = new Mark(document.querySelector("div.context"));
         let json_ans = JSON.parse(data);
         let accordion = document.getElementById("divAccordion");
         accordion.removeAttribute("hidden");
-        options = {
+        options_pos = {
+          element: "markpos",
+          separateWordSearch: false,
+          accurarcy: "exactly",
+          ignorePunctuation: ":;.,-–—‒_(){}[]!'\"+=".split(""),
+        };
+        options_neg = {
+          element: "markneg",
           separateWordSearch: false,
           accurarcy: "exactly",
           ignorePunctuation: ":;.,-–—‒_(){}[]!'\"+=".split(""),
@@ -205,13 +218,20 @@ $(function () {
         for (const [key, value] of Object.entries(json_ans.results.full_text)) {
           text_results_field.innerHTML += value + "</br>";
         }
-        var keywords = [];
+        var keywords_pos = [];
+        var keywords_neg = [];
         for (const [key, value] of Object.entries(
           json_ans.results.match_list
         )) {
-          keywords.push(value[1]);
+          if (value[0] == 1) {
+            keywords_pos.push(value[1]);
+          } else if (value[0] == 0) {
+            keywords_neg.push(value[1]);
+          }
         }
-        instance.mark(keywords, options);
+        instance.mark(keywords_pos, options_pos);
+        instance.mark(keywords_neg, options_neg);
+        console.log("marked !");
       },
     });
   });

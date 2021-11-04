@@ -170,7 +170,7 @@ def predict_diag_boqa():
 def ocr_pdf():
     if request.method == "POST":
         file_val = request.files["file"]
-        pdf_object = Rapport(file_obj=file_val)
+        pdf_object = Rapport(file_obj=file_val, lang=request.form["lang"])
         pdf_object.pdf_to_text()
         # pdf_object.detect_sections()
         # pdf_object.extract_section_text()
