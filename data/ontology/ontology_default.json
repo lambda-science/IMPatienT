@@ -46,5 +46,20 @@
       "hex_color": "#15f89e"
     },
     "parent": "MHO:000002"
+  },
+  {
+    "id": "MHO:000004",
+    "text": "Sample Annotation Keyword 2",
+    "icon": true,
+    "data": {
+      "description": "",
+      "synonymes": "",
+      "phenotype_datamined": "",
+      "gene_datamined": "",
+      "alternative_language": "Sample Annotation Keyword 2",
+      "correlates_with": "",
+      "hex_color": "#67d254"
+    },
+    "parent": "MHO:000002"
   }
 ]

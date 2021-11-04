@@ -4,18 +4,29 @@ import dash_bootstrap_components as dbc
 import os
 from app.dashapp import bp
 import app.dashapp.plot_common as plot_common
+import json
 
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
-
 SEG_FEATURE_TYPES = ["intensity", "edges", "texture"]
 
-class_label_colormap = ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"]
-class_labels = ["Rods", "Core", "Cytoplasme", "Noyaux", "Autre"]
+with open(os.path.join("data/ontology","ontology.json"), "r") as fp:
+    onto_tree = json.load(fp)
+id_img_annot_section = [ i["id"] for i in onto_tree if i["text"] == "Image Annotations"][0]
+onto_tree_imgannot = []
+for node in onto_tree:
+    if node["parent"] == id_img_annot_section:
+        onto_tree_imgannot.append(node)
+
+class_label_colormap = [ i["data"]["hex_color"] for i in onto_tree_imgannot ]
+class_labels = [ i["text"] for i in onto_tree_imgannot ]
+class_label_colormap = class_label_colormap
 assert len(class_labels) <= len(class_label_colormap)
 
 
-def class_to_color(n):
-    return class_label_colormap[n]
+def class_to_color(onto_tree_imgannot, class_id):
+    for i in onto_tree_imgannot:
+        if class_id == i["text"]:
+            return i["data"]["hex_color"]
 
 
 def get_external_stylesheets():
@@ -186,7 +197,7 @@ sidebar = [
                             dbc.Button(
                                 c,
                                 id={"type": "label-class-button", "index": n},
-                                style={"background-color": class_to_color(n)},
+                                style={"background-color": class_to_color(onto_tree_imgannot, c)},
                             )
                             for n, c in enumerate(class_labels)
                         ],
