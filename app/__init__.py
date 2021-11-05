@@ -150,9 +150,10 @@ def register_dashapps(app):
     )
 
     with app.app_context():
-        dashapp.title = "Dashapp 1"
+        dashapp.title = "Image Annotation"
         dashapp.layout = layout
         register_callbacks(dashapp)
+        app.config["DASHAPP"] = dashapp
     _protect_dashviews(dashapp)
 
 

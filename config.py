@@ -14,7 +14,7 @@ class Config(object):
     DEFAULT_ADMIN_EMAIL = os.environ.get("DEFAULT_ADMIN_EMAIL") or "admin@admin.admin"
     DEFAULT_ADMIN_PASSWORD = os.environ.get("DEFAULT_ADMIN_PASSWORD") or "admin"
     SECRET_KEY = os.environ.get("SECRET_KEY") or "myverylongsecretkey"
-
+    
     DATA_FOLDER = os.path.join(basedir, "data")
     ONTOLOGY_FOLDER = os.path.join(basedir, "data", "ontology")
     IMAGES_FOLDER = os.path.join(basedir, "data", "images")

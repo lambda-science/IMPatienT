@@ -40,6 +40,15 @@ def delete_img(id_img):
         if image is None:
             flash("Image {} not found.".format(id_img), "danger")
             return redirect(url_for("imgupload.img_index"))
+        try:
+            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.image_path))
+            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.mask_annot_path))
+            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.seg_matrix_path))
+            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.classifier_path))
+            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.bland_image_path))
+            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.mask_image_path))            
+        except:
+            pass
         db.session.delete(image)
         db.session.commit()
         flash("Deleted Image entry {}!".format(id_img), "success")

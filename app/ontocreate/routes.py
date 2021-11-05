@@ -16,7 +16,6 @@ from app.ontocreate.forms import OntologyDescript, InvertLangButton
 from app.models import ReportHisto
 from app.historeport.onto_func import Ontology
 
-
 @bp.route("/ontology/<path:filename>")
 @login_required
 def onto_json(filename):
@@ -70,6 +69,15 @@ def modify_onto():
         report.ontology_tree = updated_report_ontology
         flag_modified(report, "ontology_tree")
     db.session.commit()
+
+    # Update The DashApp Callback & layout
+    # By Force reloading the layout code
+    dashapp = current_app.config["DASHAPP"]
+    with current_app.app_context():
+        import importlib
+        import app.dashapp.layout
+        importlib.reload(app.dashapp.layout)
+        dashapp.layout = app.dashapp.layout.layout
     return json.dumps({"success": True}), 200, {"ContentType": "application/json"}
 
 

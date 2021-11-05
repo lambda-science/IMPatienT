@@ -7,7 +7,6 @@ import app.dashapp.plot_common as plot_common
 import json
 
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
-SEG_FEATURE_TYPES = ["intensity", "edges", "texture"]
 
 with open(os.path.join("data/ontology","ontology.json"), "r") as fp:
     onto_tree = json.load(fp)
@@ -96,11 +95,11 @@ description = dbc.Col(
                                 dbc.Col(
                                     html.P(
                                         "This is the image annotation tool interface. "
-                                        "Select the label and draw on the image to annotate parts of the image. "
-                                        'Then check the "Show Segmentation" tickbox to automatically expands your annotations to the whole image. '
-                                        "You may add more marks to clarify parts of the image where the classifier was not successful and the classification"
-                                        "classifier was not successful and the classification will update. Once satisfied with the annotations area you can click the"
-                                        '"Save Annotation To Database" to save your annotations.'
+                                        "Select the standard vocabulary term and draw on the image to annotate parts of the image. "
+                                        "Then check the 'Compute Segmentation' tickbox to automatically expands your annotations to the whole image. "
+                                        "You may add more marks to clarify parts of the image where the classifier was not successful",
+                                        "and the classification will update. Once satisfied with the annotations area you can click the"
+                                        "'Save Annotation To Database' to save your annotations."
                                     ),
                                     md=True,
                                 ),
@@ -119,7 +118,7 @@ segmentation = [
     dbc.Card(
         id="segmentation-card",
         children=[
-            dbc.CardHeader("Viewer"),
+            dbc.CardHeader("Image Viewer"),
             dbc.CardBody(
                 [
                     # Wrap dcc.Loading in a div to force transparency when loading
@@ -161,7 +160,7 @@ segmentation = [
                             dbc.ButtonGroup(
                                 [
                                     dbc.Button(
-                                        "Save Annotation to Database",
+                                        "Save Segmentation to Database",
                                         id="download-button",
                                         color="success",
                                     )
@@ -186,10 +185,10 @@ sidebar = [
     dbc.Card(
         id="sidebar-card",
         children=[
-            dbc.CardHeader("Tools"),
+            dbc.CardHeader("Tool-Box"),
             dbc.CardBody(
                 [
-                    html.H6("Label class", className="card-title"),
+                    html.H6("Standard Vocabulary Term", className="card-title"),
                     # Label class chosen with buttons
                     html.Div(
                         id="label-class-buttons",
@@ -208,7 +207,7 @@ sidebar = [
                             dbc.Row(
                                 [
                                     dbc.Label(
-                                        "Width of annotation paintbrush",
+                                        "Paintbrush Size",
                                         html_for="stroke-width",
                                     ),
                                     # Slider for specifying stroke width
@@ -223,12 +222,8 @@ sidebar = [
                             ),
                             dbc.Row(
                                 [
-                                    html.H6(
-                                        id="stroke-width-display",
-                                        className="card-title",
-                                    ),
                                     dbc.Label(
-                                        "Blurring parameter",
+                                        "Segmentation stringency range",
                                         html_for="sigma-range-slider",
                                     ),
                                     dcc.RangeSlider(
@@ -240,31 +235,21 @@ sidebar = [
                                     ),
                                 ]
                             ),
-                            dbc.Row(
-                                [
-                                    dbc.Label(
-                                        "Select features",
-                                        html_for="segmentation-features",
-                                    ),
-                                    dcc.Checklist(
-                                        id="segmentation-features",
-                                        options=[
-                                            {"label": l.capitalize(), "value": l}
-                                            for l in SEG_FEATURE_TYPES
-                                        ],
-                                        value=["intensity", "edges"],
-                                    ),
-                                ]
-                            ),
                             # Indicate showing most recently computed segmentation
                             dcc.Checklist(
                                 id="show-segmentation",
                                 options=[
                                     {
-                                        "label": "Show segmentation",
+                                        "label": "COMPUTE SEGMENTATION",
                                         "value": "Show segmentation",
                                     }
                                 ],
+                                style={
+                                    "border": "solid",
+                                    "color": "red",
+                                    "border-radius": "30px",
+                                    "text-align": "center",
+                                },
                                 value=[],
                             ),
                         ]
