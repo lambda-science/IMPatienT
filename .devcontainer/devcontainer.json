@@ -24,7 +24,8 @@
     "ms-python.python",
     "njpwerner.autodocstring",
     "mutantdino.resourcemonitor",
-    "albert.tabout"
+    "albert.tabout",
+    "github.copilot"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
