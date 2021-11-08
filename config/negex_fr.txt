@@ -140,8 +140,6 @@ suffisante pour l'exclure de la liste des candidats
 suffisante pour l'exclure de l'affaire
 suffisante pour exclure le patient contre
 exclure
-r/o
-ro
 l'exclure
 l'exclure
 exclure le patient

@@ -132,15 +132,17 @@ function update_annotated_terms_overview() {
   var present_features = [];
   var absent_features = [];
   for (const [key, value] of Object.entries(v)) {
-    if (value.data.presence > "0") {
+    presence_value = value.data.presence || -0.25;
+    if (presence_value > "0") {
       present_features.push(value.id + " " + value.text);
-    } else if (value.data.presence === "0") {
+    } else if (presence_value === "0") {
       absent_features.push(value.id + " " + value.text);
     }
     let present_feat_overview = document.getElementById("feature-present");
     let absent_feat_overview = document.getElementById("feature-absent");
     present_feat_overview.innerHTML = "";
     absent_feat_overview.innerHTML = "";
+
     for (const [key, value] of Object.entries(present_features)) {
       present_feat_overview.innerHTML +=
         "<span style='color:green'>" + value + "</span></br>";
@@ -184,12 +186,14 @@ $("#predictbutton").on("click", function () {
 
 $(function () {
   $("#upload-file-btn").click(function () {
+    let loading_spinner = document.getElementById("ocr-loading");
+    let fail_div = document.getElementById("ocr-fail");
+    loading_spinner.removeAttribute("hidden");
     var form_data = new FormData($("#upload-file")[0]);
     form_data.append(
       "lang",
       $("#select-ocr-lang").find("option:selected").val()
     );
-    console.log(form_data);
     $.ajax({
       type: "POST",
       url: "/ocr_pdf",
@@ -197,8 +201,13 @@ $(function () {
       contentType: false,
       cache: false,
       processData: false,
+      error: function (data) {
+        loading_spinner.setAttribute("hidden", "true");
+        fail_div.removeAttribute("hidden");
+      },
       success: function (data) {
-        console.log("sucess !");
+        fail_div.setAttribute("hidden", "true");
+        loading_spinner.setAttribute("hidden", "true");
         let text_results_field = document.querySelector("div.context");
         text_results_field.innerHTML = "";
         var instance = new Mark(document.querySelector("div.context"));
@@ -217,9 +226,12 @@ $(function () {
           accurarcy: "exactly",
           ignorePunctuation: ":;.,-–—‒_(){}[]!'\"+=".split(""),
         };
+        // Print of detected text in the viewer
         for (const [key, value] of Object.entries(json_ans.results.full_text)) {
           text_results_field.innerHTML += value + "</br>";
         }
+
+        // Making the list of postive and negative keywords
         var keywords_pos = [];
         var keywords_neg = [];
         for (const [key, value] of Object.entries(
@@ -233,7 +245,62 @@ $(function () {
         }
         instance.mark(keywords_pos, options_pos);
         instance.mark(keywords_neg, options_neg);
-        console.log("marked !");
+
+        // Fill the accordion section
+        let present_feat_overview_auto = document.getElementById(
+          "feature-present-auto"
+        );
+        let absent_feat_overview_auto = document.getElementById(
+          "feature-absent-auto"
+        );
+        present_feat_overview_auto.innerHTML = "";
+        absent_feat_overview_auto.innerHTML = "";
+
+        // For each entires in our match list add to corresponding accordion
+        for (const [key, value] of Object.entries(
+          json_ans.results.match_list
+        )) {
+          if (value[0] == 1) {
+            present_feat_overview_auto.innerHTML +=
+              "<span style='color:green'>" +
+              value[3] +
+              " " +
+              value[2] +
+              " (" +
+              value[1] +
+              ")" +
+              "</span></br>";
+          } else if (value[0] == 0) {
+            absent_feat_overview_auto.innerHTML +=
+              "<span style='color:red'>" +
+              value[3] +
+              " " +
+              value[2] +
+              " (" +
+              value[1] +
+              ")" +
+              "</span></br>";
+          }
+          // Auto Fill the ontology tree with NLP Results (overwrite)
+          var json_tree = $("input[id=ontology_tree]").val();
+          var json_tree_obj = JSON.parse(json_tree);
+          // Iterate the tree and find the node that matches the feature ID
+          for (let entry of json_tree_obj) {
+            if (entry["id"] == value[3]) {
+              if (value[0] == 1) {
+                entry["data"]["presence"] = "1";
+                entry["icon"] = "/static/checkmark-32.png";
+              } else if (value[0] == 0) {
+                entry["data"]["presence"] = "0";
+                entry["icon"] = "/static/x-mark-32.png";
+              }
+              $("input[id=ontology_tree]").val(JSON.stringify(json_tree_obj));
+            }
+          }
+        }
+        $("#jstree").jstree(true).settings.core.data = json_tree_obj;
+        $("#jstree").jstree(true).refresh();
+        update_annotated_terms_overview();
       },
     });
   });

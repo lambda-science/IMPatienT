@@ -36,7 +36,6 @@ class Ontology:
                     or i["data"] != dest_onto.jstree_as_dict[i["id"]]["data"]
                 ):
                     # If destination has modified data or name: update
-                    i["data"].setdefault("old_name", []).append(i["text"])
                     i["text"] = dest_onto.jstree_as_dict[i["id"]]["text"]
                     i["data"]["description"] = dest_onto.jstree_as_dict[i["id"]][
                         "data"
