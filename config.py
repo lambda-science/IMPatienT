@@ -28,7 +28,7 @@ class Config(object):
 
     negex_sent_en = open(os.path.join(CONFIG_FOLDER, "negex_sep_en.txt"),"r")
     negex_sent_fr = open(os.path.join(CONFIG_FOLDER, "negex_sep_fr.txt"),"r")
-    NEGEX_SENT_FR = [line.strip('\n') for line in negex_sent_en.readlines()]
+    NEGEX_SENT_EN = [line.strip('\n') for line in negex_sent_en.readlines()]
     NEGEX_SENT_FR = [line.strip('\n') for line in negex_sent_fr.readlines()]
 
     SEND_FILE_MAX_AGE_DEFAULT = 0
