@@ -1,43 +1,44 @@
-# MYO-xIA: Web-App to Format and Explore Patient Data
+# EHRoes: an all-in-one web application for patients’ data digitalization and exploration
 
-**MYO-xIA is a web application developed to format free text and images from patients’ data to machine-learning ready formats. It also generates several visualization as well as automatic diagnosis to accelerate research on diseases.**  
-It features ontology, optical character recognition (OCR), natural language processing (NLP), image annotation using machine learning, interactive plots and explainable AI.
+**EHRoes is a web application developped in the MYO-xIA project for patient data digitalization and exploration.**  
+It features standard vocabulary creator, optical character recognition (OCR), natural language processing (NLP), image annotation and segmentation using machine learning, interactive visualizations and automatic diagnosis prediction.
 
-It is currently deployed at: https://myoxia.lbgi.fr/  
+A demo version is currently deployed at: https://ehroes.lbgi.fr/  
 This project is free and open-source under the MIT license, feel free to fork and contribute to the development. Several guides are available at the bottom of this page for the production deployment and developer mode.
 
 ## Contact:
 
 The main maintainer is:  
-**Corentin Meyer** - PhD Student @ CSTB Team - iCube - University Of Strasbourg <corentin.meyer@etu.unsitra.fr>
+**Corentin Meyer** - PhD Student @ CSTB Team - iCube - University Of Strasbourg <co.meyer@unistra.fr>
 
-## Citing MYO-xIA
+## Citing EHRoes
 
 [placeholder]
 
-## MYO-xIA Abstract
+## EHRoes Abstract
 
 **Background**  
-Digitalization of patients’ data using ontologies such as Human Phenotype Ontology (HPO) is essential for clinical research for better diagnosis of diseases. However, ontology development requires a mix of domain expertise and technical knowledge, also multiple domains such as muscle histology do not have a standard ontology. Here we present MYO-xIA a web application developed to easily create a pseudo-ontology called standard vocabulary for domains that are missing one and use this ontology to digitalize free-text medical reports and annotate images. This tool also includes automatic visualization modules that generate graphs and tables on the data as well an automatic diagnosis prediction and assisted vocabulary keyword suggestion.  
+With a growing amount of patient data such as sequencing, imaging, and medical records, electronic health records (EHR) became central to drive research and improve diagnosis of patients by using multimodal data. But EHR usage is challenging as they require tools to format, digitalize and interpret data. Today’s EHR exploitation tools ecosystem is heavily fragmented among tools to create EHR (format and digitalize) and tools to interpret the data (exploration and diagnosis). Also most of the tools are specialized for one specific type of data, multiplying the number of different software needed for multimodal approaches. There is a strong need for a simple, all-rounder and flexible platform.  
 **Results**  
-As a use case of the platform, we analyzed 89 histology reports of patients with congenital myopathy, and we created a first draft of the muscle histology vocabulary. Automatically generated analysis was used to discover per disease and per gene patient profile and we obtained an accuracy 0.75 for congenital myopathy subtypes classification.  
+In this paper we present EHRoes, an all-in-one web application for patients’ data digitalization and exploration. With its module-based architecture, we developed four modules to: (i) create a set of standard vocabulary for a domain, (ii) automatically digitalize free-text data to a set of standard terms, (iii) annotate images with standard vocabulary using automatic segmentation and (iv) generate an automatic visualization dashboard to provide insight on the data and perform automatic diagnosis suggestions. Using this platform, we successfully digitalized 89 muscle histology reports from patients with congenital myopathies and we obtained an accuracy 0.75 for congenital myopathy subtypes classification.  
 **Conclusions**  
-With MYO-xIA we created versatile applications that can be used to digitalize free-text data and image using controlled vocabulary and requiring no prior technical knowledge. As it is flexible, it can be used in any domains that lacks a well-defined free text formatting procedure.
+With EHRoes we created a platform for both patients data digitalization and exploration that can handle image data and free-text data. As it uses user designed standard vocabulary, it is highly flexible to fit any domain of research. It can be used both as a patient registry with automatic diagnosis or as a research tool to explore a cohort of patients.  
+A demo instance of the application is available at https://ehroes.lbgi.fr.
 
 ## Setup guides
 
 ### (DOCKER) Developper Mode Setup (to contribute)
 
-[See the wiki page: Developper Mode Setup (DOCKER)](<https://github.com/lambda-science/MYO-xIA-App/wiki/(DOCKER)-Developper-Mode-Setup-(to-contribute)>)
+[See the wiki page: Developper Mode Setup (DOCKER)](<https://github.com/lambda-science/EHRoes-App/wiki/(DOCKER)-Developper-Mode-Setup-(to-contribute)>)
 
-### (DOCKER) Deploy to production & Maintain MYO-xIA
+### (DOCKER) Deploy to production & Maintain EHRoes
 
-[See the wiki page: Deploy and maintain (DOCKER)](<https://github.com/lambda-science/MYO-xIA-App/wiki/(DOCKER)-Deploy-&-Maintain-MYO-xIA>)
+[See the wiki page: Deploy and maintain (DOCKER)](<https://github.com/lambda-science/EHRoes-App/wiki/(DOCKER)-Deploy-&-Maintain-EHRoes>)
 
-### (LINUX) Deploy to production & Maintain MYO-xIA
+### (LINUX) Deploy to production & Maintain EHRoes
 
-[See the wiki page: Deploy and maintain (LINUX)](<https://github.com/lambda-science/MYO-xIA-App/wiki/(LINUX)-Deploy-&-Maintain-MYO-xIA>)
+[See the wiki page: Deploy and maintain (LINUX)](<https://github.com/lambda-science/EHRoes-App/wiki/(LINUX)-Deploy-&-Maintain-EHRoes>)
 
 ### (LEGACY - Deprecated) Developper Mode Setup (non-docker)
 
-[See the wiki page: Developper Mode Setup (non-docker)](<https://github.com/lambda-science/MYO-xIA-App/wiki/(LEGACY---Deprecated)-Developper-Mode-Setup-(non-docker)>)
+[See the wiki page: Developper Mode Setup (non-docker)](<https://github.com/lambda-science/EHRoes-App/wiki/(LEGACY---Deprecated)-Developper-Mode-Setup-(non-docker)>)

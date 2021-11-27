@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "myoxia"
+name = "ehroes"
 version = "1.0.0"
 description = "My main application for the handling, cleaning and processing of myopathy patient health data"
 authors = ["Corentin Meyer <corentin.meyer@etu.unistra.fr>"]

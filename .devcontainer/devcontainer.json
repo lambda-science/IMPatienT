@@ -1,8 +1,8 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/docker-existing-dockerfile
 {
-  "name": "myoxiadev",
-  "build": { "args": { "-t": "myoxiadev:latest" } },
+  "name": "ehroesdev",
+  "build": { "args": { "-t": "ehroesdev:latest" } },
   // Sets the run context to one level up instead of the .devcontainer folder.
   "context": "..",
 
@@ -34,10 +34,10 @@
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
-  "workspaceMount": "source=${localWorkspaceFolder},target=/home/myoxia/code,type=bind,consistency=cached",
-  "workspaceFolder": "/home/myoxia/code",
-  "runArgs": ["--init", "--name", "myoxiadev", "--rm"],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/ehroes/code,type=bind,consistency=cached",
+  "workspaceFolder": "/home/ehroes/code",
+  "runArgs": ["--init", "--name", "ehroesdev", "--rm"],
 
   // Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
-  "remoteUser": "myoxia"
+  "remoteUser": "ehroes"
 }

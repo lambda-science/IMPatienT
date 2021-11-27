@@ -8,9 +8,9 @@
       "name": "Python: Flask",
       "type": "python",
       "request": "launch",
-      "module": "myoxia",
+      "module": "ehroes",
       "env": {
-        "FLASK_APP": "myoxia.py",
+        "FLASK_APP": "ehroes.py",
         "FLASK_ENV": "development"
       },
       "args": ["--host=0.0.0.0"],
