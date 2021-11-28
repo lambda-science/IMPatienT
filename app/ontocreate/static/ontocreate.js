@@ -18,7 +18,7 @@ function ontology_ID(id_list) {
   id = id_list.sort()[id_list.length - 2].substring(4);
   id = parseInt(id);
   id += 1;
-  id = "MHO" + id.toString().padStart(6, "0");
+  id = "MHO:" + id.toString().padStart(6, "0");
   return id;
 }
 

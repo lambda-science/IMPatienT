@@ -1,1 +1,1 @@
-docker build -t myoxia:latest -f Dockerfile .
+docker build -t ehroes:latest -f Dockerfile .

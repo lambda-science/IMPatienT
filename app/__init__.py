@@ -97,7 +97,7 @@ def create_app(config_class=Config):
                 mailhost=(app.config["MAIL_SERVER"], app.config["MAIL_PORT"]),
                 fromaddr="no-reply@" + app.config["MAIL_SERVER"],
                 toaddrs=app.config["ADMINS_EMAIL"],
-                subject="MYO-xIA Failure",
+                subject="EHRoes Failure",
                 credentials=auth,
                 secure=secure,
             )
@@ -113,7 +113,7 @@ def create_app(config_class=Config):
             if not os.path.exists("logs"):
                 os.mkdir("logs")
             file_handler = RotatingFileHandler(
-                "logs/MYOxIA.log", maxBytes=10240, backupCount=10
+                "logs/ehroes.log", maxBytes=10240, backupCount=10
             )
             file_handler.setFormatter(
                 logging.Formatter(
@@ -125,7 +125,7 @@ def create_app(config_class=Config):
             app.logger.addHandler(file_handler)
 
         app.logger.setLevel(logging.INFO)
-        app.logger.info("MYO-xIA startup")
+        app.logger.info("EHRoes startup")
     return app
 
 
@@ -150,9 +150,10 @@ def register_dashapps(app):
     )
 
     with app.app_context():
-        dashapp.title = "Dashapp 1"
+        dashapp.title = "Image Annotation"
         dashapp.layout = layout
         register_callbacks(dashapp)
+        app.config["DASHAPP"] = dashapp
     _protect_dashviews(dashapp)
 
 

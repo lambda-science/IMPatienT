@@ -30,27 +30,19 @@ from app.dashapp.trainable_segmentation import multiscale_basic_features
 
 memory = Memory("./joblib_cache", bytes_limit=3000000000, verbose=3)
 compute_features = memory.cache(multiscale_basic_features)
-DEFAULT_LABEL_CLASS = 0
-NUM_LABEL_CLASSES = 5
-DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
-class_label_colormap = ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"]
-class_labels = list(range(NUM_LABEL_CLASSES))
-# we can't have less colors than classes
-assert NUM_LABEL_CLASSES <= len(class_label_colormap)
 
-
-def class_to_color(n):
+def class_to_color(class_label_colormap, n):
     return class_label_colormap[n]
 
 
-def color_to_class(c):
+def color_to_class(class_label_colormap, c):
     return class_label_colormap.index(c)
 
 
 def make_default_figure(
     images=None,
-    stroke_color=class_to_color(DEFAULT_LABEL_CLASS),
-    stroke_width=DEFAULT_STROKE_WIDTH,
+    stroke_color="",
+    stroke_width=3,
     shapes=[],
     source_img=None,
 ):
@@ -84,10 +76,11 @@ def save_img_classifier(clf, label_to_colors_args, segmenter_args):
     }
 
 
-def show_segmentation(image_path, mask_shapes, features, segmenter_args):
+def show_segmentation(image_path, mask_shapes, features, segmenter_args, class_label_colormap):
     """adds an image showing segmentations to a figure's layout"""
     # add 1 because classifier takes 0 to mean no mask
-    shape_layers = [color_to_class(shape["line"]["color"]) + 1 for shape in mask_shapes]
+    shape_layers = [color_to_class(class_label_colormap, shape["line"]["color"])+1 for shape in mask_shapes]
+    #shape_layers = [color_to_class(onto_tree, shape["line"]["color"]) for shape in mask_shapes]
     label_to_colors_args = {
         "colormap": class_label_colormap,
         "color_class_offset": -1,
@@ -110,7 +103,6 @@ def register_callbacks(dashapp):
         [
             Output("graph", "figure"),
             Output("masks", "data"),
-            Output("stroke-width-display", "children"),
             Output("classifier-store", "data"),
             Output("classified-image-store", "data"),
             Output("alertbox", "children"),
@@ -125,7 +117,6 @@ def register_callbacks(dashapp):
             Input("stroke-width", "value"),
             Input("show-segmentation", "value"),
             Input("download-button", "n_clicks"),
-            Input("segmentation-features", "value"),
             Input("sigma-range-slider", "value"),
         ],
         [
@@ -139,10 +130,26 @@ def register_callbacks(dashapp):
         stroke_width_value,
         show_segmentation_value,
         download_button_n_clicks,
-        segmentation_features_value,
         sigma_range_slider_value,
         masks_data,
     ):
+        with open(os.path.join("data/ontology","ontology.json"), "r") as fp:
+            onto_tree = json.load(fp)
+        id_img_annot_section = [ i["id"] for i in onto_tree if i["text"] == "Image Annotations"][0]
+        onto_tree_imgannot = []
+        for node in onto_tree:
+            if node["parent"] == id_img_annot_section:
+                onto_tree_imgannot.append(node)
+
+        class_label_colormap = [ i["data"]["hex_color"] for i in onto_tree_imgannot ]
+        class_labels = list(range(len(class_label_colormap)))
+        NUM_LABEL_CLASSES = len(class_label_colormap)
+        DEFAULT_LABEL_CLASS = class_labels[0]
+        DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
+
+        # we can't have less colors than classes
+        assert NUM_LABEL_CLASSES <= len(class_label_colormap)
+
         classified_image_store_data = dash.no_update
         classifier_store_data = dash.no_update
         alertbox = html.Div()
@@ -168,17 +175,15 @@ def register_callbacks(dashapp):
             if image.mask_annot_path is not None and image.mask_annot_path != []:
                 with open(image.mask_annot_path, "r") as file:
                     masks_data["shapes"] = json.load(file)
-        if cbcontext in ["segmentation-features.value", "sigma-range-slider.value"] or (
+        if cbcontext in ["sigma-range-slider.value"] or (
             ("Show segmentation" in show_segmentation_value)
             and (len(masks_data["shapes"]) > 0)
         ):
             segmentation_features_dict = {
-                "intensity": False,
-                "edges": False,
-                "texture": False,
+                "intensity": True,
+                "edges": True,
+                "texture": True,
             }
-            for feat in segmentation_features_value:
-                segmentation_features_dict[feat] = True
             features = compute_features(
                 img,
                 **segmentation_features_dict,
@@ -199,9 +204,10 @@ def register_callbacks(dashapp):
                 enumerate(any_label_class_button_value),
                 key=lambda t: 0 if t[1] is None else t[1],
             )[0]
+            #label_class_value = class_labels[label_class_value]
         fig = make_default_figure(
             images=[image.image_path],
-            stroke_color=class_to_color(label_class_value),
+            stroke_color=class_to_color(class_label_colormap, label_class_value),
             stroke_width=stroke_width,
             shapes=masks_data["shapes"],
             source_img=source,
@@ -219,7 +225,7 @@ def register_callbacks(dashapp):
                 feature_opts["sigma_min"] = sigma_range_slider_value[0]
                 feature_opts["sigma_max"] = sigma_range_slider_value[1]
                 segimgpng, seg_matrix, clf = show_segmentation(
-                    image.image_path, masks_data["shapes"], features, feature_opts
+                    image.image_path, masks_data["shapes"], features, feature_opts, class_label_colormap
                 )
                 if cbcontext == "download-button.n_clicks":
                     classifier_store_data = clf
@@ -267,7 +273,7 @@ def register_callbacks(dashapp):
 
             except Exception:
                 print(traceback.format_exc())
-                alertbox = dbc.Alert("Issues Saving to Database...", color="error")
+                alertbox = dbc.Alert("Issues Saving to Database Please Reload The Page...", color="error")
             images_to_draw = []
             if segimgpng is not None:
                 images_to_draw = [segimgpng]
@@ -276,7 +282,6 @@ def register_callbacks(dashapp):
         return (
             fig,
             masks_data,
-            "Current paintbrush width: %d" % (stroke_width,),
             classifier_store_data,
             classified_image_store_data,
             alertbox,

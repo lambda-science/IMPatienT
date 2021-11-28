@@ -14,9 +14,9 @@ import os
 class Rapport:
     """PDF File class used to detect text and analyse it"""
 
-    def __init__(self, file_obj):
+    def __init__(self, file_obj, lang):
         self.file_obj = file_obj
-        self.lang = "fra"
+        self.lang = lang
         self.ontology_path = os.path.join(
             current_app.config["ONTOLOGY_FOLDER"], "ontology.json"
         )
@@ -24,27 +24,15 @@ class Rapport:
         self.raw_text = ""
         self.text_as_list = []
         self.header_text = []
-        self.nlp = spacy.load("fr_core_news_lg")
-        # self.section = collections.OrderedDict()
-        # self.section_text = collections.OrderedDict()
-        # self.section_names = [
-        #     "Hématéine-éosine et trichrome de Gomori",
-        #     "Activité myosine ATPasique",
-        #     "Différenciation des fibres :",
-        #     "Répartition numérique des fibres :",
-        #     "Répartition topographique des différents types de fibres",
-        #     "Activité myosine ATPasique",
-        #     "Activités oxydatives (SDH, NADH-TR",
-        #     "Cox :",
-        #     "PAS :",
-        #     "Phosphorylases :",
-        #     "Soudans :",
-        #     "Soudan :",
-        #     "Lipides :",
-        #     "Lipides soudan:",
-        #     "Technique de Koëlle",
-        #     "CONCLUSIONS :",
-        # ]
+        if self.lang == "fra":
+            self.nlp = spacy.load("fr_core_news_lg")
+            self.negexlist = current_app.config["NEGEX_LIST_FR"]
+            self.negex_sent = current_app.config["NEGEX_SENT_FR"]
+        if self.lang == "eng":
+            self.nlp = spacy.load("en_core_web_lg")
+            self.negexlist = current_app.config["NEGEX_LIST_EN"]
+            self.negex_sent = current_app.config["NEGEX_SENT_EN"]
+
         self.results_match_dict = {}
 
     def get_grayscale(self, image):
@@ -75,66 +63,61 @@ class Rapport:
         self.text_as_list = self.raw_text.split("\n")
         return self.raw_text
 
-    # def detect_sections(self):
-    #     """ "Detect the line number where each section starts"""
-    #     index = 0
-    #     non_sorted_dict = {}
-    #     for i in self.text_as_list:
-    #         for j in self.section_names:
-    #             if fuzz.partial_ratio(j, i) > 90:
-    #                 non_sorted_dict[j] = index
-    #         index += 1
-    #     sorted_tuple = sorted(
-    #         non_sorted_dict.items(), key=lambda x: x[1], reverse=False
-    #     )
-    #     for i in sorted_tuple:
-    #         self.section[i[0]] = i[1]
+    def _detect_negation(self, sentence: str) -> list:
+        """Detect negation in a sentence"""
+        sent = self.nlp(sentence)
+        for negex_term in self.negexlist:
+            if len(negex_term.split(" ")) == 1:
+                for i in sent.text.lower().split(" "):
+                    if i == negex_term:
+                        return sent, True
+            else:
+                if negex_term in sent.text.lower():
+                    return sent, True
+        return sent, False
 
-    # def extract_section_text(self):
-    #     """ "Use the list of line number section start to separate text between hearder, section and conclusion"""
-    #     self.header_text = self.text_as_list[: list(self.section.items())[0][1]]
-
-    #     for i in range(len(self.section) - 1):
-    #         self.section_text[list(self.section.items())[i][0]] = " ".join(
-    #             self.text_as_list[
-    #                 list(self.section.items())[i][1] : list(self.section.items())[
-    #                     i + 1
-    #                 ][1]
-    #             ]
-    #         )
-    #     self.section_text[list(self.section.items())[-1][0]] = " ".join(
-    #         self.text_as_list[list(self.section.items())[-1][1] :]
-    #     )
-
+    def _split_sentence(self, sent_original: object) -> list:
+        """"Split setence into sub-setence based on negex terms"""
+        for sent_sep in self.negex_sent:
+            if sent_sep in sent_original.text:
+                sent_list = sent_original.text.split(sent_sep)
+                break
+            else:
+                sent_list = [sent_original.text]
+        return sent_list
+        
     def _spacy_ngrams(self, text_section: str) -> dict:
         """ "Extract 1,2,3 ngrams for a block of text using spacy."""
         doc = self.nlp(text_section)
         final_one_ngrams = []
         final_two_ngrams = []
         final_three_ngrams = []
-        for sent in doc.sents:
-            temp_token_list = []
-            for token in sent:
-                # if not token.is_stop and not token.is_punct and token.is_alpha:
-                if not token.is_punct and token.is_alpha:
-                    final_one_ngrams.append(token.text.lower())
-                    temp_token_list.append(token.text.lower())
-            if len(temp_token_list) > 1:
-                for i in range(len(temp_token_list) - 1):
-                    final_two_ngrams.append(
-                        " ".join([temp_token_list[i], temp_token_list[i + 1]])
-                    )
-            if len(temp_token_list) > 2:
-                for i in range(len(temp_token_list) - 2):
-                    final_three_ngrams.append(
-                        " ".join(
-                            [
-                                temp_token_list[i],
-                                temp_token_list[i + 1],
-                                temp_token_list[i + 2],
-                            ]
+        for sent_original in doc.sents:
+            sent_list = self._split_sentence(sent_original)
+            for sent_str in sent_list:
+                sent, flag_neg = self._detect_negation(sent_str)
+                temp_token_list = []
+                for token in sent:
+                    # if not token.is_stop and not token.is_punct and token.is_alpha:
+                    if not token.is_punct and token.is_alpha:
+                        final_one_ngrams.append([token.text.lower(), 0 if flag_neg else 1])
+                        temp_token_list.append(token.text.lower())
+                if len(temp_token_list) > 1:
+                    for i in range(len(temp_token_list) - 1):
+                        final_two_ngrams.append(
+                            [" ".join([temp_token_list[i], temp_token_list[i + 1]]), 0 if flag_neg else 1]
                         )
-                    )
+                if len(temp_token_list) > 2:
+                    for i in range(len(temp_token_list) - 2):
+                        final_three_ngrams.append([
+                            " ".join(
+                                [
+                                    temp_token_list[i],
+                                    temp_token_list[i + 1],
+                                    temp_token_list[i + 2],
+                                ]
+                            ), 0 if flag_neg else 1]
+                        )
         full_ngrams = final_one_ngrams + final_two_ngrams + final_three_ngrams
         return full_ngrams
 
@@ -143,20 +126,16 @@ class Rapport:
         match_list = []
         json_onto = json.load(open(self.ontology_path, "rb"))
         for i in json_onto:
-            ontology_terms.append(i["text"])
+            ontology_terms.append([i["id"], i["text"]])
+            for synonym in i["data"]["synonymes"].split(","):
+                ontology_terms.append([i["id"], synonym])
         for i in full_ngrams:
             for j in ontology_terms:
-                score = fuzz.ratio(i.lower(), j.lower())
+                score = fuzz.ratio(i[0].lower(), j[1].lower())
                 if score >= 80:
-                    match_list.append([score, i, j])
+                    # [neg_flag, ngram, match_term, node_id]
+                    match_list.append([i[1], i[0], j[1], j[0]])
         return match_list
-
-    # def analyze_all_sections(self) -> dict:
-    #     for section in self.section_text.keys():
-    #         text_block = self.section_text[section]
-    #         full_ngrams = self._spacy_ngrams(text_block)
-    #         match_list = self._match_ngram_ontology(full_ngrams)
-    #         self.results_match_dict[section] = match_list
 
     def analyze_text(self) -> json:
         full_ngrams = self._spacy_ngrams(self.raw_text)

@@ -1,6 +1,6 @@
 #!/bin/bash
 # this script is used to boot a Docker container
-source /home/myoxia/.venv/bin/activate
+source /home/ehroes/.venv/bin/activate
 while true; do
     FILE="data/ontology/ontology.json"     
     if [ ! -f $FILE ]; then
@@ -14,4 +14,4 @@ while true; do
     echo Deploy command failed, retrying in 5 secs...
     sleep 5
 done
-exec gunicorn -b :5000 --access-logfile - --error-logfile - --timeout 900 --workers 4 --threads 8 --preload myoxia:app
+exec gunicorn -b :5000 --access-logfile - --error-logfile - --timeout 900 --workers 4 --threads 8 --preload ehroes:app
