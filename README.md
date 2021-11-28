@@ -1,7 +1,7 @@
-# EHRoes: an all-in-one web application for patients’ data digitalization and exploration
+# EHRoes 🦸: an all-in-one web application for patients’ data digitalization and exploration
 
 **EHRoes is a web application developped in the MYO-xIA project for patient data digitalization and exploration.**  
-It features standard vocabulary creator, optical character recognition (OCR), natural language processing (NLP), image annotation and segmentation using machine learning, interactive visualizations and automatic diagnosis prediction.
+It features a standard vocabulary creator, optical character recognition (OCR), natural language processing (NLP), image annotation and segmentation using machine learning, interactive visualizations and automatic diagnosis prediction.
 
 A demo version is currently deployed at: https://ehroes.lbgi.fr/  
 This project is free and open-source under the MIT license, feel free to fork and contribute to the development. Several guides are available at the bottom of this page for the production deployment and developer mode.
