@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "ehroes"
 version = "1.0.0"
-description = "My main application for the handling, cleaning and processing of myopathy patient health data"
-authors = ["Corentin Meyer <corentin.meyer@etu.unistra.fr>"]
+description = "EHRoes: an all-in-one web application for patients’ data digitalization and exploration"
+authors = ["Corentin Meyer <co.meyer@unistra.fr>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
