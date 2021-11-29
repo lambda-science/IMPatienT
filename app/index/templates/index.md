@@ -6,8 +6,8 @@ It features a standard vocabulary creator, optical character recognition (OCR), 
 ## Demo Usage Instructions
 
 If you are on the demo instance (https://ehroes.lbgi.fr), you can login on top right with **login: demo ; password: demo**  
-Data on this demo instance is reset once every day.  
-For the PDF automatic analysis, you can find a sample PDF [HERE](https://www.lbgi.fr/~meyer/EHRoes/sample_demo_report.pdf) working with the preinstalled standard vocabulary. A sample image for image annotation can be found [HERE](https://www.lbgi.fr/~meyer/EHRoes/sample_image_histo.png).
+The application is preloaded with a database of histology reports and a standard vocabulary for muscle biopsy. Data on this demo instance is reset once every day.  
+For the PDF automatic analysis, you can find a sample PDF [HERE](https://www.lbgi.fr/~meyer/EHRoes/sample_demo_report.pdf) working with the preinstalled standard vocabulary. A sample image for image annotation can be found [HERE](https://www.lbgi.fr/~meyer/EHRoes/sample_image_histo.jpg).
 
 ## EHRoes Abstract
 

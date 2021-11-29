@@ -284,7 +284,7 @@ layout = html.Div(
                 dbc.Row(description),
                 dbc.Row(
                     id="app-content",
-                    children=[dbc.Col(segmentation, md=8), dbc.Col(sidebar, md=4)],
+                    children=[dbc.Col(segmentation, lg=8), dbc.Col(sidebar, lg=4)],
                 ),
                 dbc.Row(dbc.Col(meta)),
             ],
