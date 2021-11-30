@@ -1,14 +1,14 @@
-import unittest
+import json
 import os
 import sys
-import json
+import unittest
 
 topdir = os.path.join(os.path.dirname(__file__), "..")
 sys.path.append(topdir)
 
 from app import create_app, db
-from app.models import User
 from app.historeport.onto_func import StandardVocabulary
+from app.models import User
 from config import Config
 
 
@@ -22,7 +22,7 @@ class TestConfig(Config):
 
 
 class HistoReportCase(unittest.TestCase):
-    """Class for User authentification test case"""
+    """Class for text report module case"""
 
     def setUp(self):
         self.app = create_app(TestConfig)

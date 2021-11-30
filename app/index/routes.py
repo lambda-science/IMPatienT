@@ -1,8 +1,12 @@
-from flask import render_template
 from app.index import bp
+from flask import render_template
 
 
 @bp.route("/")
 def index():
-    """View function to show index page"""
+    """View function for the Index page
+
+    Returns:
+        str: HTML template for the Index page
+    """
     return render_template("index.html")

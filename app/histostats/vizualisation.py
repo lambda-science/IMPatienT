@@ -1,21 +1,28 @@
 import json
 import os
-import pandas as pd
 
-# import seaborn as sns
 import numpy as np
+import pandas as pd
 import plotly
 import plotly.express as px
+import plotly.figure_factory as ff
 import plotly.graph_objs as go
-from flask import current_app
-
 from app import db
 from app.models import ReportHisto
+from flask import current_app
 from sklearn.metrics import confusion_matrix
-import plotly.figure_factory as ff
 
 
 def table_to_df(df):
+    """Transform the JSON JSTree in the text report table to a pandas dataframe columns
+
+    Args:
+        df (Dataframe): Dataframe version of the text report table in database
+
+    Returns:
+        Dataframe: Table as dataframe with new columns correspondig to JSTree nodes
+        List: List of the columns extracted from the standard vocabulary JSTree nodes
+    """
     # Transformation of the SQLite table to a Pandas DataFrame by parsing the JSON tree
     # Returns a dictionnary and a list of columns (standard terms)
     tree_as_dict = {}
@@ -47,11 +54,25 @@ def table_to_df(df):
 
 
 def db_to_df():
+    """Convert the SQLite table to a pandas dataframe
+
+    Returns:
+        Dataframe: Dataframe representation of the SQLite table for text reports
+    """
     df = pd.read_sql(db.session.query(ReportHisto).statement, db.session.bind)
     return df
 
 
 def process_df(df):
+    """Process the dataframe to replace diagnosis names and values with
+    corresponding values from dictionary hardcoded in the function.
+
+    Args:
+        df (Dataframe): Dataframe representation of the SQLite table for text reports
+
+    Returns:
+        Dataframe: Processed DataFrame with modified values
+    """
     df = df.replace(
         {
             "COM_CCD": "COM",
@@ -67,6 +88,14 @@ def process_df(df):
 
 
 def create_plotly_viz(df):
+    """Create the four plotly histograms for the muscle, age, gene and conclusion columns.
+
+    Args:
+        df (DataFrame): Processed DataFrame
+
+    Returns:
+        list: List of Plotly JSON Graphs for the four histograms
+    """
     df["age_biopsie"].replace({"N/A": -1}, inplace=True)
     muscle_prelev = df["muscle_prelev"].value_counts()
     as_list = muscle_prelev.index.tolist()
@@ -142,82 +171,20 @@ def create_plotly_viz(df):
     return [graphJSON1, graphJSON2, graphJSON3, graphJSON4]
 
 
-# def create_basic_viz(df):
-#     df["age_biopsie"].replace({"N/A": -1}, inplace=True)
-
-#     muscle_prelev = df["muscle_prelev"].value_counts()
-#     as_list = muscle_prelev.index.tolist()
-#     idx = as_list.index("")
-#     as_list[idx] = "N/A"
-#     muscle_prelev.index = as_list
-#     sns_plot = sns.barplot(x=muscle_prelev.index, y=muscle_prelev)
-#     fig = sns_plot.get_figure()
-#     plt.xticks(rotation=25)
-#     fig.savefig(
-#         os.path.join(current_app.config["VIZ_FOLDER"], "fig1.jpg"),
-#         dpi=300,
-#         bbox_inches="tight",
-#     )
-#     plt.clf()
-
-#     age_biopsie = df["age_biopsie"].value_counts()
-#     NA_age = age_biopsie.where(age_biopsie.index == -1).sum()
-#     bebe = age_biopsie.where(age_biopsie.index <= 2).sum()
-#     enfant = age_biopsie.where((age_biopsie.index > 2) & (age_biopsie.index < 18)).sum()
-#     adulte = age_biopsie.where(age_biopsie.index >= 18).sum()
-#     sns_plot2 = sns.barplot(
-#         x=["Newborn (<=2 years)", "Child (3-17 years)", "Adult (>=18 years)", "N/A"],
-#         y=[bebe, enfant, adulte, NA_age],
-#     )
-#     for i in range(4):
-#         sns_plot2.text(
-#             i,
-#             [bebe, enfant, adulte, NA_age][i] + 0.1,
-#             int([bebe, enfant, adulte, NA_age][i]),
-#             color="black",
-#             ha="center",
-#         )
-#     fig2 = sns_plot.get_figure()
-#     plt.xticks(rotation=25)
-#     fig2.savefig(
-#         os.path.join(current_app.config["VIZ_FOLDER"], "fig2.jpg"),
-#         dpi=300,
-#         bbox_inches="tight",
-#     )
-#     plt.clf()
-
-#     gene_diag = df["gene_diag"].value_counts()
-#     # gene_diag = df["gene_diag"].value_counts()[0:4]
-#     # gene_diag["Other"] = len(df) - (df["gene_diag"].value_counts()[0:4].sum())
-
-#     sns_plot3 = sns.barplot(x=gene_diag.index, y=gene_diag)
-#     for i in range(len(gene_diag)):
-#         sns_plot3.text(i, gene_diag[i] + 0.1, gene_diag[i], color="black", ha="center")
-#     fig3 = sns_plot3.get_figure()
-#     plt.xticks(rotation=90)
-#     fig3.savefig(
-#         os.path.join(current_app.config["VIZ_FOLDER"], "fig3.jpg"),
-#         dpi=300,
-#         bbox_inches="tight",
-#     )
-#     plt.clf()
-
-#     conclusion = df["conclusion"].value_counts()
-#     sns_plot4 = sns.barplot(x=conclusion.index, y=conclusion)
-#     for i in range(len(conclusion)):
-#         sns_plot4.text(
-#             i, conclusion[i] + 0.1, conclusion[i], color="black", ha="center"
-#         )
-#     fig4 = sns_plot4.get_figure()
-#     fig4.savefig(
-#         os.path.join(current_app.config["VIZ_FOLDER"], "fig4.jpg"),
-#         dpi=300,
-#         bbox_inches="tight",
-#     )
-#     plt.clf()
-
-
 def generate_stat_per(df, features_col):
+    """Generate the frequencies statistics for each standard vocbulary terms per
+     genes and per conclusion. Return the stats as dataframe, write the stats
+     to JSON files.
+
+    Args:
+        df (DataFrame): Processed DataFrame
+        features_col (list): List of column names corresponding to Standard
+         vocabulary terms
+
+    Returns:
+        DataFrame: DataFrame of frequencies statistics per gene
+        DataFrame: DataFrame of frequencies statistics per conclusion
+    """
     # Stats as Dataframe for HTML Template
     list_per_gene = []
     all_genes = list(set(df.gene_diag.to_list()))
@@ -290,6 +257,14 @@ def generate_stat_per(df, features_col):
 
 
 def generate_UNCLEAR(df):
+    """Generate the histogram for the re-prediction with BOQA of the UNCLEAR patients.
+
+    Args:
+        df (Dataframe): Processed DataFrame
+
+    Returns:
+        list: Plotly JSON Graph
+    """
     df_unclear = df[df["conclusion"] == "UNCLEAR"]
     conclusion_boqa = df_unclear["BOQA_prediction"].value_counts()
     fig = px.bar(
@@ -310,6 +285,15 @@ def generate_UNCLEAR(df):
 
 
 def generate_confusion_BOQA(df):
+    """Generate the confusion matrix for the prediction of patients with BOQA
+    (excluding UNCLEAR and OTHER)
+
+    Args:
+        df (DataFrame): Processed DataFrame
+
+    Returns:
+        list: Plotly JSON Graph
+    """
     df_no_unclear = df[(df["conclusion"] != "UNCLEAR") & (df["conclusion"] != "OTHER")]
     y_true = df_no_unclear["conclusion"].to_list()
     y_pred = df_no_unclear["BOQA_prediction"].to_list()
@@ -335,6 +319,13 @@ def generate_confusion_BOQA(df):
 
 
 def generate_corr_matrix(df):
+    """Generation the correlation matrix for the standard vocabulary terms.
+    Internal threshold is set to at least 10 annotations (0 or 1).
+    Figure is dumped to a Plotly JSON Graph to a file named correlation_matrix.json
+
+    Args:
+        df (DataFrame): Processed DataFrame
+    """
     onto_values = df.iloc[:, 13:]
     onto_values = onto_values.dropna(axis=1, thresh=10)
     onto_values = onto_values.replace({0: -1})
@@ -375,6 +366,12 @@ def generate_corr_matrix(df):
 
 
 def update_phenotype_gene(df):
+    """Update the phenotype and gene datamined information of the standard vocabulary
+    terms in the ontology.json JSTree file.
+
+    Args:
+        df (DataFrame): Processed DataFrame
+    """
     with open(
         os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
     ) as fp:
@@ -400,6 +397,12 @@ def update_phenotype_gene(df):
 
 
 def update_correlation_data(corrMatrix):
+    """Update the correlation information of the standard vocabulary terms in the
+    ontology.json JSTree file.
+
+    Args:
+        corrMatrix (Dataframe): Correlation Dataframe computed from processed dataframe.
+    """
     with open(
         os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
     ) as fp:

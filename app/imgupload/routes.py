@@ -1,28 +1,45 @@
 import os
 
-from flask import flash, request, redirect, url_for, render_template
-from flask import send_from_directory, current_app
-from flask_login import current_user, login_required
-from werkzeug.utils import secure_filename
-from werkzeug.datastructures import FileStorage
-
 from app import db
 from app.imgupload import bp
-from app.imgupload.forms import ImageForm, DeleteButton
+from app.imgupload.forms import DeleteButton, ImageForm
 from app.models import Image
+from flask import (
+    current_app,
+    flash,
+    redirect,
+    render_template,
+    request,
+    send_from_directory,
+    url_for,
+)
+from flask_login import current_user, login_required
+from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
 
 
 @bp.route("/data/images/<path:filename>")
 @login_required
 def images_folder(filename):
-    """Serve files located in patient subfolder inside folder"""
+    """Route to serve files located in the data/images folder.
+
+    Args:
+        filename (str): Path to the filename inside the data/images folder.
+
+    Returns:
+        File: returns the file
+    """
     return send_from_directory(current_app.config["IMAGES_FOLDER"], filename)
 
 
 @bp.route("/img_index", methods=["GET", "POST"])
 @login_required
 def img_index():
-    """Image Index Page"""
+    """View function for the image index
+
+    Returns:
+        str: Image Index HTML Page
+    """
     form = DeleteButton()
     image_history = Image.query.all()
 
@@ -32,7 +49,14 @@ def img_index():
 @bp.route("/delete_img/<id_img>", methods=["POST"])
 @login_required
 def delete_img(id_img):
-    """Page delete a histology report from database with delete button."""
+    """Route for the deletion of an image from the database and data folder.
+
+    Args:
+        id_img (int): ID of the image to delete
+
+    Returns:
+        redirect: Redirect to the image index HTML page
+    """
     form = DeleteButton()
     # Retrieve database entry and delete it if existing
     if form.validate_on_submit():
@@ -41,12 +65,26 @@ def delete_img(id_img):
             flash("Image {} not found.".format(id_img), "danger")
             return redirect(url_for("imgupload.img_index"))
         try:
-            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.image_path))
-            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.mask_annot_path))
-            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.seg_matrix_path))
-            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.classifier_path))
-            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.bland_image_path))
-            os.remove(os.path.join(current_app.config["IMAGES_FOLDER"],image.mask_image_path))            
+            os.remove(
+                os.path.join(current_app.config["IMAGES_FOLDER"], image.image_path)
+            )
+            os.remove(
+                os.path.join(current_app.config["IMAGES_FOLDER"], image.mask_annot_path)
+            )
+            os.remove(
+                os.path.join(current_app.config["IMAGES_FOLDER"], image.seg_matrix_path)
+            )
+            os.remove(
+                os.path.join(current_app.config["IMAGES_FOLDER"], image.classifier_path)
+            )
+            os.remove(
+                os.path.join(
+                    current_app.config["IMAGES_FOLDER"], image.bland_image_path
+                )
+            )
+            os.remove(
+                os.path.join(current_app.config["IMAGES_FOLDER"], image.mask_image_path)
+            )
         except:
             pass
         db.session.delete(image)
@@ -60,6 +98,11 @@ def delete_img(id_img):
 @bp.route("/create_img", methods=["GET", "POST"])
 @login_required
 def create_img():
+    """View function for the image upload page.
+
+    Returns:
+        str: Image upload HTML page and form and redirects to the image index.
+    """
     # If args in URL, try to retrive report from DB and pre-fill it
     if request.args:
         image_request = Image.query.get(request.args.get("id"))

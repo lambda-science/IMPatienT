@@ -1,33 +1,45 @@
-import os
 import json
+import os
+
+from app import db
+from app.historeport.onto_func import StandardVocabulary
+from app.models import ReportHisto
+from app.ontocreate import bp
+from app.ontocreate.forms import InvertLangButton, OntologyDescript
 from flask import (
-    render_template,
     current_app,
-    send_from_directory,
-    request,
     redirect,
+    render_template,
+    request,
+    send_from_directory,
     url_for,
 )
 from flask_login import login_required
 from sqlalchemy.orm.attributes import flag_modified
-from app import db
-from app.ontocreate import bp
-from app.ontocreate.forms import OntologyDescript, InvertLangButton
-from app.models import ReportHisto
-from app.historeport.onto_func import StandardVocabulary
 
 
 @bp.route("/ontology/<path:filename>")
 @login_required
 def onto_json(filename):
-    """Serve ontology json file"""
+    """Route to serve the standard vocabulary JSON file. Used internally by JSTree.
+
+    Args:
+        filename (str): Standard vocabulary JSON file name.
+
+    Returns:
+        File: returns the file
+    """
     return send_from_directory(current_app.config["ONTOLOGY_FOLDER"], filename)
 
 
 @bp.route("/ontocreate", methods=["GET", "POST"])
 @login_required
 def ontocreate():
-    """View used to show and modify ontology tree"""
+    """View function for the standard vocabulary creator module.
+
+    Returns:
+        str: HTML page for the standard creator module.
+    """
     form = OntologyDescript()
     form2 = InvertLangButton()
     return render_template("ontocreate.html", form=form, form2=form2)
@@ -36,7 +48,12 @@ def ontocreate():
 @bp.route("/modify_onto", methods=["PATCH"])
 @login_required
 def modify_onto():
-    """Update ontology json file with PATCH Ajax Request from JSTree"""
+    """API PATCH route to update the standard vocabulary JSON file with modifications.
+    PATCH AJAX Requestion from JSTree.
+
+    Returns:
+        json: JSON response with success code.
+    """
     # Get AJAX JSON data and parse it
     raw_data = request.get_data()
     parsed = json.loads(raw_data)
@@ -76,6 +93,7 @@ def modify_onto():
     dashapp = current_app.config["DASHAPP"]
     with current_app.app_context():
         import importlib
+
         import app.dashapp.layout
 
         importlib.reload(app.dashapp.layout)
@@ -86,7 +104,11 @@ def modify_onto():
 @bp.route("/download_onto", methods=["GET"])
 @login_required
 def download_onto():
-    """Download ontology tree"""
+    """Route to download the standard vocabulary JSON file.
+
+    Returns:
+        File: returns the file
+    """
     return send_from_directory(
         current_app.config["ONTOLOGY_FOLDER"], "ontology.json", as_attachment=True
     )
@@ -95,7 +117,11 @@ def download_onto():
 @bp.route("/invert_lang", methods=["POST"])
 @login_required
 def invert_lang():
-    """Download ontology tree"""
+    """API POST route to invert the language of the standard vocabulary JSON file.
+
+    Returns:
+        redirect: Refreshes the page to reload the Standard Vocabulary JSON file.
+    """
 
     # Open the ontology, invert text and alternative field, save it
     with open(

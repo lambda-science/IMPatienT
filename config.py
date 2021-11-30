@@ -1,5 +1,7 @@
 import os
+
 from dotenv import load_dotenv
+
 import app.src.common as Common
 
 # Get base working directory and load env variables
@@ -14,22 +16,22 @@ class Config(object):
     DEFAULT_ADMIN_EMAIL = os.environ.get("DEFAULT_ADMIN_EMAIL") or "admin@admin.admin"
     DEFAULT_ADMIN_PASSWORD = os.environ.get("DEFAULT_ADMIN_PASSWORD") or "admin"
     SECRET_KEY = os.environ.get("SECRET_KEY") or "myverylongsecretkey"
-    
+
     DATA_FOLDER = os.path.join(basedir, "data")
     ONTOLOGY_FOLDER = os.path.join(basedir, "data", "ontology")
     IMAGES_FOLDER = os.path.join(basedir, "data", "images")
     CONFIG_FOLDER = os.path.join(basedir, "config")
     VIZ_FOLDER = os.path.join(basedir, "app", "static", "viz")
 
-    negex_en = open(os.path.join(CONFIG_FOLDER, "negex_en.txt"),"r")
-    negex_fr = open(os.path.join(CONFIG_FOLDER, "negex_fr.txt"),"r")
-    NEGEX_LIST_EN = [line.strip('\n') for line in negex_en.readlines()]
-    NEGEX_LIST_FR = [line.strip('\n') for line in negex_fr.readlines()]
+    negex_en = open(os.path.join(CONFIG_FOLDER, "negex_en.txt"), "r")
+    negex_fr = open(os.path.join(CONFIG_FOLDER, "negex_fr.txt"), "r")
+    NEGEX_LIST_EN = [line.strip("\n") for line in negex_en.readlines()]
+    NEGEX_LIST_FR = [line.strip("\n") for line in negex_fr.readlines()]
 
-    negex_sent_en = open(os.path.join(CONFIG_FOLDER, "negex_sep_en.txt"),"r")
-    negex_sent_fr = open(os.path.join(CONFIG_FOLDER, "negex_sep_fr.txt"),"r")
-    NEGEX_SENT_EN = [line.strip('\n') for line in negex_sent_en.readlines()]
-    NEGEX_SENT_FR = [line.strip('\n') for line in negex_sent_fr.readlines()]
+    negex_sent_en = open(os.path.join(CONFIG_FOLDER, "negex_sep_en.txt"), "r")
+    negex_sent_fr = open(os.path.join(CONFIG_FOLDER, "negex_sep_fr.txt"), "r")
+    NEGEX_SENT_EN = [line.strip("\n") for line in negex_sent_en.readlines()]
+    NEGEX_SENT_FR = [line.strip("\n") for line in negex_sent_fr.readlines()]
 
     SEND_FILE_MAX_AGE_DEFAULT = 0
     SESSION_COOKIE_SAMESITE = "Lax"

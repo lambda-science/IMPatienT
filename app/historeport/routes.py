@@ -136,7 +136,6 @@ def delete_report(id_report):
     Returns:
         redirect: Redirect to the report index HTML page
     """
-    """Page delete a histology report from database with delete button."""
     form = DeleteButton()
     # Retrieve database entry and delete it if existing
     if form.validate_on_submit():

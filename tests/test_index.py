@@ -1,6 +1,6 @@
-import unittest
 import os
 import sys
+import unittest
 
 topdir = os.path.join(os.path.dirname(__file__), "..")
 sys.path.append(topdir)
@@ -19,7 +19,7 @@ class TestConfig(Config):
 
 
 class IndexView(unittest.TestCase):
-    """Class for User authentification test case"""
+    """Class for the index page test case"""
 
     def setUp(self):
         self.app = create_app(TestConfig)
