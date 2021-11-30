@@ -8,7 +8,7 @@ sys.path.append(topdir)
 
 from app import create_app, db
 from app.models import User
-from app.historeport.onto_func import Ontology
+from app.historeport.onto_func import StandardVocabulary
 from config import Config
 
 
@@ -51,8 +51,12 @@ class HistoReportCase(unittest.TestCase):
         assert b"Digitalize a new report" in rv.data
 
     def test_update_from_template(self):
-        report = Ontology(json.load(open("tests/data/sample_historeport.json", "r")))
-        template = Ontology(json.load(open("tests/data/sample_template.json", "r")))
+        report = StandardVocabulary(
+            json.load(open("tests/data/sample_historeport.json", "r"))
+        )
+        template = StandardVocabulary(
+            json.load(open("tests/data/sample_template.json", "r"))
+        )
         result = report.update_ontology(template)
         node_names = [i["text"] for i in result]
         assert "OUTDATED : Fibre Type 1" in node_names

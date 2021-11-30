@@ -29,16 +29,16 @@ A demo instance of the application is available at https://ehroes.lbgi.fr.
 
 ### (DOCKER) Developper Mode Setup (to contribute)
 
-[See the wiki page: Developper Mode Setup (DOCKER)](<https://github.com/lambda-science/EHRoes-App/wiki/(DOCKER)-Developper-Mode-Setup-(to-contribute)>)
+[See the wiki page: Developper Mode Setup (DOCKER)](<https://github.com/lambda-science/EHRoes/wiki/(DOCKER)-Developper-Mode-Setup-(to-contribute)>)
 
 ### (DOCKER) Deploy to production & Maintain EHRoes
 
-[See the wiki page: Deploy and maintain (DOCKER)](<https://github.com/lambda-science/EHRoes-App/wiki/(DOCKER)-Deploy-&-Maintain-EHRoes>)
+[See the wiki page: Deploy and maintain (DOCKER)](<https://github.com/lambda-science/EHRoes/wiki/(DOCKER)-Deploy-&-Maintain-EHRoes>)
 
 ### (LINUX) Deploy to production & Maintain EHRoes
 
-[See the wiki page: Deploy and maintain (LINUX)](<https://github.com/lambda-science/EHRoes-App/wiki/(LINUX)-Deploy-&-Maintain-EHRoes>)
+[See the wiki page: Deploy and maintain (LINUX)](<https://github.com/lambda-science/EHRoes/wiki/(LINUX)-Deploy-&-Maintain-EHRoes>)
 
 ### (LEGACY - Deprecated) Developper Mode Setup (non-docker)
 
-[See the wiki page: Developper Mode Setup (non-docker)](<https://github.com/lambda-science/EHRoes-App/wiki/(LEGACY---Deprecated)-Developper-Mode-Setup-(non-docker)>)
+[See the wiki page: Developper Mode Setup (non-docker)](<https://github.com/lambda-science/EHRoes/wiki/(LEGACY---Deprecated)-Developper-Mode-Setup-(non-docker)>)

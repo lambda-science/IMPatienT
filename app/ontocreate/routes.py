@@ -14,7 +14,8 @@ from app import db
 from app.ontocreate import bp
 from app.ontocreate.forms import OntologyDescript, InvertLangButton
 from app.models import ReportHisto
-from app.historeport.onto_func import Ontology
+from app.historeport.onto_func import StandardVocabulary
+
 
 @bp.route("/ontology/<path:filename>")
 @login_required
@@ -58,9 +59,9 @@ def modify_onto():
         json.dump(clean_tree, json_file, indent=4)
 
     # Update All Reports to the latest Version of ontology
-    template_ontology = Ontology(clean_tree)
+    template_ontology = StandardVocabulary(clean_tree)
     for report in ReportHisto.query.all():
-        current_report_ontology = Ontology(report.ontology_tree)
+        current_report_ontology = StandardVocabulary(report.ontology_tree)
         updated_report_ontology = json.loads(
             json.dumps(current_report_ontology.update_ontology(template_ontology))
         )
@@ -76,6 +77,7 @@ def modify_onto():
     with current_app.app_context():
         import importlib
         import app.dashapp.layout
+
         importlib.reload(app.dashapp.layout)
         dashapp.layout = app.dashapp.layout.layout
     return json.dumps({"success": True}), 200, {"ContentType": "application/json"}
@@ -113,9 +115,9 @@ def invert_lang():
         json.dump(onto, fp, indent=4)
 
     # After Switching lang, switch it for all patients onto_tree !
-    template_ontology = Ontology(onto)
+    template_ontology = StandardVocabulary(onto)
     for report in ReportHisto.query.all():
-        current_report_ontology = Ontology(report.ontology_tree)
+        current_report_ontology = StandardVocabulary(report.ontology_tree)
         updated_report_ontology = json.loads(
             json.dumps(current_report_ontology.update_ontology(template_ontology))
         )

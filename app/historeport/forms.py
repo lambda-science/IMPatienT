@@ -1,21 +1,25 @@
-import os
 import json
-from flask_wtf import FlaskForm
-from wtforms import (
-    StringField,
-    SubmitField,
-    #    RadioField,
-    SelectField,
-    TextAreaField,
-)
-from wtforms.fields.html5 import DecimalRangeField
-from wtforms.validators import DataRequired, Regexp, Length, NumberRange
-from wtforms import fields
+import os
+
 import app.src.common as Common
+from flask_wtf import FlaskForm
+from wtforms import SelectField, StringField, SubmitField, TextAreaField, fields
+from wtforms.fields.html5 import DecimalRangeField
+from wtforms.validators import DataRequired, Length, NumberRange, Regexp
 
 
 class JSONField(fields.StringField):
-    """Form Field for JSON Handeling"""
+    """Extension of WTForms string field to handle JSON data.
+
+    Args:
+        fields (WTForm object): StringField object of WTForms
+
+    Raises:
+        ValueError: If JSON data is invalid
+
+    Returns:
+        str: JSON data as string
+    """
 
     def _value(self):
         return json.dumps(self.data) if self.data else ""
@@ -39,7 +43,11 @@ class JSONField(fields.StringField):
 
 
 class ReportForm(FlaskForm):
-    """Form used for report registration."""
+    """Form for textual reports.
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     patient_id = StringField(
         "Patient ID",
@@ -110,7 +118,11 @@ class ReportForm(FlaskForm):
 
 
 class OntologyDescriptPreAbs(FlaskForm):
-    """Form used to show node informations from ontology tree"""
+    """Form used to show informations about the ontology tree selected node.
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     onto_id_ext = StringField(
         "Vocabulary ID",
@@ -201,6 +213,10 @@ class OntologyDescriptPreAbs(FlaskForm):
 
 
 class DeleteButton(FlaskForm):
-    """Empty form for delete button"""
+    """Empty form for the delete button.
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     submit = SubmitField("Confirm Deletion", render_kw={"class": "btn btn-danger"})

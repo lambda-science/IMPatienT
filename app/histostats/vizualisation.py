@@ -16,8 +16,8 @@ import plotly.figure_factory as ff
 
 
 def table_to_df(df):
-    # Transformation de la table SQLite en dataframe en parsant l'arbre JSON
-    # Return un dictionnaire et une liste de colonnes (les features histo)
+    # Transformation of the SQLite table to a Pandas DataFrame by parsing the JSON tree
+    # Returns a dictionnary and a list of columns (standard terms)
     tree_as_dict = {}
     features_col = []
     for index, row in df.iterrows():
