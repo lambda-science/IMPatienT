@@ -32,6 +32,9 @@ RUN chown ehroes:ehroes /home/ehroes
 RUN chmod a+x boot.sh
 
 ENV FLASK_APP ehroes.py
+
+RUN usermod -u 1000 ehroes
+RUN usermod -G staff ehroes
 USER ehroes
 
 EXPOSE 5000
