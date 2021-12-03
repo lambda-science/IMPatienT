@@ -16,5 +16,5 @@ docker run --name ehroes -d -p $APP_PORT:5000 -it -e SECRET_KEY=$SECRET_KEY \
     -e DEFAULT_ADMIN_EMAIL=$DEFAULT_ADMIN_EMAIL \
     -e DEFAULT_ADMIN_PASSWORD=$DEFAULT_ADMIN_PASSWORD \
     -e ADMINS_EMAIL=$ADMINS_EMAIL \
-    --mount 'type=volume,src=dataehroes,dst=/home/ehroes/data' \
+    -v dataehroes:/home/ehroes/data \
     --restart unless-stopped ehroes:latest
