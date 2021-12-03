@@ -9,7 +9,7 @@ DEFAULT_ADMIN_EMAIL=<admin_email>
 DEFAULT_ADMIN_PASSWORD=<admin_password>
 ADMINS_EMAIL=<admin_email>
 
-docker run --name ehroes -d -p $APP_PORT:5000 --rm -e SECRET_KEY=$SECRET_KEY \
+docker run --name ehroes -d -p $APP_PORT:5000 -it -e SECRET_KEY=$SECRET_KEY \
     -e MAIL_SERVER=$MAIL_SERVER -e MAIL_PORT=$MAIL_PORT -e MAIL_USE_TLS=true \
     -e MAIL_USERNAME=$MAIL_USERNAME -e MAIL_PASSWORD=$MAIL_PASSWORD \
     -e DEFAULT_ADMIN_USERNAME=$DEFAULT_ADMIN_USERNAME \
@@ -17,5 +17,4 @@ docker run --name ehroes -d -p $APP_PORT:5000 --rm -e SECRET_KEY=$SECRET_KEY \
     -e DEFAULT_ADMIN_PASSWORD=$DEFAULT_ADMIN_PASSWORD \
     -e ADMINS_EMAIL=$ADMINS_EMAIL \
     --mount 'type=volume,src=dataehroes,dst=/home/ehroes/data' \
-    --restart \
-    ehroes:latest
+    --restart unless-stopped ehroes:latest
