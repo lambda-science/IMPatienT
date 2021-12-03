@@ -1,27 +1,24 @@
 import json
 
-from flask_login import current_user, login_required
-from flask import (
-    render_template,
-    request,
-    flash,
-    redirect,
-    url_for,
-    current_app,
-)
 from app import db
 from app.historeport import bp
-from app.models import ReportHisto
-from app.historeport.forms import ReportForm, OntologyDescriptPreAbs, DeleteButton
-from app.historeport.onto_func import Ontology
 from app.historeport.boqa import *
-from app.historeport.ocr import Rapport
+from app.historeport.forms import DeleteButton, OntologyDescriptPreAbs, ReportForm
+from app.historeport.ocr import TextReport
+from app.historeport.onto_func import StandardVocabulary
+from app.models import ReportHisto
+from flask import current_app, flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required
 
 
 @bp.route("/historeport", methods=["GET", "POST"])
 @login_required
 def histoindex():
-    """Page for management of reports registered in database."""
+    """View function for the text report index
+
+    Returns:
+        str: Report Index HTML Page
+    """
     form = DeleteButton()
     report_history = ReportHisto.query.all()
     return render_template("histo_index.html", history=report_history, form=form)
@@ -30,7 +27,12 @@ def histoindex():
 @bp.route("/historeport/new", methods=["GET", "POST"])
 @login_required
 def historeport():
-    """Page to create new histology report of modify already existing one."""
+    """View function for the text report registration form.
+    Or modify an existing report.
+
+    Returns:
+        str: Report Registration HTML Page
+    """
     # If args in URL, try to retrive report from DB and pre-fill it
     ontology_tree_exist = False
     if request.args:
@@ -69,7 +71,7 @@ def historeport():
             report_entry = ReportHisto.query.get(request.args.get("id"))
             if report_entry is not None:
                 form.populate_obj(report_entry)
-                onto_jstree = Ontology(report_entry.ontology_tree)
+                onto_jstree = StandardVocabulary(report_entry.ontology_tree)
                 report_entry.ontology_tree = onto_jstree.clean_tree()
                 report_entry.expert_id = current_user.id
                 try:
@@ -93,7 +95,7 @@ def historeport():
         else:
             report_entry = ReportHisto()
             form.populate_obj(report_entry)
-            onto_jstree = Ontology(report_entry.ontology_tree)
+            onto_jstree = StandardVocabulary(report_entry.ontology_tree)
             report_entry.ontology_tree = onto_jstree.clean_tree()
             report_entry.expert_id = current_user.id
             db.session.add(report_entry)
@@ -126,7 +128,14 @@ def historeport():
 @bp.route("/delete_report/<id_report>", methods=["POST"])
 @login_required
 def delete_report(id_report):
-    """Page delete a histology report from database with delete button."""
+    """Route for the deletion of a registered text report.
+
+    Args:
+        id_report (int): ID of the report to delete
+
+    Returns:
+        redirect: Redirect to the report index HTML page
+    """
     form = DeleteButton()
     # Retrieve database entry and delete it if existing
     if form.validate_on_submit():
@@ -145,6 +154,11 @@ def delete_report(id_report):
 @bp.route("/predict_diag_boqa/", methods=["POST"])
 @login_required
 def predict_diag_boqa():
+    """API POST route for the prediction of a text report class using BOQA.
+
+    Returns:
+        str: JSON string with the best prediction results and its score
+    """
     class_label = {
         "CNM": "Centronuclear Myopathy",
         "COM": "Core Myopathy",
@@ -168,9 +182,15 @@ def predict_diag_boqa():
 @bp.route("/ocr_pdf", methods=["POST"])
 @login_required
 def ocr_pdf():
+    """API POST route for the OCR/NLP of a PDF file.
+
+    Returns:
+        str: JSON string with the results of the OCR/NLP (list of matched
+        standard terms)
+    """
     if request.method == "POST":
         file_val = request.files["file"]
-        pdf_object = Rapport(file_obj=file_val, lang=request.form["lang"])
+        pdf_object = TextReport(file_obj=file_val, lang=request.form["lang"])
         pdf_object.pdf_to_text()
         # pdf_object.detect_sections()
         # pdf_object.extract_section_text()

@@ -1,18 +1,20 @@
-from flask import flash, request, redirect, url_for, render_template
-from flask_login import current_user, login_user, logout_user
-from werkzeug.urls import url_parse
-
 from app import db
 from app.auth import bp
-from app.auth.forms import LoginForm, ResetPasswordRequestForm, ResetPasswordForm
-from app.models import User
 from app.auth.email import send_password_reset_email
-from app.historeport.ocr import Rapport
+from app.auth.forms import LoginForm, ResetPasswordForm, ResetPasswordRequestForm
+from app.models import User
+from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_user, logout_user
+from werkzeug.urls import url_parse
 
 
 @bp.route("/login", methods=["GET", "POST"])
 def login():
-    """View page to log in"""
+    """The login page
+
+    Returns:
+        str: Login HTML Page
+    """
     # Already auth. user are redirected to index
     if current_user.is_authenticated:
         return redirect(url_for("index.index"))
@@ -35,7 +37,11 @@ def login():
 
 @bp.route("/logout")
 def logout():
-    """View page to logout"""
+    """Logout Page
+
+    Returns:
+        str: Logout HTML Page
+    """ """View page to logout"""
     flash("You were logged out", "info")
     logout_user()
     return redirect(url_for("auth.login"))
@@ -43,7 +49,11 @@ def logout():
 
 @bp.route("/reset_password_request", methods=["GET", "POST"])
 def reset_password_request():
-    """View page to request password reset"""
+    """Reset password request page
+
+    Returns:
+        str: Reset password request HTML Page or redirection to login page
+    """ """View page to request password reset"""
     # If Logged already: redirect to index
     if current_user.is_authenticated:
         return redirect(url_for("index.index"))
@@ -67,7 +77,14 @@ def reset_password_request():
 
 @bp.route("/reset_password/<token>", methods=["GET", "POST"])
 def reset_password(token):
-    """View page to create new password if token is valid"""
+    """Create new password page
+
+    Args:
+        token (str): JWT-Token to reset password
+
+    Returns:
+        str: HTML Page to create new password or redirection to login page
+    """
     # If Logged already: redirect to index
     if current_user.is_authenticated:
         return redirect(url_for("index.index"))

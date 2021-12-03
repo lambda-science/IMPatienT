@@ -1,13 +1,18 @@
 import os
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, SubmitField, SelectField
-from wtforms.validators import DataRequired, Regexp
+
 import app.src.common as Common
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed, FileField, FileRequired
+from wtforms import SelectField, StringField, SubmitField
+from wtforms.validators import DataRequired, Regexp
 
 
 class ImageForm(FlaskForm):
-    """Form used for image uploading"""
+    """Form for uploading images.
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     image = FileField(
         validators=[
@@ -71,6 +76,10 @@ class ImageForm(FlaskForm):
 
 
 class DeleteButton(FlaskForm):
-    """Empty form for delete button"""
+    """Empty form for the delete button.
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     submit = SubmitField("Confirm Deletion", render_kw={"class": "btn btn-danger"})

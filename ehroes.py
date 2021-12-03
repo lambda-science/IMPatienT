@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.models import User, Image, ReportHisto
+from app.models import Image, ReportHisto, User
 
 # Create instance of app
 app = create_app()
@@ -7,6 +7,7 @@ app = create_app()
 
 @app.before_first_request
 def create_admin():
+    """Create admin user if no user registered"""
     User.create_admin_account()
 
 

@@ -1,9 +1,13 @@
-from flask import render_template, current_app
 from app.email import send_email
+from flask import current_app, render_template
 
 
 def send_password_reset_email(user):
-    """Function to send a token by email to user to reset his password"""
+    """Sent a token by email to reset the password
+
+    Args:
+        user (SQLAlchemy Object): The user who requested the password reset
+    """    
     token = user.get_reset_password_token()
     send_email(
         ("[EHRoes] Reset Your Password"),

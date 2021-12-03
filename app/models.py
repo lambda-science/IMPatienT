@@ -1,11 +1,12 @@
-from time import time
-import jwt
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
-from flask import current_app
-from app import db
-from app import login
 import datetime
+from time import time
+
+import jwt
+from flask import current_app
+from flask_login import UserMixin
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from app import db, login
 
 
 class User(UserMixin, db.Model):
@@ -27,15 +28,33 @@ class User(UserMixin, db.Model):
         return "<User {} Email {}>".format(self.username, self.email)
 
     def set_password(self, password):
-        """Method to hash password in DB"""
+        """Method to hash password to the database
+
+        Args:
+            password (str): Plain-text password
+        """
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        """Method to check plain-text password against hashed password"""
+        """Method to check if the plain-text password matches the hashed one
+
+        Args:
+            password (str): Plain-text password
+
+        Returns:
+            bool: True if the password matches, False otherwise
+        """
         return check_password_hash(self.password_hash, password)
 
     def get_reset_password_token(self, expires_in=600):
-        """Method generate a password reset token"""
+        """Generate a JWT Token to reset password.
+
+        Args:
+            expires_in (int, optional): Token validity duration. Defaults to 600.
+
+        Returns:
+            JWT Token: The generated token as string
+        """
         return jwt.encode(
             {"reset_password": self.id, "exp": time() + expires_in},
             current_app.config["SECRET_KEY"],
@@ -44,7 +63,15 @@ class User(UserMixin, db.Model):
 
     @staticmethod
     def verify_reset_password_token(token):
-        """Method to check if token is valid"""
+        """Method to check if the token is valid
+
+        Args:
+            token (JWT Token): The token to check
+
+        Returns:
+            SQLAlchemy Obj: Return the user database entry object if the token is
+            valid, None otherwise
+        """
         try:
             id = jwt.decode(
                 token, current_app.config["SECRET_KEY"], algorithms=["HS256"]
@@ -55,7 +82,7 @@ class User(UserMixin, db.Model):
 
     @staticmethod
     def create_admin_account():
-        # Create default admin account if user table is empty
+        """Create a default admin account if no user is present in the database"""
         user_entry = User.query.get(1)
         if not user_entry:
             user = User(
@@ -69,7 +96,14 @@ class User(UserMixin, db.Model):
 
 @login.user_loader
 def load_user(id):
-    """Method to load current user in flask-login"""
+    """Method to load current user in Flask-Login
+
+    Args:
+        id (str): User ID in database
+
+    Returns:
+        SQLAlchemy Obj: Return the user database entry object corresponding to the ID
+    """
     return User.query.get(int(id))
 
 
@@ -95,7 +129,12 @@ class Image(db.Model):
         return "<Image Name {} Patient {}>".format(self.image_name, self.patient_id)
 
     def isduplicated(self):
-        """Method to check if new entry already exist"""
+        """Method to check if the image is already in the
+        database (same name and patient ID)
+
+        Returns:
+            bool: True if the image is already in the database, False otherwise
+        """
         if (
             Image.query.filter_by(
                 image_name=self.image_name, patient_id=self.patient_id
@@ -108,7 +147,7 @@ class Image(db.Model):
 
 
 class ReportHisto(db.Model):
-    """Database table histology reports"""
+    """Database table text reports"""
 
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.String(100), index=True)

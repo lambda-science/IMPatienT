@@ -1,6 +1,6 @@
-import unittest
 import os
 import sys
+import unittest
 
 topdir = os.path.join(os.path.dirname(__file__), "..")
 sys.path.append(topdir)

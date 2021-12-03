@@ -1,15 +1,20 @@
 import json
 import os
-from flask_login import login_required
-from flask import render_template, current_app
+
 from app.histostats import bp
 from app.histostats.vizualisation import *
+from flask import current_app, render_template
+from flask_login import login_required
 
 
 @bp.route("/histostats", methods=["GET", "POST"])
 @login_required
 def statsindex():
-    """Page for histo statistics page."""
+    """View function for the automatic dashboard visualization
+
+    Returns:
+        str: Dashboard HTML Page
+    """
     # Up to stat_per_diag to move in the historeport part to not always regenerate
     df = db_to_df()
     df, features_col = table_to_df(df)
@@ -18,7 +23,6 @@ def statsindex():
     graph_viz = create_plotly_viz(df)
     graph_UNCLEAR = generate_UNCLEAR(df)
     graph_matrixboqa = generate_confusion_BOQA(df)
-    # create_basic_viz(df)
     generate_corr_matrix(df)
     update_phenotype_gene(df)
 

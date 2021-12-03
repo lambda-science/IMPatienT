@@ -1,0 +1,2948 @@
+[
+    {
+        "id": "MHO:000076",
+        "text": "ATPase staining",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Enzymologie ATPasique",
+            "correlates_with": "",
+            "hex_color": "#C19CF4"
+        },
+        "parent": "#"
+    },
+    {
+        "id": "MHO:000089",
+        "text": "ATPase activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 ATPasique",
+            "correlates_with": "",
+            "hex_color": "#C5326E"
+        },
+        "parent": "MHO:000076"
+    },
+    {
+        "id": "MHO:000095",
+        "text": "Abnormal ATPase activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM",
+            "gene_datamined": "TTN",
+            "alternative_language": "Activit\u00e9 ATPasique Anormale",
+            "correlates_with": "",
+            "hex_color": "#ABC865"
+        },
+        "parent": "MHO:000089"
+    },
+    {
+        "id": "MHO:000090",
+        "text": "Acid-Resistant Activity (Type 1)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Acide-Resistant,Acid-Resistant",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Acide-R\u00e9sistant (Type 1)",
+            "correlates_with": "",
+            "hex_color": "#80A42F"
+        },
+        "parent": "MHO:000089"
+    },
+    {
+        "id": "MHO:000091",
+        "text": "Central ATP activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM",
+            "gene_datamined": "DHPR,MTM1",
+            "alternative_language": "Activit\u00e9 ATP Centrale",
+            "correlates_with": "",
+            "hex_color": "#188893"
+        },
+        "parent": "MHO:000089"
+    },
+    {
+        "id": "MHO:000093",
+        "text": "Extended Range Activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Plage \u00e9tendue,Extended Range",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 en Plage \u00e9tendue",
+            "correlates_with": "",
+            "hex_color": "#1B8ED5"
+        },
+        "parent": "MHO:000089"
+    },
+    {
+        "id": "MHO:000094",
+        "text": "Halo activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Halo",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 en Halo",
+            "correlates_with": "",
+            "hex_color": "#0F1786"
+        },
+        "parent": "MHO:000089"
+    },
+    {
+        "id": "MHO:000096",
+        "text": "Locally Abnormal ATP Activity (Clear Zone)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,NM",
+            "gene_datamined": "MTM1,NEB,TTN",
+            "synonymes": "localement anormale,locally abnormal",
+            "alternative_language": "Activit\u00e9 ATPasique Anormale Localement (Zone Claire)",
+            "correlates_with": "",
+            "hex_color": "#A093D4"
+        },
+        "parent": "MHO:000089"
+    },
+    {
+        "id": "MHO:000092",
+        "text": "Peripheral ATP activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "p\u00e9riph\u00e9rique,peripheral",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 ATP P\u00e9riph\u00e9rique",
+            "correlates_with": "",
+            "hex_color": "#A0C802"
+        },
+        "parent": "MHO:000089"
+    },
+    {
+        "id": "MHO:000077",
+        "text": "Fibre differentiation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Diff\u00e9rentiation des Fibres",
+            "correlates_with": "",
+            "hex_color": "#CB89E3"
+        },
+        "parent": "MHO:000076"
+    },
+    {
+        "id": "MHO:000078",
+        "text": "Abnormal differentiation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Abnormal differentiation,Increase in the number of nuclei",
+            "alternative_language": "Diff\u00e9renciation Anormale",
+            "hex_color": "#613C20"
+        },
+        "parent": "MHO:000077"
+    },
+    {
+        "id": "MHO:000080",
+        "text": "Area without ATPase activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Area without ATPase activity,Fuscinophilic material: Dark clusters/aggregates,Rods",
+            "alternative_language": "Zone sans activit\u00e9 ATPase",
+            "hex_color": "#7C0CD9"
+        },
+        "parent": "MHO:000077"
+    },
+    {
+        "id": "MHO:000079",
+        "text": "Pale Atrophic Fibre Staining",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration P\u00e2le des Fibre Atrophiques",
+            "correlates_with": "",
+            "hex_color": "#41CA1C"
+        },
+        "parent": "MHO:000077"
+    },
+    {
+        "id": "MHO:000081",
+        "text": "Type Uniformity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,NM,UNCLEAR",
+            "gene_datamined": "DHPR,MTM1,N/A,TTN",
+            "correlates_with": "Connective Interstitial Tissue Increase,Predominance Fibre Type 1,Structural Disorganisation,Type Uniformity",
+            "alternative_language": "Uniformit\u00e9 de Type",
+            "hex_color": "#C6FD2F"
+        },
+        "parent": "MHO:000077"
+    },
+    {
+        "id": "MHO:000082",
+        "text": "Numeric Fibre Distribution",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "R\u00e9partition Num\u00e9rique des Fibres",
+            "correlates_with": "",
+            "hex_color": "#59C385"
+        },
+        "parent": "MHO:000076"
+    },
+    {
+        "id": "MHO:000083",
+        "text": "Predominance Fibre Type 1",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,COM,NM,UNCLEAR",
+            "gene_datamined": "ACTA1,BIN1,DHPR,MTM1,N/A,NEB,RYR1,TTN",
+            "correlates_with": "Predominance Fibre Type 1,Type Uniformity",
+            "alternative_language": "Pr\u00e9dominance Fibre Type 1",
+            "hex_color": "#7E19C5"
+        },
+        "parent": "MHO:000082"
+    },
+    {
+        "id": "MHO:000084",
+        "text": "Predominance Fibre Type 2",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Nuclei with Myotubular Aspects,Predominance Fibre Type 2",
+            "alternative_language": "Pr\u00e9dominance Fibre Type 2",
+            "hex_color": "#4BEBA8"
+        },
+        "parent": "MHO:000082"
+    },
+    {
+        "id": "MHO:000085",
+        "text": "Topographical Distribution of Fibre Types",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "R\u00e9partition Topographique des Types de Fibre",
+            "correlates_with": "",
+            "hex_color": "#3B7F84"
+        },
+        "parent": "MHO:000076"
+    },
+    {
+        "id": "MHO:000086",
+        "text": "Fibre bundling",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Fibre bundling,Fibres 1 Grouped,Fibres 2 Grouped",
+            "alternative_language": "Regroupement des Fibres",
+            "hex_color": "#55DEBE"
+        },
+        "parent": "MHO:000085"
+    },
+    {
+        "id": "MHO:000087",
+        "text": "Fibres 1 Grouped",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "TTN",
+            "correlates_with": "Fibre bundling,Fibres 1 Grouped,Fibres 2 Grouped",
+            "alternative_language": "Fibres 1 Group\u00e9es",
+            "hex_color": "#4D26F1"
+        },
+        "parent": "MHO:000085"
+    },
+    {
+        "id": "MHO:000088",
+        "text": "Fibres 2 Grouped",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Fibre bundling,Fibres 1 Grouped,Fibres 2 Grouped",
+            "alternative_language": "Fibres 2 Group\u00e9es",
+            "hex_color": "#D8390D"
+        },
+        "parent": "MHO:000085"
+    },
+    {
+        "id": "MHO:000156",
+        "text": "Electron Microscopy (EM)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Microscopie Electronique (ME)",
+            "correlates_with": "",
+            "hex_color": "#D08E9B"
+        },
+        "parent": "#"
+    },
+    {
+        "id": "MHO:000160",
+        "text": "ME: A Band",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "A-band,Bande A",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "ME: Bande A",
+            "correlates_with": "",
+            "hex_color": "#7A8142"
+        },
+        "parent": "MHO:000156"
+    },
+    {
+        "id": "MHO:000164",
+        "text": "ME: Autophagic vacuoles",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Vacuoles autophagiques,Autophagic vacuoles",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "ME: Vacuoles Autophagiques",
+            "correlates_with": "",
+            "hex_color": "#34FA8E"
+        },
+        "parent": "MHO:000156"
+    },
+    {
+        "id": "MHO:000167",
+        "text": "ME: CAPS-type lesions",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "CAPS,Lesions Caps",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "ME: L\u00e9sions de type CAPS",
+            "correlates_with": "",
+            "hex_color": "#17FE15"
+        },
+        "parent": "MHO:000156"
+    },
+    {
+        "id": "MHO:000157",
+        "text": "ME: Sarcomeric structure",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "ME: Structure sarcom\u00e9rique",
+            "correlates_with": "",
+            "hex_color": "#8B87EB"
+        },
+        "parent": "MHO:000156"
+    },
+    {
+        "id": "MHO:000159",
+        "text": "ME: Crescent-shaped sarcomeric structure",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Crescent sarcomeric structure,Structure sarcom\u00e9rique en croissant",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "ME: Structure sarcom\u00e9rique en Croissant",
+            "correlates_with": "",
+            "hex_color": "#E08D25"
+        },
+        "parent": "MHO:000157"
+    },
+    {
+        "id": "MHO:000158",
+        "text": "ME: Disorganized sarcomeric structure",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "D\u00e9sorganis\u00e9e",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "ME: Structure sarcom\u00e9rique Remani\u00e9",
+            "correlates_with": "",
+            "hex_color": "#E6B4EC"
+        },
+        "parent": "MHO:000157"
+    },
+    {
+        "id": "MHO:000165",
+        "text": "ME: Tanker",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "ME: Citerne",
+            "correlates_with": "",
+            "hex_color": "#4511F4"
+        },
+        "parent": "MHO:000156"
+    },
+    {
+        "id": "MHO:000166",
+        "text": "Tanker Expansion",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Dilatation de Citerne",
+            "correlates_with": "",
+            "hex_color": "#C5088D"
+        },
+        "parent": "MHO:000165"
+    },
+    {
+        "id": "MHO:000161",
+        "text": "ME: Z Material",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Z Material",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "ME: Materiel Z",
+            "correlates_with": "",
+            "hex_color": "#B903D6"
+        },
+        "parent": "MHO:000156"
+    },
+    {
+        "id": "MHO:000162",
+        "text": "Z Material: Enlargement",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Elargissement Z,Enlargement Z",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Materiel Z: Elargissement",
+            "correlates_with": "",
+            "hex_color": "#7CBADA"
+        },
+        "parent": "MHO:000161"
+    },
+    {
+        "id": "MHO:000163",
+        "text": "Z Materiel: Streaming",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Streaming Z",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Materiel Z: Streaming",
+            "correlates_with": "",
+            "hex_color": "#89911C"
+        },
+        "parent": "MHO:000161"
+    },
+    {
+        "id": "MHO:000133",
+        "text": "Enzymology Miscellaneous",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "test",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Enzymologie Divers",
+            "correlates_with": "",
+            "hex_color": "#DBF65C"
+        },
+        "parent": "#"
+    },
+    {
+        "id": "MHO:000134",
+        "text": "COX activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 COX",
+            "correlates_with": "",
+            "hex_color": "#66530A"
+        },
+        "parent": "MHO:000133"
+    },
+    {
+        "id": "MHO:000135",
+        "text": "Abnormal COX activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Abnormal COX activity",
+            "alternative_language": "Activit\u00e9 COX Anormale",
+            "hex_color": "#E31559"
+        },
+        "parent": "MHO:000134"
+    },
+    {
+        "id": "MHO:000136",
+        "text": "Local Abnormal COX activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Local Abnormal COX activity,Type 1 Hypertrophic (large)",
+            "alternative_language": "Activit\u00e9 COX Anormale Localement",
+            "hex_color": "#2BEACC"
+        },
+        "parent": "MHO:000134"
+    },
+    {
+        "id": "MHO:000142",
+        "text": "PAS Staining",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration PAS",
+            "correlates_with": "",
+            "hex_color": "#EC3F37"
+        },
+        "parent": "MHO:000133"
+    },
+    {
+        "id": "MHO:000143",
+        "text": "Abnormal PAS Staining (Overload)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM",
+            "gene_datamined": "RYR1",
+            "synonymes": "",
+            "correlates_with": "Abnormal PAS Staining (Overload),Internalized nuclei",
+            "alternative_language": "Coloration PAS Anormale (Surcharge)",
+            "hex_color": "#A3D834"
+        },
+        "parent": "MHO:000142"
+    },
+    {
+        "id": "MHO:000146",
+        "text": "PAS Staining: Diffuse Overload",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration PAS: Surcharge Diffuse",
+            "correlates_with": "",
+            "hex_color": "#3F5B17"
+        },
+        "parent": "MHO:000142"
+    },
+    {
+        "id": "MHO:000148",
+        "text": "PAS Staining: High Contrast Type I and II",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "contraste fort,high contrast",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration PAS: Contraste Fort Type I et II",
+            "correlates_with": "",
+            "hex_color": "#450AAC"
+        },
+        "parent": "MHO:000142"
+    },
+    {
+        "id": "MHO:000145",
+        "text": "PAS Staining: Irregular / Uneven",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration PAS: Irr\u00e9guli\u00e8re / In\u00e9gale",
+            "correlates_with": "",
+            "hex_color": "#2A4A55"
+        },
+        "parent": "MHO:000142"
+    },
+    {
+        "id": "MHO:000144",
+        "text": "PAS Staining: Locally Abnormal (Overload)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Interstitial alterations,PAS Staining: Locally Abnormal (Overload)",
+            "alternative_language": "Coloration PAS Anormale Localement (Surcharge)",
+            "hex_color": "#320000"
+        },
+        "parent": "MHO:000142"
+    },
+    {
+        "id": "MHO:000149",
+        "text": "PAS Staining: Low Level",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "synonymes": "",
+            "alternative_language": "Coloration PAS Teneur Faible",
+            "correlates_with": "",
+            "hex_color": "#1AB017"
+        },
+        "parent": "MHO:000142"
+    },
+    {
+        "id": "MHO:000147",
+        "text": "PAS Staining: Overdosing in Abnormal Fibre",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration PAS: Surchage dans Fibre Anormales",
+            "correlates_with": "",
+            "hex_color": "#FEA257"
+        },
+        "parent": "MHO:000142"
+    },
+    {
+        "id": "MHO:000137",
+        "text": "Phospholipase activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Phospholipases",
+            "correlates_with": "",
+            "hex_color": "#83CC6B"
+        },
+        "parent": "MHO:000133"
+    },
+    {
+        "id": "MHO:000140",
+        "text": "Abnormal Phospholipase Activity Locally",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "ACTA1",
+            "synonymes": "",
+            "correlates_with": "Abnormal Phospholipase Activity Locally",
+            "alternative_language": "Activit\u00e9 Phospholipases Anormale Localement",
+            "hex_color": "#74C1E2"
+        },
+        "parent": "MHO:000137"
+    },
+    {
+        "id": "MHO:000138",
+        "text": "Abnormal Phospholipase+AMP activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "ACTA1",
+            "correlates_with": "Abnormal Phospholipase+AMP activity,Abnormal phospholipase activity,Sub-Sarcolemmal Nuclei",
+            "alternative_language": "Activit\u00e9 Phospholipases+AMP Anormale",
+            "hex_color": "#C7D991"
+        },
+        "parent": "MHO:000137"
+    },
+    {
+        "id": "MHO:000139",
+        "text": "Abnormal phospholipase activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Abnormal Phospholipase+AMP activity,Abnormal phospholipase activity",
+            "alternative_language": "Activit\u00e9 Phospholipases Anormale",
+            "hex_color": "#704E95"
+        },
+        "parent": "MHO:000137"
+    },
+    {
+        "id": "MHO:000141",
+        "text": "Diffuse Phospholipase Activity",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "synonymes": "",
+            "alternative_language": "Activit\u00e9 Phospholipases Diffuse",
+            "correlates_with": "",
+            "hex_color": "#1F5269"
+        },
+        "parent": "MHO:000137"
+    },
+    {
+        "id": "MHO:000150",
+        "text": "Sudan colouring",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration Soudan",
+            "correlates_with": "",
+            "hex_color": "#22DDA9"
+        },
+        "parent": "MHO:000133"
+    },
+    {
+        "id": "MHO:000151",
+        "text": "Sudan Staining: Abornmal (Lipids Overload)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "ACTA1,NEB,TTN",
+            "synonymes": "soudan surcharge,soudan overload,surcharge lipide",
+            "correlates_with": "Rods,Sudan Staining: Abornmal (Lipids Overload)",
+            "alternative_language": "Coloration Soudan: Anormale (Surchage en Lipides)",
+            "hex_color": "#F462F3"
+        },
+        "parent": "MHO:000150"
+    },
+    {
+        "id": "MHO:000152",
+        "text": "Sudan Staining: Lipid Droplets",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "goutelette lipidiques,lipid droplets",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "NEB",
+            "alternative_language": "Coloration Soudan: Goutelettes Lipidiques",
+            "correlates_with": "",
+            "hex_color": "#E9865F"
+        },
+        "parent": "MHO:000150"
+    },
+    {
+        "id": "MHO:000154",
+        "text": "Sudan Staining: Overload in Disorganized Fibres",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "surcharge dans les fibre remani\u00e9es,overload in disorganized fibers",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration Soudan: Surchage dans les Fibres Remani\u00e9es",
+            "correlates_with": "",
+            "hex_color": "#1B0BA7"
+        },
+        "parent": "MHO:000150"
+    },
+    {
+        "id": "MHO:000153",
+        "text": "Sudan Staining: Overload in Type I Fibre",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "surchage dans fibre type I,overload in type I fibre",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration Soudan: Surchage dans Fibre Type I",
+            "correlates_with": "",
+            "hex_color": "#D8BBF1"
+        },
+        "parent": "MHO:000150"
+    },
+    {
+        "id": "MHO:000155",
+        "text": "Sudan Staining: Type II fibres richer than Type I",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Fibre type II plus riche,Fiber type II richer",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration Soudan: Fibres Type II plus riche que Type I",
+            "correlates_with": "",
+            "hex_color": "#9FDD3F"
+        },
+        "parent": "MHO:000150"
+    },
+    {
+        "id": "MHO:000001",
+        "text": "HE and TG staining",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Coloration HE et TG",
+            "correlates_with": "",
+            "hex_color": "#DC4807"
+        },
+        "parent": "#"
+    },
+    {
+        "id": "MHO:000002",
+        "text": "Biopsy Global Aspect",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "synonymes": "",
+            "alternative_language": "Aspect Global Pr\u00e9l\u00e8vement",
+            "correlates_with": "",
+            "hex_color": "#7B1AFF"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000003",
+        "text": "Abnormal Biopsy",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM,NM,UNCLEAR",
+            "gene_datamined": "ACTA1,N/A,NEB,RYR1",
+            "synonymes": "",
+            "alternative_language": "Pr\u00e9l\u00e8vement Anormal",
+            "correlates_with": "",
+            "hex_color": "#A2C7B9"
+        },
+        "parent": "MHO:000002"
+    },
+    {
+        "id": "MHO:000058",
+        "text": "Connective Tissue",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Tissu Conjonctif",
+            "correlates_with": "",
+            "hex_color": "#5824D1"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000059",
+        "text": "Fibrous connective tissue",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,UNCLEAR",
+            "gene_datamined": "MTM1,N/A",
+            "alternative_language": "Tissus conjonctif Fibreux",
+            "correlates_with": "",
+            "hex_color": "#5827D1"
+        },
+        "parent": "MHO:000058"
+    },
+    {
+        "id": "MHO:000060",
+        "text": "Lipomatous connective tissue",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,COM,UNCLEAR",
+            "gene_datamined": "MTM1,N/A,RYR1",
+            "alternative_language": "Tissus conjonctif Lipomateux",
+            "correlates_with": "",
+            "hex_color": "#37CEE2"
+        },
+        "parent": "MHO:000058"
+    },
+    {
+        "id": "MHO:000069",
+        "text": "Endosymal collagen",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Collag\u00e8ne Endosymial",
+            "correlates_with": "",
+            "hex_color": "#B1B19B"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000070",
+        "text": "Increase in Endosymal Collagen",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM",
+            "gene_datamined": "DHPR",
+            "correlates_with": "Centralized Nuclei,Increase in Endosymal Collagen,Internalized nuclei,Sub-Sarcolemmal Nuclei",
+            "alternative_language": "Augmentation du Collag\u00e8ne Endosymial",
+            "hex_color": "#17ACC1"
+        },
+        "parent": "MHO:000069"
+    },
+    {
+        "id": "MHO:000012",
+        "text": "Fibre Size",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Taille Fibre",
+            "correlates_with": "",
+            "hex_color": "#D0A7B3"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000014",
+        "text": "Homogeneous size",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Taille Homog\u00e8ne",
+            "correlates_with": "",
+            "hex_color": "#7A744E"
+        },
+        "parent": "MHO:000012"
+    },
+    {
+        "id": "MHO:000015",
+        "text": "No Topography",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM,NM,UNCLEAR",
+            "gene_datamined": "BIN1,NEB,RYR1,TTN",
+            "correlates_with": "No Topography",
+            "alternative_language": "Sans Topographie",
+            "hex_color": "#8EF386"
+        },
+        "parent": "MHO:000012"
+    },
+    {
+        "id": "MHO:000013",
+        "text": "Unequal Size",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,COM,NM,UNCLEAR",
+            "gene_datamined": "ACTA1,BIN1,DHPR,MTM1,N/A,NEB,PYROXD1,RYR1,TTN",
+            "correlates_with": "Type 1 Heterogeneous size,Unequal Size",
+            "alternative_language": "Taille In\u00e9gale",
+            "hex_color": "#C8F19D"
+        },
+        "parent": "MHO:000012"
+    },
+    {
+        "id": "MHO:000004",
+        "text": "Fibre Type 1",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "PYROXD1",
+            "alternative_language": "Fibre Type 1",
+            "correlates_with": "",
+            "hex_color": "#95C792"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000006",
+        "text": "Type 1 Atrophied (small)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "atrophi\u00e9es,petite taille,atrophied,small size",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,NM,UNCLEAR",
+            "gene_datamined": "ACTA1,BIN1,DHPR,MTM1,N/A,NEB,PYROXD1,TTN",
+            "correlates_with": "Type 1 Atrophied (small)",
+            "alternative_language": "Type 1 Atrophi\u00e9es (petites)",
+            "hex_color": "#056F5D"
+        },
+        "parent": "MHO:000004"
+    },
+    {
+        "id": "MHO:000007",
+        "text": "Type 1 Heterogeneous size",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "taille h\u00e9t\u00e9rog\u00e8ne,heterogeneous size",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "ACTA1,NEB",
+            "correlates_with": "Type 1 Heterogeneous size,Unequal Size",
+            "alternative_language": "Type  1 Taille h\u00e9t\u00e9rog\u00e8ne",
+            "hex_color": "#EC022F"
+        },
+        "parent": "MHO:000004"
+    },
+    {
+        "id": "MHO:000005",
+        "text": "Type 1 Hypertrophic (large)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "hypertrophi\u00e9e,hypertrophic,grande taille,big size",
+            "phenotype": "",
+            "phenotype_datamined": "COM,NM,UNCLEAR",
+            "gene_datamined": "ACTA1,N/A,RYR1",
+            "correlates_with": "Connective Interstitial Tissue Increase,Local Abnormal COX activity,Structural Disorganisation,Type 1 Hypertrophic (large),Type 2 Hypertrophic (large)",
+            "alternative_language": "Type 1 Hypertrophiques (grandes)",
+            "hex_color": "#01910D"
+        },
+        "parent": "MHO:000004"
+    },
+    {
+        "id": "MHO:000008",
+        "text": "Fibre Type 2",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "PYROXD1",
+            "alternative_language": "Fibre Type 2",
+            "correlates_with": "",
+            "hex_color": "#AEE98A"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000010",
+        "text": "Type 2 Atrophied (small)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "small size,atrophied,atrophi\u00e9e,petite taille",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,COM,NM,UNCLEAR",
+            "gene_datamined": "ACTA1,DHPR,N/A,NEB,PYROXD1,RYR1,TTN",
+            "correlates_with": "Rods,Type 2 Atrophied (small)",
+            "alternative_language": "Type 2 Atrophi\u00e9es (petites)",
+            "hex_color": "#E038D2"
+        },
+        "parent": "MHO:000008"
+    },
+    {
+        "id": "MHO:000011",
+        "text": "Type 2 Heterogeneous size",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "taille h\u00e9t\u00e9rog\u00e8ne,heterogenous size",
+            "phenotype": "",
+            "phenotype_datamined": "COM,NM",
+            "gene_datamined": "ACTA1,RYR1",
+            "alternative_language": "Type 2  Taille h\u00e9t\u00e9rog\u00e8ne",
+            "correlates_with": "",
+            "hex_color": "#E155A6"
+        },
+        "parent": "MHO:000008"
+    },
+    {
+        "id": "MHO:000009",
+        "text": "Type 2 Hypertrophic (large)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "hypertrophi\u00e9e,grande taille,hypertrophic,big size",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,COM,NM",
+            "gene_datamined": "ACTA1,MTM1,NEB,RYR1",
+            "correlates_with": "Type 1 Hypertrophic (large),Type 2 Hypertrophic (large)",
+            "alternative_language": "Type 2 Hypertrophiques (grandes)",
+            "hex_color": "#1FD2B6"
+        },
+        "parent": "MHO:000008"
+    },
+    {
+        "id": "MHO:000035",
+        "text": "Fuscinophilic material",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Mat\u00e9riel Fuscinophile",
+            "correlates_with": "",
+            "hex_color": "#0FDCF0"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000041",
+        "text": "Fuscinophile matrial: Peripherals",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "p\u00e9riph\u00e9riques,peripherals",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: P\u00e9riph\u00e9riques",
+            "correlates_with": "",
+            "hex_color": "#0749F7"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000040",
+        "text": "Fuscinophilic material: Centralized",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "N/A",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: Centralis\u00e9s",
+            "correlates_with": "",
+            "hex_color": "#690CBE"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000036",
+        "text": "Fuscinophilic material: Dark clusters/aggregates",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "amas sombre,dark clusters,dark aggregates,aggr\u00e9gats sombres",
+            "phenotype": "",
+            "phenotype_datamined": "NM,UNCLEAR",
+            "gene_datamined": "ACTA1,N/A,NEB,TTN",
+            "correlates_with": "Area without ATPase activity,Fuscinophilic material: Dark clusters/aggregates,Rods,Single Central Core,Type 2 Atrophied (small)",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: Amas/Aggr\u00e9gat sombre",
+            "hex_color": "#84E98A"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000039",
+        "text": "Fuscinophilic material: Diffused",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "diffus,sparse,diffused",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: Diffus",
+            "correlates_with": "",
+            "hex_color": "#DA5C8F"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000037",
+        "text": "Fuscinophilic material: Granular",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "granuleux,granular,grainy",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: Granuleux",
+            "correlates_with": "",
+            "hex_color": "#D6A94C"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000044",
+        "text": "Fuscinophilic material: Irregular edges",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "bords irr\u00e9guliers,irregular edges",
+            "phenotype": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "N/A",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: Bords irr\u00e9guliers",
+            "correlates_with": "",
+            "hex_color": "#9BC19D"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000038",
+        "text": "Fuscinophilic material: Radiant",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "radiant",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: Radiant",
+            "correlates_with": "",
+            "hex_color": "#5CBC7D"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000043",
+        "text": "Fuscinophilic material: Regular edges",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "regular edges,bords r\u00e9guliers",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: Bords r\u00e9guliers",
+            "correlates_with": "",
+            "hex_color": "#15B83B"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000045",
+        "text": "Fuscinophilic material: Rounded",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "arrondis,rounded",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: Arrondis",
+            "correlates_with": "",
+            "hex_color": "#7E7B79"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000042",
+        "text": "Fuscinophilic material: Sub-Sarcolemma",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "sous-sarcolemmique,sub-sarcolemma",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Mat\u00e9riel Fuscinophile: Sous-Sarcolemmique",
+            "correlates_with": "",
+            "hex_color": "#462EC7"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000046",
+        "text": "Purplish appearance (unclear outline)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Aspect violine (contour impr\u00e9cis)",
+            "correlates_with": "",
+            "hex_color": "#1787A1"
+        },
+        "parent": "MHO:000035"
+    },
+    {
+        "id": "MHO:000016",
+        "text": "HETG: Fibre Aspect",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "HETG: Apsect Fibre",
+            "correlates_with": "",
+            "hex_color": "#C32B1F"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000020",
+        "text": "HETG: Angular",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "anguleuse,angular",
+            "phenotype": "",
+            "phenotype_datamined": "CNM",
+            "gene_datamined": "MTM1",
+            "alternative_language": "HETG: Anguleuse",
+            "correlates_with": "",
+            "hex_color": "#9DD5D8"
+        },
+        "parent": "MHO:000016"
+    },
+    {
+        "id": "MHO:000025",
+        "text": "HETG: Annular fibre",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "fibre annulaire,annular fibre",
+            "phenotype": "",
+            "phenotype_datamined": "CNM",
+            "gene_datamined": "MTM1",
+            "alternative_language": "HETG: Fibre  annulaire",
+            "correlates_with": "",
+            "hex_color": "#3D0E6A"
+        },
+        "parent": "MHO:000016"
+    },
+    {
+        "id": "MHO:000022",
+        "text": "HETG: Fibre segmentation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "segmentation de fibre,fibre segmentation",
+            "phenotype": "",
+            "phenotype_datamined": "COM",
+            "gene_datamined": "RYR1",
+            "alternative_language": "HETG: Segmentation de fibre",
+            "correlates_with": "",
+            "hex_color": "#875069"
+        },
+        "parent": "MHO:000016"
+    },
+    {
+        "id": "MHO:000019",
+        "text": "HETG: Lobulated",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "lobul\u00e9e,lobulated",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "HETG: Lobul\u00e9e",
+            "correlates_with": "",
+            "hex_color": "#88F797"
+        },
+        "parent": "MHO:000016"
+    },
+    {
+        "id": "MHO:000024",
+        "text": "HETG: Red-ragged fibers",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "red-ragged fibers",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "HETG: Red-ragged fibers",
+            "correlates_with": "",
+            "hex_color": "#44450E"
+        },
+        "parent": "MHO:000016"
+    },
+    {
+        "id": "MHO:000021",
+        "text": "HETG: Rounded edge",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "bord arrondis,rounded edge",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,COM,UNCLEAR",
+            "gene_datamined": "DHPR,N/A,RYR1",
+            "alternative_language": "HETG: Bord arrondis",
+            "correlates_with": "",
+            "hex_color": "#7D3317"
+        },
+        "parent": "MHO:000016"
+    },
+    {
+        "id": "MHO:000018",
+        "text": "HETG: Vacuolised bordered",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "vacuolis\u00e9e bord\u00e9e,vacuolised bordered",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "HETG: Vacuolis\u00e9e bord\u00e9e",
+            "correlates_with": "",
+            "hex_color": "#294D29"
+        },
+        "parent": "MHO:000016"
+    },
+    {
+        "id": "MHO:000023",
+        "text": "HETG: Whirlwind",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "tourbillon,whirlwind",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "HETG: Tourbillon",
+            "correlates_with": "",
+            "hex_color": "#026C86"
+        },
+        "parent": "MHO:000016"
+    },
+    {
+        "id": "MHO:000017",
+        "text": "HETG: wheel spokes shape",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "rayon de roue",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "HETG: En rayon de roue",
+            "correlates_with": "",
+            "hex_color": "#FAE65F"
+        },
+        "parent": "MHO:000016"
+    },
+    {
+        "id": "MHO:000067",
+        "text": "Inflammatory elements",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Elements Inflammatoires",
+            "correlates_with": "",
+            "hex_color": "#045BDA"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000068",
+        "text": "Inflammation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "NEB",
+            "correlates_with": "Inflammation",
+            "alternative_language": "Inflammation",
+            "hex_color": "#233403"
+        },
+        "parent": "MHO:000067"
+    },
+    {
+        "id": "MHO:000061",
+        "text": "Interstitial alterations and damage",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Alt\u00e9rations et L\u00e9sions Interstitielles",
+            "correlates_with": "",
+            "hex_color": "#FE7040"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000065",
+        "text": "Circle the Fibers Completely",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Entoure Compl\u00e8tement les Fibres",
+            "correlates_with": "",
+            "hex_color": "#F01417"
+        },
+        "parent": "MHO:000061"
+    },
+    {
+        "id": "MHO:000063",
+        "text": "Connective Interstitial Tissue Increase",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Connective Interstitial Tissue Increase,Type 1 Hypertrophic (large),Type Uniformity",
+            "alternative_language": "Augmentation Tissu Conjonctif",
+            "hex_color": "#DE050F"
+        },
+        "parent": "MHO:000061"
+    },
+    {
+        "id": "MHO:000064",
+        "text": "Fatty tissue Increase",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "ACTA1,NEB",
+            "alternative_language": "Augmentation Tissu Adipeux",
+            "correlates_with": "",
+            "hex_color": "#D8B91A"
+        },
+        "parent": "MHO:000061"
+    },
+    {
+        "id": "MHO:000062",
+        "text": "Interstitial alterations",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM",
+            "gene_datamined": "RYR1",
+            "correlates_with": "Interstitial alterations,PAS Staining: Locally Abnormal (Overload)",
+            "alternative_language": "Alt\u00e9rations Interstitielles",
+            "hex_color": "#659331"
+        },
+        "parent": "MHO:000061"
+    },
+    {
+        "id": "MHO:000066",
+        "text": "Thick band between fascicle",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Bande \u00e9paisse entre Fascicules",
+            "correlates_with": "",
+            "hex_color": "#63E495"
+        },
+        "parent": "MHO:000061"
+    },
+    {
+        "id": "MHO:000072",
+        "text": "Necklace Fibers",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "collier",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,UNCLEAR",
+            "gene_datamined": "DHPR,MTM1,N/A",
+            "alternative_language": "Necklace Fibers",
+            "correlates_with": "",
+            "hex_color": "#92A2B9"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000074",
+        "text": "Necrosis",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "NM,UNCLEAR",
+            "gene_datamined": "N/A,NEB",
+            "correlates_with": "Necrosis,Regeneration",
+            "alternative_language": "N\u00e9crose",
+            "hex_color": "#6669EC"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000056",
+        "text": "Neuromuscular spindle",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Fuseau Neuromusculaire",
+            "correlates_with": "",
+            "hex_color": "#AA55FF"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000057",
+        "text": "Abnormal Neuromuscular Spindle",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Fuseau Neuromusculaire Anormal",
+            "correlates_with": "",
+            "hex_color": "#4058B8"
+        },
+        "parent": "MHO:000056"
+    },
+    {
+        "id": "MHO:000026",
+        "text": "Nuclei",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Aspect Noyaux",
+            "correlates_with": "",
+            "hex_color": "#6DFFD7"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000027",
+        "text": "Centralized Nuclei",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,COM,NM,UNCLEAR",
+            "gene_datamined": "BIN1,DHPR,MTM1,N/A,NEB,PYROXD1,RYR1,TTN",
+            "correlates_with": "Centralized Nuclei",
+            "alternative_language": "Noyaux Centralis\u00e9",
+            "hex_color": "#6F7356"
+        },
+        "parent": "MHO:000026"
+    },
+    {
+        "id": "MHO:000031",
+        "text": "Increase in the number of nuclei",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,UNCLEAR",
+            "gene_datamined": "DHPR,N/A",
+            "correlates_with": "Abnormal differentiation,Centralized Nuclei,Increase in the number of nuclei,Internalized nuclei",
+            "alternative_language": "Augmentation du Nombre de Noyaux",
+            "hex_color": "#72B750"
+        },
+        "parent": "MHO:000026"
+    },
+    {
+        "id": "MHO:000028",
+        "text": "Internalized nuclei",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,COM,UNCLEAR",
+            "gene_datamined": "DHPR,MTM1,N/A,RYR1",
+            "correlates_with": "Abnormal PAS Staining (Overload),Internalized nuclei",
+            "alternative_language": "Noyaux Internalis\u00e9",
+            "hex_color": "#11C256"
+        },
+        "parent": "MHO:000026"
+    },
+    {
+        "id": "MHO:000174",
+        "text": "Normal Situation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "synonymes": "position normale",
+            "phenotype_datamined": "NM,UNCLEAR",
+            "gene_datamined": "NEB,PYROXD1",
+            "alternative_language": "Situation Normale",
+            "correlates_with": "",
+            "hex_color": "#e621e1"
+        },
+        "parent": "MHO:000026"
+    },
+    {
+        "id": "MHO:000030",
+        "text": "Nuclei with Myotubular Aspects",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "aspect myotubulaire,myotubular aspect",
+            "phenotype": "",
+            "phenotype_datamined": "CNM",
+            "gene_datamined": "DHPR",
+            "correlates_with": "Nuclei with Myotubular Aspects,Predominance Fibre Type 2,Sub-Sarcolemmal Nuclei",
+            "alternative_language": "Noyaux \u00e0 Aspects Myotubulaire",
+            "hex_color": "#8C0679"
+        },
+        "parent": "MHO:000026"
+    },
+    {
+        "id": "MHO:000029",
+        "text": "Sub-Sarcolemmal Nuclei",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "CNM",
+            "gene_datamined": "DHPR",
+            "correlates_with": "Abnormal Phospholipase+AMP activity,Centralized Nuclei,Increase in Endosymal Collagen,Internalized nuclei,Nuclei with Myotubular Aspects,Sub-Sarcolemmal Nuclei",
+            "alternative_language": "Noyaux Sous-Sarcolemmique",
+            "hex_color": "#9AB613"
+        },
+        "parent": "MHO:000026"
+    },
+    {
+        "id": "MHO:000052",
+        "text": "Pale Zone",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Zone Claire",
+            "correlates_with": "",
+            "hex_color": "#A0D32E"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000054",
+        "text": "Central Pale Zone",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "NEB",
+            "alternative_language": "Zone Claire Centrale",
+            "correlates_with": "",
+            "hex_color": "#DC48F0"
+        },
+        "parent": "MHO:000052"
+    },
+    {
+        "id": "MHO:000055",
+        "text": "Majority of Fibre",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Majorit\u00e9 de la Fibre",
+            "correlates_with": "",
+            "hex_color": "#AD9F5E"
+        },
+        "parent": "MHO:000052"
+    },
+    {
+        "id": "MHO:000053",
+        "text": "Pale Zone as Peripheral Crescent",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "pale zone",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Croissant P\u00e9riph\u00e9rique",
+            "correlates_with": "",
+            "hex_color": "#8D3207"
+        },
+        "parent": "MHO:000052"
+    },
+    {
+        "id": "MHO:000073",
+        "text": "Peripheral nail stroke",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "coup d'ongle,nail stroke",
+            "phenotype": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "N/A",
+            "alternative_language": "Coup d'ongle p\u00e9riph\u00e9rique",
+            "correlates_with": "",
+            "hex_color": "#E90559"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000032",
+        "text": "Protein inclusions",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Inclusions prot\u00e9iques",
+            "correlates_with": "",
+            "hex_color": "#9C6361"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000033",
+        "text": "Centralized Inclusions",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "NM,UNCLEAR",
+            "gene_datamined": "NEB,PYROXD1",
+            "alternative_language": "Inclusions Centralis\u00e9es",
+            "correlates_with": "",
+            "hex_color": "#02F38D"
+        },
+        "parent": "MHO:000032"
+    },
+    {
+        "id": "MHO:000034",
+        "text": "Peripheral Inclusions",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Inclusions P\u00e9riph\u00e9riques",
+            "correlates_with": "",
+            "hex_color": "#D9C462"
+        },
+        "parent": "MHO:000032"
+    },
+    {
+        "id": "MHO:000075",
+        "text": "Regeneration",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "N/A",
+            "correlates_with": "Necrosis,Regeneration",
+            "alternative_language": "R\u00e9g\u00e9n\u00e9ration",
+            "hex_color": "#11BAC8"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000047",
+        "text": "Rods and Nemaline Bodies",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "B\u00e2tonnets - Rods et Nemaline Bodies",
+            "correlates_with": "",
+            "hex_color": "#D65282"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000049",
+        "text": "Mini-rods",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "minirods",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Mini-rods",
+            "correlates_with": "",
+            "hex_color": "#0F25C0"
+        },
+        "parent": "MHO:000047"
+    },
+    {
+        "id": "MHO:000051",
+        "text": "Red Dust",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "N/A",
+            "alternative_language": "Poussi\u00e8re rouge",
+            "correlates_with": "",
+            "hex_color": "#351F4E"
+        },
+        "parent": "MHO:000047"
+    },
+    {
+        "id": "MHO:000050",
+        "text": "Red Spike",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "rod-like",
+            "phenotype": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "N/A",
+            "alternative_language": "Piquet\u00e9 rouge",
+            "correlates_with": "",
+            "hex_color": "#BCAD10"
+        },
+        "parent": "MHO:000047"
+    },
+    {
+        "id": "MHO:000048",
+        "text": "Rods",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "rods",
+            "phenotype": "",
+            "phenotype_datamined": "NM,UNCLEAR",
+            "gene_datamined": "ACTA1,N/A,NEB,PYROXD1,TTN",
+            "correlates_with": "Rods,Sudan Staining: Abornmal (Lipids Overload),Type 2 Atrophied (small)",
+            "alternative_language": "Batonnets",
+            "hex_color": "#058775"
+        },
+        "parent": "MHO:000047"
+    },
+    {
+        "id": "MHO:000071",
+        "text": "Tubular aggregates",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Aggr\u00e9gats Tubulaires",
+            "correlates_with": "",
+            "hex_color": "#FB4D7A"
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000168",
+        "text": "Image Annotations",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Image Annotations",
+            "correlates_with": "",
+            "hex_color": "#8D27F1"
+        },
+        "parent": "#"
+    },
+    {
+        "id": "MHO:000172",
+        "text": "Img: Cores",
+        "icon": true,
+        "data": {
+            "description": "",
+            "synonymes": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Img: Cores",
+            "correlates_with": "",
+            "hex_color": "#9b59b2"
+        },
+        "parent": "MHO:000168"
+    },
+    {
+        "id": "MHO:000169",
+        "text": "Img: Cytoplasm",
+        "icon": true,
+        "data": {
+            "description": "",
+            "synonymes": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Img: Cytoplasme",
+            "correlates_with": "",
+            "hex_color": "#b4db6d"
+        },
+        "parent": "MHO:000168"
+    },
+    {
+        "id": "MHO:000173",
+        "text": "Img: Intercellular spaces",
+        "icon": true,
+        "data": {
+            "description": "",
+            "synonymes": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Img: Espace inter-cellulaire",
+            "correlates_with": "",
+            "hex_color": "#150c22"
+        },
+        "parent": "MHO:000168"
+    },
+    {
+        "id": "MHO:000170",
+        "text": "Img: Nuclei",
+        "icon": true,
+        "data": {
+            "description": "",
+            "synonymes": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Img: Noyaux",
+            "correlates_with": "",
+            "hex_color": "#342e8d"
+        },
+        "parent": "MHO:000168"
+    },
+    {
+        "id": "MHO:000171",
+        "text": "Img: Rods",
+        "icon": true,
+        "data": {
+            "description": "",
+            "synonymes": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Img: Batonnets",
+            "correlates_with": "",
+            "hex_color": "#f80134"
+        },
+        "parent": "MHO:000168"
+    },
+    {
+        "id": "MHO:000097",
+        "text": "Oxidative staining",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Enzymologie oxydative",
+            "correlates_with": "",
+            "hex_color": "#A494C7"
+        },
+        "parent": "#"
+    },
+    {
+        "id": "MHO:000111",
+        "text": "Activity Repartition",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "R\u00e9partition Activit\u00e9",
+            "correlates_with": "",
+            "hex_color": "#A2BE55"
+        },
+        "parent": "MHO:000097"
+    },
+    {
+        "id": "MHO:000116",
+        "text": "Oxy Activity: Crescent shape",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: En Croissant",
+            "correlates_with": "",
+            "hex_color": "#99B212"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000120",
+        "text": "Oxy Activity: Dark Peripheral Border",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "liseret p\u00e9riph\u00e9rique fonc\u00e9,dark peripheral border",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Liseret P\u00e9riph\u00e9rique Fonc\u00e9",
+            "correlates_with": "",
+            "hex_color": "#38E141"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000121",
+        "text": "Oxy Activity: Uncoloured Inclusion Zone",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "zone d'inclusion non color\u00e9e,uncolored inclusion zone",
+            "phenotype": "",
+            "phenotype_datamined": "NM",
+            "gene_datamined": "NEB",
+            "alternative_language": "Activit\u00e9 Oxy: Zone Inclusion Non Color\u00e9e",
+            "correlates_with": "",
+            "hex_color": "#61CF2C"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000118",
+        "text": "Oxy activity: Blurred boundaries",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Limites floues",
+            "correlates_with": "",
+            "hex_color": "#837158"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000114",
+        "text": "Oxy activity: Central",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM,NM",
+            "gene_datamined": "NEB,RYR1,TTN",
+            "alternative_language": "Activit\u00e9 Oxy: Centrale",
+            "correlates_with": "",
+            "hex_color": "#471D22"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000113",
+        "text": "Oxy activity: Clear zone (pale)",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "zone claire,clear zone,pale zone,zone pale",
+            "phenotype": "",
+            "phenotype_datamined": "COM,UNCLEAR",
+            "gene_datamined": "BIN1,RYR1",
+            "alternative_language": "Activit\u00e9 Oxy: Zone Claire (p\u00e2le)",
+            "correlates_with": "",
+            "hex_color": "#5645F3"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000112",
+        "text": "Oxy activity: Disproportion",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Disproportion",
+            "correlates_with": "",
+            "hex_color": "#8838C3"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000117",
+        "text": "Oxy activity: Net limits",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Limites nettes",
+            "correlates_with": "",
+            "hex_color": "#FBD0B1"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000115",
+        "text": "Oxy activity: Peripheral",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM",
+            "gene_datamined": "RYR1",
+            "alternative_language": "Activit\u00e9 Oxy: P\u00e9riph\u00e9rique",
+            "correlates_with": "",
+            "hex_color": "#B4D25B"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000119",
+        "text": "Oxy activity: Sub-Sarcolemma dark staining",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "coloration fonc\u00e9e sous-sarcolemmique,sub-sarcolemma dark staining",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Coloration Fonc\u00e9 Sous-Sarcolemmique",
+            "correlates_with": "",
+            "hex_color": "#34C03B"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000122",
+        "text": "Peripheral Mitochondrial Accumulation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "accumulation mitochondries,mitochondries p\u00e9riph\u00e9riques",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Accumulation Mitochondries P\u00e9riph\u00e9riques",
+            "correlates_with": "",
+            "hex_color": "#383047"
+        },
+        "parent": "MHO:000111"
+    },
+    {
+        "id": "MHO:000123",
+        "text": "Core",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Core",
+            "correlates_with": "",
+            "hex_color": "#F24C11"
+        },
+        "parent": "MHO:000097"
+    },
+    {
+        "id": "MHO:000128",
+        "text": "Cores over the whole Section",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM,UNCLEAR",
+            "gene_datamined": "BIN1,RYR1,TTN",
+            "alternative_language": "Core sur toute la Section",
+            "correlates_with": "",
+            "hex_color": "#D28A16"
+        },
+        "parent": "MHO:000123"
+    },
+    {
+        "id": "MHO:000127",
+        "text": "Cores with Blurred Boundaries",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM,UNCLEAR",
+            "gene_datamined": "BIN1,RYR1,TTN",
+            "alternative_language": "Core \u00e0 Limites Floues",
+            "correlates_with": "",
+            "hex_color": "#74BC84"
+        },
+        "parent": "MHO:000123"
+    },
+    {
+        "id": "MHO:000126",
+        "text": "Cores with Net Limits",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM,UNCLEAR",
+            "gene_datamined": "BIN1,RYR1",
+            "alternative_language": "Core \u00e0 Limites Nettes",
+            "correlates_with": "",
+            "hex_color": "#29024C"
+        },
+        "parent": "MHO:000123"
+    },
+    {
+        "id": "MHO:000129",
+        "text": "Minicores",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM,UNCLEAR",
+            "gene_datamined": "BIN1,TTN",
+            "alternative_language": "Minicores",
+            "correlates_with": "",
+            "hex_color": "#8B48D5"
+        },
+        "parent": "MHO:000123"
+    },
+    {
+        "id": "MHO:000124",
+        "text": "Peripheral Cores",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM,UNCLEAR",
+            "gene_datamined": "BIN1,RYR1,TTN",
+            "correlates_with": "Peripheral Cores,Single Central Core",
+            "alternative_language": "Core P\u00e9riph\u00e9riques",
+            "hex_color": "#119F16"
+        },
+        "parent": "MHO:000123"
+    },
+    {
+        "id": "MHO:000125",
+        "text": "Single Central Core",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "COM,UNCLEAR",
+            "gene_datamined": "BIN1,RYR1,TTN",
+            "correlates_with": "Peripheral Cores,Single Central Core",
+            "alternative_language": "Core Centraux Uniques",
+            "hex_color": "#02AD6D"
+        },
+        "parent": "MHO:000123"
+    },
+    {
+        "id": "MHO:000130",
+        "text": "NADH",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "NADH",
+            "correlates_with": "",
+            "hex_color": "#1A6A14"
+        },
+        "parent": "MHO:000097"
+    },
+    {
+        "id": "MHO:000131",
+        "text": "NADH: Dark Atrophic Fibre",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Fibre atrophique fonc\u00e9e,dark atrophic fibre",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "NADH: Fibre Atrophique Fonc\u00e9e",
+            "correlates_with": "",
+            "hex_color": "#76238F"
+        },
+        "parent": "MHO:000130"
+    },
+    {
+        "id": "MHO:000132",
+        "text": "NADH: Sub-Sarcolemma Dark Halo",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "halo fonc\u00e9 sous-sarcolemmique,sub-sarcolemma darko halo",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "NADH: Halo Fonc\u00e9 Sous-Sarcolemmique",
+            "correlates_with": "",
+            "hex_color": "#0C6A5D"
+        },
+        "parent": "MHO:000130"
+    },
+    {
+        "id": "MHO:000098",
+        "text": "Oxy activity: Fibre aspect",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Aspect Fibre",
+            "correlates_with": "",
+            "hex_color": "#82EF87"
+        },
+        "parent": "MHO:000097"
+    },
+    {
+        "id": "MHO:000105",
+        "text": "Oxy activity: Core-like alveolus",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "Core-like",
+            "phenotype": "",
+            "phenotype_datamined": "COM,UNCLEAR",
+            "gene_datamined": "BIN1,RYR1,TTN",
+            "alternative_language": "Activit\u00e9 Oxy: Alv\u00e9ole Core-like",
+            "correlates_with": "",
+            "hex_color": "#6DA551"
+        },
+        "parent": "MHO:000098"
+    },
+    {
+        "id": "MHO:000100",
+        "text": "Oxy activity: Dark circles",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "cern\u00e9,dark circles",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Cern\u00e9",
+            "correlates_with": "",
+            "hex_color": "#24312E"
+        },
+        "parent": "MHO:000098"
+    },
+    {
+        "id": "MHO:000101",
+        "text": "Oxy activity: Lobulation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "lobulation",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Lobulation",
+            "correlates_with": "",
+            "hex_color": "#C10BD4"
+        },
+        "parent": "MHO:000098"
+    },
+    {
+        "id": "MHO:000102",
+        "text": "Oxy activity: Multi-lobulated",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "multi-lobul\u00e9",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Multi-lobul\u00e9",
+            "correlates_with": "",
+            "hex_color": "#EAFF29"
+        },
+        "parent": "MHO:000098"
+    },
+    {
+        "id": "MHO:000099",
+        "text": "Oxy activity: Myotubular",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "myotubulaire,myotubular",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: Myotubulaire",
+            "correlates_with": "",
+            "hex_color": "#470E1A"
+        },
+        "parent": "MHO:000098"
+    },
+    {
+        "id": "MHO:000104",
+        "text": "Oxy activity: Targettoide aspect",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "aspect targ\u00e9toide,targettoide aspect",
+            "phenotype": "",
+            "phenotype_datamined": "CNM",
+            "gene_datamined": "MTM1",
+            "alternative_language": "Activit\u00e9 Oxy: Aspect targ\u00e9toide",
+            "correlates_with": "",
+            "hex_color": "#E13911"
+        },
+        "parent": "MHO:000098"
+    },
+    {
+        "id": "MHO:000103",
+        "text": "Oxy activity: wheel spoke shape",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Activit\u00e9 Oxy: En rayon de roue",
+            "correlates_with": "",
+            "hex_color": "#1C3A4B"
+        },
+        "parent": "MHO:000098"
+    },
+    {
+        "id": "MHO:000106",
+        "text": "Structural Reorganisation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "remaniement structurel",
+            "phenotype": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "PYROXD1",
+            "alternative_language": "Remaniement Structurel",
+            "correlates_with": "",
+            "hex_color": "#AEF02F"
+        },
+        "parent": "MHO:000097"
+    },
+    {
+        "id": "MHO:000109",
+        "text": "Irregular Intermyofibrillar Network",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "correlates_with": "Irregular Intermyofibrillar Network,Structural Disorganisation,Type 2 Atrophied (small)",
+            "alternative_language": "R\u00e9seau Intermyofibrillaire Irr\u00e9gulier",
+            "hex_color": "#1F4FDC"
+        },
+        "parent": "MHO:000106"
+    },
+    {
+        "id": "MHO:000110",
+        "text": "Rimmed Sarcolemma",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "Rimmed Sarcolemma",
+            "correlates_with": "",
+            "hex_color": "#8FEB53"
+        },
+        "parent": "MHO:000106"
+    },
+    {
+        "id": "MHO:000107",
+        "text": "Structural Disorganisation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "remaniement structurel",
+            "phenotype": "",
+            "phenotype_datamined": "CNM,COM,NM,UNCLEAR",
+            "gene_datamined": "ACTA1,BIN1,DHPR,MTM1,N/A,NEB,PYROXD1,RYR1",
+            "correlates_with": "Irregular Intermyofibrillar Network,Structural Disorganisation,Type 1 Hypertrophic (large),Type Uniformity",
+            "alternative_language": "D\u00e9sorganisation structurelle",
+            "hex_color": "#AE2884"
+        },
+        "parent": "MHO:000106"
+    },
+    {
+        "id": "MHO:000108",
+        "text": "Sub-sarcolemmal lesion",
+        "icon": true,
+        "data": {
+            "description": "",
+            "genes": "",
+            "synonymes": "",
+            "phenotype": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "L\u00e9sion Sous-Sarcolemmique",
+            "correlates_with": "",
+            "hex_color": "#F133BB"
+        },
+        "parent": "MHO:000106"
+    }
+]

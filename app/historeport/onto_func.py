@@ -1,10 +1,15 @@
 import json
 
 
-class Ontology:
-    """A class to handle transformation of ontology"""
+class StandardVocabulary:
+    """Class for the standard vocabulary"""
 
     def __init__(self, json_content: list):
+        """Initiliaze the class with the json tree content (from JSTree)
+
+        Args:
+            json_content (list): JSON from JSTree
+        """
         self.jstree_as_list = json_content
         self.jstree_as_dict = {
             i["id"]: {
@@ -17,10 +22,16 @@ class Ontology:
             for i in self.jstree_as_list
         }
 
-    def update_ontology(self, dest_onto: object) -> dict:
-        """Function to update the current ontology tree
-        used for anotation with latest modifications of the destination
-        (template) of the ontology tree (delete, update, create new, check parents)"""
+    def update_ontology(self, dest_onto: object) -> list:
+        """Update the current standard vocabulary tree with the latest modification
+        (destination) of the tree (delete, add, update, check parents).
+
+        Args:
+            dest_onto (object): Another instance of the class StandardVocabulary
+
+        Returns:
+            list: return the updated tree as list of dict (json)
+        """
         updated_jstree_as_list = []
 
         for i in self.jstree_as_list:
@@ -93,10 +104,20 @@ class Ontology:
         return self.jstree_as_list
 
     def dump_updated_to_file(self, file_path: str):
+        """Dump the updated tree to a json file
+
+        Args:
+            file_path (str): path to save the json file
+        """
         with open(file_path, "w") as fp:
             json.dump(self.jstree_as_dict, fp, indent=4)
 
     def clean_tree(self) -> list:
+        """Clean the tree of non informative fields.
+
+        Returns:
+            list: return the updated tree as list of dict (json)
+        """
         clean_tree_list = []
         for i in self.jstree_as_dict:
             clean_tree_list.append(self.jstree_as_dict[i])

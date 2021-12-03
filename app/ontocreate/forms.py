@@ -1,9 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField
+from wtforms import StringField, SubmitField, TextAreaField
 
 
 class OntologyDescript(FlaskForm):
-    """Form used to save modification of nodes in the onotlogy create tool"""
+    """Form used to show and save modification of nodes from the standard vocabulary
+    tree in the standard vocabulary creator module
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     onto_id_ext = StringField(
         "Vocabulary ID",
@@ -87,6 +92,10 @@ class OntologyDescript(FlaskForm):
 
 
 class InvertLangButton(FlaskForm):
-    """Empty form for language inversion button"""
+    """Empty form for the langage inversion button.
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     submit = SubmitField("Confirm Inversion", render_kw={"class": "btn btn-warning"})

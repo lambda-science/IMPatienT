@@ -1,18 +1,17 @@
 import logging
-import dash
-from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
-from flask import Flask, current_app
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_login import LoginManager
-from flask_mail import Mail
-from flask_session import Session
-from config import Config
-from sqlalchemy import MetaData
+from logging.handlers import RotatingFileHandler, SMTPHandler
 
+import dash
+from config import Config
+from flask import Flask, current_app
 from flask.helpers import get_root_path
-from flask_login import login_required
+from flask_login import LoginManager, login_required
+from flask_mail import Mail
+from flask_migrate import Migrate
+from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import MetaData
 
 convention = {
     "ix": "ix_%(column_0_label)s",
@@ -34,7 +33,15 @@ session = Session()
 
 
 def create_app(config_class=Config):
-    """Function used to create instance of web-app with config settings"""
+    """Function used to create instance of web-app with config settings
+
+    Args:
+        config_class (Config Class, optional): The class containing all the
+        configurations for the flask app. Defaults to Config.
+
+    Returns:
+        Flask app object: the application object of Flask
+    """
     app = Flask(__name__)
     app.config.from_object(config_class)
     db.init_app(app)
@@ -130,11 +137,13 @@ def create_app(config_class=Config):
 
 
 def register_dashapps(app):
-    from app.dashapp.layout import (
-        layout,
-        get_external_stylesheets,
-    )
+    """Function to regeister the dash application to the flask app.
+
+    Args:
+        app (Flask Application Object): Our flask application object.
+    """
     from app.dashapp.callbacks import register_callbacks
+    from app.dashapp.layout import get_external_stylesheets, layout
 
     # Meta tags for viewport responsiveness
     meta_viewport = {
@@ -158,6 +167,11 @@ def register_dashapps(app):
 
 
 def _protect_dashviews(dashapp):
+    """Function to protect the dash views behind the login mecanism.
+
+    Args:
+        dashapp (Dash Application Object): Our Dash Application Object
+    """
     for view_func in dashapp.server.view_functions:
         if view_func.startswith(dashapp.config.url_base_pathname):
             dashapp.server.view_functions[view_func] = login_required(

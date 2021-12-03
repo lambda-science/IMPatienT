@@ -1,10 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import BooleanField, PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 
 
 class LoginForm(FlaskForm):
-    """The form used for login"""
+    """Login
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     username = StringField(
         "Username",
@@ -18,14 +22,22 @@ class LoginForm(FlaskForm):
 
 
 class ResetPasswordRequestForm(FlaskForm):
-    """The form used to ask for password reset"""
+    """Reset Password Request Form
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     email = StringField("Email", validators=[DataRequired(), Email()])
     submit = SubmitField("Request Password Reset")
 
 
 class ResetPasswordForm(FlaskForm):
-    """The form used to create a new password"""
+    """New password form
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
 
     password = PasswordField("Password", validators=[DataRequired()])
     password2 = PasswordField(
