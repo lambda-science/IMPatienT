@@ -1,6 +1,5 @@
 
-name: CI to Docker Hub
-
+name: Build
 on:
   push:
     branches: [ main ]
