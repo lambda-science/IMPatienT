@@ -1,0 +1,39 @@
+name: Format
+on: [push, pull_request]
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        # Make sure the actual branch is checked out when running on pull requests
+        ref: ${{ github.head_ref }}
+        # This is important to fetch the changes to the previous commit
+        fetch-depth: 0
+
+    - name: Prettify code
+      uses: creyD/prettier_action@v4.1
+      with:
+        # This part is also where you can pass other options, for example:
+        prettier_options: --write **/*.js
+        only_changed: True
+
+    - name: Check files using the black formatter
+      uses: rickstaa/action-black@v1
+      id: action_black
+      with:
+        black_args: "."
+        
+    - name: Create Pull Request
+      if: steps.action_black.outputs.is_formatted == 'true'
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: "Format Python code with psf/black push"
+        commit-message: ":art: Format Python code with psf/black"
+        body: |
+          There appear to be some python formatting errors in ${{ github.sha }}. This pull request
+          uses the [psf/black](https://github.com/psf/black) formatter to fix these issues.
+        base: ${{ github.head_ref }} # Creates pull request onto pull request or commit branch
+        branch: actions/black
