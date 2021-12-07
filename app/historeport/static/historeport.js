@@ -145,11 +145,11 @@ function update_annotated_terms_overview() {
 
     for (const [key, value] of Object.entries(present_features)) {
       present_feat_overview.innerHTML +=
-        "<span style='color:green'>" + value + "</span></br>";
+        "<span style='color:green'>" + value + "</span><br />";
     }
     for (const [key, value] of Object.entries(absent_features)) {
       absent_feat_overview.innerHTML +=
-        "<span style='color:red'>" + value + "</span></br>";
+        "<span style='color:red'>" + value + "</span><br />";
     }
   }
 }
@@ -228,7 +228,7 @@ $(function () {
         };
         // Print of detected text in the viewer
         for (const [key, value] of Object.entries(json_ans.results.full_text)) {
-          text_results_field.innerHTML += value + "</br>";
+          text_results_field.innerHTML += value + "<br />";
         }
 
         // Making the list of postive and negative keywords
@@ -269,7 +269,7 @@ $(function () {
               " (" +
               value[1] +
               ")" +
-              "</span></br>";
+              "</span><br />";
           } else if (value[0] == 0) {
             absent_feat_overview_auto.innerHTML +=
               "<span style='color:red'>" +
@@ -279,7 +279,7 @@ $(function () {
               " (" +
               value[1] +
               ")" +
-              "</span></br>";
+              "</span><br />";
           }
           // Auto Fill the ontology tree with NLP Results (overwrite)
           var json_tree = $("input[id=ontology_tree]").val();
