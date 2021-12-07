@@ -1,23 +1,26 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% block content %}
 <h1>Sign In</h1>
-<p>New User? Contact an admin to create an account !</p>
+<p>New User? Contact an admin to create an account !</a></p>
 <form action="" method="post" novalidate>
-  {{ form.hidden_tag() }} {% for error in form.errors %}
-  <span style="color: red">{{ error }}: {{form.errors[error]}}</span>
-  {% endfor %}
-  <p>
-    {{ form.username.label }}<br />
-    {{ form.username(size=32) }}
-  </p>
-  <p>
-    {{ form.password.label }}<br />
-    {{ form.password(size=32) }}
-  </p>
-  <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-  <p>
-    Forgot Your Password?
-    <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a>
-  </p>
-  <p>{{ form.submit() }}</p>
+    {{ form.hidden_tag() }}
+    {% for error in form.errors %}
+    <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
+    {% endfor %}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}
+    </p>
+    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+    <p>
+        Forgot Your Password?
+        <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a>
+    </p>
+    <p>{{ form.submit() }}</p>
 </form>
 {% endblock %}

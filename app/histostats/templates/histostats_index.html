@@ -1,15 +1,7 @@
 {% extends "base.html"%} {% block content %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css"
-/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 
-<script
-  type="text/javascript"
-  charset="utf8"
-  src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"
-></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
 <div class="row justify-content-md-center">
   <div class="col-xl-8">
@@ -48,52 +40,48 @@
 <div class="row">
   <div class="col-xl-6">
     <h1>Vocabulary Frequencies Per Genes</h1>
-    <a href="{{ url_for('static', filename='viz/stat_per_gene.csv') }}" download
-      >Download Table (.CSV)</a
-    >
+    <a href="{{ url_for('static', filename='viz/stat_per_gene.csv') }}" download>Download Table (.CSV)</a>
     {{df_per_gene | safe}}
   </div>
 
   <div class="col-xl-6">
     <h1>Vocabulary Frequencies Per Diagnosis</h1>
-    <a href="{{ url_for('static', filename='viz/stat_per_diag.csv') }}" download
-      >Download Table (.CSV)</a
-    >
+    <a href="{{ url_for('static', filename='viz/stat_per_diag.csv') }}" download>Download Table (.CSV)</a>
     {{df_per_diag | safe}}
   </div>
 </div>
-<br />
-<br />
+</br>
+</br>
 
-<meta id="data-graph" data-jsongraph="{{graphJSON|tojson|safe}}" />
-<meta id="data-fig1" data-fig1="{{graph_viz[0]|tojson|safe}}" />
-<meta id="data-fig2" data-fig2="{{graph_viz[1]|tojson|safe}}" />
-<meta id="data-fig3" data-fig3="{{graph_viz[2]|tojson|safe}}" />
-<meta id="data-fig4" data-fig4="{{graph_viz[3]|tojson|safe}}" />
-<meta id="data-unclear" data-unclear="{{graph_UNCLEAR|tojson|safe}}" />
-<meta id="data-matrixboqa" data-matrixboqa="{{matrixboqa|tojson|safe}}" />
+<meta id="data-graph" data-jsongraph='{{graphJSON|tojson|safe}}'>
+<meta id="data-fig1" data-fig1='{{graph_viz[0]|tojson|safe}}'>
+<meta id="data-fig2" data-fig2='{{graph_viz[1]|tojson|safe}}'>
+<meta id="data-fig3" data-fig3='{{graph_viz[2]|tojson|safe}}'>
+<meta id="data-fig4" data-fig4='{{graph_viz[3]|tojson|safe}}'>
+<meta id="data-unclear" data-unclear='{{graph_UNCLEAR|tojson|safe}}'>
+<meta id="data-matrixboqa" data-matrixboqa='{{matrixboqa|tojson|safe}}'>
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script type="text/javascript">
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
   var graphs = $("#data-graph").data();
-  Plotly.plot("corrMatrixChart", graphs.jsongraph, {});
+  Plotly.plot('corrMatrixChart', graphs.jsongraph, {});
 
   var fig1 = $("#data-fig1").data();
-  Plotly.plot("fig1", fig1.fig1, {});
+  Plotly.plot('fig1', fig1.fig1, {});
   var fig2 = $("#data-fig2").data();
-  Plotly.plot("fig2", fig2.fig2, {});
+  Plotly.plot('fig2', fig2.fig2, {});
   var fig3 = $("#data-fig3").data();
-  Plotly.plot("fig3", fig3.fig3, {});
+  Plotly.plot('fig3', fig3.fig3, {});
   var fig4 = $("#data-fig4").data();
-  Plotly.plot("fig4", fig4.fig4, {});
+  Plotly.plot('fig4', fig4.fig4, {});
   var unclear = $("#data-unclear").data();
-  Plotly.plot("unclear", unclear.unclear, {});
+  Plotly.plot('unclear', unclear.unclear, {});
   var matrixboqa = $("#data-matrixboqa").data();
-  Plotly.plot("matrixboqa", matrixboqa.matrixboqa, {});
+  Plotly.plot('matrixboqa', matrixboqa.matrixboqa, {});
 
   $(document).ready(function () {
-    $("#per-gene-table").DataTable();
-    $("#per-diag-table").DataTable();
+    $('#per-gene-table').DataTable();
+    $('#per-diag-table').DataTable();
   });
 </script>
 
