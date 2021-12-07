@@ -16,7 +16,7 @@ jobs:
       uses: creyD/prettier_action@v4.1
       with:
         # This part is also where you can pass other options, for example:
-        prettier_options: --write **/*.{js}
+        prettier_options: --write **/*.js
         only_changed: True
 
     - name: Check files using the black formatter
