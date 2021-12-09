@@ -1,0 +1,19 @@
+name: Security Check
+on: [push, pull_request]
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
+          # This is important to fetch the changes to the previous commit
+          fetch-depth: 0
+          
+      - name: Bandit
+        uses: jpetrucciani/bandit-check@master
+        with:
+          bandit_flags: '-ll -r -x "./tests/*" .'
+          
