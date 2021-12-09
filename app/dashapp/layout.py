@@ -8,18 +8,20 @@ import json
 
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
 
-with open(os.path.join("data/ontology","ontology.json"), "r") as fp:
+with open(os.path.join("data/ontology", "ontology.json"), "r") as fp:
     onto_tree = json.load(fp)
-id_img_annot_section = [ i["id"] for i in onto_tree if i["text"] == "Image Annotations"][0]
+id_img_annot_section = [i["id"] for i in onto_tree if i["text"] == "Image Annotations"][
+    0
+]
 onto_tree_imgannot = []
 for node in onto_tree:
     if node["parent"] == id_img_annot_section:
         onto_tree_imgannot.append(node)
 
-class_label_colormap = [ i["data"]["hex_color"] for i in onto_tree_imgannot ]
-class_labels = [ i["text"] for i in onto_tree_imgannot ]
+class_label_colormap = [i["data"]["hex_color"] for i in onto_tree_imgannot]
+class_labels = [i["text"] for i in onto_tree_imgannot]
 class_label_colormap = class_label_colormap
-assert len(class_labels) <= len(class_label_colormap)
+assert len(class_labels) <= len(class_label_colormap)  # nosec
 
 
 def class_to_color(onto_tree_imgannot, class_id):
@@ -99,7 +101,7 @@ description = dbc.Col(
                                         "Then check the 'Compute Segmentation' tickbox to automatically expands your annotations to the whole image. "
                                         "You may add more marks to clarify parts of the image where the classifier was not successful",
                                         "and the classification will update. Once satisfied with the annotations area you can click the"
-                                        "'Save Annotation To Database' to save your annotations."
+                                        "'Save Annotation To Database' to save your annotations.",
                                     ),
                                     md=True,
                                 ),
@@ -196,7 +198,11 @@ sidebar = [
                             dbc.Button(
                                 c,
                                 id={"type": "label-class-button", "index": n},
-                                style={"background-color": class_to_color(onto_tree_imgannot, c)},
+                                style={
+                                    "background-color": class_to_color(
+                                        onto_tree_imgannot, c
+                                    )
+                                },
                             )
                             for n, c in enumerate(class_labels)
                         ],

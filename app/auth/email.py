@@ -7,7 +7,7 @@ def send_password_reset_email(user):
 
     Args:
         user (SQLAlchemy Object): The user who requested the password reset
-    """    
+    """
     token = user.get_reset_password_token()
     send_email(
         ("[EHRoes] Reset Your Password"),
