@@ -15,5 +15,6 @@ jobs:
       - name: Bandit
         uses: jpetrucciani/bandit-check@master
         with:
-          bandit_flags: '-ll -r -x "./tests/*" .'
+          path: '.'
+          bandit_flags: '-ll -r -x "./tests/*"'
           
