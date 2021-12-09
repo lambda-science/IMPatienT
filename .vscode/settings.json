@@ -21,5 +21,8 @@
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
   "editor.fontFamily": "Roboto Mono",
-  "sqlite.logLevel": "DEBUG"
+  "sqlite.logLevel": "DEBUG",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
 }
