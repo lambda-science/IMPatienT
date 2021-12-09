@@ -23,7 +23,8 @@
 <!-- Custom files -->
 <link rel="stylesheet" type="text/css" href="{{url_for('historeport.static', filename='slider.css')}}">
 <div class="row">
-    <div class="col-xl-8 offset-xl-2" style="border: solid;border-color: #4885ed;border-radius: 30px; border-width: thin;" align="center">
+    <div class="col-xl-8 offset-xl-2"
+        style="border: solid;border-color: #4885ed;border-radius: 30px; border-width: thin;" align="center">
         <div class="row">
             <div class="col" align="center">
                 <form id="upload-file" method="post" enctype="multipart/form-data">
@@ -86,7 +87,7 @@
                         <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
                             data-bs-parent="#accordionAutoFeatOCR">
                             <div class="accordion-body" id="resultsOCRNLP">
-                                <div class="context", id="feature-present-auto" align="left"> </div>
+                                <div class="context" , id="feature-present-auto" align="left"> </div>
                             </div>
                         </div>
                     </div>
@@ -104,21 +105,23 @@
                         <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
                             data-bs-parent="#accordionAutoFeatOCR2">
                             <div class="accordion-body" id="resultsOCRNLP2">
-                                <div class="context", id="feature-absent-auto" align="left"> </div>
+                                <div class="context" , id="feature-absent-auto" align="left"> </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </div>
 </div>
-</br>
-<div class="row">
-    <div class="col-xl-8 offset-xl-2" style="border: solid;border-color: #db3236;border-radius: 30px; border-width: thin;">
-        <h1>Patient Informations</h1>
-        <form method="post" id="histo_report">
+
+<br />
+
+<form method="post" id="histo_report">
+    <div class="row">
+        <div class="col-xl-8 offset-xl-2"
+            style="border: solid;border-color: #db3236;border-radius: 30px; border-width: thin;">
+            <h1>Patient Informations</h1>
             <div class="form-group">
                 {% for error in form.errors %}
                 <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
@@ -150,96 +153,102 @@
                     {{ form.ontology_tree }}
                 </div>
             </div>
-    </div>
-    <div class="row">
-        <div class="col-xl-5 mt-3 offset-xl-1">
-            <h2>Vocabulary Tree</h2>
-
-            <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control"
-                placeholder="Rechercher">
-            <div id="jstree" class="demo" style="overflow:scroll; max-height: 600px;"></div>
         </div>
-        <div class="col-xl-5 mt-3">
-            <h2>Absence/Presence Annotation</h2>
+        <div class="row">
+            <div class="col-xl-5 mt-3 offset-xl-1">
+                <h2>Vocabulary Tree</h2>
 
-            {% for error in form2.errors %}
-            <span style="color: red;">{{ error }}: {{form2.errors[error]}}</span>
-            {% endfor %}
-            {{ form2.hidden_tag() }}
-            <div class="col-xl-12">
-                <div class="row">
-                    <div class="col-xl-6 range">
-                        {{ form2.preabsProba.label(class="d-flex justify-content-center") }}
-                        {{ form2.preabsProba }}
-                        <div class="d-flex justify-content-center" id="sliderspan">
+                <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control"
+                    placeholder="Rechercher">
+                <div id="jstree" class="demo" style="overflow:scroll; max-height: 600px;"></div>
+            </div>
+            <div class="col-xl-5 mt-3">
+                <h2>Absence/Presence Annotation</h2>
+
+                {% for error in form2.errors %}
+                <span style="color: red;">{{ error }}: {{form2.errors[error]}}</span>
+                {% endfor %}
+                {{ form2.hidden_tag() }}
+                <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-xl-6 range">
+                            {{ form2.preabsProba.label(class="d-flex justify-content-center") }}
+                            {{ form2.preabsProba }}
+                            <div class="d-flex justify-content-center" id="sliderspan">
+                            </div>
                         </div>
                     </div>
+
                 </div>
+                <br />
+                <h4>Vocabulary Term Details</h4>
+                <div class="row">
+                    <div class="col-xl-3 range">
+                        {{ form2.onto_id_ext.label }}
+                        {{ form2.onto_id_ext }}
+                    </div>
+                    <div class="col-xl-9 range">
+                        {{ form2.onto_name.label }}
+                        {{ form2.onto_name }}
+                    </div>
+                </div>
+                {{ form2.synonymes.label }}
+                {{ form2.synonymes }}
+                {{ form2.alternative_language.label }}
+                {{ form2.alternative_language }}
+                {{ form2.gene_datamined.label }}
+                {{ form2.gene_datamined }}
+                {{ form2.phenotype_datamined.label }}
+                {{ form2.phenotype_datamined }}
+                {{ form2.correlates_with.label }}
+                {{ form2.correlates_with }}
+                {{ form2.description.label }}
+                {{ form2.description }}
+
 
             </div>
-            </br>
-            <h4>Vocabulary Term Details</h4>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-xl-8 offset-xl-2"
+            style="border: solid;border-color: #3cba54;border-radius: 30px; border-width: thin;">
             <div class="row">
-                <div class="col-xl-3 range">
-                    {{ form2.onto_id_ext.label }}
-                    {{ form2.onto_id_ext }}
+                <div class="col">
+                    <h4>Final Vocabulary Annotation (Present)</h4>
+                    <div id="feature-present">
+                    </div>
                 </div>
-                <div class="col-xl-9 range">
-                    {{ form2.onto_name.label }}
-                    {{ form2.onto_name }}
-                </div>
-            </div>
-            {{ form2.synonymes.label }}
-            {{ form2.synonymes }}
-            {{ form2.alternative_language.label }}
-            {{ form2.alternative_language }}
-            {{ form2.gene_datamined.label }}
-            {{ form2.gene_datamined }}
-            {{ form2.phenotype_datamined.label }}
-            {{ form2.phenotype_datamined }}
-            {{ form2.correlates_with.label }}
-            {{ form2.correlates_with }}
-            {{ form2.description.label }}
-            {{ form2.description }}
+                <div class="col">
+                    <h4>Final Vocabulary Annotation (Negated)</h4>
+                    <div id="feature-absent">
+                    </div>
 
-
-        </div>
-    </div>
-</div>
-</br>
-
-<div class="row">
-    <div class="col-xl-8 offset-xl-2" style="border: solid;border-color: #3cba54;border-radius: 30px; border-width: thin;">
-        <div class="row">
-            <div class="col">
-                <h4>Final Vocabulary Annotation (Present)</h4>
-                <div id="feature-present">
                 </div>
             </div>
-            <div class="col">
-                <h4>Final Vocabulary Annotation (Negated)</h4>
-                <div id="feature-absent">
+            <div class="row">
+                <div class="col">
+                    <h4>Commentaries and Conclusions</h4>
+                    {{form.comment}}
+                    <b>Diagnosis Prediction:</b><button id="predictbutton" type="button"
+                        class="btn btn-info btn-sm">Predict
+                        !</button><br />
+                    Method BOQA (Stats): <div class="predict_diag_boqa badge bg-primary"></div>
+                    <div class="predict_proba_boqa badge bg-primary"></div><br />
+                    {{form.conclusion.label}}
+                    {{form.conclusion}}
+                    {{form.submit}}
                 </div>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h4>Commentaries and Conclusions</h4>
-                {{form.comment}}
-                <b>Diagnosis Prediction:</b><button id="predictbutton" type="button" class="btn btn-info btn-sm">Predict
-                    !</button></br>
-                Method BOQA (Stats): <div class="predict_diag_boqa badge bg-primary"></div>
-                <div class="predict_proba_boqa badge bg-primary"></div></br>
-                {{form.conclusion.label}}
-                {{form.conclusion}}
-                {{form.submit}}
             </div>
         </div>
     </div>
-</div>
-</br>
-    <meta id="data-url" data-boqa="{{url_for('historeport.predict_diag_boqa') }}">
-    <script src="{{ url_for('historeport.static', filename='historeport.js') }}"></script>
 
-    {% endblock %}
+</form>
+
+<br />
+
+<meta id="data-url" data-boqa="{{url_for('historeport.predict_diag_boqa') }}">
+<script src="{{ url_for('historeport.static', filename='historeport.js') }}"></script>
+
+{% endblock %}

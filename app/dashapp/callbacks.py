@@ -3,7 +3,7 @@ import base64
 import json
 import os
 import dash
-import pickle
+import pickle  # nosec
 import traceback
 
 from flask import current_app
@@ -30,6 +30,7 @@ from app.dashapp.trainable_segmentation import multiscale_basic_features
 
 memory = Memory("./joblib_cache", bytes_limit=3000000000, verbose=3)
 compute_features = memory.cache(multiscale_basic_features)
+
 
 def class_to_color(class_label_colormap, n):
     return class_label_colormap[n]
@@ -76,11 +77,16 @@ def save_img_classifier(clf, label_to_colors_args, segmenter_args):
     }
 
 
-def show_segmentation(image_path, mask_shapes, features, segmenter_args, class_label_colormap):
+def show_segmentation(
+    image_path, mask_shapes, features, segmenter_args, class_label_colormap
+):
     """adds an image showing segmentations to a figure's layout"""
     # add 1 because classifier takes 0 to mean no mask
-    shape_layers = [color_to_class(class_label_colormap, shape["line"]["color"])+1 for shape in mask_shapes]
-    #shape_layers = [color_to_class(onto_tree, shape["line"]["color"]) for shape in mask_shapes]
+    shape_layers = [
+        color_to_class(class_label_colormap, shape["line"]["color"]) + 1
+        for shape in mask_shapes
+    ]
+    # shape_layers = [color_to_class(onto_tree, shape["line"]["color"]) for shape in mask_shapes]
     label_to_colors_args = {
         "colormap": class_label_colormap,
         "color_class_offset": -1,
@@ -133,22 +139,24 @@ def register_callbacks(dashapp):
         sigma_range_slider_value,
         masks_data,
     ):
-        with open(os.path.join("data/ontology","ontology.json"), "r") as fp:
+        with open(os.path.join("data/ontology", "ontology.json"), "r") as fp:
             onto_tree = json.load(fp)
-        id_img_annot_section = [ i["id"] for i in onto_tree if i["text"] == "Image Annotations"][0]
+        id_img_annot_section = [
+            i["id"] for i in onto_tree if i["text"] == "Image Annotations"
+        ][0]
         onto_tree_imgannot = []
         for node in onto_tree:
             if node["parent"] == id_img_annot_section:
                 onto_tree_imgannot.append(node)
 
-        class_label_colormap = [ i["data"]["hex_color"] for i in onto_tree_imgannot ]
+        class_label_colormap = [i["data"]["hex_color"] for i in onto_tree_imgannot]
         class_labels = list(range(len(class_label_colormap)))
         NUM_LABEL_CLASSES = len(class_label_colormap)
         DEFAULT_LABEL_CLASS = class_labels[0]
         DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
 
         # we can't have less colors than classes
-        assert NUM_LABEL_CLASSES <= len(class_label_colormap)
+        assert NUM_LABEL_CLASSES <= len(class_label_colormap)  # nosec
 
         classified_image_store_data = dash.no_update
         classifier_store_data = dash.no_update
@@ -204,7 +212,7 @@ def register_callbacks(dashapp):
                 enumerate(any_label_class_button_value),
                 key=lambda t: 0 if t[1] is None else t[1],
             )[0]
-            #label_class_value = class_labels[label_class_value]
+            # label_class_value = class_labels[label_class_value]
         fig = make_default_figure(
             images=[image.image_path],
             stroke_color=class_to_color(class_label_colormap, label_class_value),
@@ -225,7 +233,11 @@ def register_callbacks(dashapp):
                 feature_opts["sigma_min"] = sigma_range_slider_value[0]
                 feature_opts["sigma_max"] = sigma_range_slider_value[1]
                 segimgpng, seg_matrix, clf = show_segmentation(
-                    image.image_path, masks_data["shapes"], features, feature_opts, class_label_colormap
+                    image.image_path,
+                    masks_data["shapes"],
+                    features,
+                    feature_opts,
+                    class_label_colormap,
                 )
                 if cbcontext == "download-button.n_clicks":
                     classifier_store_data = clf
@@ -273,7 +285,9 @@ def register_callbacks(dashapp):
 
             except Exception:
                 print(traceback.format_exc())
-                alertbox = dbc.Alert("Issues Saving to Database Please Reload The Page...", color="error")
+                alertbox = dbc.Alert(
+                    "Issues Saving to Database Please Reload The Page...", color="error"
+                )
             images_to_draw = []
             if segimgpng is not None:
                 images_to_draw = [segimgpng]

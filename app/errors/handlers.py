@@ -12,7 +12,7 @@ def not_found_error(error):
 
     Returns:
         str: HTML page for error 404.
-    """    
+    """
     return render_template("404.html"), 404
 
 
@@ -25,7 +25,7 @@ def internal_error(error):
 
     Returns:
         str: HTML page for error 500.
-    """    
+    """
     db.session.rollback()
     return render_template("500.html"), 500
 
@@ -39,5 +39,5 @@ def too_large(error):
 
     Returns:
         str: HTML page for error 413.
-    """    
+    """
     return render_template("413.html"), 413

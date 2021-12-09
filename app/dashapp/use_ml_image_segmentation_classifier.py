@@ -20,7 +20,7 @@ from app.dashapp.trainable_segmentation import (
     multiscale_basic_features,
     predict_segmenter,
 )
-import pickle
+import pickle  # nosec
 import base64
 import io
 import skimage.io
@@ -62,7 +62,7 @@ def use_img_classifier(clf_file, img_path, out_img):
     clfb64 = classr["classifier"]
     segmenter_args = classr["segmenter_args"]
     label_to_colors_args = classr["label_to_colors_args"]
-    clf = pickle.load(io.BytesIO(base64.b64decode(clfb64)))
+    clf = pickle.load(io.BytesIO(base64.b64decode(clfb64)))  # nosec
     use_img_classifier_in_mem(
         clf, segmenter_args, label_to_colors_args, img_path=img_path, out_img=out_img
     )
