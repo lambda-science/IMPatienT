@@ -19,7 +19,6 @@ jobs:
           black_args: ". --check"
 
       - name: Prettify code
-        uses: creyD/prettier_action@v4.1
+        uses: creyD/prettier_action@v4.1.1
         with:
           prettier_options: --check **/*.{css,js}
-          only_changed: True
