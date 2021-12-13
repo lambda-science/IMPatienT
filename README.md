@@ -1,5 +1,8 @@
 ![Twitter Follow](https://img.shields.io/twitter/follow/corentinm_py?style=social) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/lambda-science/ehroes) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/lambda-science/EHRoes) [![Build](https://github.com/lambda-science/EHRoes/actions/workflows/docker-build-push.yml/badge.svg)](https://github.com/lambda-science/EHRoes/actions/workflows/docker-build-push.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/lambda-science/ehroes) ![GitHub](https://img.shields.io/github/license/lambda-science/ehroes)
 # EHRoes 🦸: an all-in-one web application for patients’ data digitalization and exploration
+<p align="center">
+  <img src="https://i.imgur.com/wObOAZ0.png" alt="EHRoes Banner"/>
+</p>
 
 **EHRoes 🦸 is a web application developped in the MYO-xIA project for patient data digitalization and exploration.**  
 It features a standard vocabulary creator, optical character recognition (OCR), natural language processing (NLP), image annotation and segmentation using machine learning, interactive visualizations and automatic diagnosis prediction.

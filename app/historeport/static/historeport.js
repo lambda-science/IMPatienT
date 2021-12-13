@@ -1,4 +1,7 @@
+// Get data stored in data-url meta tag
 var data_url = $("#data-url").data();
+
+// Generate all Tagify object for tag input in the form.
 var input = document.querySelector("input[id=synonymes]");
 var input_tag = new Tagify(input);
 // var input2 = document.querySelector("input[id=gene]");
@@ -14,7 +17,14 @@ var input6_tag = new Tagify(input6);
 var input7 = document.querySelector("input[id=correlates_with]");
 var input7_tag = new Tagify(input7);
 
+// Get the JSON of the JSTree (stored in hidden form input) as a variable.
 var json_tree = $("input[id=ontology_tree]").val();
+
+/**
+ * Create a new node ID incrementally from all node ID as MHO:XXXXXX
+ * @param {array}     id_list   list of all current standard vocabulary terms ID
+ * @returns {string}  id        id of the new term
+ */
 function ontology_ID(id_list) {
   id = id_list.sort()[id_list.length - 2].substring(4);
   id = parseInt(id);
@@ -23,14 +33,18 @@ function ontology_ID(id_list) {
   return id;
 }
 
+/**
+ * Initilize JSTree
+ * Load a custom create_node function using our own function and settings default node data
+ * Load Data from the json_tree variable (hidden input form)
+ * Activate all required plugins
+ */
 $("#jstree")
   .bind("create_node.jstree", function (event, data) {
     var v = $("#jstree").jstree(true).get_json("#", { flat: true });
     var id_list = v.map(({ id }) => id);
     var newId = ontology_ID(id_list);
-    var randomColor = "#000000".replace(/0/g, function () {
-      return (~~(Math.random() * 16)).toString(16);
-    });
+    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
     // data.node.data = { description: "", genes: "", synonymes: "", phenotype: "", phenotype_datamined: "", gene_datamined: "", alternative_language: "", correlates_with: "" };
     data.node.data = {
       description: "",
@@ -66,6 +80,8 @@ $("#jstree")
     //  },
     //},
   });
+
+// Search function for the JSTree search bar
 var to = false;
 $("#plugins4_q").keyup(function () {
   if (to) {
@@ -76,9 +92,11 @@ $("#plugins4_q").keyup(function () {
     $("#jstree").jstree(true).search(v);
   }, 250);
 });
+
+// Call update_annotated_terms_overview function when page is loaded the first time
 update_annotated_terms_overview();
 
-// Prefill Form from JSON
+// When a JSTree is selected: dynamically update the form about term details.
 $("#jstree").on("select_node.jstree", function (e, data) {
   $("input[id=onto_id_ext]").val(data.node.id);
   $("input[id=onto_name]").val(data.node.text);
@@ -98,17 +116,25 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   input7_tag.removeAllTags();
   input7_tag.addTags(data.node.data.correlates_with);
   $("textarea[id=description]").val(data.node.data.description) || "";
+  // Set slider value from node data or set default value (-0.25)
   $("input[id=preabsProba]").val(data.node.data.presence || -0.25);
   set_slider_span(data.node.data.presence || "-0.25");
 });
 
+// When the slider value change for a node: update JSTree node data and terms overview div.
 $("input[id=preabsProba]").on("input change", function () {
+  // Set slider visual
   set_slider_span($("input[id=preabsProba]").val());
+  // Update node data and overview div
   update_node_data();
   update_annotated_terms_overview();
 });
 
-// placeholder
+/**
+ * Function to update the Node Data with the value of the slider also change its icon.
+ * Get form data, insert it in the JSTree node.data object
+ * Call the save_tree function
+ */
 function update_node_data() {
   var node_id = $("#jstree").jstree(true).get_selected();
   var node = $("#jstree").jstree(true).get_node(node_id);
@@ -126,6 +152,12 @@ function update_node_data() {
   $("input[id=ontology_tree]").val(JSON.stringify(v));
 }
 
+/**
+ * Function to update the overview div in the HTML page (summary of all terms annotated)
+ * Iterate on all nodes of the JSTree. If the data of presence is different from -0.25,
+ * add the term to the corresponding list (present or absent/negated).
+ * For each elem of each list, add a new span to the HTLM div with the Node ID and name
+ */
 function update_annotated_terms_overview() {
   // var v = $("#jstree").jstree(true).get_json("#", { flat: true });
   var v = JSON.parse($("input[id=ontology_tree]").val());
@@ -154,6 +186,10 @@ function update_annotated_terms_overview() {
   }
 }
 
+/**
+ * Function to set the slider sub-text according to the slider value
+ * @param {float} value - the value of the slider
+ */
 function set_slider_span(slide_value) {
   var message = {
     "-0.25": '<span class="badge bg-warning range-value">N/A</span>',
@@ -165,7 +201,11 @@ function set_slider_span(slide_value) {
   };
   $("#sliderspan").html(message[slide_value]);
 }
-
+/**
+ * Function to get BOQA diagnosis suggestions for query JSTree.
+ * This function make an AJAX request with que JSTree as JSON data.
+ * If sucessful, it updates the prediction HTML div with the results. (class and proba)
+ */
 function predict_diag_boqa() {
   var json_tree = $("input[id=ontology_tree]").val();
   $.ajax({
@@ -180,10 +220,26 @@ function predict_diag_boqa() {
     dataType: "text",
   });
 }
+// Trigger the Prediction AJAX Function when clicking the predict button
 $("#predictbutton").on("click", function () {
   predict_diag_boqa();
 });
 
+/**
+ * Function used for the OCR/NLP analysis (first part of the form)
+ *
+ * On file upload, show a loading animation and make an AJAX request to the server.
+ * If successful analysis, create a Mark.JS instance and configure it for positive and
+ * negative instance.
+ * For each line in the detected text, add it to the text viewer.
+ * From the results JSON, extract the results in two list: one for present and one for
+ * absent (negated) terms.
+ * For each entry in the lists, mark it in the text viewer using Mark.JS
+ * and fill the two accordions with the marking results.
+ * Finally update the JSTree with the results from the analysis: set node data presence
+ * to 0 or 1 depending on positive or negated detection.
+ * And update the final annotation overview.
+ */
 $(function () {
   $("#upload-file-btn").click(function () {
     let loading_spinner = document.getElementById("ocr-loading");
@@ -194,6 +250,7 @@ $(function () {
       "lang",
       $("#select-ocr-lang").find("option:selected").val()
     );
+    // On file upload, show a loading animation and make an AJAX request to the server.
     $.ajax({
       type: "POST",
       url: "/ocr_pdf",
@@ -205,6 +262,8 @@ $(function () {
         loading_spinner.setAttribute("hidden", "true");
         fail_div.removeAttribute("hidden");
       },
+      // If successful analysis, create a Mark.JS instance and configure it for
+      // positive and negative instance.
       success: function (data) {
         fail_div.setAttribute("hidden", "true");
         loading_spinner.setAttribute("hidden", "true");
@@ -226,12 +285,13 @@ $(function () {
           accurarcy: "exactly",
           ignorePunctuation: ":;.,-–—‒_(){}[]!'\"+=".split(""),
         };
-        // Print of detected text in the viewer
+        // For each line in the detected text, add it to the text viewer.
         for (const [key, value] of Object.entries(json_ans.results.full_text)) {
           text_results_field.innerHTML += value + "<br />";
         }
 
-        // Making the list of postive and negative keywords
+        // From the results JSON, extract the results in two list: one for present and
+        // one for absent (negated) terms.
         var keywords_pos = [];
         var keywords_neg = [];
         for (const [key, value] of Object.entries(
@@ -243,10 +303,12 @@ $(function () {
             keywords_neg.push(value[1]);
           }
         }
+
+        // For each entry in the lists, mark it in the text viewer using Mark.JS
+        // and fill the two accordions with the marking results.
         instance.mark(keywords_pos, options_pos);
         instance.mark(keywords_neg, options_neg);
 
-        // Fill the accordion section
         let present_feat_overview_auto = document.getElementById(
           "feature-present-auto"
         );
@@ -281,7 +343,9 @@ $(function () {
               ")" +
               "</span><br />";
           }
-          // Auto Fill the ontology tree with NLP Results (overwrite)
+
+          // Finally update the JSTree with the results from the analysis: set node data
+          // presence to 0 or 1 depending on positive or negated detection.
           var json_tree = $("input[id=ontology_tree]").val();
           var json_tree_obj = JSON.parse(json_tree);
           // Iterate the tree and find the node that matches the feature ID
@@ -298,8 +362,11 @@ $(function () {
             }
           }
         }
+        // Update the tree viewer with the latest changes.
         $("#jstree").jstree(true).settings.core.data = json_tree_obj;
         $("#jstree").jstree(true).refresh();
+
+        // Update the final annotation overview.
         update_annotated_terms_overview();
       },
     });
