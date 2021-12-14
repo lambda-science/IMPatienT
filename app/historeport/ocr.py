@@ -83,6 +83,12 @@ class TextReport:
             # Tesseract OCR
             custom_config = r"-l " + self.lang + r" --oem 1 --psm 1 "
             text_page = pytesseract.image_to_string(open_cv_image, config=custom_config)
+            # print(pytesseract.image_to_data(open_cv_image, config=custom_config))
+            # hocr_results = pytesseract.image_to_pdf_or_hocr(
+            #     open_cv_image, config=custom_config, extension="hocr"
+            # )
+            # with open("hocr.html", "wb") as f:
+            #     f.write(hocr_results)
             # Save text results
             page_list.append(text_page)
         self.raw_text = "\n".join(page_list)
@@ -215,3 +221,13 @@ class TextReport:
         full_ngrams = self._spacy_ngrams(self.raw_text)
         match_list = self._match_ngram_ontology(full_ngrams)
         return match_list
+
+
+if __name__ == "__main__":
+    import sys
+
+    pdf_path = sys.argv[1]
+    pdf_lang = sys.argv[2]
+    pdf_object = TextReport(file_obj=open(pdf_path, "rb"), lang=pdf_lang)
+    pdf_object.pdf_to_text()
+    # print(pdf_object.raw_text)

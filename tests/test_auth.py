@@ -14,6 +14,7 @@ class TestConfig(Config):
     """Basic App configuration for testing environnement"""
 
     TESTING = True
+    ADMINS_EMAIL = ["test@test.test"]
     SQLALCHEMY_DATABASE_URI = "sqlite://"
     SECRET_KEY = "testingsecretkey"
     WTF_CSRF_ENABLED = False
