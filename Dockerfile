@@ -11,8 +11,6 @@ COPY --chown=ehroes:ehroes poetry.lock poetry.lock
 RUN python -m pip install poetry
 RUN python -m poetry config virtualenvs.in-project true
 RUN python -m poetry install
-RUN .venv/bin/python -m spacy download fr_core_news_lg
-RUN .venv/bin/python -m spacy download en_core_web_lg
 
 FROM python:3.9-slim as release
 
