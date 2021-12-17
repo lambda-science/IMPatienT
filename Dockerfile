@@ -1,26 +1,16 @@
-FROM python:3.9-slim as env
+FROM python:3.9-slim
 
-SHELL ["/bin/bash", "-c"]
 RUN useradd ehroes
 WORKDIR /home/ehroes
 
-RUN apt update && apt install -y gcc git
+RUN apt update && apt install -y gcc git tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra poppler-utils
 COPY --chown=ehroes:ehroes pyproject.toml pyproject.toml
 COPY --chown=ehroes:ehroes poetry.lock poetry.lock
 
 RUN python -m pip install poetry
-RUN python -m poetry config virtualenvs.in-project true
-RUN python -m poetry install
+RUN python -m poetry config virtualenvs.create false
+RUN python -m poetry install --no-root --no-interaction && rm -rf ~/.cache/pypoetry/{cache,artifacts}
 
-FROM python:3.9-slim as release
-
-SHELL ["/bin/bash", "-c"]
-RUN useradd ehroes
-WORKDIR /home/ehroes
-
-RUN apt update && apt install -y gcc tesseract-ocr tesseract-ocr-osd tesseract-ocr-fra poppler-utils
-
-COPY --chown=ehroes:ehroes --from=env /home/ehroes/.venv .venv
 COPY --chown=ehroes:ehroes ehroes.py config.py docker/boot.sh ./
 COPY --chown=ehroes:ehroes app app
 COPY --chown=ehroes:ehroes migrations migrations
