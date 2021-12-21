@@ -170,3 +170,7 @@ data/ontology/ontology.json
 !data/images/.gitkeep
 docker/run.sh
 .bash_history
+.vscode-server
+.ssh
+.config
+.gitconfig

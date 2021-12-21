@@ -25,7 +25,9 @@
     "njpwerner.autodocstring",
     "mutantdino.resourcemonitor",
     "albert.tabout",
-    "github.copilot"
+    "github.copilot",
+    "druideinformatique.antidote",
+    "vincaslt.highlight-matching-tag"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -34,8 +36,8 @@
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
-  "workspaceMount": "source=${localWorkspaceFolder},target=/home/ehroes/code,type=bind,consistency=cached",
-  "workspaceFolder": "/home/ehroes/code",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/ehroes,type=bind,consistency=cached",
+  "workspaceFolder": "/home/ehroes",
   "runArgs": ["--init", "--name", "ehroesdev", "--rm", "-it"],
 
   // Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.

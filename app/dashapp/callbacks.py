@@ -28,7 +28,7 @@ from app.dashapp.shapes_to_segmentations import (
 from app.dashapp.trainable_segmentation import multiscale_basic_features
 
 
-memory = Memory("./joblib_cache", bytes_limit=3000000000, verbose=3)
+memory = Memory("./joblib_cache", bytes_limit=500000000, verbose=1)
 compute_features = memory.cache(multiscale_basic_features)
 
 
