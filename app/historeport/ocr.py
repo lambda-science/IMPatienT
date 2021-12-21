@@ -32,11 +32,11 @@ class TextReport:
         self.text_as_list = []
         self.header_text = []
         if self.lang == "fra":
-            self.nlp = spacy.load("fr_core_news_lg")
+            self.nlp = spacy.load("fr_core_news_sm")
             self.negexlist = current_app.config["NEGEX_LIST_FR"]
             self.negex_sent = current_app.config["NEGEX_SENT_FR"]
         if self.lang == "eng":
-            self.nlp = spacy.load("en_core_web_lg")
+            self.nlp = spacy.load("en_core_web_sm")
             self.negexlist = current_app.config["NEGEX_LIST_EN"]
             self.negex_sent = current_app.config["NEGEX_SENT_EN"]
 
