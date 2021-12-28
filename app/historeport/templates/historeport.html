@@ -34,12 +34,10 @@
                             <input name="file" class="form-control-file" type="file" id="FormControlFile1">
                         </div>
                         <div class="col">
-                            <div class="form-group">
-                                <select class="form-control" id="select-ocr-lang">
-                                    <option value="eng">English</option>
-                                    <option value="fra">French</option>
-                                </select>
-                            </div>
+                            <select class="form-control" id="select-ocr-lang">
+                                <option value="eng">English</option>
+                                <option value="fra">French</option>
+                            </select>
                         </div>
                         <div class="col">
                             <button id="upload-file-btn" class="btn btn-primary" type="button">Upload</button>
@@ -122,36 +120,35 @@
         <div class="col-xl-8 offset-xl-2"
             style="border: solid;border-color: #db3236;border-radius: 30px; border-width: thin;">
             <h1>Patient Informations</h1>
-            <div class="form-group">
-                {% for error in form.errors %}
-                <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
-                {% endfor %}
-                {{ form.hidden_tag() }}
-                <div class="row">
-                    <div class="col-xl">
-                        {{ form.patient_id.label }}
-                        {{ form.patient_id }}
-                    </div>
-                    <div class="col-xl">
-                        {{ form.biopsie_id.label }}
-                        {{ form.biopsie_id }}</div>
-                    <div class="col-xl">
-                        {{ form.date_envoie.label }}
-                        {{ form.date_envoie }}</div>
-                    <div class="col-xl">
-                        {{ form.muscle_prelev.label }}
-                        {{ form.muscle_prelev }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xl">
 
-                        {{ form.age_biopsie.label() }}
-                        {{ form.age_biopsie }}</div>
-                    <div class="col-xl">
-                        {{ form.gene_diag.label() }}
-                        {{ form.gene_diag }}</div>
-                    {{ form.ontology_tree }}
+            {% for error in form.errors %}
+            <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
+            {% endfor %}
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="col-xl">
+                    {{ form.patient_id.label(class="form-label") }}
+                    {{ form.patient_id }}
                 </div>
+                <div class="col-xl">
+                    {{ form.biopsie_id.label(class="form-label") }}
+                    {{ form.biopsie_id }}</div>
+                <div class="col-xl">
+                    {{ form.date_envoie.label(class="form-label") }}
+                    {{ form.date_envoie }}</div>
+                <div class="col-xl">
+                    {{ form.muscle_prelev.label(class="form-label") }}
+                    {{ form.muscle_prelev }}</div>
+            </div>
+            <div class="row">
+                <div class="col-xl">
+
+                    {{ form.age_biopsie.label(class="form-label") }}
+                    {{ form.age_biopsie }}</div>
+                <div class="col-xl">
+                    {{ form.gene_diag.label(class="form-label") }}
+                    {{ form.gene_diag }}</div>
+                {{ form.ontology_tree }}
             </div>
         </div>
         <div class="row">
@@ -172,7 +169,7 @@
                 <div class="col-xl-12">
                     <div class="row">
                         <div class="col-xl-6 range">
-                            {{ form2.preabsProba.label(class="d-flex justify-content-center") }}
+                            {{ form2.preabsProba.label(class="form-label d-flex justify-content-center") }}
                             {{ form2.preabsProba }}
                             <div class="d-flex justify-content-center" id="sliderspan">
                             </div>
@@ -184,25 +181,25 @@
                 <h4>Vocabulary Term Details</h4>
                 <div class="row">
                     <div class="col-xl-3 range">
-                        {{ form2.onto_id_ext.label }}
+                        {{ form2.onto_id_ext.label(class="form-label") }}
                         {{ form2.onto_id_ext }}
                     </div>
                     <div class="col-xl-9 range">
-                        {{ form2.onto_name.label }}
+                        {{ form2.onto_name.label(class="form-label") }}
                         {{ form2.onto_name }}
                     </div>
                 </div>
-                {{ form2.synonymes.label }}
+                {{ form2.synonymes.label(class="form-label") }}
                 {{ form2.synonymes }}
-                {{ form2.alternative_language.label }}
+                {{ form2.alternative_language.label(class="form-label") }}
                 {{ form2.alternative_language }}
-                {{ form2.gene_datamined.label }}
+                {{ form2.gene_datamined.label(class="form-label") }}
                 {{ form2.gene_datamined }}
-                {{ form2.phenotype_datamined.label }}
+                {{ form2.phenotype_datamined.label(class="form-label") }}
                 {{ form2.phenotype_datamined }}
-                {{ form2.correlates_with.label }}
+                {{ form2.correlates_with.label(class="form-label") }}
                 {{ form2.correlates_with }}
-                {{ form2.description.label }}
+                {{ form2.description.label(class="form-label") }}
                 {{ form2.description }}
 
 
@@ -236,7 +233,7 @@
                         !</button><br />
                     Method BOQA (Stats): <div class="predict_diag_boqa badge bg-primary"></div>
                     <div class="predict_proba_boqa badge bg-primary"></div><br />
-                    {{form.conclusion.label}}
+                    {{form.conclusion.label(class="form-label")}}
                     {{form.conclusion}}
                     {{form.submit}}
                 </div>
