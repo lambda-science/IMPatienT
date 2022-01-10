@@ -3,6 +3,7 @@ import os
 
 import app.src.common as Common
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed, FileField, FileRequired
 from wtforms import SelectField, StringField, SubmitField, TextAreaField, fields
 from wtforms.fields.html5 import DecimalRangeField
 from wtforms.validators import DataRequired, Length, NumberRange, Regexp
@@ -220,3 +221,41 @@ class DeleteButton(FlaskForm):
     """
 
     submit = SubmitField("Confirm Deletion", render_kw={"class": "btn btn-danger"})
+
+
+class PdfUpload(FlaskForm):
+    """Form for uploading images.
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
+
+    pdf_file = FileField(
+        validators=[
+            FileRequired(),
+            FileAllowed(
+                ["pdf"],
+                "This file is not a valid image !",
+            ),
+        ],
+        render_kw={"class": "form-control-file border"},
+    )
+    language = SelectField(
+        "language",
+        validators=[DataRequired()],
+        choices=[
+            ("eng", "English"),
+            ("fra", "French"),
+        ],
+        render_kw={
+            "placeholder": "PDF Language",
+            "class": "form-control custom-select",
+        },
+    )
+
+    # submit = SubmitField(
+    #     "Upload",
+    #     render_kw={
+    #         "class": "btn btn-primary mb-2",
+    #     },
+    # )

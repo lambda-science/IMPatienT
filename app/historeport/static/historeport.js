@@ -242,12 +242,12 @@ $("#predictbutton").on("click", function () {
  */
 $(function () {
   $("#upload-file-btn").click(function () {
-    let loading_spinner = document.getElementById("ocr-loading");
-    let fail_div = document.getElementById("ocr-fail");
+    var loading_spinner = document.getElementById("ocr-loading");
+    var fail_div = document.getElementById("ocr-fail");
     loading_spinner.removeAttribute("hidden");
     var form_data = new FormData($("#upload-file")[0]);
     form_data.append(
-      "lang",
+      "language",
       $("#select-ocr-lang").find("option:selected").val()
     );
     // On file upload, show a loading animation and make an AJAX request to the server.
@@ -259,8 +259,8 @@ $(function () {
       cache: false,
       processData: false,
       error: function (data) {
-        loading_spinner.setAttribute("hidden", "true");
         fail_div.removeAttribute("hidden");
+        loading_spinner.setAttribute("hidden", "true");
       },
       // If successful analysis, create a Mark.JS instance and configure it for
       // positive and negative instance.
