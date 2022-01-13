@@ -85,8 +85,27 @@ class ReportForm(FlaskForm):
             "placeholder": "YYYY-MM-DD",
         },
     )
+    mutation = StringField(
+        "Mutation",
+        validators=[
+            Length(max=140),
+        ],
+        render_kw={
+            "class": "form-control",
+            "placeholder": "Mutation (HGVS Format)",
+        },
+    )
+
+    pheno_terms = StringField(
+        "Phenotype terms",
+        render_kw={
+            "class": "form-control",
+            "placeholder": "Phenotype Description",
+        },
+    )
+
     gene_diag = SelectField(
-        "Diagnosed Gene ",
+        "Diagnosed Gene",
         validators=[DataRequired()],
         choices=Common.create_list(os.path.join("config", "config_gene.txt")),
         render_kw={

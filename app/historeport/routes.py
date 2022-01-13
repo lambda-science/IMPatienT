@@ -50,6 +50,8 @@ def historeport():
                 muscle_prelev=report_request.muscle_prelev,
                 age_biopsie=report_request.age_biopsie,
                 date_envoie=report_request.date_envoie,
+                mutation=report_request.mutation,
+                pheno_terms=report_request.pheno_terms,
                 gene_diag=report_request.gene_diag,
                 ontology_tree=report_request.ontology_tree,
                 comment=report_request.comment,

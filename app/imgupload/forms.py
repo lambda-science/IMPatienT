@@ -18,7 +18,7 @@ class ImageForm(FlaskForm):
         validators=[
             FileRequired(),
             FileAllowed(
-                ["png", "jpg", "jpeg"],
+                ["png", "jpg", "jpeg", "tif", "tiff", "TIF", "TIFF"],
                 "This file is not a valid image !",
             ),
         ],

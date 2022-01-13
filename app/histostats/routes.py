@@ -16,8 +16,10 @@ def statsindex():
         str: Dashboard HTML Page
     """
     # Up to stat_per_diag to move in the historeport part to not always regenerate
+    with open(os.path.join("data/ontology", "ontology.json"), "r") as fp:
+        onto_tree = json.load(fp)
     df = db_to_df()
-    df, features_col = table_to_df(df)
+    df, features_col = table_to_df(df, onto_tree)
     df = process_df(df)
     df_per_gene, df_per_diag = generate_stat_per(df, features_col)
     graph_viz = create_plotly_viz(df)

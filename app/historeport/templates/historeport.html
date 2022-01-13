@@ -151,6 +151,18 @@
                     {{ form.gene_diag }}</div>
                 {{ form.ontology_tree }}
             </div>
+
+
+            <div class="row">
+                <div class="col-xl">
+
+                    {{ form.pheno_terms.label(class="form-label") }}
+                    {{ form.pheno_terms }}</div>
+                <div class="col-xl">
+                    {{ form.mutation.label(class="form-label") }}
+                    {{ form.mutation }}</div>
+            </div>
+
         </div>
         <div class="row">
             <div class="col-xl-5 mt-3 offset-xl-1">
