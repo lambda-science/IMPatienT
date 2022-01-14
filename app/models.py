@@ -120,7 +120,7 @@ class Image(db.Model):
     image_path = db.Column(db.String(4096), unique=True, nullable=False)
     image_background_path = db.Column(db.String(4096), unique=True)
     sigma_range_min = db.Column(db.Float())
-    sigma_range_min = db.Column(db.Float())
+    sigma_range_max = db.Column(db.Float())
     diagnostic = db.Column(db.String(140), index=True)
     seg_matrix_path = db.Column(db.String(4096), unique=True)
     mask_image_path = db.Column(db.String(4096), unique=True)

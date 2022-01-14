@@ -16,6 +16,7 @@ from flask import (
 from flask_login import current_user, login_required
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
+from PIL import Image as PILImage
 
 
 @bp.route("/data/images/<path:filename>")
@@ -128,15 +129,25 @@ def create_img():
     if form.validate_on_submit():
         file = form.image.data
         patient_id = form.patient_ID.data
-        filename = secure_filename(patient_id + "_" + file.filename)
 
+        filename = secure_filename(patient_id + "_" + file.filename)
         # Create a data folder for patient
         data_patient_dir = os.path.join(current_app.config["IMAGES_FOLDER"], patient_id)
         if not os.path.exists(data_patient_dir):
             os.makedirs(data_patient_dir)
         # Save the image to patient data folder
         file.save(os.path.join(data_patient_dir, filename))
+
+        # If Image is a Tiff, save a PNG format
+        print(filename.split("."))
+        if filename.split(".")[-1] in ["tiff", "tif", "TIFF", "TIF"]:
+            image = PILImage.open(file)
+            filename_back = ".".join(filename.split(".")[0:-1]) + ".png"
+            image.save(os.path.join(data_patient_dir, filename_back), "PNG")
+        else:
+            filename_back = filename
         # Create our new Image & Patient database entry
+        print(os.path.join(data_patient_dir, filename_back))
         image = Image(
             image_name=filename,
             expert_id=current_user.id,
@@ -145,6 +156,7 @@ def create_img():
             type_coloration=form.type_coloration.data,
             age_at_biopsy=form.age_histo.data,
             image_path=os.path.join(data_patient_dir, filename),
+            image_background_path=os.path.join(data_patient_dir, filename_back),
             diagnostic=form.diagnostic.data,
         )
         # Check if the image already exist in DB (same filename & patient ID)

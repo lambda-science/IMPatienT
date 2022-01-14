@@ -25,17 +25,17 @@ class ImageForm(FlaskForm):
         render_kw={"class": "form-control-file border"},
     )
     patient_ID = StringField(
-        "patient_ID",
+        "Patient ID",
         validators=[Regexp(r"^[\w.-_]+$"), DataRequired()],
         render_kw={"placeholder": "Patient ID", "class": "form-control"},
     )
     biopsy_report_ID = StringField(
-        "biopsy_report_ID",
+        "Biopsy ID",
         validators=[DataRequired(), Regexp(r"^[\w.-_]*$")],
         render_kw={"placeholder": "Biopsy Report ID", "class": "form-control"},
     )
     type_coloration = SelectField(
-        "type_coloration",
+        "Coloration Type",
         validators=[DataRequired()],
         choices=[
             "HE",
@@ -54,7 +54,7 @@ class ImageForm(FlaskForm):
         },
     )
     age_histo = SelectField(
-        "age_histology",
+        "Age of patient at biopsy",
         validators=[DataRequired()],
         choices=[i for i in range(131)],
         render_kw={
@@ -63,7 +63,7 @@ class ImageForm(FlaskForm):
         },
     )
     diagnostic = SelectField(
-        "diagnostic",
+        "Diagnosis",
         validators=[DataRequired()],
         choices=Common.create_diag_list(os.path.join("config", "diagnostic.tsv")),
         render_kw={

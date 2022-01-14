@@ -9,12 +9,17 @@
             <span style="color: red;">{{ error }}: {{form.errors[error]}}</span>
             {% endfor %}
             {{ form.hidden_tag() }}
+            {{ form.patient_ID.label(class="form-label") }}
             {{ form.patient_ID }}
             <h4>Select an image file</h4>
-            {{ form.image }}
+            {{ form.image }} <br />
+            {{ form.biopsy_report_ID.label(class="form-label") }}
             {{ form.biopsy_report_ID }}
+            {{ form.type_coloration.label(class="form-label") }}
             {{ form.type_coloration }}
+            {{ form.age_histo.label(class="form-label") }}
             {{ form.age_histo }}
+            {{ form.diagnostic.label(class="form-label") }}
             {{ form.diagnostic }}
             {{ form.submit }}
     </div>

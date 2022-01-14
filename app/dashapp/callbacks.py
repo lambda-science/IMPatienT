@@ -112,6 +112,7 @@ def register_callbacks(dashapp):
             Output("classifier-store", "data"),
             Output("classified-image-store", "data"),
             Output("alertbox", "children"),
+            Output("sigma-range-slider", "value"),
         ],
         [
             Input("url", "href"),
@@ -183,6 +184,11 @@ def register_callbacks(dashapp):
             if image.mask_annot_path is not None and image.mask_annot_path != []:
                 with open(image.mask_annot_path, "r") as file:
                     masks_data["shapes"] = json.load(file)
+                    sigma_range_slider_value = [
+                        image.sigma_range_min,
+                        image.sigma_range_max,
+                    ]
+
         if cbcontext in ["sigma-range-slider.value"] or (
             ("Show segmentation" in show_segmentation_value)
             and (len(masks_data["shapes"]) > 0)
@@ -246,6 +252,8 @@ def register_callbacks(dashapp):
                             PIL.Image.open(image.image_path), segimgpng
                         )
                     )
+                    image.sigma_range_min = sigma_range_slider_value[0]
+                    image.sigma_range_max = sigma_range_slider_value[1]
                     image.seg_matrix_path = os.path.join(
                         current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
@@ -299,4 +307,5 @@ def register_callbacks(dashapp):
             classifier_store_data,
             classified_image_store_data,
             alertbox,
+            sigma_range_slider_value,
         )
