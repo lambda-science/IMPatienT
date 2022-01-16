@@ -13,7 +13,7 @@ from flask import current_app
 from sklearn.metrics import confusion_matrix
 
 
-def table_to_df(df):
+def table_to_df(df, onto_tree):
     """Transform the JSON JSTree in the text report table to a pandas dataframe columns
 
     Args:
@@ -28,6 +28,7 @@ def table_to_df(df):
     tree_as_dict = {}
     features_col = []
     for index, row in df.iterrows():
+
         tree_as_dict.setdefault("id", []).append(row[0])
         tree_as_dict.setdefault("patient_id", []).append(row[1])
         tree_as_dict.setdefault("expert_id", []).append(row[2])
@@ -36,19 +37,26 @@ def table_to_df(df):
         tree_as_dict.setdefault("age_biopsie", []).append(row[5])
         tree_as_dict.setdefault("date_envoie", []).append(row[6])
         tree_as_dict.setdefault("gene_diag", []).append(row[7])
-        tree_as_dict.setdefault("comment", []).append(row[9])
-        tree_as_dict.setdefault("conclusion", []).append(row[10])
-        tree_as_dict.setdefault("BOQA_prediction", []).append(row[11])
-        tree_as_dict.setdefault("BOQA_prediction_score", []).append(row[12])
-        tree_as_dict.setdefault("datetime", []).append(row[13])
+        tree_as_dict.setdefault("mutation", []).append(row[8])
+        tree_as_dict.setdefault("pheno_terms", []).append(row[9])
+        tree_as_dict.setdefault("comment", []).append(row[11])
+        tree_as_dict.setdefault("conclusion", []).append(row[12])
+        tree_as_dict.setdefault("BOQA_prediction", []).append(row[13])
+        tree_as_dict.setdefault("BOQA_prediction_score", []).append(row[14])
+        tree_as_dict.setdefault("datetime", []).append(row[15])
 
-        my_tree = row[8]
-        for feature in my_tree:
-            tree_as_dict.setdefault(feature["text"], []).append(
-                float(feature["data"].get("presence", -0.25))
+        my_tree = row[10]
+        # my_tree = dict((item['text'], item) for item in row[8])
+        for feature in onto_tree:
+            # node = my_tree[feature["text"]]
+            node = next(
+                (item for item in my_tree if item["text"] == feature["text"]), None
+            )
+            tree_as_dict.setdefault(node["text"], []).append(
+                float(node["data"].get("presence", -0.25))
             )
             if index == 0:
-                features_col.append(feature["text"])
+                features_col.append(node["text"])
     df_return = pd.DataFrame.from_dict(tree_as_dict)
     return df_return, features_col
 

@@ -3,7 +3,12 @@ import json
 from app import db
 from app.historeport import bp
 from app.historeport.boqa import *
-from app.historeport.forms import DeleteButton, OntologyDescriptPreAbs, ReportForm
+from app.historeport.forms import (
+    DeleteButton,
+    OntologyDescriptPreAbs,
+    ReportForm,
+    PdfUpload,
+)
 from app.historeport.ocr import TextReport
 from app.historeport.onto_func import StandardVocabulary
 from app.models import ReportHisto
@@ -45,6 +50,8 @@ def historeport():
                 muscle_prelev=report_request.muscle_prelev,
                 age_biopsie=report_request.age_biopsie,
                 date_envoie=report_request.date_envoie,
+                mutation=report_request.mutation,
+                pheno_terms=report_request.pheno_terms,
                 gene_diag=report_request.gene_diag,
                 ontology_tree=report_request.ontology_tree,
                 comment=report_request.comment,
@@ -63,6 +70,7 @@ def historeport():
         form = ReportForm(ontology_tree=empty_json_tree)
     # Form for panel on the right with node description
     form2 = OntologyDescriptPreAbs()
+    pdf_form = PdfUpload()
 
     # On validation, save to database
     if form.validate_on_submit():
@@ -121,6 +129,7 @@ def historeport():
         "historeport.html",
         form=form,
         form2=form2,
+        pdf_form=pdf_form,
         ontology_tree_exist=ontology_tree_exist,
     )
 
@@ -189,8 +198,8 @@ def ocr_pdf():
         standard terms)
     """
     if request.method == "POST":
-        file_val = request.files["file"]
-        pdf_object = TextReport(file_obj=file_val, lang=request.form["lang"])
+        file_val = request.files["pdf_file"]
+        pdf_object = TextReport(file_obj=file_val, lang=request.form["language"])
         pdf_object.pdf_to_text()
         # pdf_object.detect_sections()
         # pdf_object.extract_section_text()

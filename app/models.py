@@ -118,12 +118,20 @@ class Image(db.Model):
     type_coloration = db.Column(db.String(140))
     age_at_biopsy = db.Column(db.Integer, default=-1)
     image_path = db.Column(db.String(4096), unique=True, nullable=False)
+    image_background_path = db.Column(db.String(4096), unique=True)
+    sigma_range_min = db.Column(db.Float())
+    sigma_range_max = db.Column(db.Float())
     diagnostic = db.Column(db.String(140), index=True)
     seg_matrix_path = db.Column(db.String(4096), unique=True)
     mask_image_path = db.Column(db.String(4096), unique=True)
     bland_image_path = db.Column(db.String(4096), unique=True)
     classifier_path = db.Column(db.String(4096), unique=True)
     mask_annot_path = db.Column(db.String(4096), unique=True)
+    datetime = db.Column(
+        db.DateTime(),
+        onupdate=datetime.datetime.utcnow,
+        default=datetime.datetime.utcnow,
+    )
 
     def __repr__(self):
         return "<Image Name {} Patient {}>".format(self.image_name, self.patient_id)
@@ -157,6 +165,8 @@ class ReportHisto(db.Model):
     age_biopsie = db.Column(db.Integer)
     date_envoie = db.Column(db.String(10))
     gene_diag = db.Column(db.String(140), index=True)
+    mutation = db.Column(db.String(140))
+    pheno_terms = db.Column(db.String(4096))
     ontology_tree = db.Column(db.JSON, default=[], nullable=False)
     comment = db.Column(db.Text, default="")
     conclusion = db.Column(db.String(140), index=True)
