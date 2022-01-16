@@ -168,7 +168,7 @@ def register_callbacks(dashapp):
         key_params = dict(parse.parse_qsl(parse.urlsplit(href).query))
         url_splited = parse.urlsplit(href)
         image = Image.query.get(key_params["id"])
-        image_split_path = image.image_path.split("/")
+        image_split_path = image.image_background_path.split("/")
         img = skio.imread(image.image_path)
         source = "/".join(
             [
