@@ -29,6 +29,8 @@
     integrity="sha384-tvG/2mnCFmGQzYC1Oh3qxQ7CkQ9kMzYjWZSNtrRZygHPDDqottzEJsqS4oUVodhW"
     crossorigin="anonymous"></script>
 
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/16f030e06e.js" crossorigin="anonymous"></script>
 
   <!-- Custom files -->
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='custom.css')}}">
@@ -46,16 +48,20 @@
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav me-auto">
           <li class="nav-item ">
-            <a class="nav-link" href="{{ url_for('ontocreate.ontocreate') }}">Standard Vocabulary</a>
+            <a class="nav-link" href="{{ url_for('ontocreate.ontocreate') }}"><i class="fa-solid fa-folder-tree"></i>
+              Standard Vocabulary</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{{ url_for('historeport.histoindex') }}">Report Digitalization</a>
+            <a class="nav-link" href="{{ url_for('historeport.histoindex') }}"><i class="fa-solid fa-file-medical"></i>
+              Report Digitalization</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{{ url_for('imgupload.img_index') }}">Image Annotation</a>
+            <a class="nav-link" href="{{ url_for('imgupload.img_index') }}"> <i class="fa-regular fa-image"></i> Image
+              Annotation</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{{ url_for('histostats.statsindex') }}">Visualization Dashboard</a>
+            <a class="nav-link" href="{{ url_for('histostats.statsindex') }}"><i class="fa-solid fa-chart-column"></i>
+              Visualization Dashboard</a>
           </li>
 
         </ul>
@@ -63,7 +69,8 @@
 
       <div class="mx-auto order-0">
         <li class="nav-item">
-          <a class="nav-link navbar-brand mx-auto" href="{{ url_for('index.index') }}">EHRoes 🦸</a>
+          <a class="nav-link navbar-brand mx-auto" href="{{ url_for('index.index') }}"><i class="fa-solid fa-house"></i>
+            EHRoes 🦸</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".dual-collapse2" />
           <span class="navbar-toggler-icon"></span>
         </li>
@@ -72,14 +79,17 @@
         <ul class=" navbar-nav ms-auto">
           {% if current_user.is_anonymous %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+            <a class="nav-link" href="{{ url_for('auth.login') }}"><i class="fa-solid fa-right-to-bracket"></i>
+              Login</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="#">Logged in as: {{ current_user.username }}</a>
+            <a class="nav-link" href="#"><i class="fa-regular fa-user"></i> Logged in as: {{ current_user.username
+              }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+            <a class="nav-link" href="{{ url_for('auth.logout') }}"><i class="fa-solid fa-right-from-bracket"></i>
+              Logout</a>
           </li>
           {% endif %}
         </ul>

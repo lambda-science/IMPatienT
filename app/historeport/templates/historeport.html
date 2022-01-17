@@ -42,7 +42,8 @@
                         </div>
                         <div class="col">
                             <!-- {{ pdf_form.submit}} -->
-                            <button id="upload-file-btn" class="btn btn-primary" type="button">Upload</button>
+                            <button id="upload-file-btn" class="btn btn-primary" type="button"><i
+                                    class="fa-solid fa-file-arrow-up"></i> Upload</button>
                             <div class="spinner-border text-primary" hidden role="status" id="ocr-loading">
                                 <span class="sr-only"></span>
                                 <span class="badge badge-danger" hidden id="ocr-fail"> Error</span>
@@ -241,14 +242,15 @@
                 <div class="col">
                     <h4>Commentaries and Conclusions</h4>
                     {{form.comment}}
-                    <b>Diagnosis Prediction:</b><button id="predictbutton" type="button"
-                        class="btn btn-info btn-sm">Predict
+                    <b>Diagnosis Prediction:</b><button id="predictbutton" type="button" class="btn btn-info btn-sm"><i
+                            class="fa-solid fa-gears"></i> Predict
                         !</button><br />
                     Method BOQA (Stats): <div class="predict_diag_boqa badge bg-primary"></div>
                     <div class="predict_proba_boqa badge bg-primary"></div><br />
                     {{form.conclusion.label(class="form-label")}}
                     {{form.conclusion}}
-                    {{form.submit}}
+                    <button type="submit" class="btn btn-primary mb-2"><i class="fa-regular fa-floppy-disk"></i> Save to
+                        Database</button>
                 </div>
             </div>
         </div>

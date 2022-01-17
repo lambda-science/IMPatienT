@@ -7,8 +7,8 @@
   <div class="col-xl-3 offset-md-4">
     <h1>Upload a new image</h1>
     <div class="text-center">
-      <a href="{{ url_for('imgupload.create_img') }}" class="btn btn-info btn-lg" role="button">
-        New Image
+      <a href="{{ url_for('imgupload.create_img') }}" class="btn btn-info btn-lg" role="button"><i
+          class="fa-solid fa-plus"></i> New Image
       </a>
     </div>
   </div>
@@ -31,15 +31,17 @@
         <td class="align-middle text-center">{{ image.image_name }}</td>
         <td class="align-middle text-center">{{ image.conclusion }}</td>
         <td class="align-middle text-center">
-          <a class="btn btn-warning btn-sm" role="button" href="dashboard?id={{image.id}}">
+          <a class="btn btn-warning btn-sm" role="button" href="dashboard?id={{image.id}}"><i
+              class="fa-solid fa-draw-polygon"></i>
             Anotate
           </a>
-          <a class="btn btn-success btn-sm" role="button" href="create_img?id={{image.id}}">
+          <a class="btn btn-success btn-sm" role="button" href="create_img?id={{image.id}}"><i
+              class="fa-regular fa-image"></i>
             Modify
           </a>
           <!-- Button Show Popup -->
           <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-            data-bs-target="#DeletionPopup{{image.id}}">
+            data-bs-target="#DeletionPopup{{image.id}}"><i class="fa-regular fa-trash-can"></i>
             Delete
           </button>
 

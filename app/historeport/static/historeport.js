@@ -170,19 +170,18 @@ function update_annotated_terms_overview() {
     } else if (presence_value === "0") {
       absent_features.push(value.id + " " + value.text);
     }
-    let present_feat_overview = document.getElementById("feature-present");
-    let absent_feat_overview = document.getElementById("feature-absent");
+    var present_feat_overview = document.getElementById("feature-present");
+    var absent_feat_overview = document.getElementById("feature-absent");
     present_feat_overview.innerHTML = "";
     absent_feat_overview.innerHTML = "";
-
-    for (const [key, value] of Object.entries(present_features)) {
-      present_feat_overview.innerHTML +=
-        "<span style='color:green'>" + value + "</span><br />";
-    }
-    for (const [key, value] of Object.entries(absent_features)) {
-      absent_feat_overview.innerHTML +=
-        "<span style='color:red'>" + value + "</span><br />";
-    }
+  }
+  for (const [key, value] of Object.entries(present_features)) {
+    present_feat_overview.innerHTML +=
+      "<span style='color:green'>" + value + "</span><br />";
+  }
+  for (const [key, value] of Object.entries(absent_features)) {
+    absent_feat_overview.innerHTML +=
+      "<span style='color:red'>" + value + "</span><br />";
   }
 }
 
