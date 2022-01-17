@@ -72,7 +72,7 @@ class ImageForm(FlaskForm):
         },
     )
 
-    submit = SubmitField("Upload", render_kw={"class": "btn btn-primary mb-2"})
+    # submit = SubmitField("Upload", render_kw={"class": "btn btn-primary mb-2"})
 
 
 class DeleteButton(FlaskForm):

@@ -23,7 +23,7 @@ class LoginForm(FlaskForm):
         render_kw={"placeholder": "Password", "class": "form-control"},
     )
     remember_me = BooleanField("Remember Me")
-    submit = SubmitField("Sign In", render_kw={"class": "btn btn-primary"})
+    # submit = SubmitField("Sign In", render_kw={"class": "btn btn-primary"})
 
 
 class ResetPasswordRequestForm(FlaskForm):
@@ -38,9 +38,9 @@ class ResetPasswordRequestForm(FlaskForm):
         validators=[DataRequired(), Email()],
         render_kw={"placeholder": "Email", "class": "form-control"},
     )
-    submit = SubmitField(
-        "Request Password Reset", render_kw={"class": "btn btn-primary"}
-    )
+    # submit = SubmitField(
+    #     "Request Password Reset", render_kw={"class": "btn btn-primary"}
+    # )
 
 
 class ResetPasswordForm(FlaskForm):
@@ -60,9 +60,9 @@ class ResetPasswordForm(FlaskForm):
         validators=[DataRequired(), EqualTo("password")],
         render_kw={"placeholder": "Confirm Password", "class": "form-control"},
     )
-    submit = SubmitField(
-        "Request Password Reset", render_kw={"class": "btn btn-primary"}
-    )
+    # submit = SubmitField(
+    #     "Request Password Reset", render_kw={"class": "btn btn-primary"}
+    # )
 
 
 # class RegistrationForm(FlaskForm):

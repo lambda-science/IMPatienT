@@ -18,16 +18,17 @@
 <div class="row">
   <div class="col-xl">
     <h1>Standard Vocabulary Tree</h1>
-    <a href="{{ url_for('ontocreate.download_onto') }}">Download Vocabulary (.JSON)
+    <a href="{{ url_for('ontocreate.download_onto') }}"><i class="fa-solid fa-download"></i> Download Vocabulary (.JSON)
     </a>
     <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control" placeholder="Search" />
     <div id="jstree" class="demo" style="overflow: scroll; max-height: 600px"></div>
 
-    <button type="button" class="btn btn-success" onclick="save_tree()">
+    <button type="button" class="btn btn-success" onclick="save_tree()"><i class="fa-regular fa-floppy-disk"></i>
       Save Tree
     </button>
     <!-- Button Show Popup -->
-    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LangInvertPopup">
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LangInvertPopup"><i
+        class="fa-solid fa-repeat"></i>
       Invert Ontology Language
     </button>
 
@@ -78,7 +79,8 @@
       {{ form.description.label(class="form-label") }}
       {{ form.description }}
 
-      <button type="button" class="btn btn-success" onclick="update_node_data()">
+      <button type="button" class="btn btn-success" onclick="update_node_data()"><i
+          class="fa-regular fa-floppy-disk"></i>
         Update Details
       </button>
     </form>

@@ -132,9 +132,9 @@ class ReportForm(FlaskForm):
             "class": "form-control custom-select",
         },
     )
-    submit = SubmitField(
-        "Save report to the database", render_kw={"class": "btn btn-primary mb-2"}
-    )
+    # submit = SubmitField(
+    #     "Save report to the database", render_kw={"class": "btn btn-primary mb-2"}
+    # )
 
 
 class OntologyDescriptPreAbs(FlaskForm):

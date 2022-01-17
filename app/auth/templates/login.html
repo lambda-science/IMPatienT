@@ -20,9 +20,11 @@
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>
             Forgot Your Password?
-            <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a>
+            <a href="{{ url_for('auth.reset_password_request') }}"><i
+                    class="fa-solid fa-arrow-up-right-from-square"></i> Click to Reset It</a>
         </p>
-        <p>{{ form.submit() }}</p>
+        <p><button type="submit" class="btn btn-primary"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign
+                In</button></p>
     </form>
 </div>
 {% endblock %}
