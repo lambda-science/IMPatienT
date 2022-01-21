@@ -26,6 +26,10 @@
     <button type="button" class="btn btn-success" onclick="save_tree()"><i class="fa-regular fa-floppy-disk"></i>
       Save Tree
     </button>
+    <div class="spinner-border text-success" role="status" id="savespinner" hidden>
+      <span class="sr-only"></span>
+    </div>
+
     <!-- Button Show Popup -->
     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LangInvertPopup"><i
         class="fa-solid fa-repeat"></i>
@@ -79,10 +83,10 @@
       {{ form.description.label(class="form-label") }}
       {{ form.description }}
 
-      <button type="button" class="btn btn-success" onclick="update_node_data()"><i
+      <!-- <button type="button" class="btn btn-success" onclick="update_node_data()"><i
           class="fa-regular fa-floppy-disk"></i>
         Update Details
-      </button>
+      </button> -->
     </form>
   </div>
 </div>

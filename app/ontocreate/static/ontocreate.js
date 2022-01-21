@@ -99,11 +99,22 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   // input4_tag.addTags(data.node.data.phenotype);
   input5_tag.removeAllTags();
   input5_tag.addTags(data.node.data.phenotype_datamined);
+
   input6_tag.removeAllTags();
   input6_tag.addTags(data.node.data.alternative_language);
   input7_tag.removeAllTags();
   input7_tag.addTags(data.node.data.correlates_with);
   $("textarea[id=description]").val(data.node.data.description) || "";
+});
+
+$("input[id=alternative_language]").change(function () {
+  update_node_data();
+});
+$("input[id=synonymes]").change(function () {
+  update_node_data();
+});
+$("textarea[id=description]").change(function () {
+  update_node_data();
 });
 
 /**
@@ -124,19 +135,25 @@ function update_node_data() {
   );
   node.data.correlates_with = get_taglist("input[id=correlates_with]");
   node.data.description = $("textarea[id=description]").val();
-  save_tree();
+  $("#jstree").jstree(true).redraw();
+  //save_tree();
 }
 /**
  * Get the current JStree Json data and make an AJAX Request to update the .JSON file
  */
 function save_tree() {
+  var loading_spinner = document.getElementById("savespinner");
+  loading_spinner.removeAttribute("hidden");
+
   var v = $("#jstree").jstree(true).get_json("#", { flat: true });
   myJSON = JSON.stringify(v);
   $.ajax({
     type: "PATCH",
     url: data_url.savetree,
     data: myJSON,
-    success: console.log("Ontology File Updated"),
+    success: function (data) {
+      loading_spinner.setAttribute("hidden", "true");
+    },
     dataType: "text",
   });
 }
