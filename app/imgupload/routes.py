@@ -12,11 +12,14 @@ from flask import (
     request,
     send_from_directory,
     url_for,
+    make_response,
 )
 from flask_login import current_user, login_required
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from PIL import Image as PILImage
+import pandas as pd
+import tarfile
 
 
 @bp.route("/data/images/<path:filename>")
@@ -45,6 +48,21 @@ def img_index():
     image_history = Image.query.all()
 
     return render_template("img_index.html", form=form, image_history=image_history)
+
+
+@bp.route("/img_index/download", methods=["GET"])
+@login_required
+def img_download():
+    df = pd.read_sql(db.session.query(Image).statement, db.session.bind)
+    df.to_csv(os.path.join(current_app.config["IMAGES_FOLDER"], "images_db.csv"))
+    with tarfile.open(
+        os.path.join(current_app.config["DATA_FOLDER"], "image_data.tar.gz"), "w:gz"
+    ) as tar:
+        tar.add(
+            current_app.config["IMAGES_FOLDER"],
+            arcname=os.path.basename(current_app.config["IMAGES_FOLDER"]),
+        )
+    return send_from_directory(current_app.config["DATA_FOLDER"], "image_data.tar.gz")
 
 
 @bp.route("/delete_img/<id_img>", methods=["POST"])
