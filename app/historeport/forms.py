@@ -200,6 +200,7 @@ class OntologyDescriptPreAbs(FlaskForm):
         render_kw={
             "placeholder": "Alternative Language",
             "class": "form-control",
+            "readonly": "",
         },
     )
     correlates_with = StringField(

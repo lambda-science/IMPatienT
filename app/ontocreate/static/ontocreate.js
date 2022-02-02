@@ -89,21 +89,12 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   $("input[id=onto_id_ext]").val(data.node.id);
   $("input[id=onto_name]").val(data.node.text);
   $("input[id=parent_id]").val(data.node.parent);
-  input_tag.removeAllTags();
-  input_tag.addTags(data.node.data.synonymes);
-  // input2_tag.removeAllTags();
-  // input2_tag.addTags(data.node.data.genes);
-  input3_tag.removeAllTags();
-  input3_tag.addTags(data.node.data.gene_datamined);
-  // input4_tag.removeAllTags();
-  // input4_tag.addTags(data.node.data.phenotype);
-  input5_tag.removeAllTags();
-  input5_tag.addTags(data.node.data.phenotype_datamined);
+  input_tag.loadOriginalValues(data.node.data.synonymes);
+  input3_tag.loadOriginalValues(data.node.data.gene_datamined);
+  input5_tag.loadOriginalValues(data.node.data.phenotype_datamined);
+  input6_tag.loadOriginalValues(data.node.data.alternative_language);
+  input7_tag.loadOriginalValues(data.node.data.correlates_with);
 
-  input6_tag.removeAllTags();
-  input6_tag.addTags(data.node.data.alternative_language);
-  input7_tag.removeAllTags();
-  input7_tag.addTags(data.node.data.correlates_with);
   $("textarea[id=description]").val(data.node.data.description) || "";
 });
 
