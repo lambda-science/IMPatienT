@@ -9,10 +9,23 @@ from app.historeport.forms import (
     ReportForm,
     PdfUpload,
 )
+from app.histostats.vizualisation import (
+    db_to_df,
+    table_to_df,
+    process_df,
+)
 from app.historeport.ocr import TextReport
 from app.historeport.onto_func import StandardVocabulary
 from app.models import ReportHisto
-from flask import current_app, flash, redirect, render_template, request, url_for
+from flask import (
+    current_app,
+    flash,
+    redirect,
+    render_template,
+    request,
+    url_for,
+    make_response,
+)
 from flask_login import current_user, login_required
 
 
@@ -27,6 +40,19 @@ def histoindex():
     form = DeleteButton()
     report_history = ReportHisto.query.all()
     return render_template("histo_index.html", history=report_history, form=form)
+
+
+@bp.route("/historeport/download", methods=["GET"])
+@login_required
+def histo_download():
+    with open(os.path.join("data/ontology", "ontology.json"), "r") as fp:
+        onto_tree = json.load(fp)
+    df = db_to_df()
+    df, features_col = table_to_df(df, onto_tree)
+    resp = make_response(df.to_csv())
+    resp.headers["Content-Disposition"] = "attachment; filename=text_reports.csv"
+    resp.headers["Content-Type"] = "text/csv"
+    return resp
 
 
 @bp.route("/historeport/new", methods=["GET", "POST"])

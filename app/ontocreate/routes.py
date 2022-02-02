@@ -6,6 +6,7 @@ from app.historeport.onto_func import StandardVocabulary
 from app.models import ReportHisto
 from app.ontocreate import bp
 from app.ontocreate.forms import InvertLangButton, OntologyDescript
+from app.histostats.vizualisation import db_to_df, table_to_df
 from flask import (
     current_app,
     redirect,
@@ -152,4 +153,21 @@ def invert_lang():
         report.ontology_tree = updated_report_ontology
         flag_modified(report, "ontology_tree")
     db.session.commit()
+
+    df = db_to_df()
+    df, features_col = table_to_df(df, onto)
+    df = process_df(df)
+    generate_stat_per(df, features_col)
+
+    # Update The DashApp Callback & layout
+    # By Force reloading the layout code
+    dashapp = current_app.config["DASHAPP"]
+    with current_app.app_context():
+        import importlib
+
+        import app.dashapp.layout
+
+        importlib.reload(app.dashapp.layout)
+        dashapp.layout = app.dashapp.layout.layout
+
     return redirect(url_for("ontocreate.ontocreate"))
