@@ -174,3 +174,4 @@ docker/run.sh
 .ssh
 .config
 .gitconfig
+*.tar.gz

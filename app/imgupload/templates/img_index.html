@@ -15,7 +15,8 @@
 </div>
 <div class="row">
   <div class="col-xl">
-    <h1>Image Database</h1>
+    <h1>Image Database</h1> <a href="{{ url_for('imgupload.img_download') }}"><i class="fa-solid fa-download"></i>
+      Download All Images (.tar.gz)</a>
     <table id="image-history" class="table table-striped table-bordered table-hover table-responsive">
       <thead class="table-info">
         <th class="align-middle text-center">Biopsy ID</th>

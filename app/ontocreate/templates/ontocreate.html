@@ -8,12 +8,12 @@
   crossorigin="anonymous"></script>
 
 <!-- Tagify -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tagify/3.23.1/tagify.css"
-  integrity="sha512-1CG2eaZ3B/p7OqthY2eBpVCD2A+0b2T7aEXfMnr4FqZFoKddxURdxcD8EcKI66qthtkGAWA/Hnwy7ceNHcHJKw=="
-  crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tagify/3.23.1/tagify.min.js"
-  integrity="sha512-jb/SYEPmc1tGaJ3Yu6CZaOBhn8sqTpgTqVcXUm4udHGaUsBIOj6DsIc6aXZpsvXhtexnmIowmOVBHKuIwyB2Rw=="
-  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.9.5/tagify.css"
+  integrity="sha512-BaWShaAj9H6cyD1SI+/ekd0OtzwPiGXz6R1SP39S3n9URHluzg6asEPsbbldma1UVTGAf1NEYHFAnWcA5bxHzg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.9.5/tagify.min.js"
+  integrity="sha512-BGEMEI3qqrE/xefnyaPBBZ7luE9L7+kUNxCP0hyQMDYqxyC6w4vQbjjrqiSQxGIHs8C2cl65zvbhmXt5JZUHow=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <div class="row">
   <div class="col-xl">
@@ -26,10 +26,14 @@
     <button type="button" class="btn btn-success" onclick="save_tree()"><i class="fa-regular fa-floppy-disk"></i>
       Save Tree
     </button>
+    <div class="spinner-border text-success" role="status" id="savespinner" hidden>
+      <span class="sr-only"></span>
+    </div>
+
     <!-- Button Show Popup -->
     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LangInvertPopup"><i
         class="fa-solid fa-repeat"></i>
-      Invert Ontology Language
+      Invert Vocabulary Language
     </button>
 
     <!-- Deletion Popup -->
@@ -79,10 +83,10 @@
       {{ form.description.label(class="form-label") }}
       {{ form.description }}
 
-      <button type="button" class="btn btn-success" onclick="update_node_data()"><i
+      <!-- <button type="button" class="btn btn-success" onclick="update_node_data()"><i
           class="fa-regular fa-floppy-disk"></i>
         Update Details
-      </button>
+      </button> -->
     </form>
   </div>
 </div>
