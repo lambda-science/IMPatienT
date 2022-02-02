@@ -12,7 +12,6 @@ from app.historeport.forms import (
 from app.histostats.vizualisation import (
     db_to_df,
     table_to_df,
-    process_df,
 )
 from app.historeport.ocr import TextReport
 from app.historeport.onto_func import StandardVocabulary

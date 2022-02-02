@@ -6,7 +6,12 @@ from app.historeport.onto_func import StandardVocabulary
 from app.models import ReportHisto
 from app.ontocreate import bp
 from app.ontocreate.forms import InvertLangButton, OntologyDescript
-from app.histostats.vizualisation import db_to_df, table_to_df
+from app.histostats.vizualisation import (
+    db_to_df,
+    table_to_df,
+    process_df,
+    generate_stat_per,
+)
 from flask import (
     current_app,
     redirect,
