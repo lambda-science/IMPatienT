@@ -17,6 +17,64 @@ var input6_tag = new Tagify(input6);
 var input7 = document.querySelector("input[id=correlates_with]");
 var input7_tag = new Tagify(input7);
 
+// HPO Terms Field Handler
+
+// Load previous terms annotated to the report from DB as a list (whitelist for tagify)
+var term_previous_list = [];
+if ($("input[id=pheno_terms]").val() !== "") {
+  var term_previous_json = JSON.parse($("input[id=pheno_terms]").val());
+  var term_previous_list = [];
+
+  for (var i = 0; i < term_previous_json.length; i++) {
+    term_previous_list.push(term_previous_json[i]["value"]);
+  }
+}
+
+// Tagify Field handler with whitelist and HPO ajax
+var pheno_terms = document.querySelector("input[id=pheno_terms]");
+var pheno_terms_tag = new Tagify(pheno_terms, {
+    enforceWhitelist: true,
+    whitelist: term_previous_list,
+    dropdown: {
+      enabled: 0,
+    },
+  }),
+  controller; // for aborting the call
+
+pheno_terms_tag.on("input", onInput);
+
+// Tagify AJAX Function to get a list of HPO terms
+function onInput(e) {
+  var value = e.detail.value;
+  pheno_terms_tag.whitelist = null; // reset the whitelist
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort
+  controller && controller.abort();
+  controller = new AbortController();
+
+  // show loading animation and hide the suggestions dropdown
+  pheno_terms_tag.loading(true).dropdown.hide();
+
+  fetch(
+    "https://hpo.jax.org/api/hpo/search/?q=" +
+      value +
+      "&max=5&offset=0&category=terms",
+    { signal: controller.signal }
+  )
+    .then((RES) => RES.json())
+    .then(function (newWhitelist) {
+      var terms_list = [];
+      for (var i = 0; i < newWhitelist.terms.length; i++) {
+        terms_list.push(
+          newWhitelist.terms[i]["id"] + " " + newWhitelist.terms[i]["name"]
+        );
+      }
+      pheno_terms_tag.whitelist = terms_list;
+      pheno_terms_tag.loading(false);
+      pheno_terms_tag.dropdown.show(terms_list); // render the suggestions dropdown
+    });
+}
+
 // Get the JSON of the JSTree (stored in hidden form input) as a variable.
 var json_tree = $("input[id=ontology_tree]").val();
 
