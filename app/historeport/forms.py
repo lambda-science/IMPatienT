@@ -97,10 +97,10 @@ class ReportForm(FlaskForm):
     )
 
     pheno_terms = StringField(
-        "Phenotype terms",
+        "HPO Phenotype terms",
         render_kw={
             "class": "form-control",
-            "placeholder": "Phenotype Description",
+            "placeholder": "HPO Phenotype Description",
         },
     )
 
