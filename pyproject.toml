@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ehroes"
 version = "1.0.0"
-description = "EHRoes: an all-in-one web application for patients’ data digitalization and exploration"
+description = "EHRoes: an all-in-one web application for patients’ data digitization and exploration"
 authors = ["Corentin Meyer <co.meyer@unistra.fr>"]
 license = "MIT"
 

@@ -48,7 +48,7 @@ class HistoReportCase(unittest.TestCase):
     def test_histo_report_index(self):
         rv = self.client.get("/historeport")
         assert rv.status_code == 200
-        assert b"Digitalize a new report" in rv.data
+        assert b"digitize a new report" in rv.data
 
     def test_update_from_template(self):
         report = StandardVocabulary(
