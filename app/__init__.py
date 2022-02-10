@@ -11,6 +11,7 @@ from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from sqlalchemy import MetaData
 
 convention = {
@@ -30,6 +31,7 @@ login.login_view = "auth.login"
 login.login_message_category = "info"
 mail = Mail()
 session = Session()
+cors = CORS()
 
 
 def create_app(config_class=Config):
@@ -53,6 +55,7 @@ def create_app(config_class=Config):
     login.init_app(app)
     mail.init_app(app)
     session.init_app(app)
+    cors.init_app(app)
     register_dashapps(app)
 
     # Configuration of our various flask-blueprint folders

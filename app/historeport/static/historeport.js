@@ -18,7 +18,6 @@ var input7 = document.querySelector("input[id=correlates_with]");
 var input7_tag = new Tagify(input7);
 
 // HPO Terms Field Handler
-
 // Load previous terms annotated to the report from DB as a list (whitelist for tagify)
 var term_previous_list = [];
 if ($("input[id=pheno_terms]").val() !== "") {
@@ -35,20 +34,18 @@ var pheno_terms = document.querySelector("input[id=pheno_terms]");
 var pheno_terms_tag = new Tagify(pheno_terms, {
   enforceWhitelist: true,
   whitelist: term_previous_list,
-  dropdown: {
-    enabled: 0,
-  },
 }); // for aborting the call
 
-pheno_terms_tag.on("input", onInput);
+pheno_terms_tag.on("input", onInputHPO);
 
 // Tagify AJAX Function to get a list of HPO terms
 var delayTimer;
-function onInput(e) {
+function onInputHPO(e) {
   pheno_terms_tag.whitelist = null; // reset the whitelist
   // show loading animation and hide the suggestions dropdown
   pheno_terms_tag.loading(true).dropdown.hide();
   clearTimeout(delayTimer);
+
   delayTimer = setTimeout(function () {
     var value = e.detail.value;
     fetch(
@@ -67,6 +64,125 @@ function onInput(e) {
         pheno_terms_tag.whitelist = terms_list;
         pheno_terms_tag.loading(false);
         pheno_terms_tag.dropdown.show(); // render the suggestions dropdown
+      });
+  }, 700);
+}
+
+// HNC Genes Names Field Handler
+// Tagify Field handler with whitelist and HPO ajax
+var previous_gene = $("input[id=gene_diag]").val();
+var previous_gene_list = [];
+if ($("input[id=gene_diag]").val() !== "") {
+  var previous_gene_json = JSON.parse($("input[id=gene_diag]").val());
+  var previous_gene_list = [];
+
+  for (var i = 0; i < previous_gene_json.length; i++) {
+    previous_gene_list.push(previous_gene_json[i]["value"]);
+  }
+}
+
+var gene_diag_tag = new Tagify(gene_diag, {
+  enforceWhitelist: true,
+  whitelist: previous_gene_list,
+  mode: "select",
+});
+
+gene_diag_tag.on("input", onInputGene);
+
+// Tagify AJAX Function to get a list of HPO terms
+var delayTimer;
+function onInputGene(e) {
+  gene_diag_tag.whitelist = null; // reset the whitelist
+  // show loading animation and hide the suggestions dropdown
+  gene_diag_tag.loading(true).dropdown.hide();
+  clearTimeout(delayTimer);
+  var myHeaders = new Headers({
+    "content-type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  });
+  var options = {
+    method: "GET",
+    headers: myHeaders,
+    mode: "cors",
+  };
+  delayTimer = setTimeout(function () {
+    var value = e.detail.value;
+    fetch(
+      "https://rest.genenames.org/search/symbol/" +
+        value +
+        "*+AND+status:Approved",
+      options
+    )
+      .then((RES) => RES.json())
+      .then(function (newWhitelist) {
+        var terms_list = [];
+        for (var i = 0; i < 5; i++) {
+          terms_list.push(
+            newWhitelist.terms[i]["id"] + " " + newWhitelist.terms[i]["name"]
+          );
+        }
+        gene_diag_tag.whitelist = terms_list;
+        gene_diag_tag.loading(false);
+        gene_diag_tag.dropdown.show(); // render the suggestions dropdown
+      });
+  }, 700);
+}
+
+// Orphanet Disease Names Field Handler
+// Tagify Field handler with whitelist and Orphanet ajax
+var previous_conclusion = $("input[id=conclusion]").val();
+var previous_conclusion_list = [];
+if ($("input[id=conclusion]").val() !== "") {
+  var previous_conclusion_json = JSON.parse($("input[id=conclusion]").val());
+  var previous_conclusion_list = [];
+
+  for (var i = 0; i < previous_conclusion_json.length; i++) {
+    previous_conclusion_list.push(previous_conclusion_json[i]["value"]);
+  }
+}
+var conclusion = document.querySelector("input[id=conclusion]");
+var conclusion_tag = new Tagify(conclusion, {
+  enforceWhitelist: true,
+  whitelist: previous_conclusion_list,
+  mode: "select",
+});
+
+conclusion_tag.on("input", onInputConclusion);
+
+// Tagify AJAX Function to get a list of Orphanet names
+var myHeaders_orpha = new Headers({
+  apiKey: "ehroes",
+});
+var options_orpha = {
+  headers: myHeaders_orpha,
+};
+
+var delayTimer;
+function onInputConclusion(e) {
+  conclusion_tag.whitelist = null; // reset the whitelist
+  // show loading animation and hide the suggestions dropdown
+  conclusion_tag.loading(true).dropdown.hide();
+  clearTimeout(delayTimer);
+  delayTimer = setTimeout(function () {
+    var value = e.detail.value;
+
+    fetch(
+      "https://api.orphacode.org/EN/ClinicalEntity/ApproximateName/" + value,
+      options_orpha
+    )
+      .then((RES) => RES.json())
+      .then(function (newWhitelist) {
+        var terms_list = [];
+        for (var i = 0; i < newWhitelist.length; i++) {
+          terms_list.push(
+            newWhitelist[i]["ORPHAcode"] +
+              " " +
+              newWhitelist[i]["Preferred term"]
+          );
+        }
+        conclusion_tag.whitelist = terms_list;
+        conclusion_tag.loading(false);
+        conclusion_tag.dropdown.show(); // render the suggestions dropdown
       });
   }, 700);
 }

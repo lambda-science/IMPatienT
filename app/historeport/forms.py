@@ -104,13 +104,11 @@ class ReportForm(FlaskForm):
         },
     )
 
-    gene_diag = SelectField(
+    gene_diag = StringField(
         "Diagnosed Gene",
-        validators=[DataRequired()],
-        choices=Common.create_list(os.path.join("config", "config_gene.txt")),
         render_kw={
             "placeholder": "Diagnosed Gene",
-            "class": "form-control custom-select",
+            "class": "form-control",
         },
     )
     ontology_tree = JSONField("Json Ontology Tree", render_kw={"type": "hidden"})
@@ -124,12 +122,11 @@ class ReportForm(FlaskForm):
             "placeholder": "Commentary",
         },
     )
-    conclusion = SelectField(
+    conclusion = StringField(
         "Final Diagnosis",
-        choices=Common.create_diag_list(os.path.join("config", "diagnostic.tsv")),
         render_kw={
             "placeholder": "Final Diagnosis",
-            "class": "form-control custom-select",
+            "class": "form-control",
         },
     )
     # submit = SubmitField(
