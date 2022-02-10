@@ -98,7 +98,7 @@ def delete_img(id_img):
             )
             os.remove(
                 os.path.join(
-                    current_app.config["IMAGES_FOLDER"], image.bland_image_path
+                    current_app.config["IMAGES_FOLDER"], image.blend_image_path
                 )
             )
             os.remove(

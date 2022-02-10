@@ -271,14 +271,14 @@ def register_callbacks(dashapp):
                         image.image_name + "_mask_image.png",
                     )
                     segimgpng.save(image.mask_image_path)
-                    image.bland_image_path = os.path.join(
+                    image.blend_image_path = os.path.join(
                         current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
-                        image.image_name + "_bland_image.png",
+                        image.image_name + "_blend_image.png",
                     )
                     blend_image_and_classified_regions_pil(
                         PIL.Image.open(image.image_path), segimgpng
-                    ).save(image.bland_image_path)
+                    ).save(image.blend_image_path)
                     image.classifier_path = os.path.join(
                         current_app.config["IMAGES_FOLDER"],
                         image.patient_id,

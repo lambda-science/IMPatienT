@@ -124,7 +124,7 @@ class Image(db.Model):
     diagnostic = db.Column(db.String(140), index=True)
     seg_matrix_path = db.Column(db.String(4096), unique=True)
     mask_image_path = db.Column(db.String(4096), unique=True)
-    bland_image_path = db.Column(db.String(4096), unique=True)
+    blend_image_path = db.Column(db.String(4096), unique=True)
     classifier_path = db.Column(db.String(4096), unique=True)
     mask_annot_path = db.Column(db.String(4096), unique=True)
     datetime = db.Column(
