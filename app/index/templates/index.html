@@ -1,8 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <div class="col-xl-6 offset-xl-3">
   <h1 align="center">
-    EHRoes 🦸: an all-in-one web application for patients’ data digitization
-    and exploration
+    EHRoes 🦸: an all-in-one web application for patients’ data digitization and exploration
   </h1>
   <p align="center">
     <img src="{{ url_for('static', filename='banner.png') }}" alt="EHRoes Banner" style="border-radius: 25px;" />
@@ -16,7 +15,7 @@
   </p>
   <br />
   <h2>Demo Usage Instructions</h2>
-  <p>
+  <p align="justify">
     If you are on the demo instance (<a href="https://ehroes.lbgi.fr">https://ehroes.lbgi.fr</a>), you can login on top
     right with
     <strong>login: demo ; password: demo</strong><br /> The application is
@@ -39,7 +38,7 @@
       </a>
     </div>
     <div class="col-xl">
-      <p>EHRoes is developped and used in collaboration with the <a
+      <p align="justify">EHRoes is developped and used in collaboration with the <a
           href="https://www.institut-myologie.org/en/recherche-2/neuromuscular-exploration-and-evaluation-centre/laboratoire-dhistopathologie-dr-norma-b-romero/">
           Morphological Unit of the Institute of Myology of Paris</a>.
         A production instance is deployed to help discovering new relevant
@@ -47,38 +46,34 @@
     </div>
   </div>
   <h2>EHRoes Abstract</h2>
-  <p>
-    <strong>Background</strong><br />With a growing amount of patient data such
-    as sequencing, imaging, and medical records, electronic health records (EHR)
-    became central to drive research and improve diagnosis of patients by using
-    multimodal data. But EHR usage is challenging as they require tools to
-    format, digitize and interpret data. Today’s EHR exploitation tools
-    ecosystem is heavily fragmented among tools to create EHR (format and
-    digitize) and tools to interpret the data (exploration and diagnosis).
-    Also most of the tools are specialized for one specific type of data,
-    multiplying the number of different software needed for multimodal
-    approaches. There is a strong need for a simple, all-rounder and flexible
-    platform.<br /><strong>Results</strong><br />In this paper we present
-    EHRoes, an all-in-one web application for patients’ data digitization and
-    exploration. With its module-based architecture, we developed four modules
-    to: (i) create a set of standard vocabulary for a domain, (ii) automatically
-    digitize free-text data to a set of standard terms, (iii) annotate images
-    with standard vocabulary using automatic segmentation and (iv) generate an
-    automatic visualization dashboard to provide insight on the data and perform
-    automatic diagnosis suggestions. Using this platform, we successfully
-    digitized 89 muscle histology reports from patients with congenital
-    myopathies and we obtained an accuracy of 0.75 for congenital myopathy
-    subtypes classification.<br /><strong>Conclusions</strong><br />With EHRoes
-    we created a platform for both patients data digitization and exploration
-    that can handle image data and free-text data. As it uses user designed
-    standard vocabulary, it is highly flexible to fit any domain of research. It
-    can be used both as a patient registry with automatic diagnosis or as a
-    research tool to explore a cohort of patients. A demo instance of the
-    application is available at
-    <a href="https://ehroes.lbgi.fr">https://ehroes.lbgi.fr</a>.
+  <p align="justify">
+    <strong>Background</strong><br />With a growing amount of patient data such as sequencing, imaging, and medical
+    records, electronic health records (EHR) are now central to drive research and improve diagnosis of patients by
+    using multimodal data. Exploiting patient data is a challenge as patient data exploitation tools ecosystem is often
+    fragmented into tools to digitize and format the data and those interpreting the data (exploration, diagnosis).
+    Furthermore, as most of the tools are specialized in one type of data, a multitude of software is needed for
+    multimodal approaches. There is a strong need for a simple, all-rounder and flexible platform.
+    <br />
+    <strong>Results</strong>
+    <br />
+    In this paper we present EHRoes, an all-in-one web application to digitize and explore patient data. EHRoes has a
+    module-based architecture, composed of four modules to: (i) create a standard vocabulary for a domain (ii)
+    automatically digitize free-text data to a set of standard terms (iii) annotate images with standard vocabulary
+    using automatic segmentation and (iv) generate an automatic visualization dashboard to provide insight on the data
+    and perform automatic diagnosis suggestions. We demonstrated the utility of EHRoes by digitizing 40 artificial
+    muscle histology reports of patients with congenital myopathies.
+    <br />
+    <strong>Conclusions</strong>
+    <br />
+    With EHRoes we created a platform for both digitization and exploration of patient data that can handle image data
+    and free-text data. As it uses user-designed standard vocabulary, it is highly flexible to fit any domain of
+    research. It can be used both as a patient registry with automatic diagnosis or as a research tool to explore a
+    cohort of patients. A demo instance of the application is available at <a
+      href="https://ehroes.lbgi.fr">https://ehroes.lbgi.fr</a>.
+
   </p>
   <h2>MYO-xIA Project</h2>
-  <p>
+  <p align="justify">
     The MYO-xIA project aims to collect data from patients with
     <strong>congenital myopathies</strong> in order to analyse them using
     <strong>explainable AI approaches</strong>. In the field of congenital
@@ -87,7 +82,7 @@
     to use modern data analysis methods.<br />This project has tree mains
     objectives:
   </p>
-  <ul>
+  <ul align="justify">
     <li>
       <strong>Gather and format patient data</strong> to be ready for automatic
       exploitation (patient histology-report form, image annotation, OCR/NLP)
