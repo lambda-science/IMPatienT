@@ -222,6 +222,7 @@ sidebar = [
                                         min=0,
                                         max=6,
                                         step=0.1,
+                                        marks=None,
                                         value=DEFAULT_STROKE_WIDTH,
                                     ),
                                 ]
@@ -237,6 +238,7 @@ sidebar = [
                                         min=0.01,
                                         max=20,
                                         step=0.01,
+                                        marks=None,
                                         value=[0.5, 4],
                                     ),
                                 ]
