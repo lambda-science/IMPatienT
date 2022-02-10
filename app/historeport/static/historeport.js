@@ -45,13 +45,12 @@ pheno_terms_tag.on("input", onInput);
 // Tagify AJAX Function to get a list of HPO terms
 var delayTimer;
 function onInput(e) {
+  pheno_terms_tag.whitelist = null; // reset the whitelist
+  // show loading animation and hide the suggestions dropdown
+  pheno_terms_tag.loading(true).dropdown.hide();
   clearTimeout(delayTimer);
   delayTimer = setTimeout(function () {
     var value = e.detail.value;
-    pheno_terms_tag.whitelist = null; // reset the whitelist
-    // show loading animation and hide the suggestions dropdown
-    pheno_terms_tag.loading(true).dropdown.hide();
-
     fetch(
       "https://hpo.jax.org/api/hpo/search/?q=" +
         value +
@@ -67,7 +66,7 @@ function onInput(e) {
         }
         pheno_terms_tag.whitelist = terms_list;
         pheno_terms_tag.loading(false);
-        pheno_terms_tag.dropdown.show(terms_list); // render the suggestions dropdown
+        pheno_terms_tag.dropdown.show(); // render the suggestions dropdown
       });
   }, 700);
 }
