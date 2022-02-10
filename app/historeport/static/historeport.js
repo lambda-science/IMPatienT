@@ -33,46 +33,43 @@ if ($("input[id=pheno_terms]").val() !== "") {
 // Tagify Field handler with whitelist and HPO ajax
 var pheno_terms = document.querySelector("input[id=pheno_terms]");
 var pheno_terms_tag = new Tagify(pheno_terms, {
-    enforceWhitelist: true,
-    whitelist: term_previous_list,
-    dropdown: {
-      enabled: 0,
-    },
-  }),
-  controller; // for aborting the call
+  enforceWhitelist: true,
+  whitelist: term_previous_list,
+  dropdown: {
+    enabled: 0,
+  },
+}); // for aborting the call
 
 pheno_terms_tag.on("input", onInput);
 
 // Tagify AJAX Function to get a list of HPO terms
+var delayTimer;
 function onInput(e) {
-  var value = e.detail.value;
-  pheno_terms_tag.whitelist = null; // reset the whitelist
+  clearTimeout(delayTimer);
+  delayTimer = setTimeout(function () {
+    var value = e.detail.value;
+    pheno_terms_tag.whitelist = null; // reset the whitelist
+    // show loading animation and hide the suggestions dropdown
+    pheno_terms_tag.loading(true).dropdown.hide();
 
-  // https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort
-  controller && controller.abort();
-  controller = new AbortController();
-
-  // show loading animation and hide the suggestions dropdown
-  pheno_terms_tag.loading(true).dropdown.hide();
-
-  fetch(
-    "https://hpo.jax.org/api/hpo/search/?q=" +
-      value +
-      "&max=5&offset=0&category=terms",
-    { signal: controller.signal }
-  )
-    .then((RES) => RES.json())
-    .then(function (newWhitelist) {
-      var terms_list = [];
-      for (var i = 0; i < newWhitelist.terms.length; i++) {
-        terms_list.push(
-          newWhitelist.terms[i]["id"] + " " + newWhitelist.terms[i]["name"]
-        );
-      }
-      pheno_terms_tag.whitelist = terms_list;
-      pheno_terms_tag.loading(false);
-      pheno_terms_tag.dropdown.show(terms_list); // render the suggestions dropdown
-    });
+    fetch(
+      "https://hpo.jax.org/api/hpo/search/?q=" +
+        value +
+        "&max=5&offset=0&category=terms"
+    )
+      .then((RES) => RES.json())
+      .then(function (newWhitelist) {
+        var terms_list = [];
+        for (var i = 0; i < newWhitelist.terms.length; i++) {
+          terms_list.push(
+            newWhitelist.terms[i]["id"] + " " + newWhitelist.terms[i]["name"]
+          );
+        }
+        pheno_terms_tag.whitelist = terms_list;
+        pheno_terms_tag.loading(false);
+        pheno_terms_tag.dropdown.show(terms_list); // render the suggestions dropdown
+      });
+  }, 700);
 }
 
 // Get the JSON of the JSTree (stored in hidden form input) as a variable.

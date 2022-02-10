@@ -48,6 +48,7 @@ def histo_download():
         onto_tree = json.load(fp)
     df = db_to_df()
     df, features_col = table_to_df(df, onto_tree)
+    df = df.replace({-0.25: np.nan})
     resp = make_response(df.to_csv())
     resp.headers["Content-Disposition"] = "attachment; filename=text_reports.csv"
     resp.headers["Content-Type"] = "text/csv"
