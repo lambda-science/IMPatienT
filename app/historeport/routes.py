@@ -49,7 +49,7 @@ def histo_download():
     df = db_to_df()
     df, features_col = table_to_df(df, onto_tree)
     df = df.replace({-0.25: np.nan})
-    resp = make_response(df.to_csv())
+    resp = make_response(df.to_csv(index=False))
     resp.headers["Content-Disposition"] = "attachment; filename=text_reports.csv"
     resp.headers["Content-Type"] = "text/csv"
     return resp
@@ -220,18 +220,13 @@ def predict_diag_boqa():
     Returns:
         str: JSON string with the best prediction results and its score
     """
-    class_label = {
-        "CNM": "Centronuclear Myopathy",
-        "COM": "Core Myopathy",
-        "NM": "Nemaline Myopathy",
-    }
     raw_data = request.get_data()
     results = get_boqa_pred(raw_data)
     return (
         json.dumps(
             {
                 "success": True,
-                "class": class_label[results[0]],
+                "class": results[0],
                 "proba": round(results[1], 2),
             }
         ),

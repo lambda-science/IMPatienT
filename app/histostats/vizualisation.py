@@ -81,16 +81,7 @@ def process_df(df):
     Returns:
         Dataframe: Processed DataFrame with modified values
     """
-    df = df.replace(
-        {
-            "COM_CCD": "COM",
-            "COM_MMM": "COM",
-            "NM_CAP": "NM",
-            "CFTD": "OTHER",
-            "NON_CM": "OTHER",
-            "CM": "UNCLEAR",
-        }
-    )
+    df["gene_diag"].replace({"": "N/A"}, inplace=True)
     df = df.replace({-0.25: np.nan, 0.25: 1, 0.5: 1, 0.75: 1})
     return df
 
@@ -147,8 +138,14 @@ def create_plotly_viz(df):
     graphJSON2 = json.loads(fig2.to_json())
 
     gene_diag = df["gene_diag"].value_counts()
+    gene_diag_label = []
+    for i in list(gene_diag.index):
+        if len(i.split(" ")) > 1:
+            gene_diag_label.append(i.split(" ")[1])
+        else:
+            gene_diag_label.append(i)
     fig3 = px.bar(
-        x=gene_diag.index,
+        x=gene_diag_label,
         y=gene_diag,
         text=gene_diag,
         color=gene_diag.index.astype(str),
@@ -163,6 +160,9 @@ def create_plotly_viz(df):
     graphJSON3 = json.loads(fig3.to_json())
 
     conclusion = df["conclusion"].value_counts()
+    conclusion_label = []
+    for i in list(conclusion.index):
+        conclusion_label.append(string_breaker(i, 15))
     fig4 = px.bar(
         x=conclusion.index,
         y=conclusion,
@@ -172,7 +172,12 @@ def create_plotly_viz(df):
         title="Cohort repartition by myopathy diagnosis",
     )
     fig4.update_layout(
-        xaxis_title="Myopathy class", yaxis_title="Number of reports", showlegend=False
+        xaxis_title="Myopathy class",
+        yaxis_title="Number of reports",
+        showlegend=False,
+    )
+    fig4.update_xaxes(
+        tickmode="array", tickvals=conclusion.index, ticktext=conclusion_label
     )
     graphJSON4 = json.loads(fig4.to_json())
 
@@ -216,14 +221,6 @@ def generate_stat_per(df, features_col):
             list_per_diag.append([i, nrow, index, int(value), round(value / nrow, 2)])
     df_per_diag = pd.DataFrame(
         list_per_diag, columns=["Diag", "N", "Feature", "Count", "Frequency"]
-    )
-    df_per_diag.replace(
-        {
-            "NM": "Nemaline Myopathy",
-            "CNM": "Centronuclear Myopathy",
-            "COM": "Core Myopathy",
-        },
-        inplace=True,
     )
     df_per_gene.to_csv(
         os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.csv"), index=False
@@ -275,6 +272,9 @@ def generate_UNCLEAR(df):
     """
     df_unclear = df[df["conclusion"] == "UNCLEAR"]
     conclusion_boqa = df_unclear["BOQA_prediction"].value_counts()
+    labels_trim = []
+    for i in list(conclusion_boqa.index):
+        labels_trim.append(string_breaker(i, 15))
     fig = px.bar(
         x=conclusion_boqa.index,
         y=conclusion_boqa,
@@ -287,6 +287,9 @@ def generate_UNCLEAR(df):
         xaxis_title="BOQA Myopathy Class Prediction",
         yaxis_title="Number of reports",
         showlegend=False,
+    )
+    fig.update_xaxes(
+        tickmode="array", tickvals=conclusion_boqa.index, ticktext=labels_trim
     )
     graph_UNCLEAR = json.loads(fig.to_json())
     return graph_UNCLEAR
@@ -305,13 +308,22 @@ def generate_confusion_BOQA(df):
     df_no_unclear = df[(df["conclusion"] != "UNCLEAR") & (df["conclusion"] != "OTHER")]
     y_true = df_no_unclear["conclusion"].to_list()
     y_pred = df_no_unclear["BOQA_prediction"].to_list()
+    labels = ["No_Pred"] + df_no_unclear["conclusion"].unique().tolist()
+    labels_trim = []
+    for i in list(labels):
+        labels_trim.append(string_breaker(i, 15))
     matrix_results = confusion_matrix(
-        y_true, y_pred, labels=["No_Pred", "CNM", "COM", "NM"]
+        #    y_true, y_pred, labels=["No_Pred", "CNM", "COM", "NM"]
+        y_true,
+        y_pred,
+        labels=labels,
     )
     fig = ff.create_annotated_heatmap(
         z=matrix_results,
-        x=["No_Pred", "CNM", "COM", "NM"],
-        y=["No_Pred", "CNM", "COM", "NM"],
+        x=labels_trim,
+        y=labels_trim,
+        #    x=["No_Pred", "CNM", "COM", "NM"],
+        #    y=["No_Pred", "CNM", "COM", "NM"],
         colorscale="Viridis",
     )
     fig.update_layout(
@@ -426,3 +438,14 @@ def update_correlation_data(corrMatrix):
         os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as fp:
         json.dump(onto, fp, indent=4)
+
+
+def string_breaker(s, max_length=10):
+    # s = s.split(" ")
+    # s_elem_len = [len(i) for i in s]
+    lines_nb = int(len(s) / max_length)
+    new_string = []
+    for i in range(lines_nb):
+        new_string.append(s[i * max_length : i * max_length + max_length])
+    new_string.append(s[lines_nb * max_length :])
+    return "<br>".join(new_string)

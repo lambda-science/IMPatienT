@@ -54,7 +54,9 @@ def img_index():
 @login_required
 def img_download():
     df = pd.read_sql(db.session.query(Image).statement, db.session.bind)
-    df.to_csv(os.path.join(current_app.config["IMAGES_FOLDER"], "images_db.csv"))
+    df.to_csv(
+        os.path.join(current_app.config["IMAGES_FOLDER"], "images_db.csv"), index=False
+    )
     with tarfile.open(
         os.path.join(current_app.config["DATA_FOLDER"], "image_data.tar.gz"), "w:gz"
     ) as tar:
