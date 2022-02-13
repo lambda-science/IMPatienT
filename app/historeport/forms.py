@@ -97,20 +97,18 @@ class ReportForm(FlaskForm):
     )
 
     pheno_terms = StringField(
-        "HPO Phenotype terms",
+        "Phenotype terms (HPO API)",
         render_kw={
             "class": "form-control",
             "placeholder": "HPO Phenotype Description",
         },
     )
 
-    gene_diag = SelectField(
-        "Diagnosed Gene",
-        validators=[DataRequired()],
-        choices=Common.create_list(os.path.join("config", "config_gene.txt")),
+    gene_diag = StringField(
+        "Diagnosed Gene (HGNC API)",
         render_kw={
             "placeholder": "Diagnosed Gene",
-            "class": "form-control custom-select",
+            "class": "form-control",
         },
     )
     ontology_tree = JSONField("Json Ontology Tree", render_kw={"type": "hidden"})
@@ -124,12 +122,11 @@ class ReportForm(FlaskForm):
             "placeholder": "Commentary",
         },
     )
-    conclusion = SelectField(
-        "Final Diagnosis",
-        choices=Common.create_diag_list(os.path.join("config", "diagnostic.tsv")),
+    conclusion = StringField(
+        "Final Diagnosis (Orphanet API)",
         render_kw={
             "placeholder": "Final Diagnosis",
-            "class": "form-control custom-select",
+            "class": "form-control",
         },
     )
     # submit = SubmitField(

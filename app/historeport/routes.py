@@ -1,5 +1,5 @@
 import json
-
+from contextlib import suppress
 from app import db
 from app.historeport import bp
 from app.historeport.boqa import *
@@ -49,7 +49,7 @@ def histo_download():
     df = db_to_df()
     df, features_col = table_to_df(df, onto_tree)
     df = df.replace({-0.25: np.nan})
-    resp = make_response(df.to_csv())
+    resp = make_response(df.to_csv(index=False))
     resp.headers["Content-Disposition"] = "attachment; filename=text_reports.csv"
     resp.headers["Content-Type"] = "text/csv"
     return resp
@@ -106,6 +106,20 @@ def historeport():
             if report_entry is not None:
                 form.populate_obj(report_entry)
                 onto_jstree = StandardVocabulary(report_entry.ontology_tree)
+                # Process Tagify Output JSON
+                with suppress(json.decoder.JSONDecodeError):
+                    pheno_terms_list = [
+                        i["value"] for i in json.loads(report_entry.pheno_terms)
+                    ]
+                    report_entry.pheno_terms = ",".join(pheno_terms_list)
+                with suppress(json.decoder.JSONDecodeError):
+                    report_entry.gene_diag = json.loads(report_entry.gene_diag)[0][
+                        "value"
+                    ]
+                with suppress(json.decoder.JSONDecodeError):
+                    report_entry.conclusion = json.loads(report_entry.conclusion)[0][
+                        "value"
+                    ]
                 report_entry.ontology_tree = onto_jstree.clean_tree()
                 report_entry.expert_id = current_user.id
                 try:
@@ -129,6 +143,18 @@ def historeport():
         else:
             report_entry = ReportHisto()
             form.populate_obj(report_entry)
+            # Process Tagify Output JSON
+            with suppress(json.decoder.JSONDecodeError):
+                pheno_terms_list = [
+                    i["value"] for i in json.loads(report_entry.pheno_terms)
+                ]
+                report_entry.pheno_terms = ",".join(pheno_terms_list)
+            with suppress(json.decoder.JSONDecodeError):
+                report_entry.gene_diag = json.loads(report_entry.gene_diag)[0]["value"]
+            with suppress(json.decoder.JSONDecodeError):
+                report_entry.conclusion = json.loads(report_entry.conclusion)[0][
+                    "value"
+                ]
             onto_jstree = StandardVocabulary(report_entry.ontology_tree)
             report_entry.ontology_tree = onto_jstree.clean_tree()
             report_entry.expert_id = current_user.id
@@ -194,18 +220,13 @@ def predict_diag_boqa():
     Returns:
         str: JSON string with the best prediction results and its score
     """
-    class_label = {
-        "CNM": "Centronuclear Myopathy",
-        "COM": "Core Myopathy",
-        "NM": "Nemaline Myopathy",
-    }
     raw_data = request.get_data()
     results = get_boqa_pred(raw_data)
     return (
         json.dumps(
             {
                 "success": True,
-                "class": class_label[results[0]],
+                "class": results[0],
                 "proba": round(results[1], 2),
             }
         ),
