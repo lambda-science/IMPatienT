@@ -162,7 +162,7 @@ def create_plotly_viz(df):
     conclusion = df["conclusion"].value_counts()
     conclusion_label = []
     for i in list(conclusion.index):
-        conclusion_label.append(string_breaker(i, 15))
+        conclusion_label.append(string_wordbreaker(i))
     fig4 = px.bar(
         x=conclusion.index,
         y=conclusion,
@@ -274,7 +274,7 @@ def generate_UNCLEAR(df):
     conclusion_boqa = df_unclear["BOQA_prediction"].value_counts()
     labels_trim = []
     for i in list(conclusion_boqa.index):
-        labels_trim.append(string_breaker(i, 15))
+        labels_trim.append(string_wordbreaker(i))
     fig = px.bar(
         x=conclusion_boqa.index,
         y=conclusion_boqa,
@@ -311,7 +311,7 @@ def generate_confusion_BOQA(df):
     labels = ["No_Pred"] + df_no_unclear["conclusion"].unique().tolist()
     labels_trim = []
     for i in list(labels):
-        labels_trim.append(string_breaker(i, 15))
+        labels_trim.append(string_wordbreaker(i))
     matrix_results = confusion_matrix(
         #    y_true, y_pred, labels=["No_Pred", "CNM", "COM", "NM"]
         y_true,
@@ -448,4 +448,20 @@ def string_breaker(s, max_length=10):
     for i in range(lines_nb):
         new_string.append(s[i * max_length : i * max_length + max_length])
     new_string.append(s[lines_nb * max_length :])
+    return "<br>".join(new_string)
+
+
+def string_wordbreaker(s, max_length=20):
+    s.replace("-", " ")
+    s = s.split(" ")
+    new_string = [""]
+    index_new_string = 0
+    for i in s:
+        if len(new_string[index_new_string] + " " + i) >= 20:
+            index_new_string += 1
+            new_string.append("")
+            new_string[index_new_string] = i
+        else:
+            new_string[index_new_string] += " "
+            new_string[index_new_string] += i
     return "<br>".join(new_string)
