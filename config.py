@@ -42,8 +42,6 @@ class Config(object):
 
     # Max upload size: 1GB
     MAX_CONTENT_LENGTH = 1024 * 1024 * 1024
-    # Create various list from config file
-    DIAG_LIST = Common.create_diag_list(os.path.join("config", "diagnostic.tsv"))
 
     # DB connection settings
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
