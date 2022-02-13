@@ -97,7 +97,7 @@ class ReportForm(FlaskForm):
     )
 
     pheno_terms = StringField(
-        "HPO Phenotype terms",
+        "Phenotype terms (HPO API)",
         render_kw={
             "class": "form-control",
             "placeholder": "HPO Phenotype Description",
@@ -105,7 +105,7 @@ class ReportForm(FlaskForm):
     )
 
     gene_diag = StringField(
-        "Diagnosed Gene",
+        "Diagnosed Gene (HGNC API)",
         render_kw={
             "placeholder": "Diagnosed Gene",
             "class": "form-control",
@@ -123,7 +123,7 @@ class ReportForm(FlaskForm):
         },
     )
     conclusion = StringField(
-        "Final Diagnosis",
+        "Final Diagnosis (Orphanet API)",
         render_kw={
             "placeholder": "Final Diagnosis",
             "class": "form-control",

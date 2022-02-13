@@ -26,12 +26,11 @@ class ImageForm(FlaskForm):
     )
     patient_ID = StringField(
         "Patient ID",
-        validators=[Regexp(r"^[\w.-_]+$"), DataRequired()],
+        validators=[DataRequired(), Regexp(r"^[\w.-_]+$")],
         render_kw={"placeholder": "Patient ID", "class": "form-control"},
     )
     biopsy_report_ID = StringField(
         "Biopsy ID",
-        validators=[DataRequired(), Regexp(r"^[\w.-_]*$")],
         render_kw={"placeholder": "Biopsy Report ID", "class": "form-control"},
     )
     type_coloration = SelectField(
@@ -62,13 +61,11 @@ class ImageForm(FlaskForm):
             "class": "form-control custom-select",
         },
     )
-    diagnostic = SelectField(
-        "Diagnosis",
-        validators=[DataRequired()],
-        choices=Common.create_diag_list(os.path.join("config", "diagnostic.tsv")),
+    diagnostic = StringField(
+        "Diagnosis (Orphanet API)",
         render_kw={
             "placeholder": "Disease diagnostic",
-            "class": "form-control custom-select",
+            "class": "form-control",
         },
     )
 

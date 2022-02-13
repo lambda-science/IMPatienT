@@ -1,5 +1,6 @@
 import os
-
+from contextlib import suppress
+import json
 from app import db
 from app.imgupload import bp
 from app.imgupload.forms import DeleteButton, ImageForm
@@ -46,7 +47,6 @@ def img_index():
     """
     form = DeleteButton()
     image_history = Image.query.all()
-
     return render_template("img_index.html", form=form, image_history=image_history)
 
 
@@ -175,8 +175,10 @@ def create_img():
             age_at_biopsy=form.age_histo.data,
             image_path=os.path.join(data_patient_dir, filename),
             image_background_path=os.path.join(data_patient_dir, filename_back),
-            diagnostic=form.diagnostic.data,
         )
+
+        with suppress(json.decoder.JSONDecodeError):
+            image.diagnostic = json.loads(form.diagnostic.data)[0]["value"]
         # Check if the image already exist in DB (same filename & patient ID)
         # If not: add it to DB
 

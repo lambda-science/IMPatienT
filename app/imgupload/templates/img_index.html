@@ -27,10 +27,10 @@
       </thead>
       {% for image in image_history %}
       <tr>
-        <td class="align-middle text-center">{{ image.biopsie_id }}</td>
+        <td class="align-middle text-center">{{ image.biopsy_id }}</td>
         <td class="align-middle text-center">{{ image.patient_id }}</td>
         <td class="align-middle text-center">{{ image.image_name }}</td>
-        <td class="align-middle text-center">{{ image.conclusion }}</td>
+        <td class="align-middle text-center">{{ image.diagnostic }}</td>
         <td class="align-middle text-center">
           <a class="btn btn-warning btn-sm" role="button" href="dashboard?id={{image.id}}"><i
               class="fa-solid fa-draw-polygon"></i>
