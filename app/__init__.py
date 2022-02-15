@@ -26,9 +26,9 @@ convention = {
 metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
 migrate = Migrate()
-login = LoginManager()
-login.login_view = "auth.login"
-login.login_message_category = "info"
+login_manager = LoginManager()
+login_manager.login_view = "auth.login"
+login_manager.login_message_category = "info"
 mail = Mail()
 session = Session()
 cors = CORS()
@@ -52,7 +52,7 @@ def create_app(config_class=Config):
             migrate.init_app(app, db, render_as_batch=True)
         else:
             migrate.init_app(app, db)
-    login.init_app(app)
+    login_manager.init_app(app)
     mail.init_app(app)
     session.init_app(app)
     cors.init_app(app)

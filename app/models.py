@@ -6,7 +6,7 @@ from flask import current_app
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from app import db, login
+from app import db, login_manager
 
 
 class User(UserMixin, db.Model):
@@ -94,7 +94,7 @@ class User(UserMixin, db.Model):
             db.session.commit()
 
 
-@login.user_loader
+@login_manager.user_loader
 def load_user(id):
     """Method to load current user in Flask-Login
 
