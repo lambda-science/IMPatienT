@@ -65,6 +65,14 @@ class OntologyDescript(FlaskForm):
             "readonly": "",
         },
     )
+    hpo_datamined = StringField(
+        "Associated HPO Terms (Extracted from reports)",
+        render_kw={
+            "placeholder": "Associated HPO Terms (Extracted from reports)",
+            "class": "form-control",
+            "readonly": "",
+        },
+    )
     alternative_language = StringField(
         "Alternative Language",
         render_kw={

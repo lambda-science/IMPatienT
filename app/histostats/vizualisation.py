@@ -400,10 +400,17 @@ def update_phenotype_gene(df):
         df_temp = df[df[term["text"]] == 1]
         gene_datamined_temp = list(df_temp["gene_diag"].value_counts().index)
         phenotype_datamined_temp = list(df_temp["conclusion"].value_counts().index)
+        hpo_datamined_temp = list(df_temp["pheno_terms"].value_counts().index)
         if gene_datamined_temp == []:
             term["data"]["gene_datamined"] = ""
         else:
             term["data"]["gene_datamined"] = ",".join(sorted(gene_datamined_temp))
+
+        if hpo_datamined_temp == []:
+            term["data"]["hpo_datamined"] = ""
+        else:
+            term["data"]["hpo_datamined"] = ",".join(sorted(hpo_datamined_temp))
+
         if phenotype_datamined_temp == []:
             term["data"]["phenotype_datamined"] = ""
         else:

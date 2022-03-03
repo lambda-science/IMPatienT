@@ -12,7 +12,8 @@
             "gene_datamined": "",
             "alternative_language": "Enzymologie ATPasique",
             "correlates_with": "",
-            "hex_color": "#C19CF4"
+            "hex_color": "#C19CF4",
+            "hpo_datamined": ""
         },
         "parent": "#"
     },
@@ -29,7 +30,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 ATPasique",
             "correlates_with": "",
-            "hex_color": "#C5326E"
+            "hex_color": "#C5326E",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000076"
     },
@@ -46,7 +48,8 @@
             "gene_datamined": "HGNC:12403 TTN,HGNC:129 ACTA1",
             "alternative_language": "Activit\u00e9 ATPasique Anormale",
             "correlates_with": "",
-            "hex_color": "#ABC865"
+            "hex_color": "#ABC865",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000089"
     },
@@ -63,7 +66,8 @@
             "gene_datamined": "HGNC:129 ACTA1",
             "alternative_language": "Activit\u00e9 Acide-R\u00e9sistant (Type 1)",
             "correlates_with": "",
-            "hex_color": "#80A42F"
+            "hex_color": "#80A42F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000089"
     },
@@ -80,7 +84,8 @@
             "gene_datamined": "HGNC:7448 MTM1,HGNC:9752 QDPR",
             "alternative_language": "Activit\u00e9 ATP Centrale",
             "correlates_with": "",
-            "hex_color": "#188893"
+            "hex_color": "#188893",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000089"
     },
@@ -97,7 +102,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 en Plage \u00e9tendue",
             "correlates_with": "",
-            "hex_color": "#1B8ED5"
+            "hex_color": "#1B8ED5",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000089"
     },
@@ -114,7 +120,8 @@
             "gene_datamined": "HGNC:7577 MYH7",
             "alternative_language": "Activit\u00e9 en Halo",
             "correlates_with": "",
-            "hex_color": "#0F1786"
+            "hex_color": "#0F1786",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000089"
     },
@@ -131,7 +138,8 @@
             "synonymes": "localement anormale,locally abnormal",
             "alternative_language": "Activit\u00e9 ATPasique Anormale Localement (Zone Claire)",
             "correlates_with": "Centralized Nuclei,Locally Abnormal ATP Activity (Clear Zone)",
-            "hex_color": "#A093D4"
+            "hex_color": "#A093D4",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000089"
     },
@@ -148,7 +156,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 ATP P\u00e9riph\u00e9rique",
             "correlates_with": "",
-            "hex_color": "#A0C802"
+            "hex_color": "#A0C802",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000089"
     },
@@ -165,7 +174,8 @@
             "gene_datamined": "",
             "alternative_language": "Diff\u00e9rentiation des Fibres",
             "correlates_with": "",
-            "hex_color": "#CB89E3"
+            "hex_color": "#CB89E3",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000076"
     },
@@ -182,7 +192,8 @@
             "gene_datamined": "",
             "correlates_with": "Abnormal differentiation,Increase in the number of nuclei",
             "alternative_language": "Diff\u00e9renciation Anormale",
-            "hex_color": "#613C20"
+            "hex_color": "#613C20",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000077"
     },
@@ -199,7 +210,8 @@
             "gene_datamined": "",
             "correlates_with": "Area without ATPase activity,Fuscinophilic material: Dark clusters/aggregates,Rods",
             "alternative_language": "Zone sans activit\u00e9 ATPase",
-            "hex_color": "#7C0CD9"
+            "hex_color": "#7C0CD9",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000077"
     },
@@ -216,7 +228,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration P\u00e2le des Fibre Atrophiques",
             "correlates_with": "",
-            "hex_color": "#41CA1C"
+            "hex_color": "#41CA1C",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000077"
     },
@@ -233,7 +246,8 @@
             "gene_datamined": "HGNC:12403 TTN,HGNC:7448 MTM1,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "correlates_with": "Connective Interstitial Tissue Increase,Predominance Fibre Type 1,Structural Disorganisation,Type Uniformity",
             "alternative_language": "Uniformit\u00e9 de Type",
-            "hex_color": "#C6FD2F"
+            "hex_color": "#C6FD2F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000077"
     },
@@ -250,7 +264,8 @@
             "gene_datamined": "",
             "alternative_language": "R\u00e9partition Num\u00e9rique des Fibres",
             "correlates_with": "",
-            "hex_color": "#59C385"
+            "hex_color": "#59C385",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000076"
     },
@@ -267,7 +282,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "correlates_with": "Predominance Fibre Type 1,Type Uniformity",
             "alternative_language": "Pr\u00e9dominance Fibre Type 1",
-            "hex_color": "#7E19C5"
+            "hex_color": "#7E19C5",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000082"
     },
@@ -284,7 +300,8 @@
             "gene_datamined": "",
             "correlates_with": "Nuclei with Myotubular Aspects,Predominance Fibre Type 2",
             "alternative_language": "Pr\u00e9dominance Fibre Type 2",
-            "hex_color": "#4BEBA8"
+            "hex_color": "#4BEBA8",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000082"
     },
@@ -301,7 +318,8 @@
             "gene_datamined": "",
             "alternative_language": "R\u00e9partition Topographique des Types de Fibre",
             "correlates_with": "",
-            "hex_color": "#3B7F84"
+            "hex_color": "#3B7F84",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000076"
     },
@@ -318,7 +336,8 @@
             "gene_datamined": "",
             "correlates_with": "Fibre bundling,Fibres 1 Grouped,Fibres 2 Grouped",
             "alternative_language": "Regroupement des Fibres",
-            "hex_color": "#55DEBE"
+            "hex_color": "#55DEBE",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000085"
     },
@@ -335,7 +354,8 @@
             "gene_datamined": "HGNC:12403 TTN",
             "correlates_with": "Fibre bundling,Fibres 1 Grouped,Fibres 2 Grouped",
             "alternative_language": "Fibres 1 Group\u00e9es",
-            "hex_color": "#4D26F1"
+            "hex_color": "#4D26F1",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000085"
     },
@@ -352,7 +372,8 @@
             "gene_datamined": "",
             "correlates_with": "Fibre bundling,Fibres 1 Grouped,Fibres 2 Grouped",
             "alternative_language": "Fibres 2 Group\u00e9es",
-            "hex_color": "#D8390D"
+            "hex_color": "#D8390D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000085"
     },
@@ -369,7 +390,8 @@
             "gene_datamined": "",
             "alternative_language": "Microscopie Electronique (ME)",
             "correlates_with": "",
-            "hex_color": "#D08E9B"
+            "hex_color": "#D08E9B",
+            "hpo_datamined": ""
         },
         "parent": "#"
     },
@@ -386,7 +408,8 @@
             "gene_datamined": "",
             "alternative_language": "ME: Bande A",
             "correlates_with": "",
-            "hex_color": "#7A8142"
+            "hex_color": "#7A8142",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000156"
     },
@@ -403,7 +426,8 @@
             "gene_datamined": "",
             "alternative_language": "ME: Vacuoles Autophagiques",
             "correlates_with": "",
-            "hex_color": "#34FA8E"
+            "hex_color": "#34FA8E",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000156"
     },
@@ -420,7 +444,8 @@
             "gene_datamined": "",
             "alternative_language": "ME: L\u00e9sions de type CAPS",
             "correlates_with": "",
-            "hex_color": "#17FE15"
+            "hex_color": "#17FE15",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000156"
     },
@@ -437,7 +462,8 @@
             "gene_datamined": "",
             "alternative_language": "ME: Structure sarcom\u00e9rique",
             "correlates_with": "",
-            "hex_color": "#8B87EB"
+            "hex_color": "#8B87EB",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000156"
     },
@@ -454,7 +480,8 @@
             "gene_datamined": "",
             "alternative_language": "ME: Structure sarcom\u00e9rique en Croissant",
             "correlates_with": "",
-            "hex_color": "#E08D25"
+            "hex_color": "#E08D25",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000157"
     },
@@ -471,7 +498,8 @@
             "gene_datamined": "",
             "alternative_language": "ME: Structure sarcom\u00e9rique Remani\u00e9",
             "correlates_with": "",
-            "hex_color": "#E6B4EC"
+            "hex_color": "#E6B4EC",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000157"
     },
@@ -488,7 +516,8 @@
             "gene_datamined": "",
             "alternative_language": "ME: Citerne",
             "correlates_with": "",
-            "hex_color": "#4511F4"
+            "hex_color": "#4511F4",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000156"
     },
@@ -505,7 +534,8 @@
             "gene_datamined": "",
             "alternative_language": "Dilatation de Citerne",
             "correlates_with": "",
-            "hex_color": "#C5088D"
+            "hex_color": "#C5088D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000165"
     },
@@ -522,7 +552,8 @@
             "gene_datamined": "",
             "alternative_language": "ME: Materiel Z",
             "correlates_with": "",
-            "hex_color": "#B903D6"
+            "hex_color": "#B903D6",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000156"
     },
@@ -539,7 +570,8 @@
             "gene_datamined": "",
             "alternative_language": "Materiel Z: Elargissement",
             "correlates_with": "",
-            "hex_color": "#7CBADA"
+            "hex_color": "#7CBADA",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000161"
     },
@@ -556,7 +588,8 @@
             "gene_datamined": "",
             "alternative_language": "Materiel Z: Streaming",
             "correlates_with": "",
-            "hex_color": "#89911C"
+            "hex_color": "#89911C",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000161"
     },
@@ -573,7 +606,8 @@
             "gene_datamined": "",
             "alternative_language": "Enzymologie Divers",
             "correlates_with": "",
-            "hex_color": "#DBF65C"
+            "hex_color": "#DBF65C",
+            "hpo_datamined": ""
         },
         "parent": "#"
     },
@@ -590,7 +624,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 COX",
             "correlates_with": "",
-            "hex_color": "#66530A"
+            "hex_color": "#66530A",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000133"
     },
@@ -607,7 +642,8 @@
             "gene_datamined": "N/A",
             "correlates_with": "Abnormal COX activity",
             "alternative_language": "Activit\u00e9 COX Anormale",
-            "hex_color": "#E31559"
+            "hex_color": "#E31559",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000134"
     },
@@ -624,7 +660,8 @@
             "gene_datamined": "HGNC:7720 NEB,N/A",
             "correlates_with": "Local Abnormal COX activity,Type 1 Hypertrophic (large)",
             "alternative_language": "Activit\u00e9 COX Anormale Localement",
-            "hex_color": "#2BEACC"
+            "hex_color": "#2BEACC",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000134"
     },
@@ -641,7 +678,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration PAS",
             "correlates_with": "",
-            "hex_color": "#EC3F37"
+            "hex_color": "#EC3F37",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000133"
     },
@@ -658,7 +696,8 @@
             "synonymes": "",
             "correlates_with": "Abnormal PAS Staining (Overload)",
             "alternative_language": "Coloration PAS Anormale (Surcharge)",
-            "hex_color": "#A3D834"
+            "hex_color": "#A3D834",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000142"
     },
@@ -675,7 +714,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration PAS: Surcharge Diffuse",
             "correlates_with": "",
-            "hex_color": "#3F5B17"
+            "hex_color": "#3F5B17",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000142"
     },
@@ -692,7 +732,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration PAS: Contraste Fort Type I et II",
             "correlates_with": "",
-            "hex_color": "#450AAC"
+            "hex_color": "#450AAC",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000142"
     },
@@ -709,7 +750,8 @@
             "gene_datamined": "HGNC:129 ACTA1",
             "alternative_language": "Coloration PAS: Irr\u00e9guli\u00e8re / In\u00e9gale",
             "correlates_with": "",
-            "hex_color": "#2A4A55"
+            "hex_color": "#2A4A55",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000142"
     },
@@ -726,7 +768,8 @@
             "gene_datamined": "",
             "correlates_with": "Interstitial alterations,PAS Staining: Locally Abnormal (Overload)",
             "alternative_language": "Coloration PAS Anormale Localement (Surcharge)",
-            "hex_color": "#320000"
+            "hex_color": "#320000",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000142"
     },
@@ -743,7 +786,8 @@
             "synonymes": "",
             "alternative_language": "Coloration PAS Teneur Faible",
             "correlates_with": "",
-            "hex_color": "#1AB017"
+            "hex_color": "#1AB017",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000142"
     },
@@ -760,7 +804,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration PAS: Surchage dans Fibre Anormales",
             "correlates_with": "",
-            "hex_color": "#FEA257"
+            "hex_color": "#FEA257",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000142"
     },
@@ -777,7 +822,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Phospholipases",
             "correlates_with": "",
-            "hex_color": "#83CC6B"
+            "hex_color": "#83CC6B",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000133"
     },
@@ -794,7 +840,8 @@
             "synonymes": "",
             "correlates_with": "Abnormal Phospholipase Activity Locally,Sudan Staining: Abornmal (Lipids Overload)",
             "alternative_language": "Activit\u00e9 Phospholipases Anormale Localement",
-            "hex_color": "#74C1E2"
+            "hex_color": "#74C1E2",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000137"
     },
@@ -811,7 +858,8 @@
             "gene_datamined": "HGNC:129 ACTA1",
             "correlates_with": "Abnormal Phospholipase+AMP activity,Abnormal phospholipase activity,Sub-Sarcolemmal Nuclei",
             "alternative_language": "Activit\u00e9 Phospholipases+AMP Anormale",
-            "hex_color": "#C7D991"
+            "hex_color": "#C7D991",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000137"
     },
@@ -828,7 +876,8 @@
             "gene_datamined": "",
             "correlates_with": "Abnormal Phospholipase+AMP activity,Abnormal phospholipase activity",
             "alternative_language": "Activit\u00e9 Phospholipases Anormale",
-            "hex_color": "#704E95"
+            "hex_color": "#704E95",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000137"
     },
@@ -845,7 +894,8 @@
             "synonymes": "",
             "alternative_language": "Activit\u00e9 Phospholipases Diffuse",
             "correlates_with": "",
-            "hex_color": "#1F5269"
+            "hex_color": "#1F5269",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000137"
     },
@@ -862,7 +912,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration Soudan",
             "correlates_with": "",
-            "hex_color": "#22DDA9"
+            "hex_color": "#22DDA9",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000133"
     },
@@ -879,7 +930,8 @@
             "synonymes": "soudan surcharge,soudan overload,surcharge lipide",
             "correlates_with": "Abnormal Phospholipase Activity Locally,Fuscinophilic material: Dark clusters/aggregates,Rods,Sudan Staining: Abornmal (Lipids Overload)",
             "alternative_language": "Coloration Soudan: Anormale (Surchage en Lipides)",
-            "hex_color": "#F462F3"
+            "hex_color": "#F462F3",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000150"
     },
@@ -896,7 +948,8 @@
             "gene_datamined": "HGNC:7720 NEB",
             "alternative_language": "Coloration Soudan: Goutelettes Lipidiques",
             "correlates_with": "",
-            "hex_color": "#E9865F"
+            "hex_color": "#E9865F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000150"
     },
@@ -913,7 +966,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration Soudan: Surchage dans les Fibres Remani\u00e9es",
             "correlates_with": "",
-            "hex_color": "#1B0BA7"
+            "hex_color": "#1B0BA7",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000150"
     },
@@ -930,7 +984,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration Soudan: Surchage dans Fibre Type I",
             "correlates_with": "",
-            "hex_color": "#D8BBF1"
+            "hex_color": "#D8BBF1",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000150"
     },
@@ -947,7 +1002,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration Soudan: Fibres Type II plus riche que Type I",
             "correlates_with": "",
-            "hex_color": "#9FDD3F"
+            "hex_color": "#9FDD3F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000150"
     },
@@ -964,7 +1020,8 @@
             "gene_datamined": "",
             "alternative_language": "Coloration HE et TG",
             "correlates_with": "",
-            "hex_color": "#DC4807"
+            "hex_color": "#DC4807",
+            "hpo_datamined": ""
         },
         "parent": "#"
     },
@@ -981,7 +1038,8 @@
             "synonymes": "",
             "alternative_language": "Aspect Global Pr\u00e9l\u00e8vement",
             "correlates_with": "",
-            "hex_color": "#7B1AFF"
+            "hex_color": "#7B1AFF",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -998,7 +1056,8 @@
             "synonymes": "",
             "alternative_language": "Pr\u00e9l\u00e8vement Anormal",
             "correlates_with": "",
-            "hex_color": "#A2C7B9"
+            "hex_color": "#A2C7B9",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000002"
     },
@@ -1015,7 +1074,8 @@
             "gene_datamined": "",
             "alternative_language": "Tissu Conjonctif",
             "correlates_with": "",
-            "hex_color": "#5824D1"
+            "hex_color": "#5824D1",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1032,7 +1092,8 @@
             "gene_datamined": "HGNC:12403 TTN,HGNC:7448 MTM1,N/A",
             "alternative_language": "Tissus conjonctif Fibreux",
             "correlates_with": "",
-            "hex_color": "#5827D1"
+            "hex_color": "#5827D1",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000058"
     },
@@ -1049,7 +1110,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:7448 MTM1,N/A",
             "alternative_language": "Tissus conjonctif Lipomateux",
             "correlates_with": "",
-            "hex_color": "#37CEE2"
+            "hex_color": "#37CEE2",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000058"
     },
@@ -1066,7 +1128,8 @@
             "gene_datamined": "",
             "alternative_language": "Collag\u00e8ne Endosymial",
             "correlates_with": "",
-            "hex_color": "#B1B19B"
+            "hex_color": "#B1B19B",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1083,7 +1146,8 @@
             "gene_datamined": "HGNC:12403 TTN,HGNC:9752 QDPR",
             "correlates_with": "Centralized Nuclei,Increase in Endosymal Collagen,Internalized nuclei,Sub-Sarcolemmal Nuclei",
             "alternative_language": "Augmentation du Collag\u00e8ne Endosymial",
-            "hex_color": "#17ACC1"
+            "hex_color": "#17ACC1",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000069"
     },
@@ -1100,7 +1164,8 @@
             "gene_datamined": "",
             "alternative_language": "Taille Fibre",
             "correlates_with": "",
-            "hex_color": "#D0A7B3"
+            "hex_color": "#D0A7B3",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1117,7 +1182,8 @@
             "gene_datamined": "",
             "alternative_language": "Taille Homog\u00e8ne",
             "correlates_with": "",
-            "hex_color": "#7A744E"
+            "hex_color": "#7A744E",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000012"
     },
@@ -1134,7 +1200,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7720 NEB",
             "correlates_with": "Fuscinophilic material: Dark clusters/aggregates,Minicores,No Topography",
             "alternative_language": "Sans Topographie",
-            "hex_color": "#8EF386"
+            "hex_color": "#8EF386",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000012"
     },
@@ -1151,7 +1218,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "correlates_with": "Type 1 Heterogeneous size,Unequal Size",
             "alternative_language": "Taille In\u00e9gale",
-            "hex_color": "#C8F19D"
+            "hex_color": "#C8F19D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000012"
     },
@@ -1168,7 +1236,8 @@
             "gene_datamined": "N/A",
             "alternative_language": "Fibre Type 1",
             "correlates_with": "",
-            "hex_color": "#95C792"
+            "hex_color": "#95C792",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1185,7 +1254,8 @@
             "gene_datamined": "HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "correlates_with": "Rods,Type 1 Atrophied (small)",
             "alternative_language": "Type 1 Atrophi\u00e9es (petites)",
-            "hex_color": "#056F5D"
+            "hex_color": "#056F5D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000004"
     },
@@ -1202,7 +1272,8 @@
             "gene_datamined": "HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB,N/A",
             "correlates_with": "Type 1 Heterogeneous size,Type 1 Hypertrophic (large),Type 2 Heterogeneous size,Type 2 Hypertrophic (large)",
             "alternative_language": "Type  1 Taille h\u00e9t\u00e9rog\u00e8ne",
-            "hex_color": "#EC022F"
+            "hex_color": "#EC022F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000004"
     },
@@ -1219,7 +1290,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB,N/A",
             "correlates_with": "Fuscinophilic material: Dark clusters/aggregates,Type 1 Heterogeneous size,Type 1 Hypertrophic (large),Type 2 Heterogeneous size,Type 2 Hypertrophic (large)",
             "alternative_language": "Type 1 Hypertrophiques (grandes)",
-            "hex_color": "#01910D"
+            "hex_color": "#01910D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000004"
     },
@@ -1236,7 +1308,8 @@
             "gene_datamined": "N/A",
             "alternative_language": "Fibre Type 2",
             "correlates_with": "",
-            "hex_color": "#AEE98A"
+            "hex_color": "#AEE98A",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1253,7 +1326,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "correlates_with": "Rods,Type 2 Atrophied (small)",
             "alternative_language": "Type 2 Atrophi\u00e9es (petites)",
-            "hex_color": "#E038D2"
+            "hex_color": "#E038D2",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000008"
     },
@@ -1270,7 +1344,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:129 ACTA1,HGNC:7577 MYH7,N/A",
             "alternative_language": "Type 2  Taille h\u00e9t\u00e9rog\u00e8ne",
             "correlates_with": "Type 1 Heterogeneous size,Type 1 Hypertrophic (large),Type 2 Heterogeneous size,Type 2 Hypertrophic (large)",
-            "hex_color": "#E155A6"
+            "hex_color": "#E155A6",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000008"
     },
@@ -1287,7 +1362,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:7720 NEB,N/A",
             "correlates_with": "Type 1 Heterogeneous size,Type 1 Hypertrophic (large),Type 2 Heterogeneous size,Type 2 Hypertrophic (large)",
             "alternative_language": "Type 2 Hypertrophiques (grandes)",
-            "hex_color": "#1FD2B6"
+            "hex_color": "#1FD2B6",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000008"
     },
@@ -1304,7 +1380,8 @@
             "gene_datamined": "",
             "alternative_language": "Mat\u00e9riel Fuscinophile",
             "correlates_with": "",
-            "hex_color": "#0FDCF0"
+            "hex_color": "#0FDCF0",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1321,7 +1398,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:7720 NEB,N/A",
             "alternative_language": "Mat\u00e9riel Fuscinophile: P\u00e9riph\u00e9riques",
             "correlates_with": "",
-            "hex_color": "#0749F7"
+            "hex_color": "#0749F7",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1338,7 +1416,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:7720 NEB,N/A",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Centralis\u00e9s",
             "correlates_with": "",
-            "hex_color": "#690CBE"
+            "hex_color": "#690CBE",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1355,7 +1434,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7720 NEB,N/A",
             "correlates_with": "Fuscinophilic material: Dark clusters/aggregates,No Topography,Rods,Sudan Staining: Abornmal (Lipids Overload),Type 1 Hypertrophic (large)",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Amas/Aggr\u00e9gat sombre",
-            "hex_color": "#84E98A"
+            "hex_color": "#84E98A",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1372,7 +1452,8 @@
             "gene_datamined": "",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Diffus",
             "correlates_with": "",
-            "hex_color": "#DA5C8F"
+            "hex_color": "#DA5C8F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1389,7 +1470,8 @@
             "gene_datamined": "HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Granuleux",
             "correlates_with": "",
-            "hex_color": "#D6A94C"
+            "hex_color": "#D6A94C",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1406,7 +1488,8 @@
             "gene_datamined": "HGNC:7577 MYH7,N/A",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Bords irr\u00e9guliers",
             "correlates_with": "",
-            "hex_color": "#9BC19D"
+            "hex_color": "#9BC19D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1423,7 +1506,8 @@
             "gene_datamined": "",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Radiant",
             "correlates_with": "",
-            "hex_color": "#5CBC7D"
+            "hex_color": "#5CBC7D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1440,7 +1524,8 @@
             "gene_datamined": "",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Bords r\u00e9guliers",
             "correlates_with": "",
-            "hex_color": "#15B83B"
+            "hex_color": "#15B83B",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1457,7 +1542,8 @@
             "gene_datamined": "HGNC:7720 NEB,N/A",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Arrondis",
             "correlates_with": "",
-            "hex_color": "#7E7B79"
+            "hex_color": "#7E7B79",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1474,7 +1560,8 @@
             "gene_datamined": "",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Sous-Sarcolemmique",
             "correlates_with": "",
-            "hex_color": "#462EC7"
+            "hex_color": "#462EC7",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1491,7 +1578,8 @@
             "gene_datamined": "HGNC:10483 RYR1",
             "alternative_language": "Aspect violine (contour impr\u00e9cis)",
             "correlates_with": "",
-            "hex_color": "#1787A1"
+            "hex_color": "#1787A1",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000035"
     },
@@ -1508,7 +1596,8 @@
             "gene_datamined": "",
             "alternative_language": "HETG: Apsect Fibre",
             "correlates_with": "",
-            "hex_color": "#C32B1F"
+            "hex_color": "#C32B1F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1525,7 +1614,8 @@
             "gene_datamined": "HGNC:7448 MTM1,HGNC:7577 MYH7",
             "alternative_language": "HETG: Anguleuse",
             "correlates_with": "",
-            "hex_color": "#9DD5D8"
+            "hex_color": "#9DD5D8",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000016"
     },
@@ -1542,7 +1632,8 @@
             "gene_datamined": "HGNC:7448 MTM1",
             "alternative_language": "HETG: Fibre  annulaire",
             "correlates_with": "",
-            "hex_color": "#3D0E6A"
+            "hex_color": "#3D0E6A",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000016"
     },
@@ -1559,7 +1650,8 @@
             "gene_datamined": "HGNC:10483 RYR1",
             "alternative_language": "HETG: Segmentation de fibre",
             "correlates_with": "",
-            "hex_color": "#875069"
+            "hex_color": "#875069",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000016"
     },
@@ -1576,7 +1668,8 @@
             "gene_datamined": "",
             "alternative_language": "HETG: Lobul\u00e9e",
             "correlates_with": "",
-            "hex_color": "#88F797"
+            "hex_color": "#88F797",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000016"
     },
@@ -1593,7 +1686,8 @@
             "gene_datamined": "",
             "alternative_language": "HETG: Red-ragged fibers",
             "correlates_with": "",
-            "hex_color": "#44450E"
+            "hex_color": "#44450E",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000016"
     },
@@ -1610,7 +1704,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "alternative_language": "HETG: Bord arrondis",
             "correlates_with": "",
-            "hex_color": "#7D3317"
+            "hex_color": "#7D3317",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000016"
     },
@@ -1627,7 +1722,8 @@
             "gene_datamined": "",
             "alternative_language": "HETG: Vacuolis\u00e9e bord\u00e9e",
             "correlates_with": "",
-            "hex_color": "#294D29"
+            "hex_color": "#294D29",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000016"
     },
@@ -1644,7 +1740,8 @@
             "gene_datamined": "",
             "alternative_language": "HETG: Tourbillon",
             "correlates_with": "",
-            "hex_color": "#026C86"
+            "hex_color": "#026C86",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000016"
     },
@@ -1661,7 +1758,8 @@
             "gene_datamined": "",
             "alternative_language": "HETG: En rayon de roue",
             "correlates_with": "",
-            "hex_color": "#FAE65F"
+            "hex_color": "#FAE65F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000016"
     },
@@ -1678,7 +1776,8 @@
             "gene_datamined": "",
             "alternative_language": "Elements Inflammatoires",
             "correlates_with": "",
-            "hex_color": "#045BDA"
+            "hex_color": "#045BDA",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1695,7 +1794,8 @@
             "gene_datamined": "HGNC:7720 NEB",
             "correlates_with": "Inflammation",
             "alternative_language": "Inflammation",
-            "hex_color": "#233403"
+            "hex_color": "#233403",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000067"
     },
@@ -1712,7 +1812,8 @@
             "gene_datamined": "",
             "alternative_language": "Alt\u00e9rations et L\u00e9sions Interstitielles",
             "correlates_with": "",
-            "hex_color": "#FE7040"
+            "hex_color": "#FE7040",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1729,7 +1830,8 @@
             "gene_datamined": "",
             "alternative_language": "Entoure Compl\u00e8tement les Fibres",
             "correlates_with": "",
-            "hex_color": "#F01417"
+            "hex_color": "#F01417",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000061"
     },
@@ -1746,7 +1848,8 @@
             "gene_datamined": "HGNC:12403 TTN,HGNC:7720 NEB",
             "correlates_with": "Connective Interstitial Tissue Increase,Type 1 Hypertrophic (large),Type Uniformity",
             "alternative_language": "Augmentation Tissu Conjonctif",
-            "hex_color": "#DE050F"
+            "hex_color": "#DE050F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000061"
     },
@@ -1763,7 +1866,8 @@
             "gene_datamined": "HGNC:129 ACTA1,HGNC:7720 NEB",
             "alternative_language": "Augmentation Tissu Adipeux",
             "correlates_with": "",
-            "hex_color": "#D8B91A"
+            "hex_color": "#D8B91A",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000061"
     },
@@ -1780,7 +1884,8 @@
             "gene_datamined": "HGNC:10483 RYR1",
             "correlates_with": "Interstitial alterations,PAS Staining: Locally Abnormal (Overload)",
             "alternative_language": "Alt\u00e9rations Interstitielles",
-            "hex_color": "#659331"
+            "hex_color": "#659331",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000061"
     },
@@ -1797,7 +1902,8 @@
             "gene_datamined": "",
             "alternative_language": "Bande \u00e9paisse entre Fascicules",
             "correlates_with": "",
-            "hex_color": "#63E495"
+            "hex_color": "#63E495",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000061"
     },
@@ -1814,7 +1920,8 @@
             "gene_datamined": "HGNC:7448 MTM1,HGNC:9752 QDPR,N/A",
             "alternative_language": "Necklace Fibers",
             "correlates_with": "",
-            "hex_color": "#92A2B9"
+            "hex_color": "#92A2B9",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1831,7 +1938,8 @@
             "gene_datamined": "HGNC:7720 NEB,N/A",
             "correlates_with": "Necrosis,Regeneration",
             "alternative_language": "N\u00e9crose",
-            "hex_color": "#6669EC"
+            "hex_color": "#6669EC",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1848,7 +1956,8 @@
             "gene_datamined": "",
             "alternative_language": "Fuseau Neuromusculaire",
             "correlates_with": "",
-            "hex_color": "#AA55FF"
+            "hex_color": "#AA55FF",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1865,7 +1974,8 @@
             "gene_datamined": "N/A",
             "alternative_language": "Fuseau Neuromusculaire Anormal",
             "correlates_with": "",
-            "hex_color": "#4058B8"
+            "hex_color": "#4058B8",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000056"
     },
@@ -1882,7 +1992,8 @@
             "gene_datamined": "",
             "alternative_language": "Aspect Noyaux",
             "correlates_with": "",
-            "hex_color": "#6DFFD7"
+            "hex_color": "#6DFFD7",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -1899,7 +2010,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "correlates_with": "Centralized Nuclei,Internalized nuclei,Locally Abnormal ATP Activity (Clear Zone)",
             "alternative_language": "Noyaux Centralis\u00e9",
-            "hex_color": "#6F7356"
+            "hex_color": "#6F7356",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000026"
     },
@@ -1916,7 +2028,8 @@
             "gene_datamined": "HGNC:9752 QDPR,N/A",
             "correlates_with": "Abnormal differentiation,Centralized Nuclei,Increase in the number of nuclei,Internalized nuclei",
             "alternative_language": "Augmentation du Nombre de Noyaux",
-            "hex_color": "#72B750"
+            "hex_color": "#72B750",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000026"
     },
@@ -1933,7 +2046,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:9752 QDPR,N/A",
             "correlates_with": "Centralized Nuclei,Internalized nuclei",
             "alternative_language": "Noyaux Internalis\u00e9",
-            "hex_color": "#11C256"
+            "hex_color": "#11C256",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000026"
     },
@@ -1948,7 +2062,10 @@
             "gene_datamined": "HGNC:7720 NEB,N/A",
             "alternative_language": "Situation Normale",
             "correlates_with": "",
-            "hex_color": "#e621e1"
+            "hex_color": "#e621e1",
+            "genes": "",
+            "phenotype": "",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000026"
     },
@@ -1965,7 +2082,8 @@
             "gene_datamined": "HGNC:9752 QDPR,N/A",
             "correlates_with": "Nuclei with Myotubular Aspects,Predominance Fibre Type 2,Sub-Sarcolemmal Nuclei",
             "alternative_language": "Noyaux \u00e0 Aspects Myotubulaire",
-            "hex_color": "#8C0679"
+            "hex_color": "#8C0679",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000026"
     },
@@ -1982,7 +2100,8 @@
             "gene_datamined": "HGNC:7577 MYH7,HGNC:9752 QDPR,N/A",
             "correlates_with": "Abnormal Phospholipase+AMP activity,Centralized Nuclei,Increase in Endosymal Collagen,Internalized nuclei,Nuclei with Myotubular Aspects,Sub-Sarcolemmal Nuclei",
             "alternative_language": "Noyaux Sous-Sarcolemmique",
-            "hex_color": "#9AB613"
+            "hex_color": "#9AB613",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000026"
     },
@@ -1999,7 +2118,8 @@
             "gene_datamined": "",
             "alternative_language": "Zone Claire",
             "correlates_with": "",
-            "hex_color": "#A0D32E"
+            "hex_color": "#A0D32E",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -2016,7 +2136,8 @@
             "gene_datamined": "HGNC:7720 NEB",
             "alternative_language": "Zone Claire Centrale",
             "correlates_with": "",
-            "hex_color": "#DC48F0"
+            "hex_color": "#DC48F0",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000052"
     },
@@ -2033,7 +2154,8 @@
             "gene_datamined": "",
             "alternative_language": "Majorit\u00e9 de la Fibre",
             "correlates_with": "",
-            "hex_color": "#AD9F5E"
+            "hex_color": "#AD9F5E",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000052"
     },
@@ -2050,7 +2172,8 @@
             "gene_datamined": "",
             "alternative_language": "Croissant P\u00e9riph\u00e9rique",
             "correlates_with": "",
-            "hex_color": "#8D3207"
+            "hex_color": "#8D3207",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000052"
     },
@@ -2067,7 +2190,8 @@
             "gene_datamined": "N/A",
             "alternative_language": "Coup d'ongle p\u00e9riph\u00e9rique",
             "correlates_with": "",
-            "hex_color": "#E90559"
+            "hex_color": "#E90559",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -2084,7 +2208,8 @@
             "gene_datamined": "",
             "alternative_language": "Inclusions prot\u00e9iques",
             "correlates_with": "",
-            "hex_color": "#9C6361"
+            "hex_color": "#9C6361",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -2101,7 +2226,8 @@
             "gene_datamined": "HGNC:7720 NEB,N/A",
             "alternative_language": "Inclusions Centralis\u00e9es",
             "correlates_with": "",
-            "hex_color": "#02F38D"
+            "hex_color": "#02F38D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000032"
     },
@@ -2118,7 +2244,8 @@
             "gene_datamined": "HGNC:7720 NEB",
             "alternative_language": "Inclusions P\u00e9riph\u00e9riques",
             "correlates_with": "",
-            "hex_color": "#D9C462"
+            "hex_color": "#D9C462",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000032"
     },
@@ -2135,7 +2262,8 @@
             "gene_datamined": "N/A",
             "correlates_with": "Necrosis,Regeneration",
             "alternative_language": "R\u00e9g\u00e9n\u00e9ration",
-            "hex_color": "#11BAC8"
+            "hex_color": "#11BAC8",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -2152,7 +2280,8 @@
             "gene_datamined": "",
             "alternative_language": "B\u00e2tonnets - Rods et Nemaline Bodies",
             "correlates_with": "",
-            "hex_color": "#D65282"
+            "hex_color": "#D65282",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -2169,7 +2298,8 @@
             "gene_datamined": "",
             "alternative_language": "Mini-rods",
             "correlates_with": "",
-            "hex_color": "#0F25C0"
+            "hex_color": "#0F25C0",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000047"
     },
@@ -2186,7 +2316,8 @@
             "gene_datamined": "HGNC:7577 MYH7,N/A",
             "alternative_language": "Poussi\u00e8re rouge",
             "correlates_with": "",
-            "hex_color": "#351F4E"
+            "hex_color": "#351F4E",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000047"
     },
@@ -2203,7 +2334,8 @@
             "gene_datamined": "HGNC:10483 RYR1,N/A",
             "alternative_language": "Piquet\u00e9 rouge",
             "correlates_with": "",
-            "hex_color": "#BCAD10"
+            "hex_color": "#BCAD10",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000047"
     },
@@ -2220,7 +2352,8 @@
             "gene_datamined": "HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7720 NEB,N/A",
             "correlates_with": "Fuscinophilic material: Dark clusters/aggregates,Rods,Sudan Staining: Abornmal (Lipids Overload),Type 1 Atrophied (small),Type 2 Atrophied (small)",
             "alternative_language": "Batonnets",
-            "hex_color": "#058775"
+            "hex_color": "#058775",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000047"
     },
@@ -2237,7 +2370,8 @@
             "gene_datamined": "",
             "alternative_language": "Aggr\u00e9gats Tubulaires",
             "correlates_with": "",
-            "hex_color": "#FB4D7A"
+            "hex_color": "#FB4D7A",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000001"
     },
@@ -2254,7 +2388,8 @@
             "gene_datamined": "",
             "alternative_language": "Image Annotations",
             "correlates_with": "",
-            "hex_color": "#8D27F1"
+            "hex_color": "#8D27F1",
+            "hpo_datamined": ""
         },
         "parent": "#"
     },
@@ -2269,7 +2404,10 @@
             "gene_datamined": "",
             "alternative_language": "Img: Cores",
             "correlates_with": "",
-            "hex_color": "#9b59b2"
+            "hex_color": "#9b59b2",
+            "genes": "",
+            "phenotype": "",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000168"
     },
@@ -2284,7 +2422,10 @@
             "gene_datamined": "",
             "alternative_language": "Img: Cytoplasme",
             "correlates_with": "",
-            "hex_color": "#b4db6d"
+            "hex_color": "#b4db6d",
+            "genes": "",
+            "phenotype": "",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000168"
     },
@@ -2299,7 +2440,10 @@
             "gene_datamined": "",
             "alternative_language": "Img: Espace inter-cellulaire",
             "correlates_with": "",
-            "hex_color": "#150c22"
+            "hex_color": "#150c22",
+            "genes": "",
+            "phenotype": "",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000168"
     },
@@ -2314,7 +2458,10 @@
             "gene_datamined": "",
             "alternative_language": "Img: Noyaux",
             "correlates_with": "",
-            "hex_color": "#342e8d"
+            "hex_color": "#342e8d",
+            "genes": "",
+            "phenotype": "",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000168"
     },
@@ -2329,7 +2476,10 @@
             "gene_datamined": "",
             "alternative_language": "Img: Batonnets",
             "correlates_with": "",
-            "hex_color": "#f80134"
+            "hex_color": "#f80134",
+            "genes": "",
+            "phenotype": "",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000168"
     },
@@ -2346,7 +2496,8 @@
             "gene_datamined": "",
             "alternative_language": "Enzymologie oxydative",
             "correlates_with": "",
-            "hex_color": "#A494C7"
+            "hex_color": "#A494C7",
+            "hpo_datamined": ""
         },
         "parent": "#"
     },
@@ -2363,7 +2514,8 @@
             "gene_datamined": "",
             "alternative_language": "R\u00e9partition Activit\u00e9",
             "correlates_with": "",
-            "hex_color": "#A2BE55"
+            "hex_color": "#A2BE55",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000097"
     },
@@ -2380,7 +2532,8 @@
             "gene_datamined": "HGNC:129 ACTA1",
             "alternative_language": "Activit\u00e9 Oxy: En Croissant",
             "correlates_with": "",
-            "hex_color": "#99B212"
+            "hex_color": "#99B212",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2397,7 +2550,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Liseret P\u00e9riph\u00e9rique Fonc\u00e9",
             "correlates_with": "",
-            "hex_color": "#38E141"
+            "hex_color": "#38E141",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2414,7 +2568,8 @@
             "gene_datamined": "HGNC:7720 NEB",
             "alternative_language": "Activit\u00e9 Oxy: Zone Inclusion Non Color\u00e9e",
             "correlates_with": "",
-            "hex_color": "#61CF2C"
+            "hex_color": "#61CF2C",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2431,7 +2586,8 @@
             "gene_datamined": "HGNC:12403 TTN,HGNC:7577 MYH7,HGNC:7720 NEB",
             "alternative_language": "Activit\u00e9 Oxy: Limites floues",
             "correlates_with": "",
-            "hex_color": "#837158"
+            "hex_color": "#837158",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2448,7 +2604,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:12403 TTN,HGNC:7577 MYH7,HGNC:7720 NEB",
             "alternative_language": "Activit\u00e9 Oxy: Centrale",
             "correlates_with": "",
-            "hex_color": "#471D22"
+            "hex_color": "#471D22",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2465,7 +2622,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB",
             "alternative_language": "Activit\u00e9 Oxy: Zone Claire (p\u00e2le)",
             "correlates_with": "",
-            "hex_color": "#5645F3"
+            "hex_color": "#5645F3",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2482,7 +2640,8 @@
             "gene_datamined": "HGNC:7577 MYH7",
             "alternative_language": "Activit\u00e9 Oxy: Disproportion",
             "correlates_with": "",
-            "hex_color": "#8838C3"
+            "hex_color": "#8838C3",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2499,7 +2658,8 @@
             "gene_datamined": "HGNC:7577 MYH7",
             "alternative_language": "Activit\u00e9 Oxy: Limites nettes",
             "correlates_with": "",
-            "hex_color": "#FBD0B1"
+            "hex_color": "#FBD0B1",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2516,7 +2676,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:129 ACTA1",
             "alternative_language": "Activit\u00e9 Oxy: P\u00e9riph\u00e9rique",
             "correlates_with": "",
-            "hex_color": "#B4D25B"
+            "hex_color": "#B4D25B",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2533,7 +2694,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Coloration Fonc\u00e9 Sous-Sarcolemmique",
             "correlates_with": "",
-            "hex_color": "#34C03B"
+            "hex_color": "#34C03B",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2550,7 +2712,8 @@
             "gene_datamined": "N/A",
             "alternative_language": "Accumulation Mitochondries P\u00e9riph\u00e9riques",
             "correlates_with": "",
-            "hex_color": "#383047"
+            "hex_color": "#383047",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000111"
     },
@@ -2567,7 +2730,8 @@
             "gene_datamined": "HGNC:7577 MYH7",
             "alternative_language": "Core",
             "correlates_with": "",
-            "hex_color": "#F24C11"
+            "hex_color": "#F24C11",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000097"
     },
@@ -2584,7 +2748,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:7577 MYH7",
             "alternative_language": "Core sur toute la Section",
             "correlates_with": "",
-            "hex_color": "#D28A16"
+            "hex_color": "#D28A16",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000123"
     },
@@ -2601,7 +2766,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:7577 MYH7",
             "alternative_language": "Core \u00e0 Limites Floues",
             "correlates_with": "",
-            "hex_color": "#74BC84"
+            "hex_color": "#74BC84",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000123"
     },
@@ -2618,7 +2784,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:7577 MYH7",
             "alternative_language": "Core \u00e0 Limites Nettes",
             "correlates_with": "",
-            "hex_color": "#29024C"
+            "hex_color": "#29024C",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000123"
     },
@@ -2635,7 +2802,8 @@
             "gene_datamined": "HGNC:1052 BIN1,HGNC:12403 TTN,N/A",
             "alternative_language": "Minicores",
             "correlates_with": "Minicores,No Topography",
-            "hex_color": "#8B48D5"
+            "hex_color": "#8B48D5",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000123"
     },
@@ -2652,7 +2820,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7577 MYH7",
             "correlates_with": "Peripheral Cores,Single Central Core",
             "alternative_language": "Core P\u00e9riph\u00e9riques",
-            "hex_color": "#119F16"
+            "hex_color": "#119F16",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000123"
     },
@@ -2669,7 +2838,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7577 MYH7",
             "correlates_with": "Peripheral Cores,Single Central Core",
             "alternative_language": "Core Centraux Uniques",
-            "hex_color": "#02AD6D"
+            "hex_color": "#02AD6D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000123"
     },
@@ -2686,7 +2856,8 @@
             "gene_datamined": "",
             "alternative_language": "NADH",
             "correlates_with": "",
-            "hex_color": "#1A6A14"
+            "hex_color": "#1A6A14",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000097"
     },
@@ -2703,7 +2874,8 @@
             "gene_datamined": "HGNC:129 ACTA1",
             "alternative_language": "NADH: Fibre Atrophique Fonc\u00e9e",
             "correlates_with": "",
-            "hex_color": "#76238F"
+            "hex_color": "#76238F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000130"
     },
@@ -2720,7 +2892,8 @@
             "gene_datamined": "",
             "alternative_language": "NADH: Halo Fonc\u00e9 Sous-Sarcolemmique",
             "correlates_with": "",
-            "hex_color": "#0C6A5D"
+            "hex_color": "#0C6A5D",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000130"
     },
@@ -2737,7 +2910,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Aspect Fibre",
             "correlates_with": "",
-            "hex_color": "#82EF87"
+            "hex_color": "#82EF87",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000097"
     },
@@ -2754,7 +2928,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:7577 MYH7,HGNC:7720 NEB",
             "alternative_language": "Activit\u00e9 Oxy: Alv\u00e9ole Core-like",
             "correlates_with": "Oxy activity: Core-like alveolus",
-            "hex_color": "#6DA551"
+            "hex_color": "#6DA551",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000098"
     },
@@ -2771,7 +2946,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Cern\u00e9",
             "correlates_with": "",
-            "hex_color": "#24312E"
+            "hex_color": "#24312E",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000098"
     },
@@ -2788,7 +2964,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Lobulation",
             "correlates_with": "",
-            "hex_color": "#C10BD4"
+            "hex_color": "#C10BD4",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000098"
     },
@@ -2805,7 +2982,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Multi-lobul\u00e9",
             "correlates_with": "",
-            "hex_color": "#EAFF29"
+            "hex_color": "#EAFF29",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000098"
     },
@@ -2822,7 +3000,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Myotubulaire",
             "correlates_with": "",
-            "hex_color": "#470E1A"
+            "hex_color": "#470E1A",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000098"
     },
@@ -2839,7 +3018,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:7448 MTM1",
             "alternative_language": "Activit\u00e9 Oxy: Aspect targ\u00e9toide",
             "correlates_with": "",
-            "hex_color": "#E13911"
+            "hex_color": "#E13911",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000098"
     },
@@ -2856,7 +3036,8 @@
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: En rayon de roue",
             "correlates_with": "",
-            "hex_color": "#1C3A4B"
+            "hex_color": "#1C3A4B",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000098"
     },
@@ -2873,7 +3054,8 @@
             "gene_datamined": "N/A",
             "alternative_language": "Remaniement Structurel",
             "correlates_with": "",
-            "hex_color": "#AEF02F"
+            "hex_color": "#AEF02F",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000097"
     },
@@ -2890,7 +3072,8 @@
             "gene_datamined": "N/A",
             "correlates_with": "Irregular Intermyofibrillar Network,Structural Disorganisation,Type 2 Atrophied (small)",
             "alternative_language": "R\u00e9seau Intermyofibrillaire Irr\u00e9gulier",
-            "hex_color": "#1F4FDC"
+            "hex_color": "#1F4FDC",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000106"
     },
@@ -2907,7 +3090,8 @@
             "gene_datamined": "N/A",
             "alternative_language": "Rimmed Sarcolemma",
             "correlates_with": "",
-            "hex_color": "#8FEB53"
+            "hex_color": "#8FEB53",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000106"
     },
@@ -2924,7 +3108,8 @@
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "correlates_with": "Irregular Intermyofibrillar Network,Structural Disorganisation,Type 1 Hypertrophic (large),Type Uniformity",
             "alternative_language": "D\u00e9sorganisation structurelle",
-            "hex_color": "#AE2884"
+            "hex_color": "#AE2884",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000106"
     },
@@ -2941,7 +3126,8 @@
             "gene_datamined": "",
             "alternative_language": "L\u00e9sion Sous-Sarcolemmique",
             "correlates_with": "",
-            "hex_color": "#F133BB"
+            "hex_color": "#F133BB",
+            "hpo_datamined": ""
         },
         "parent": "MHO:000106"
     }
