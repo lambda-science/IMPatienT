@@ -29,13 +29,13 @@ EHRoes is developped and used in collaboration with the [Morphological Unit of t
 
 ## EHRoes Abstract
 
-**Background**
-With a growing amount of patient data such as sequencing, imaging, and medical records, electronic health records (EHR) are now central to drive research and improve diagnosis of patients by using multimodal data. Exploiting patient data is a challenge as patient data exploitation tools ecosystem is often fragmented into tools to digitize and format the data and those interpreting the data (exploration, diagnosis). Furthermore, as most of the tools are specialized in one type of data, a multitude of software is needed for multimodal approaches. There is a strong need for a simple, all-rounder and flexible platform.
-**Results**
-In this paper we present EHRoes, a web application for multimodal digitization and exploration of patient data. EHRoes has a module-based architecture, composed of four modules to: (i) create a standard vocabulary for a domain (ii) automatically digitize free-text data to a set of standard terms (iii) annotate images with standard vocabulary using automatic segmentation and (iv) generate an automatic visualization dashboard to provide insight on the data and perform automatic diagnosis suggestions. We demonstrated the utility of EHRoes by digitizing 40 artificial muscle histology reports of patients with congenital myopathies.
-**Conclusions**
-With EHRoes we created a platform for both digitization and exploration of patient data that can handle image data and free-text data. As it uses user-designed standard vocabulary, it is highly flexible to fit any domain of research. It can be used both as a patient registry with automatic diagnosis or as a research tool to explore a cohort of patients.
-A demo instance of the application is available at https://ehroes.lbgi.fr.
+**Background**  
+With a growing amount of patient data such as sequencing, imaging, and medical records, electronic health records (EHR) are now central to drive research and improve diagnosis of patients by using multimodal data. Exploiting patient data is a challenge as patient data exploitation tools ecosystem is often fragmented into tools to digitize and format the data and those interpreting the data (exploration, diagnosis). Furthermore, as most of the tools are specialized in one type of data, a multitude of software is needed for multimodal approaches. There is a strong need for a simple, all-rounder and flexible platform.  
+**Results**  
+In this paper we present EHRoes, a web application for multimodal digitization and exploration of patient data. EHRoes has a module-based architecture, composed of four modules to: (i) create a standard vocabulary for a domain (ii) automatically digitize free-text data to a set of standard terms (iii) annotate images with standard vocabulary using automatic segmentation and (iv) generate an automatic visualization dashboard to provide insight on the data and perform automatic diagnosis suggestions. We demonstrated the utility of EHRoes by digitizing 40 artificial muscle histology reports of patients with congenital myopathies.  
+**Conclusions**  
+With EHRoes we created a platform for both digitization and exploration of patient data that can handle image data and free-text data. As it uses user-designed standard vocabulary, it is highly flexible to fit any domain of research. It can be used both as a patient registry with automatic diagnosis or as a research tool to explore a cohort of patients.  
+A demo instance of the application is available at https://ehroes.lbgi.fr.  
 
 ## Setup guides
 
