@@ -61,15 +61,7 @@ $("#jstree")
         dataType: "json", // needed only if you do not supply JSON headers
       },
     },
-    plugins: [
-      "contextmenu",
-      "dnd",
-      "wholerow",
-      "unique",
-      "search",
-      "changed",
-      "sort",
-    ],
+    plugins: ["contextmenu", "dnd", "wholerow", "search", "changed", "sort"],
   });
 
 // Search function for the JSTree search bar

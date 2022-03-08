@@ -199,7 +199,7 @@ $("#jstree")
       data: JSON.parse(json_tree),
     },
     // plugins: ["contextmenu", "wholerow", "unique", "search", "changed", "dnd"],
-    plugins: ["wholerow", "unique", "search", "changed", "sort"],
+    plugins: ["wholerow", "search", "changed", "sort"],
     //contextmenu: {
     //  items: function ($node) {
     //    return {

@@ -5,9 +5,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "genes": "",
             "synonymes": "",
-            "phenotype": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Sample Keyword",
@@ -23,9 +21,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "genes": "",
             "synonymes": "",
-            "phenotype": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Image Annotations",
@@ -41,9 +37,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "genes": "",
             "synonymes": "",
-            "phenotype": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Sample Annotation Keyword",
@@ -65,8 +59,6 @@
             "alternative_language": "Sample Annotation Keyword 2",
             "correlates_with": "",
             "hex_color": "#67d254",
-            "genes": "",
-            "phenotype": "",
             "hpo_datamined": ""
         },
         "parent": "MHO:000002"
