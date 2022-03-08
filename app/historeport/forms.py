@@ -170,6 +170,14 @@ class OntologyDescriptPreAbs(FlaskForm):
     #         "readonly": "",
     #     },
     # )
+    hpo_datamined = StringField(
+        "Associated HPO Terms (Extracted from reports)",
+        render_kw={
+            "placeholder": "Associated HPO Terms (Extracted from reports)",
+            "class": "form-control",
+            "readonly": "",
+        },
+    )
     gene_datamined = StringField(
         "Associated Genes (Extracted from reports)",
         render_kw={

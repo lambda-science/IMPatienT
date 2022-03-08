@@ -51,12 +51,9 @@ class StandardVocabulary:
                     i["data"]["description"] = dest_onto.jstree_as_dict[i["id"]][
                         "data"
                     ].get("description", "")
-                    i["data"]["genes"] = dest_onto.jstree_as_dict[i["id"]]["data"].get(
-                        "genes", ""
-                    )
-                    i["data"]["phenotype"] = dest_onto.jstree_as_dict[i["id"]][
+                    i["data"]["hpo_datamined"] = dest_onto.jstree_as_dict[i["id"]][
                         "data"
-                    ].get("phenotype", "")
+                    ].get("hpo_datamined", "")
                     i["data"]["phenotype_datamined"] = dest_onto.jstree_as_dict[
                         i["id"]
                     ]["data"].get("phenotype_datamined", "")

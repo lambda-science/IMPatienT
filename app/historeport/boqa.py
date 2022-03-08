@@ -136,6 +136,6 @@ def get_boqa_pred(tree: str):
     replace_dict = {-0.25: 0, 0.25: 1, 0.5: 1, 0.75: 1, 1: 1, 0: 0}
     for feature in my_tree:
         value = float(feature["data"].get("presence", -0.25))
-        query[feature["text"]] = replace_dict[value]
+        query[feature["id"]] = replace_dict[value]
     best_match = boqa_monte_carlo(query, items_stat)
     return best_match

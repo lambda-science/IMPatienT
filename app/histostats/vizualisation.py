@@ -13,6 +13,30 @@ from flask import current_app
 from sklearn.metrics import confusion_matrix
 
 
+def id_to_name(onto, ids_list, mode="full"):
+    """Map a list of ID of ontology term to their names
+
+    Args:
+        onto (list): ontology json as list
+        ids_list (_type_): list of ID from ontology to map
+        mode (str, optional): Mapping mode (id+name or only name) Defaults to "full".
+
+    Returns:
+        name_list list : list of nodes names
+    """
+    json_index = {}
+    name_list = []
+    for i in onto:
+        json_index[i["id"]] = i
+    if mode == "full":
+        for id in ids_list:
+            name_list.append(id + " " + json_index[id]["text"])
+    if mode == "short":
+        for id in ids_list:
+            name_list.append(json_index[id]["text"])
+    return name_list
+
+
 def table_to_df(df, onto_tree):
     """Transform the JSON JSTree in the text report table to a pandas dataframe columns
 
@@ -28,7 +52,6 @@ def table_to_df(df, onto_tree):
     tree_as_dict = {}
     features_col = []
     for index, row in df.iterrows():
-
         tree_as_dict.setdefault("id", []).append(row[0])
         tree_as_dict.setdefault("patient_id", []).append(row[1])
         tree_as_dict.setdefault("expert_id", []).append(row[2])
@@ -49,14 +72,12 @@ def table_to_df(df, onto_tree):
         # my_tree = dict((item['text'], item) for item in row[8])
         for feature in onto_tree:
             # node = my_tree[feature["text"]]
-            node = next(
-                (item for item in my_tree if item["text"] == feature["text"]), None
-            )
-            tree_as_dict.setdefault(node["text"], []).append(
+            node = next((item for item in my_tree if item["id"] == feature["id"]), None)
+            tree_as_dict.setdefault(node["id"], []).append(
                 float(node["data"].get("presence", -0.25))
             )
             if index == 0:
-                features_col.append(node["text"])
+                features_col.append(node["id"])
     df_return = pd.DataFrame.from_dict(tree_as_dict)
     return df_return, features_col
 
@@ -184,7 +205,7 @@ def create_plotly_viz(df):
     return [graphJSON1, graphJSON2, graphJSON3, graphJSON4]
 
 
-def generate_stat_per(df, features_col):
+def generate_stat_per(df, features_col, onto):
     """Generate the frequencies statistics for each standard vocbulary terms per
      genes and per conclusion. Return the stats as dataframe, write the stats
      to JSON files.
@@ -193,6 +214,7 @@ def generate_stat_per(df, features_col):
         df (DataFrame): Processed DataFrame
         features_col (list): List of column names corresponding to Standard
          vocabulary terms
+        onto (list): list of ontology nodes (json)
 
     Returns:
         DataFrame: DataFrame of frequencies statistics per gene
@@ -210,6 +232,7 @@ def generate_stat_per(df, features_col):
     df_per_gene = pd.DataFrame(
         list_per_gene, columns=["Gene", "N", "Feature", "Count", "Frequency"]
     )
+    df_per_gene["Feature"] = id_to_name(onto, df_per_gene["Feature"].to_list())
 
     list_per_diag = []
     all_diag = list(set(df.conclusion.to_list()))
@@ -222,6 +245,8 @@ def generate_stat_per(df, features_col):
     df_per_diag = pd.DataFrame(
         list_per_diag, columns=["Diag", "N", "Feature", "Count", "Frequency"]
     )
+    df_per_diag["Feature"] = id_to_name(onto, df_per_diag["Feature"].to_list())
+
     df_per_gene.to_csv(
         os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.csv"), index=False
     )
@@ -338,15 +363,16 @@ def generate_confusion_BOQA(df):
     return graph_matrixboqa
 
 
-def generate_corr_matrix(df):
+def generate_corr_matrix(df, onto):
     """Generation the correlation matrix for the standard vocabulary terms.
     Internal threshold is set to at least 10 annotations (0 or 1).
     Figure is dumped to a Plotly JSON Graph to a file named correlation_matrix.json
 
     Args:
         df (DataFrame): Processed DataFrame
+        onto (list): ontology json as list
     """
-    onto_values = df.iloc[:, 13:]
+    onto_values = df.iloc[:, 15:]
     onto_values = onto_values.dropna(axis=1, thresh=10)
     onto_values = onto_values.replace({0: -1})
     # onto_values = onto_values.fillna(0)
@@ -364,10 +390,11 @@ def generate_corr_matrix(df):
     # plt.close()
     # trace_heatmap = go.Heatmap(x=g.data2d.columns, y=g.data2d.columns,
     #                    z=g.data2d, colorscale="RdBu")
-    update_correlation_data(corrMatrix)
+    update_correlation_data(corrMatrix, onto)
+    xy_label = id_to_name(onto, corrMatrix.columns)
     trace_heatmap = go.Heatmap(
-        x=corrMatrix.columns,
-        y=corrMatrix.columns,
+        x=xy_label,
+        y=xy_label,
         z=corrMatrix,
         colorscale="RdBu",
     )
@@ -397,13 +424,20 @@ def update_phenotype_gene(df):
     ) as fp:
         onto = json.load(fp)
     for term in onto:
-        df_temp = df[df[term["text"]] == 1]
+        df_temp = df[df[term["id"]] == 1]
         gene_datamined_temp = list(df_temp["gene_diag"].value_counts().index)
         phenotype_datamined_temp = list(df_temp["conclusion"].value_counts().index)
+        hpo_datamined_temp = list(df_temp["pheno_terms"].value_counts().index)
         if gene_datamined_temp == []:
             term["data"]["gene_datamined"] = ""
         else:
             term["data"]["gene_datamined"] = ",".join(sorted(gene_datamined_temp))
+
+        if hpo_datamined_temp == []:
+            term["data"]["hpo_datamined"] = ""
+        else:
+            term["data"]["hpo_datamined"] = ",".join(sorted(hpo_datamined_temp))
+
         if phenotype_datamined_temp == []:
             term["data"]["phenotype_datamined"] = ""
         else:
@@ -416,7 +450,7 @@ def update_phenotype_gene(df):
         json.dump(onto, fp, indent=4)
 
 
-def update_correlation_data(corrMatrix):
+def update_correlation_data(corrMatrix, onto):
     """Update the correlation information of the standard vocabulary terms in the
     ontology.json JSTree file.
 
@@ -428,10 +462,11 @@ def update_correlation_data(corrMatrix):
     ) as fp:
         onto = json.load(fp)
     for term in onto:
-        if term["text"] in corrMatrix:
-            correlation_series = corrMatrix[term["text"]]
+        if term["id"] in corrMatrix:
+            correlation_series = corrMatrix[term["id"]]
             correlation_series = correlation_series[(correlation_series > 0.5)]
-            term["data"]["correlates_with"] = ",".join(sorted(correlation_series.index))
+            mapped_correlation_names = id_to_name(onto, correlation_series.index)
+            term["data"]["correlates_with"] = ",".join(sorted(mapped_correlation_names))
         else:
             pass
     with open(

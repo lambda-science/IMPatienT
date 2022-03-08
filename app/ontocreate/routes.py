@@ -162,7 +162,7 @@ def invert_lang():
     df = db_to_df()
     df, features_col = table_to_df(df, onto)
     df = process_df(df)
-    generate_stat_per(df, features_col)
+    generate_stat_per(df, features_col, onto)
 
     # Update The DashApp Callback & layout
     # By Force reloading the layout code

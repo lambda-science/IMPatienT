@@ -8,8 +8,8 @@ var input_tag = new Tagify(input);
 // var input2_tag = new Tagify(input2);
 var input3 = document.querySelector("input[id=gene_datamined]");
 var input3_tag = new Tagify(input3);
-// var input4 = document.querySelector("input[id=phenotype]");
-// var input4_tag = new Tagify(input4);
+var input4 = document.querySelector("input[id=hpo_datamined]");
+var input4_tag = new Tagify(input4);
 var input5 = document.querySelector("input[id=phenotype_datamined]");
 var input5_tag = new Tagify(input5);
 var input6 = document.querySelector("input[id=alternative_language]");
@@ -199,7 +199,7 @@ $("#jstree")
       data: JSON.parse(json_tree),
     },
     // plugins: ["contextmenu", "wholerow", "unique", "search", "changed", "dnd"],
-    plugins: ["wholerow", "unique", "search", "changed", "sort"],
+    plugins: ["wholerow", "search", "changed", "sort"],
     //contextmenu: {
     //  items: function ($node) {
     //    return {
@@ -239,6 +239,7 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   $("input[id=parent_id]").val(data.node.parent);
   input_tag.loadOriginalValues(data.node.data.synonymes);
   input3_tag.loadOriginalValues(data.node.data.gene_datamined);
+  input4_tag.loadOriginalValues(data.node.data.hpo_datamined);
   input5_tag.loadOriginalValues(data.node.data.phenotype_datamined);
   input6_tag.loadOriginalValues(data.node.data.alternative_language);
   input7_tag.loadOriginalValues(data.node.data.correlates_with);

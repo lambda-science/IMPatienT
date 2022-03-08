@@ -21,11 +21,11 @@ def statsindex():
     df = db_to_df()
     df, features_col = table_to_df(df, onto_tree)
     df = process_df(df)
-    df_per_gene, df_per_diag = generate_stat_per(df, features_col)
+    df_per_gene, df_per_diag = generate_stat_per(df, features_col, onto_tree)
     graph_viz = create_plotly_viz(df)
     graph_UNCLEAR = generate_UNCLEAR(df)
     graph_matrixboqa = generate_confusion_BOQA(df)
-    generate_corr_matrix(df)
+    generate_corr_matrix(df, onto_tree)
     update_phenotype_gene(df)
 
     graphJSON = json.load(

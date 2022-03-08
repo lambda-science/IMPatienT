@@ -60,7 +60,7 @@
     </div>
   </div>
   <div class="col-xl">
-    <h1>Vocubulary Details</h1>
+    <h1>Vocubulary Properties</h1>
     <form method="post">
       {% for error in form.errors %}
       <span style="color: red">{{ error }}: {{form.errors[error]}}</span>
@@ -74,6 +74,8 @@
       {{ form.alternative_language }}
       {{ form.synonymes.label(class="form-label") }}
       {{ form.synonymes }}
+      {{ form.hpo_datamined.label(class="form-label") }}
+      {{ form.hpo_datamined }}
       {{ form.gene_datamined.label(class="form-label") }}
       {{ form.gene_datamined }}
       {{ form.phenotype_datamined.label(class="form-label") }}
