@@ -1,11 +1,17 @@
-from app import db
+from app import db, login_manager
 from app.auth import bp
 from app.auth.email import send_password_reset_email
 from app.auth.forms import LoginForm, ResetPasswordForm, ResetPasswordRequestForm
 from app.models import User
 from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.urls import url_parse
+
+
+@login_manager.unauthorized_handler
+def handle_needs_login():
+    flash("You have to be logged in to access this page.", "info")
+    return redirect(url_for("auth.login"))
 
 
 @bp.route("/login", methods=["GET", "POST"])
@@ -28,10 +34,7 @@ def login():
         # Log user if password matched, store username and redirect user
         login_user(user, remember=form.remember_me.data)
         flash("Login successful", "success")
-        next_page = request.args.get("next")
-        if not next_page or url_parse(next_page).netloc != "":
-            next_page = url_for("index.index")
-        return redirect(next_page)
+        return redirect(url_for("index.index"))
     return render_template("login.html", title="Sign In", form=form)
 
 
