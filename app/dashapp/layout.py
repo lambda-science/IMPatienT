@@ -4,20 +4,12 @@ import dash_bootstrap_components as dbc
 import os
 from app.dashapp import bp
 import app.dashapp.plot_common as plot_common
+import app.dashapp.common_func as common_func
 import json
 
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
 
-with open(os.path.join("data/ontology", "ontology.json"), "r") as fp:
-    onto_tree = json.load(fp)
-id_img_annot_section = [i["id"] for i in onto_tree if i["text"] == "Image Annotations"][
-    0
-]
-onto_tree_imgannot = []
-for node in onto_tree:
-    if node["parent"] == id_img_annot_section:
-        onto_tree_imgannot.append(node)
-
+onto_tree_imgannot = common_func.load_onto()
 class_label_colormap = [i["data"]["hex_color"] for i in onto_tree_imgannot]
 class_labels = [i["text"] for i in onto_tree_imgannot]
 class_label_colormap = class_label_colormap

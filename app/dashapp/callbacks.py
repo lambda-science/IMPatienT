@@ -9,7 +9,9 @@ import traceback
 from flask import current_app
 from urllib import parse
 from joblib import Memory
+
 import numpy as np
+import pandas as pd
 
 import PIL.Image
 from skimage import io as skio
@@ -21,6 +23,7 @@ import dash_bootstrap_components as dbc
 from app import db
 import app.dashapp.plot_common as plot_common
 from app.models import Image
+import app.dashapp.common_func as common_func
 from app.dashapp.shapes_to_segmentations import (
     compute_segmentations,
     blend_image_and_classified_regions_pil,
@@ -33,6 +36,9 @@ memory = Memory("./joblib_cache", bytes_limit=500000000, verbose=1)
 compute_features = memory.cache(multiscale_basic_features)
 
 
+onto_tree_imgannot = common_func.load_onto()
+
+
 def class_to_color(class_label_colormap, n):
     return class_label_colormap[n]
 
@@ -41,8 +47,15 @@ def color_to_class(class_label_colormap, c):
     return class_label_colormap.index(c)
 
 
-def class_to_file(seg_matrix):
-    pass
+def class_to_file(seg_matrix, onto_tree, save_path):
+    unique_classes = np.unique(seg_matrix)
+    col_df = {"class": [], "color": [], "onto_id": []}
+    for class_img in unique_classes:
+        col_df["class"].append(class_img)
+        col_df["color"].append(onto_tree[class_img - 1]["data"]["hex_color"])
+        col_df["onto_id"].append(onto_tree[class_img - 1]["id"])
+    df = pd.DataFrame.from_dict(col_df)
+    df.to_csv(save_path, index=False)
 
 
 def make_default_figure(
@@ -292,6 +305,12 @@ def register_callbacks(dashapp):
                         image.patient_id,
                         image.image_name + "_classifier.pkl",
                     )
+                    image.class_info_path = os.path.join(
+                        current_app.config["IMAGES_FOLDER"],
+                        image.patient_id,
+                        image.image_name + "_class_info.csv",
+                    )
+                    class_to_file(seg_matrix, onto_tree_imgannot, image.class_info_path)
                     with open(image.mask_annot_path, "w") as file:
                         json.dump(masks_data["shapes"], file, indent=4)
                     with open(image.classifier_path, "wb") as file:
