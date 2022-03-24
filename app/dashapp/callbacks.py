@@ -9,6 +9,7 @@ import traceback
 from flask import current_app
 from urllib import parse
 from joblib import Memory
+import numpy as np
 
 import PIL.Image
 from skimage import io as skio
@@ -38,6 +39,10 @@ def class_to_color(class_label_colormap, n):
 
 def color_to_class(class_label_colormap, c):
     return class_label_colormap.index(c)
+
+
+def class_to_file(seg_matrix):
+    pass
 
 
 def make_default_figure(
@@ -105,6 +110,8 @@ def show_segmentation(
 
 
 def register_callbacks(dashapp):
+    """ " """
+
     @dashapp.callback(
         [
             Output("graph", "figure"),
@@ -245,6 +252,7 @@ def register_callbacks(dashapp):
                     feature_opts,
                     class_label_colormap,
                 )
+                print(seg_matrix)
                 if cbcontext == "download-button.n_clicks":
                     classifier_store_data = clf
                     classified_image_store_data = plot_common.pil_image_to_uri(
@@ -257,14 +265,14 @@ def register_callbacks(dashapp):
                     image.seg_matrix_path = os.path.join(
                         current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
-                        image.image_name + "_seq_matrix.numpy",
+                        image.image_name + "_seq_matrix",
                     )
                     image.mask_annot_path = os.path.join(
                         current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
                         image.image_name + "_mask_annot.json",
                     )
-                    seg_matrix.tofile(image.seg_matrix_path)
+                    np.save(image.seg_matrix_path, seg_matrix)
                     image.mask_image_path = os.path.join(
                         current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
