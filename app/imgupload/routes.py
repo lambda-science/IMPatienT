@@ -87,11 +87,12 @@ def delete_img(id_img):
             return redirect(url_for("imgupload.img_index"))
         try:  # nosec
             os.remove(image.image_path)
-            os.remove(image.mask_annot_path)
+            os.remove(image.class_info_path)
             os.remove(image.seg_matrix_path)
             os.remove(image.classifier_path)
             os.remove(image.blend_image_path)
             os.remove(image.mask_image_path)
+            os.remove(image.mask_annot_path)
         except:  # nosec
             pass  # nosec
         db.session.delete(image)

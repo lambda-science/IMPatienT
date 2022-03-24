@@ -265,7 +265,6 @@ def register_callbacks(dashapp):
                     feature_opts,
                     class_label_colormap,
                 )
-                print(seg_matrix)
                 if cbcontext == "download-button.n_clicks":
                     classifier_store_data = clf
                     classified_image_store_data = plot_common.pil_image_to_uri(
@@ -278,7 +277,7 @@ def register_callbacks(dashapp):
                     image.seg_matrix_path = os.path.join(
                         current_app.config["IMAGES_FOLDER"],
                         image.patient_id,
-                        image.image_name + "_seq_matrix",
+                        image.image_name + "_seq_matrix.npy",
                     )
                     image.mask_annot_path = os.path.join(
                         current_app.config["IMAGES_FOLDER"],
