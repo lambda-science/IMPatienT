@@ -162,14 +162,6 @@ def register_callbacks(dashapp):
     ):
         with open(os.path.join("data/ontology", "ontology.json"), "r") as fp:
             onto_tree = json.load(fp)
-        id_img_annot_section = [
-            i["id"] for i in onto_tree if i["text"] == "Image Annotations"
-        ][0]
-        onto_tree_imgannot = []
-        for node in onto_tree:
-            if node["parent"] == id_img_annot_section:
-                onto_tree_imgannot.append(node)
-
         class_label_colormap = [i["data"]["hex_color"] for i in onto_tree_imgannot]
         class_labels = list(range(len(class_label_colormap)))
         NUM_LABEL_CLASSES = len(class_label_colormap)
