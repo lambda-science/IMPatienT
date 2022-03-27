@@ -10,16 +10,21 @@ import json
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
 
 onto_tree_imgannot = common_func.load_onto()
-class_label_colormap = [i["data"]["hex_color"] for i in onto_tree_imgannot]
-class_labels = [i["text"] for i in onto_tree_imgannot]
-class_label_colormap = class_label_colormap
+class_label_colormap = [
+    i["data"]["hex_color"]
+    for i in onto_tree_imgannot
+    if i["data"]["image_annotation"] is True
+]
+class_labels = [
+    i["text"] for i in onto_tree_imgannot if i["data"]["image_annotation"] is True
+]
 assert len(class_labels) <= len(class_label_colormap)  # nosec
 
 
-def class_to_color(onto_tree_imgannot, class_id):
-    for i in onto_tree_imgannot:
-        if class_id == i["text"]:
-            return i["data"]["hex_color"]
+def class_to_color(ontology, class_name):
+    for term in ontology:
+        if term["text"] == class_name:
+            return term["data"]["hex_color"]
 
 
 def get_external_stylesheets():

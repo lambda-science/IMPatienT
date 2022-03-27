@@ -38,15 +38,20 @@ def label_to_colors(
     example if 0 means 'no class' but we want the color of class 1 to be
     colormap[0].
     """
-    colormap = [
-        tuple([fromhex(h[s : s + 2]) for s in range(0, len(h), 2)])
-        for h in [c.replace("#", "") for c in colormap]
-    ]
+    colormap_converted = {}
+    for key, value in colormap.items():
+        hex_value = value.replace("#", "")
+        colormap_converted[key] = tuple(
+            [fromhex(hex_value[s : s + 2]) for s in range(0, len(hex_value), 2)]
+        )
     cimg = np.zeros(img.shape[:2] + (3,), dtype="uint8")
-    minc = np.min(img)
-    maxc = np.max(img)
-    for c in range(minc, maxc + 1):
-        cimg[img == c] = colormap[(c + color_class_offset) % len(colormap)]
+    label_on_img = np.unique(img).tolist()
+    for c in label_on_img:
+        # cimg[img == c] = colormap_converted[
+        #    (c + color_class_offset) % len(colormap_converted)
+        # ]
+        cimg[img == c] = colormap_converted[c]
+
     return np.concatenate(
         (cimg, alpha * np.ones(img.shape[:2] + (1,), dtype="uint8")), axis=2
     )

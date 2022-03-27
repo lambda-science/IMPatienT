@@ -146,7 +146,6 @@ def create_img():
         file.save(os.path.join(data_patient_dir, filename))
 
         # If Image is a Tiff, save a PNG format
-        print(filename.split("."))
         if filename.split(".")[-1] in ["tiff", "tif", "TIFF", "TIF"]:
             image = PILImage.open(file)
             filename_back = ".".join(filename.split(".")[0:-1]) + ".png"
@@ -154,7 +153,6 @@ def create_img():
         else:
             filename_back = filename
         # Create our new Image & Patient database entry
-        print(os.path.join(data_patient_dir, filename_back))
         image = Image(
             image_name=filename,
             expert_id=current_user.id,

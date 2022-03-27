@@ -39,23 +39,27 @@ compute_features = memory.cache(multiscale_basic_features)
 onto_tree_imgannot = common_func.load_onto()
 
 
-def class_to_color(class_label_colormap, n):
-    return class_label_colormap[n]
+def class_to_color(ontology, class_number):
+    for term in ontology:
+        if int(term["id"].split(":")[1]) == class_number:
+            return term["data"]["hex_color"]
 
 
-def color_to_class(class_label_colormap, c):
-    return class_label_colormap.index(c)
+def color_to_class(ontology, color_hex):
+    for term in ontology:
+        if term["data"]["hex_color"] == color_hex:
+            return int(term["id"].split(":")[1])
 
 
-def class_to_file(seg_matrix, onto_tree, save_path):
-    unique_classes = np.unique(seg_matrix)
-    col_df = {"class": [], "color": [], "onto_id": []}
-    for class_img in unique_classes:
-        col_df["class"].append(class_img)
-        col_df["color"].append(onto_tree[class_img - 1]["data"]["hex_color"])
-        col_df["onto_id"].append(onto_tree[class_img - 1]["id"])
-    df = pd.DataFrame.from_dict(col_df)
-    df.to_csv(save_path, index=False)
+# def class_to_file(seg_matrix, onto_tree, save_path):
+#     unique_classes = np.unique(seg_matrix)
+#     col_df = {"class": [], "color": [], "onto_id": []}
+#     for class_img in unique_classes:
+#         col_df["class"].append(class_img)
+#         col_df["color"].append(onto_tree[class_img - 1]["data"]["hex_color"])
+#         col_df["onto_id"].append(onto_tree[class_img - 1]["id"])
+#     df = pd.DataFrame.from_dict(col_df)
+#     df.to_csv(save_path, index=False)
 
 
 def make_default_figure(
@@ -96,18 +100,20 @@ def save_img_classifier(clf, label_to_colors_args, segmenter_args):
 
 
 def show_segmentation(
-    image_path, mask_shapes, features, segmenter_args, class_label_colormap
+    image_path, mask_shapes, features, segmenter_args, class_label_colormap, onto_tree
 ):
     """adds an image showing segmentations to a figure's layout"""
     # add 1 because classifier takes 0 to mean no mask
+    # shape_layers = [
+    #    color_to_class(class_label_colormap, shape["line"]["color"]) + 1
+    #    for shape in mask_shapes
+    # ]
     shape_layers = [
-        color_to_class(class_label_colormap, shape["line"]["color"]) + 1
-        for shape in mask_shapes
+        color_to_class(onto_tree, shape["line"]["color"]) for shape in mask_shapes
     ]
-    # shape_layers = [color_to_class(onto_tree, shape["line"]["color"]) for shape in mask_shapes]
     label_to_colors_args = {
         "colormap": class_label_colormap,
-        "color_class_offset": -1,
+        "color_class_offset": 0,
     }
     segimg, seg_matrix, clf = compute_segmentations(
         mask_shapes,
@@ -162,8 +168,21 @@ def register_callbacks(dashapp):
     ):
         with open(os.path.join("data/ontology", "ontology.json"), "r") as fp:
             onto_tree = json.load(fp)
-        class_label_colormap = [i["data"]["hex_color"] for i in onto_tree_imgannot]
-        class_labels = list(range(len(class_label_colormap)))
+        class_label_colormap = {
+            int(term["id"].split(":")[1]): term["data"]["hex_color"]
+            for term in onto_tree_imgannot
+            if term["data"]["image_annotation"] is True
+        }
+        class_labels = [
+            int(term["id"].split(":")[1])
+            for term in onto_tree
+            if term["data"]["image_annotation"] is True
+        ]
+        button_list = [
+            int(i["id"].split(":")[1])
+            for i in onto_tree_imgannot
+            if i["data"]["image_annotation"] is True
+        ]
         NUM_LABEL_CLASSES = len(class_label_colormap)
         DEFAULT_LABEL_CLASS = class_labels[0]
         DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
@@ -226,14 +245,16 @@ def register_callbacks(dashapp):
         if any_label_class_button_value is None:
             label_class_value = DEFAULT_LABEL_CLASS
         else:
-            label_class_value = max(
-                enumerate(any_label_class_button_value),
-                key=lambda t: 0 if t[1] is None else t[1],
-            )[0]
+            label_class_value = button_list[
+                max(
+                    enumerate(any_label_class_button_value),
+                    key=lambda t: 0 if t[1] is None else t[1],
+                )[0]
+            ]
             # label_class_value = class_labels[label_class_value]
         fig = make_default_figure(
             images=[image.image_path],
-            stroke_color=class_to_color(class_label_colormap, label_class_value),
+            stroke_color=class_to_color(onto_tree, label_class_value),
             stroke_width=stroke_width,
             shapes=masks_data["shapes"],
             source_img=source,
@@ -256,6 +277,7 @@ def register_callbacks(dashapp):
                     features,
                     feature_opts,
                     class_label_colormap,
+                    onto_tree,
                 )
                 if cbcontext == "download-button.n_clicks":
                     classifier_store_data = clf
@@ -296,12 +318,12 @@ def register_callbacks(dashapp):
                         image.patient_id,
                         image.image_name + "_classifier.pkl",
                     )
-                    image.class_info_path = os.path.join(
-                        current_app.config["IMAGES_FOLDER"],
-                        image.patient_id,
-                        image.image_name + "_class_info.csv",
-                    )
-                    class_to_file(seg_matrix, onto_tree_imgannot, image.class_info_path)
+                    # image.class_info_path = os.path.join(
+                    #     current_app.config["IMAGES_FOLDER"],
+                    #     image.patient_id,
+                    #     image.image_name + "_class_info.csv",
+                    # )
+                    # class_to_file(seg_matrix, onto_tree_imgannot, image.class_info_path)
                     with open(image.mask_annot_path, "w") as file:
                         json.dump(masks_data["shapes"], file, indent=4)
                     with open(image.classifier_path, "wb") as file:
