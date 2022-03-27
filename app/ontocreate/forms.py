@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField
+from wtforms import StringField, SubmitField, TextAreaField, BooleanField
 
 
 class OntologyDescript(FlaskForm):
@@ -88,6 +88,13 @@ class OntologyDescript(FlaskForm):
             "readonly": "",
         },
     )
+    image_annotation = BooleanField(
+        "Show as Image Annotation Class",
+        render_kw={
+            "class": "form-check-label",
+        },
+    )
+
     description = TextAreaField(
         "Description",
         render_kw={

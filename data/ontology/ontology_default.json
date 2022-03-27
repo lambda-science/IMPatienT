@@ -11,56 +11,77 @@
             "alternative_language": "Sample Keyword",
             "hex_color": "#c7ef34",
             "hpo_datamined": "",
-            "correlates_with": ""
+            "correlates_with": "",
+            "image_annotation": false
         },
         "parent": "#"
-    },
-    {
-        "id": "MHO:000002",
-        "text": "Image Annotations",
-        "icon": true,
-        "data": {
-            "description": "",
-            "synonymes": "",
-            "phenotype_datamined": "",
-            "gene_datamined": "",
-            "alternative_language": "Image Annotations",
-            "hex_color": "#e326f5",
-            "hpo_datamined": "",
-            "correlates_with": ""
-        },
-        "parent": "#"
-    },
-    {
-        "id": "MHO:000003",
-        "text": "Sample Annotation Keyword",
-        "icon": true,
-        "data": {
-            "description": "",
-            "synonymes": "",
-            "phenotype_datamined": "",
-            "gene_datamined": "",
-            "alternative_language": "Sample Annotation Keyword",
-            "hex_color": "#15f89e",
-            "hpo_datamined": "",
-            "correlates_with": ""
-        },
-        "parent": "MHO:000002"
     },
     {
         "id": "MHO:000004",
-        "text": "Sample Annotation Keyword 2",
+        "text": "Keyword Image Annotation",
+        "icon": true,
+        "data": {
+            "description": "",
+            "synonymes": "",
+            "phenotype_datamined": "UNCLEAR",
+            "gene_datamined": "N/A",
+            "alternative_language": "",
+            "correlates_with": "",
+            "image_annotation": true,
+            "hex_color": "#77e3a4",
+            "hpo_datamined": ""
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000005",
+        "text": "Keyword Image Annotation 2",
         "icon": true,
         "data": {
             "description": "",
             "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
-            "alternative_language": "Sample Annotation Keyword 2",
+            "alternative_language": "",
             "correlates_with": "",
-            "hex_color": "#67d254",
+            "image_annotation": true,
+            "hex_color": "#094f6a",
             "hpo_datamined": ""
         },
-        "parent": "MHO:000002"
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000002",
+        "text": "Sample Keyword Child",
+        "icon": true,
+        "data": {
+            "description": "",
+            "synonymes": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "",
+            "correlates_with": "",
+            "image_annotation": false,
+            "hex_color": "#14cd17",
+            "hpo_datamined": ""
+        },
+        "parent": "MHO:000001"
+    },
+    {
+        "id": "MHO:000003",
+        "text": "Sample Keyword Child 2",
+        "icon": true,
+        "data": {
+            "description": "",
+            "synonymes": "",
+            "phenotype_datamined": "",
+            "gene_datamined": "",
+            "alternative_language": "",
+            "correlates_with": "",
+            "image_annotation": false,
+            "hex_color": "#d9eab9",
+            "hpo_datamined": ""
+        },
+        "parent": "MHO:000001"
     }
 ]

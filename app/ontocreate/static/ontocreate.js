@@ -49,6 +49,7 @@ $("#jstree")
       gene_datamined: "",
       alternative_language: "",
       correlates_with: "",
+      image_annotation: false,
       hex_color: "#" + randomColor,
     };
     $("#jstree").jstree().set_id(data.node, newId);
@@ -81,6 +82,11 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   $("input[id=onto_id_ext]").val(data.node.id);
   $("input[id=onto_name]").val(data.node.text);
   $("input[id=parent_id]").val(data.node.parent);
+  if (data.node.data.image_annotation) {
+    $("input[id=image_annotation]").prop("checked", true);
+  } else {
+    $("input[id=image_annotation]").prop("checked", false);
+  }
   input_tag.loadOriginalValues(data.node.data.synonymes);
   input3_tag.loadOriginalValues(data.node.data.gene_datamined);
   input4_tag.loadOriginalValues(data.node.data.hpo_datamined);
@@ -89,6 +95,10 @@ $("#jstree").on("select_node.jstree", function (e, data) {
   input7_tag.loadOriginalValues(data.node.data.correlates_with);
 
   $("textarea[id=description]").val(data.node.data.description) || "";
+});
+
+$("input[id=image_annotation]").change(function () {
+  update_node_data();
 });
 
 $("input[id=alternative_language]").change(function () {
@@ -109,6 +119,7 @@ $("textarea[id=description]").change(function () {
 function update_node_data() {
   var node_id = $("#jstree").jstree(true).get_selected();
   var node = $("#jstree").jstree(true).get_node(node_id);
+  node.data.image_annotation = $("input[id=image_annotation]").is(":checked");
   node.data.synonymes = get_taglist("input[id=synonymes]");
   // node.data.genes = get_taglist("input[id=gene]");
   node.data.gene_datamined = get_taglist("input[id=gene_datamined]");

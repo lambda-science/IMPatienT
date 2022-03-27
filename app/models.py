@@ -127,6 +127,7 @@ class Image(db.Model):
     blend_image_path = db.Column(db.String(4096), unique=True)
     classifier_path = db.Column(db.String(4096), unique=True)
     mask_annot_path = db.Column(db.String(4096), unique=True)
+    class_info_path = db.Column(db.String(4096), unique=True)
     datetime = db.Column(
         db.DateTime(),
         onupdate=datetime.datetime.utcnow,
