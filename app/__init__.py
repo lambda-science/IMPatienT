@@ -140,7 +140,7 @@ def create_app(config_class=Config):
 
 
 def register_dashapps(app):
-    """Function to regeister the dash application to the flask app.
+    """Function to register the dash application to the flask app.
 
     Args:
         app (Flask Application Object): Our flask application object.
