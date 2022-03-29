@@ -44,6 +44,7 @@ PyJWT = "^2.3.0"
 en_core_web_sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.2.0/en_core_web_sm-3.2.0-py3-none-any.whl" }
 fr_core_news_sm = { url = "https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.2.0/fr_core_news_sm-3.2.0-py3-none-any.whl" }
 Flask-Cors = "^3.0.10"
+lightgbm = "^3.3.2"
 
 [tool.poetry.dev-dependencies]
 black = {extras = ["jupyter"], version = "*"}

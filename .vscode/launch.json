@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "configurations": [
     {
-      "name": "Debug Flask App",
+      "name": "Debug Flask App (Docker)",
       "type": "docker",
       "request": "launch",
       "preLaunchTask": "docker-run: debug",
@@ -22,7 +22,24 @@
         "action": "openExternally",
         "pattern": "Running on (http?://\\S+|[0-9]+)",
         "uriFormat": "%s://localhost:%s/"
-      }
-    }
+      },
+    },
+    {
+      "name": "Debug Flask App (Linux)",
+      "type": "python",
+      "request": "launch",
+      "module": "flask",
+      "env": {
+        "FLASK_APP": "ehroes.py",
+        "FLASK_ENV": "development",
+        "FLASK_DEBUG": "0"
+    },
+    "args": [
+        "run",
+        "--no-debugger",
+        "--no-reload"
+    ],
+    "jinja": true
+    },
   ]
 }
