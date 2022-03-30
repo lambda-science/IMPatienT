@@ -1,14 +1,14 @@
-![Twitter Follow](https://img.shields.io/twitter/follow/corentinm_py?style=social) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/lambda-science/ehroes) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/lambda-science/EHRoes) [![Build](https://github.com/lambda-science/EHRoes/actions/workflows/docker-build-push.yml/badge.svg)](https://github.com/lambda-science/EHRoes/actions/workflows/docker-build-push.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/lambda-science/ehroes) ![GitHub](https://img.shields.io/github/license/lambda-science/ehroes)
+![Twitter Follow](https://img.shields.io/twitter/follow/corentinm_py?style=social) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/lambda-science/impatient) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/lambda-science/IMPatienT) [![Build](https://github.com/lambda-science/IMPatienT/actions/workflows/docker-build-push.yml/badge.svg)](https://github.com/lambda-science/IMPatienT/actions/workflows/docker-build-push.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/lambda-science/impatient) ![GitHub](https://img.shields.io/github/license/lambda-science/impatient)
 
-# EHRoes 🦸: an integrated web application for multimodal patients data digitization and exploration
+# IMPatienT 🗂️: an integrated web application to digitize, process and explore multimodal patient data.
 <p align="center">
-  <img src="https://i.imgur.com/M18Rnrv.png" alt="EHRoes Banner" style="border-radius: 25px;" />
+  <img src="https://i.imgur.com/z5pf64y.png" alt="IMPatienT Banner" style="border-radius: 25px;" />
 </p>
 
-**EHRoes 🦸 is a web application developped in the MYO-xIA project for patient data digitization and exploration.**
+**IMPatienT 🗂️** (d**I**gitize **M**ultimodal **PATIEN**t da**T**a) **is a web application developped in the MYO-xIA project for patient data digitization and exploration.**
 It features a standard vocabulary creator, optical character recognition (OCR), natural language processing (NLP), image annotation and segmentation using machine learning, interactive visualizations and automatic diagnosis prediction.
 
-A demo version is currently deployed at: https://ehroes.lbgi.fr/
+A demo version is currently deployed at: https://impatient.lbgi.fr/
 This project is free and open-source under the MIT license, feel free to fork and contribute to the development. Several guides are available at the bottom of this page for the production deployment and developer mode.
 
 ## Contact:
@@ -16,7 +16,7 @@ This project is free and open-source under the MIT license, feel free to fork an
 The main maintainer is:
 **Corentin Meyer** - PhD Student @ CSTB Team - iCube - University Of Strasbourg <co.meyer@unistra.fr>
 
-## Citing EHRoes
+## Citing IMPatienT🗂️
 
 [placeholder]
 
@@ -25,32 +25,32 @@ The main maintainer is:
   <img src="https://i.imgur.com/csEXDnW.png" alt="Partner Banner" style="border-radius: 25px;" />
 </p>
 
-EHRoes is developped and used in collaboration with the [Morphological Unit of the Institute of Myology of Paris](https://www.institut-myologie.org/en/recherche-2/neuromuscular-exploration-and-evaluation-centre/laboratoire-dhistopathologie-dr-norma-b-romero/). A production instance is deployed to help discovering new relevant features for congenital myopathies classification and diagnosis.
+IMPatienT is developped and used in collaboration with the [Morphological Unit of the Institute of Myology of Paris](https://www.institut-myologie.org/en/recherche-2/neuromuscular-exploration-and-evaluation-centre/laboratoire-dhistopathologie-dr-norma-b-romero/). A production instance is deployed to help discovering new relevant features for congenital myopathies classification and diagnosis.
 
-## EHRoes Abstract
+## IMPatienT🗂️ Abstract
 
-**Background**  
-With a growing amount of patient data such as sequencing, imaging, and medical records, electronic health records (EHR) are now central to drive research and improve diagnosis of patients by using multimodal data. Exploiting patient data is a challenge as patient data exploitation tools ecosystem is often fragmented into tools to digitize and format the data and those interpreting the data (exploration, diagnosis). Furthermore, as most of the tools are specialized in one type of data, a multitude of software is needed for multimodal approaches. There is a strong need for a simple, all-rounder and flexible platform.  
-**Results**  
-In this paper we present EHRoes, a web application for multimodal digitization and exploration of patient data. EHRoes has a module-based architecture, composed of four modules to: (i) create a standard vocabulary for a domain (ii) automatically digitize free-text data to a set of standard terms (iii) annotate images with standard vocabulary using automatic segmentation and (iv) generate an automatic visualization dashboard to provide insight on the data and perform automatic diagnosis suggestions. We demonstrated the utility of EHRoes by digitizing 40 artificial muscle histology reports of patients with congenital myopathies.  
-**Conclusions**  
-With EHRoes we created a platform for both digitization and exploration of patient data that can handle image data and free-text data. As it uses user-designed standard vocabulary, it is highly flexible to fit any domain of research. It can be used both as a patient registry with automatic diagnosis or as a research tool to explore a cohort of patients.  
-A demo instance of the application is available at https://ehroes.lbgi.fr.  
+**Background**
+Medical acts such as imaging leads most of the time to the production of several medical text reports to describe relevant findings. Such process induce multimodality in patient data by linking image data to free-text data. Multimodal data have become central to drive research and improve diagnosis of patients. Exploiting patients’ data is challenging as the ecosystem of tools is fragmented depending on the type of data to exploit (image, text, genetic), the task to perform (digitization, processing, exploration) and the domain of interest (clinical phenotype, histology…). There is a strong need for a simple, comprehensive, and flexible platform.
+**Results**
+In this paper, we present IMPatienT (d**I**gitize **M**ultimodal **PATIEN**t da**T**a), a free and open-source web application to digitize, process and explore multimodal patient data. IMPatienT has a modular architecture, composed of four components to: (i) create a standard vocabulary for a domain (ii) digitize and process free-text data by mapping it to a set of standard terms, (iii) annotate images and perform image segmentation and (iv) generate an automatic visualization dashboard to provide insight on the data and perform automatic diagnosis suggestions. Finally, we showcased IMPatienT on a corpus of 40 simulated muscle biopsy reports of congenital myopathy patients.
+**Conclusions**
+IMPatienT is a platform to digitize, process and explore patient data that can handle image and free-text data. As it relies on user-designed standard vocabulary, it is highly flexible to fit any domain of research and can be used as a patient registry for exploratory data analysis (EDA).
+A demo instance of the application is available at https://impatient.lbgi.fr.
 
 ## Setup guides
 
 ### (DOCKER) Developper Mode Setup (to contribute)
 
-[See the wiki page: Developper Mode Setup (DOCKER)](<https://github.com/lambda-science/EHRoes/wiki/(DOCKER)-Developper-Mode-Setup-(to-contribute)>)
+[See the wiki page: Developper Mode Setup (DOCKER)](<https://github.com/lambda-science/IMPatienT/wiki/(DOCKER)-Developper-Mode-Setup-(to-contribute)>)
 
-### (DOCKER) Deploy to production & Maintain EHRoes
+### (DOCKER) Deploy to production & Maintain IMPatienT
 
-[See the wiki page: Deploy and maintain (DOCKER)](<https://github.com/lambda-science/EHRoes/wiki/(DOCKER)-Deploy-&-Maintain-EHRoes>)
+[See the wiki page: Deploy and maintain (DOCKER)](<https://github.com/lambda-science/IMPatienT/wiki/(DOCKER)-Deploy-&-Maintain-IMPatienT>)
 
-### (LINUX) Deploy to production & Maintain EHRoes
+### (LINUX) Deploy to production & Maintain IMPatienT
 
-[See the wiki page: Deploy and maintain (LINUX)](<https://github.com/lambda-science/EHRoes/wiki/(LINUX)-Deploy-&-Maintain-EHRoes>)
+[See the wiki page: Deploy and maintain (LINUX)](<https://github.com/lambda-science/IMPatienT/wiki/(LINUX)-Deploy-&-Maintain-IMPatienT>)
 
 ### (LEGACY - Deprecated) Developper Mode Setup (non-docker)
 
-[See the wiki page: Developper Mode Setup (non-docker)](<https://github.com/lambda-science/EHRoes/wiki/(LEGACY---Deprecated)-Developper-Mode-Setup-(non-docker)>)
+[See the wiki page: Developper Mode Setup (non-docker)](<https://github.com/lambda-science/IMPatienT/wiki/(LEGACY---Deprecated)-Developper-Mode-Setup-(non-docker)>)

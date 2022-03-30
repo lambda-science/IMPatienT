@@ -6,15 +6,15 @@
         "label": "docker-run: debug",
         "dependsOn": ["docker-build"],
         "dockerRun": {
-          "containerName": "ehroesdev",
-          "image": "ehroesdev:latest",
+          "containerName": "impatientdev",
+          "image": "impatientdev:latest",
           "env": {
-            "FLASK_APP": "/home/ehroes/ehroes.py",
+            "FLASK_APP": "/home/impatient/impatient.py",
             "FLASK_ENV": "development"
           },
           "volumes": [
             {
-              "containerPath": "/home/ehroes",
+              "containerPath": "/home/impatient",
               "localPath": "${workspaceFolder}"
             }
           ],
@@ -36,7 +36,7 @@
         "dockerBuild": {
           "context": "${workspaceFolder}",
           "dockerfile": "${workspaceFolder}/Dockerfile.dev",
-          "tag": "ehroesdev:latest"
+          "tag": "impatientdev:latest"
         }
       }
     ]

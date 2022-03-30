@@ -13,7 +13,7 @@
         "pathMappings": [
           {
             "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/home/ehroes"
+            "remoteRoot": "/home/impatient"
           }
         ],
         "projectType": "flask"
@@ -30,7 +30,7 @@
       "request": "launch",
       "module": "flask",
       "env": {
-        "FLASK_APP": "ehroes.py",
+        "FLASK_APP": "impatient.py",
         "FLASK_ENV": "development",
         "FLASK_DEBUG": "0"
     },
