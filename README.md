@@ -2,7 +2,7 @@
 
 # IMPatienT 🗂️: an integrated web application to digitize, process and explore multimodal patient data.
 <p align="center">
-  <img src="https://i.imgur.com/z5pf64y.png" alt="IMPatienT Banner" style="border-radius: 25px;" />
+  <img src="https://i.imgur.com/iH7UeUs.png" alt="IMPatienT Banner" style="border-radius: 25px;" />
 </p>
 
 **IMPatienT 🗂️** (d**I**gitize **M**ultimodal **PATIEN**t da**T**a) **is a web application developped in the MYO-xIA project for patient data digitization and exploration.**
@@ -29,13 +29,13 @@ IMPatienT is developped and used in collaboration with the [Morphological Unit o
 
 ## IMPatienT🗂️ Abstract
 
-**Background**
-Medical acts such as imaging leads most of the time to the production of several medical text reports to describe relevant findings. Such process induce multimodality in patient data by linking image data to free-text data. Multimodal data have become central to drive research and improve diagnosis of patients. Exploiting patients’ data is challenging as the ecosystem of tools is fragmented depending on the type of data to exploit (image, text, genetic), the task to perform (digitization, processing, exploration) and the domain of interest (clinical phenotype, histology…). There is a strong need for a simple, comprehensive, and flexible platform.
-**Results**
-In this paper, we present IMPatienT (d**I**gitize **M**ultimodal **PATIEN**t da**T**a), a free and open-source web application to digitize, process and explore multimodal patient data. IMPatienT has a modular architecture, composed of four components to: (i) create a standard vocabulary for a domain (ii) digitize and process free-text data by mapping it to a set of standard terms, (iii) annotate images and perform image segmentation and (iv) generate an automatic visualization dashboard to provide insight on the data and perform automatic diagnosis suggestions. Finally, we showcased IMPatienT on a corpus of 40 simulated muscle biopsy reports of congenital myopathy patients.
-**Conclusions**
+**Background**  
+Medical acts such as imaging leads most of the time to the production of several medical text reports to describe relevant findings. Such process induce multimodality in patient data by linking image data to free-text data. Multimodal data have become central to drive research and improve diagnosis of patients. Exploiting patients’ data is challenging as the ecosystem of tools is fragmented depending on the type of data to exploit (image, text, genetic), the task to perform (digitization, processing, exploration) and the domain of interest (clinical phenotype, histology…). There is a strong need for a simple, comprehensive, and flexible platform.  
+**Results**  
+In this paper, we present IMPatienT (d**I**gitize **M**ultimodal **PATIEN**t da**T**a), a free and open-source web application to digitize, process and explore multimodal patient data. IMPatienT has a modular architecture, composed of four components to: (i) create a standard vocabulary for a domain (ii) digitize and process free-text data by mapping it to a set of standard terms, (iii) annotate images and perform image segmentation and (iv) generate an automatic visualization dashboard to provide insight on the data and perform automatic diagnosis suggestions. Finally, we showcased IMPatienT on a corpus of 40 simulated muscle biopsy reports of congenital myopathy patients.  
+**Conclusions**  
 IMPatienT is a platform to digitize, process and explore patient data that can handle image and free-text data. As it relies on user-designed standard vocabulary, it is highly flexible to fit any domain of research and can be used as a patient registry for exploratory data analysis (EDA).
-A demo instance of the application is available at https://impatient.lbgi.fr.
+A demo instance of the application is available at https://impatient.lbgi.fr.  
 
 ## Setup guides
 
