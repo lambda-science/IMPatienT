@@ -176,3 +176,4 @@ docker/run.sh
 .gitconfig
 *.tar.gz
 IMPatienT
+!data/images/demo_patient
