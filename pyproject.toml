@@ -40,7 +40,7 @@ dash-html-components = "^2"
 gunicorn = "^20"
 opencv-python-headless = "^4"
 python-Levenshtein = "^0.12.2"
-PyJWT = "^2.3.0"
+PyJWT = "^2.4.0"
 en_core_web_sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.2.0/en_core_web_sm-3.2.0-py3-none-any.whl" }
 fr_core_news_sm = { url = "https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.2.0/fr_core_news_sm-3.2.0-py3-none-any.whl" }
 Flask-Cors = "^3.0.10"
