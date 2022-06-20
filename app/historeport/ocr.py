@@ -10,7 +10,7 @@ import spacy
 from flask import current_app
 from pdf2image import convert_from_bytes
 from thefuzz import fuzz
-
+from textacy.extract.basics import ngrams
 
 class TextReport:
     """Class for textual reports handling"""
@@ -39,7 +39,7 @@ class TextReport:
             self.nlp = spacy.load("en_core_web_sm")
             self.negexlist = current_app.config["NEGEX_LIST_EN"]
             self.negex_sent = current_app.config["NEGEX_SENT_EN"]
-
+        self.all_stopwords = self.nlp.Defaults.stop_words
         self.results_match_dict = {}
 
     def get_grayscale(self, image):
@@ -144,44 +144,17 @@ class TextReport:
             dict: all n-grams detected with negation boolean
         """
         doc = self.nlp(text_section)
-        final_one_ngrams = []
-        final_two_ngrams = []
-        final_three_ngrams = []
+        full_ngrams = []
         for sent_original in doc.sents:
             sent_list = self._split_sentence(sent_original)
+            # Detect negation in sentence part and extract n-grams up to 6 words
             for sent_str in sent_list:
+                n_gram_size = []
                 sent, flag_neg = self._detect_negation(sent_str)
-                temp_token_list = []
-                for token in sent:
-                    # if not token.is_stop and not token.is_punct and token.is_alpha:
-                    if not token.is_punct and token.is_alpha:
-                        final_one_ngrams.append(
-                            [token.text.lower(), 0 if flag_neg else 1]
-                        )
-                        temp_token_list.append(token.text.lower())
-                if len(temp_token_list) > 1:
-                    for i in range(len(temp_token_list) - 1):
-                        final_two_ngrams.append(
-                            [
-                                " ".join([temp_token_list[i], temp_token_list[i + 1]]),
-                                0 if flag_neg else 1,
-                            ]
-                        )
-                if len(temp_token_list) > 2:
-                    for i in range(len(temp_token_list) - 2):
-                        final_three_ngrams.append(
-                            [
-                                " ".join(
-                                    [
-                                        temp_token_list[i],
-                                        temp_token_list[i + 1],
-                                        temp_token_list[i + 2],
-                                    ]
-                                ),
-                                0 if flag_neg else 1,
-                            ]
-                        )
-        full_ngrams = final_one_ngrams + final_two_ngrams + final_three_ngrams
+                ngrams_generator = ngrams(sent, (1,2,3,4,5,6), filter_punct=True)
+                for i in ngrams_generator:
+                    full_ngrams.append((i.text.lower(), 0 if flag_neg else 1))
+
         return full_ngrams
 
     def _match_ngram_ontology(self, full_ngrams) -> list:
@@ -204,11 +177,19 @@ class TextReport:
                 ontology_terms.append([i["id"], synonym])
         for i in full_ngrams:
             for j in ontology_terms:
-                score = fuzz.ratio(i[0].lower(), j[1].lower())
+                score = self._calculate_similarity(i[0], j[1])
                 if score >= 80:
                     # [neg_flag, ngram, match_term, node_id]
                     match_list.append([i[1], i[0], j[1], j[0]])
         return match_list
+
+    def _calculate_similarity(self, sent: str, sent2: str) -> str:
+        sent_token = self.nlp.tokenizer(sent)
+        sent2_token = self.nlp.tokenizer(sent2)
+        sent_no_stop = ' '.join([word.text for word in sent_token if not word.text in self.all_stopwords])
+        sent2_no_stop = ' '.join([word.text for word in sent2_token if not word.text in self.all_stopwords])
+        score = fuzz.ratio(sent_no_stop.lower(), sent2_no_stop.lower())
+        return score
 
     def analyze_text(self) -> list:
         """Analyse the whole text of the PDF and match it to the standard vocabulary
