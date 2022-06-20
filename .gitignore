@@ -175,4 +175,5 @@ docker/run.sh
 .config
 .gitconfig
 *.tar.gz
-EHRoes
+IMPatienT
+!data/images/demo_patient

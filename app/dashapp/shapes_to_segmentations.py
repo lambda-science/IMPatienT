@@ -88,7 +88,7 @@ def compute_segmentations(
     # do segmentation and return this
     t1 = time()
     clf = RandomForestClassifier(
-        n_estimators=50, n_jobs=-1, max_depth=8, max_samples=0.05
+        n_estimators=50, n_jobs=-1, max_depth=8, max_samples=0.05, random_state=42
     )
     seg_matrix, clf = fit_segmenter(mask, features, clf)
     t2 = time()

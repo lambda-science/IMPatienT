@@ -33,4 +33,4 @@ class IndexView(unittest.TestCase):
     def test_index(self):
         rv = self.client.get("/")
         assert rv.status_code == 200
-        assert b"EHRoes" in rv.data
+        assert b"IMPatienT" in rv.data

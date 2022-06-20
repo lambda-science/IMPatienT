@@ -1066,7 +1066,7 @@
             "alternative_language": "Cystoplasme",
             "correlates_with": "",
             "image_annotation": true,
-            "hex_color": "#51188f",
+            "hex_color": "#70e663",
             "hpo_datamined": ""
         },
         "parent": "MHO:000001"
@@ -1729,7 +1729,7 @@
             "alternative_language": "Espace Intercellulaire",
             "correlates_with": "",
             "image_annotation": true,
-            "hex_color": "#11c715",
+            "hex_color": "#031526",
             "hpo_datamined": ""
         },
         "parent": "MHO:000001"
@@ -1915,7 +1915,7 @@
             "gene_datamined": "",
             "alternative_language": "Aspect Noyaux",
             "correlates_with": "",
-            "hex_color": "#6DFFD7",
+            "hex_color": "#ed1536",
             "hpo_datamined": "",
             "image_annotation": true
         },
