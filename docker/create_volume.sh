@@ -1,5 +1,5 @@
-docker volume create --name dataehroes
+docker volume create --name dataimpatient
 
-docker run -v dataehroes:/data --name helper busybox true
+docker run -v dataimpatient:/data --name helper busybox true
 docker cp data helper:/
 docker rm helper

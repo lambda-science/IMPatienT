@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "ehroes"
+name = "impatient"
 version = "1.5.0"
-description = "EHRoes: an all-in-one web application for patients’ data digitization and exploration"
+description = "IMPatienT: an integrated web application to digitize, process and explore multimodal patient data"
 authors = ["Corentin Meyer <co.meyer@unistra.fr>"]
 license = "AGPL"
 

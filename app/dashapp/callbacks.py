@@ -37,6 +37,26 @@ compute_features = memory.cache(multiscale_basic_features)
 
 
 onto_tree_imgannot = common_func.load_onto()
+class_label_colormap = {
+    int(term["id"].split(":")[1]): term["data"]["hex_color"]
+    for term in onto_tree_imgannot
+    if term["data"]["image_annotation"] is True
+}
+class_labels = [
+    int(term["id"].split(":")[1])
+    for term in onto_tree_imgannot
+    if term["data"]["image_annotation"] is True
+]
+button_list = [
+    int(i["id"].split(":")[1])
+    for i in onto_tree_imgannot
+    if i["data"]["image_annotation"] is True
+]
+NUM_LABEL_CLASSES = len(class_label_colormap)
+DEFAULT_LABEL_CLASS = class_labels[0]
+
+# we can't have less colors than classes
+assert NUM_LABEL_CLASSES <= len(class_label_colormap)  # nosec
 
 
 def class_to_color(ontology, class_number):
@@ -51,13 +71,13 @@ def color_to_class(ontology, color_hex):
             return int(term["id"].split(":")[1])
 
 
-# def class_to_file(seg_matrix, onto_tree, save_path):
+# def class_to_file(seg_matrix, onto_tree_imgannot, save_path):
 #     unique_classes = np.unique(seg_matrix)
 #     col_df = {"class": [], "color": [], "onto_id": []}
 #     for class_img in unique_classes:
 #         col_df["class"].append(class_img)
-#         col_df["color"].append(onto_tree[class_img - 1]["data"]["hex_color"])
-#         col_df["onto_id"].append(onto_tree[class_img - 1]["id"])
+#         col_df["color"].append(onto_tree_imgannot[class_img - 1]["data"]["hex_color"])
+#         col_df["onto_id"].append(onto_tree_imgannot[class_img - 1]["id"])
 #     df = pd.DataFrame.from_dict(col_df)
 #     df.to_csv(save_path, index=False)
 
@@ -100,7 +120,12 @@ def save_img_classifier(clf, label_to_colors_args, segmenter_args):
 
 
 def show_segmentation(
-    image_path, mask_shapes, features, segmenter_args, class_label_colormap, onto_tree
+    image_path,
+    mask_shapes,
+    features,
+    segmenter_args,
+    class_label_colormap,
+    onto_tree_imgannot,
 ):
     """adds an image showing segmentations to a figure's layout"""
     # add 1 because classifier takes 0 to mean no mask
@@ -109,7 +134,8 @@ def show_segmentation(
     #    for shape in mask_shapes
     # ]
     shape_layers = [
-        color_to_class(onto_tree, shape["line"]["color"]) for shape in mask_shapes
+        color_to_class(onto_tree_imgannot, shape["line"]["color"])
+        for shape in mask_shapes
     ]
     label_to_colors_args = {
         "colormap": class_label_colormap,
@@ -166,30 +192,6 @@ def register_callbacks(dashapp):
         sigma_range_slider_value,
         masks_data,
     ):
-        with open(os.path.join("data/ontology", "ontology.json"), "r") as fp:
-            onto_tree = json.load(fp)
-        class_label_colormap = {
-            int(term["id"].split(":")[1]): term["data"]["hex_color"]
-            for term in onto_tree_imgannot
-            if term["data"]["image_annotation"] is True
-        }
-        class_labels = [
-            int(term["id"].split(":")[1])
-            for term in onto_tree
-            if term["data"]["image_annotation"] is True
-        ]
-        button_list = [
-            int(i["id"].split(":")[1])
-            for i in onto_tree_imgannot
-            if i["data"]["image_annotation"] is True
-        ]
-        NUM_LABEL_CLASSES = len(class_label_colormap)
-        DEFAULT_LABEL_CLASS = class_labels[0]
-        DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
-
-        # we can't have less colors than classes
-        assert NUM_LABEL_CLASSES <= len(class_label_colormap)  # nosec
-
         classified_image_store_data = dash.no_update
         classifier_store_data = dash.no_update
         alertbox = html.Div()
@@ -254,7 +256,7 @@ def register_callbacks(dashapp):
             # label_class_value = class_labels[label_class_value]
         fig = make_default_figure(
             images=[image.image_path],
-            stroke_color=class_to_color(onto_tree, label_class_value),
+            stroke_color=class_to_color(onto_tree_imgannot, label_class_value),
             stroke_width=stroke_width,
             shapes=masks_data["shapes"],
             source_img=source,
@@ -277,7 +279,7 @@ def register_callbacks(dashapp):
                     features,
                     feature_opts,
                     class_label_colormap,
-                    onto_tree,
+                    onto_tree_imgannot,
                 )
                 if cbcontext == "download-button.n_clicks":
                     classifier_store_data = clf

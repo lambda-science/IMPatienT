@@ -11,7 +11,7 @@ conclusion_tag.on("input", onInputConclusion);
 
 // Tagify AJAX Function to get a list of Orphanet names
 var myHeaders_orpha = new Headers({
-  apiKey: "ehroes",
+  apiKey: "impatient",
 });
 var options_orpha = {
   headers: myHeaders_orpha,

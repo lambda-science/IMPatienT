@@ -944,6 +944,22 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "lightgbm"
+version = "3.3.2"
+description = "LightGBM Python Package"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+numpy = "*"
+scikit-learn = "!=0.22.0"
+scipy = "*"
+
+[package.extras]
+dask = ["dask[array] (>=2.0.0)", "dask[dataframe] (>=2.0.0)", "dask[distributed] (>=2.0.0)", "pandas"]
+
+[[package]]
 name = "linecache2"
 version = "1.0.0"
 description = "Backports of the linecache module"
@@ -1060,6 +1076,21 @@ python-versions = ">=3.6"
 [package.dependencies]
 numpy = [
     {version = ">=1.21.2", markers = "python_version >= \"3.10\" or python_version >= \"3.6\" and platform_system == \"Darwin\" and platform_machine == \"arm64\""},
+    {version = ">=1.19.3", markers = "python_version >= \"3.6\" and platform_system == \"Linux\" and platform_machine == \"aarch64\" or python_version >= \"3.9\""},
+    {version = ">=1.14.5", markers = "python_version >= \"3.7\""},
+    {version = ">=1.17.3", markers = "python_version >= \"3.8\""},
+]
+
+[[package]]
+name = "opencv-python-headless"
+version = "4.5.5.64"
+description = "Wrapper package for OpenCV python bindings."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+numpy = [
     {version = ">=1.19.3", markers = "python_version >= \"3.6\" and platform_system == \"Linux\" and platform_machine == \"aarch64\" or python_version >= \"3.9\""},
     {version = ">=1.14.5", markers = "python_version >= \"3.7\""},
     {version = ">=1.17.3", markers = "python_version >= \"3.8\""},
@@ -2728,6 +2759,13 @@ lazy-object-proxy = [
     {file = "lazy_object_proxy-1.7.1-cp39-cp39-win32.whl", hash = "sha256:2130db8ed69a48a3440103d4a520b89d8a9405f1b06e2cc81640509e8bf6548f"},
     {file = "lazy_object_proxy-1.7.1-cp39-cp39-win_amd64.whl", hash = "sha256:677ea950bef409b47e51e733283544ac3d660b709cfce7b187f5ace137960d61"},
     {file = "lazy_object_proxy-1.7.1-pp37.pp38-none-any.whl", hash = "sha256:d66906d5785da8e0be7360912e99c9188b70f52c422f9fc18223347235691a84"},
+]
+lightgbm = [
+    {file = "lightgbm-3.3.2-py3-none-macosx_10_14_x86_64.macosx_10_15_x86_64.macosx_11_0_x86_64.whl", hash = "sha256:2e94bd1b3ab29d173102c9c1d80db2e27ad7e43b8ff5a74c5cb7984b37d19f45"},
+    {file = "lightgbm-3.3.2-py3-none-manylinux1_x86_64.whl", hash = "sha256:f4cba3b4f29336ad7e801cb32d9b948ea4cc5300dda650b78bcdfe36b3e2c4b2"},
+    {file = "lightgbm-3.3.2-py3-none-manylinux2014_aarch64.whl", hash = "sha256:8e788c56853316fc5d35db726d81bd002c721038c856853952287f68082e0158"},
+    {file = "lightgbm-3.3.2-py3-none-win_amd64.whl", hash = "sha256:e4f1529cad416066964f9af0efad208787861e9f2181b7f9ee7fc9bacc082d4f"},
+    {file = "lightgbm-3.3.2.tar.gz", hash = "sha256:5d25d16e77c844c297ece2044df57651139bc3c8ad8c4108916374267ac68b64"},
 ]
 linecache2 = [
     {file = "linecache2-1.0.0-py2.py3-none-any.whl", hash = "sha256:e78be9c0a0dfcbac712fe04fbf92b96cddae80b1b842f24248214c8496f006ef"},

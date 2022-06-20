@@ -95,11 +95,13 @@ def modify_onto():
     db.session.commit()
 
     # Update The DashApp Callback & layout
-    # By Force reloading the layout code
+    # By Force reloading the layout code & callbacks
     dashapp = current_app.config["DASHAPP"]
     with current_app.app_context():
         import importlib
+        import sys
 
+        importlib.reload(sys.modules["app.dashapp.callbacks"])
         import app.dashapp.layout
 
         importlib.reload(app.dashapp.layout)
@@ -165,11 +167,13 @@ def invert_lang():
     generate_stat_per(df, features_col, onto)
 
     # Update The DashApp Callback & layout
-    # By Force reloading the layout code
+    # By Force reloading the layout code & callbacks
     dashapp = current_app.config["DASHAPP"]
     with current_app.app_context():
         import importlib
+        import sys
 
+        importlib.reload(sys.modules["app.dashapp.callbacks"])
         import app.dashapp.layout
 
         importlib.reload(app.dashapp.layout)
