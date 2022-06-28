@@ -126,7 +126,7 @@
             "description": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:595 Centronuclear myopathy,ORPHA:607 Nemaline myopathy",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:7720 NEB",
-            "synonymes": "localement anormale,locally abnormal",
+            "synonymes": "",
             "alternative_language": "Activit\u00e9 ATPasique Anormale Localement (Zone Claire)",
             "correlates_with": "MHO:000027 Centralized Nuclei,MHO:000096 Locally Abnormal ATP Activity (Clear Zone)",
             "hex_color": "#A093D4",
@@ -141,7 +141,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "p\u00e9riph\u00e9rique,peripheral",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 ATP P\u00e9riph\u00e9rique",
@@ -379,7 +379,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "A-band,Bande A",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "ME: Bande A",
@@ -396,7 +396,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "Vacuoles autophagiques,Autophagic vacuoles",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "ME: Vacuoles Autophagiques",
@@ -413,7 +413,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "CAPS,Lesions Caps",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "ME: L\u00e9sions de type CAPS",
@@ -515,7 +515,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "Z Material",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "ME: Materiel Z",
@@ -532,7 +532,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "Elargissement Z,Enlargement Z",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Materiel Z: Elargissement",
@@ -549,7 +549,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "Streaming Z",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Materiel Z: Streaming",
@@ -686,7 +686,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "contraste fort,high contrast",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Coloration PAS: Contraste Fort Type I et II",
@@ -856,7 +856,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "test",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Coloration Soudan",
@@ -1196,7 +1196,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "atrophi\u00e9es,petite taille,atrophied,small size",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:595 Centronuclear myopathy,ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "correlates_with": "MHO:000006 Type 1 Atrophied (small),MHO:000048 Rods",
@@ -1213,7 +1213,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "taille h\u00e9t\u00e9rog\u00e8ne,heterogeneous size",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB,N/A",
             "correlates_with": "MHO:000005 Type 1 Hypertrophic (large),MHO:000007 Type 1 Heterogeneous size,MHO:000009 Type 2 Hypertrophic (large),MHO:000011 Type 2 Heterogeneous size",
@@ -1230,7 +1230,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "hypertrophi\u00e9e,hypertrophic,grande taille,big size",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB,N/A",
             "correlates_with": "MHO:000005 Type 1 Hypertrophic (large),MHO:000007 Type 1 Heterogeneous size,MHO:000009 Type 2 Hypertrophic (large),MHO:000011 Type 2 Heterogeneous size,MHO:000036 Fuscinophilic material: Dark clusters/aggregates",
@@ -1264,7 +1264,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "small size,atrophied,atrophi\u00e9e,petite taille",
+            "synonymes": "petite taille",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:595 Centronuclear myopathy,ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "correlates_with": "MHO:000010 Type 2 Atrophied (small),MHO:000048 Rods",
@@ -1281,7 +1281,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "taille h\u00e9t\u00e9rog\u00e8ne,heterogenous size",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:129 ACTA1,HGNC:7577 MYH7,N/A",
             "alternative_language": "Type 2  Taille h\u00e9t\u00e9rog\u00e8ne",
@@ -1298,7 +1298,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "hypertrophi\u00e9e,grande taille,hypertrophic,big size",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:595 Centronuclear myopathy,ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:129 ACTA1,HGNC:7448 MTM1,HGNC:7577 MYH7,HGNC:7720 NEB,N/A",
             "correlates_with": "MHO:000005 Type 1 Hypertrophic (large),MHO:000007 Type 1 Heterogeneous size,MHO:000009 Type 2 Hypertrophic (large),MHO:000011 Type 2 Heterogeneous size",
@@ -1332,7 +1332,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "p\u00e9riph\u00e9riques,peripherals",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:607 Nemaline myopathy",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:7720 NEB,N/A",
             "alternative_language": "Mat\u00e9riel Fuscinophile: P\u00e9riph\u00e9riques",
@@ -1383,7 +1383,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "diffus,sparse,diffused",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Diffus",
@@ -1400,7 +1400,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "granuleux,granular,grainy",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:607 Nemaline myopathy",
             "gene_datamined": "HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Granuleux",
@@ -1417,7 +1417,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "bords irr\u00e9guliers,irregular edges",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:7577 MYH7,N/A",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Bords irr\u00e9guliers",
@@ -1434,7 +1434,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "radiant",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Radiant",
@@ -1451,7 +1451,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "regular edges,bords r\u00e9guliers",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Bords r\u00e9guliers",
@@ -1468,7 +1468,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "arrondis,rounded",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:7720 NEB,N/A",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Arrondis",
@@ -1485,7 +1485,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "sous-sarcolemmique,sub-sarcolemma",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Mat\u00e9riel Fuscinophile: Sous-Sarcolemmique",
@@ -1536,7 +1536,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "anguleuse,angular",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:595 Centronuclear myopathy,ORPHA:607 Nemaline myopathy",
             "gene_datamined": "HGNC:7448 MTM1,HGNC:7577 MYH7",
             "alternative_language": "HETG: Anguleuse",
@@ -1553,7 +1553,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "fibre annulaire,annular fibre",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:595 Centronuclear myopathy",
             "gene_datamined": "HGNC:7448 MTM1",
             "alternative_language": "HETG: Fibre  annulaire",
@@ -1570,7 +1570,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "segmentation de fibre,fibre segmentation",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores",
             "gene_datamined": "HGNC:10483 RYR1",
             "alternative_language": "HETG: Segmentation de fibre",
@@ -1587,7 +1587,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "lobul\u00e9e,lobulated",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "HETG: Lobul\u00e9e",
@@ -1604,7 +1604,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "red-ragged fibers",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "HETG: Red-ragged fibers",
@@ -1621,7 +1621,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "bord arrondis,rounded edge",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:595 Centronuclear myopathy,ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:7720 NEB,HGNC:9752 QDPR,N/A",
             "alternative_language": "HETG: Bord arrondis",
@@ -1638,7 +1638,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "vacuolis\u00e9e bord\u00e9e,vacuolised bordered",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "HETG: Vacuolis\u00e9e bord\u00e9e",
@@ -1655,7 +1655,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "tourbillon,whirlwind",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "HETG: Tourbillon",
@@ -1672,7 +1672,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "rayon de roue",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "HETG: En rayon de roue",
@@ -2250,7 +2250,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "rods",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7720 NEB,N/A",
             "correlates_with": "MHO:000006 Type 1 Atrophied (small),MHO:000010 Type 2 Atrophied (small),MHO:000036 Fuscinophilic material: Dark clusters/aggregates,MHO:000048 Rods,MHO:000151 Sudan Staining: Abornmal (Lipids Overload)",
@@ -2335,7 +2335,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "liseret p\u00e9riph\u00e9rique fonc\u00e9,dark peripheral border",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Liseret P\u00e9riph\u00e9rique Fonc\u00e9",
@@ -2352,7 +2352,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "zone d'inclusion non color\u00e9e,uncolored inclusion zone",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:607 Nemaline myopathy",
             "gene_datamined": "HGNC:7720 NEB",
             "alternative_language": "Activit\u00e9 Oxy: Zone Inclusion Non Color\u00e9e",
@@ -2403,7 +2403,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "zone claire,clear zone,pale zone,zone pale",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:129 ACTA1,HGNC:7577 MYH7,HGNC:7720 NEB",
             "alternative_language": "Activit\u00e9 Oxy: Zone Claire (p\u00e2le)",
@@ -2471,7 +2471,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "coloration fonc\u00e9e sous-sarcolemmique,sub-sarcolemma dark staining",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Coloration Fonc\u00e9 Sous-Sarcolemmique",
@@ -2488,7 +2488,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "accumulation mitochondries,mitochondries p\u00e9riph\u00e9riques",
+            "synonymes": "",
             "phenotype_datamined": "UNCLEAR",
             "gene_datamined": "N/A",
             "alternative_language": "Accumulation Mitochondries P\u00e9riph\u00e9riques",
@@ -2641,7 +2641,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "Fibre atrophique fonc\u00e9e,dark atrophic fibre",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores",
             "gene_datamined": "HGNC:129 ACTA1",
             "alternative_language": "NADH: Fibre Atrophique Fonc\u00e9e",
@@ -2658,7 +2658,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "halo fonc\u00e9 sous-sarcolemmique,sub-sarcolemma darko halo",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "NADH: Halo Fonc\u00e9 Sous-Sarcolemmique",
@@ -2692,7 +2692,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "Core-like",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:595 Centronuclear myopathy,ORPHA:607 Nemaline myopathy,UNCLEAR",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:1052 BIN1,HGNC:12403 TTN,HGNC:7577 MYH7,HGNC:7720 NEB",
             "alternative_language": "Activit\u00e9 Oxy: Alv\u00e9ole Core-like",
@@ -2709,7 +2709,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "cern\u00e9,dark circles",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Cern\u00e9",
@@ -2726,7 +2726,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "lobulation",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Lobulation",
@@ -2743,7 +2743,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "multi-lobul\u00e9",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Multi-lobul\u00e9",
@@ -2760,7 +2760,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "myotubulaire,myotubular",
+            "synonymes": "",
             "phenotype_datamined": "",
             "gene_datamined": "",
             "alternative_language": "Activit\u00e9 Oxy: Myotubulaire",
@@ -2777,7 +2777,7 @@
         "icon": true,
         "data": {
             "description": "",
-            "synonymes": "aspect targ\u00e9toide,targettoide aspect",
+            "synonymes": "",
             "phenotype_datamined": "ORPHA:172976 Congenital myopathy with cores,ORPHA:595 Centronuclear myopathy",
             "gene_datamined": "HGNC:10483 RYR1,HGNC:7448 MTM1",
             "alternative_language": "Activit\u00e9 Oxy: Aspect targ\u00e9toide",

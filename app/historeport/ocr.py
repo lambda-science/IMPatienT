@@ -12,6 +12,7 @@ from pdf2image import convert_from_bytes
 from thefuzz import fuzz
 from textacy.extract.basics import ngrams
 
+
 class TextReport:
     """Class for textual reports handling"""
 
@@ -109,7 +110,8 @@ class TextReport:
         sent = self.nlp(sentence)
         for negex_term in self.negexlist:
             if len(negex_term.split(" ")) == 1:
-                for i in sent.text.lower().split(" "):
+                token_list = [word.text.lower() for word in sent if word.is_alpha]
+                for i in token_list:
                     if i == negex_term:
                         return sent, True
             else:
@@ -127,8 +129,8 @@ class TextReport:
             list: list of sub-sentences from the original sentence
         """
         for sent_sep in self.negex_sent:
-            if sent_sep in sent_original.text:
-                sent_list = sent_original.text.split(sent_sep)
+            if sent_sep.lower() in sent_original.text.lower():
+                sent_list = sent_original.text.lower().split(sent_sep)
                 break
             else:
                 sent_list = [sent_original.text]
@@ -151,7 +153,7 @@ class TextReport:
             for sent_str in sent_list:
                 n_gram_size = []
                 sent, flag_neg = self._detect_negation(sent_str)
-                ngrams_generator = ngrams(sent, (1,2,3,4,5,6), filter_punct=True)
+                ngrams_generator = ngrams(sent, (1, 2, 3, 4, 5, 6), filter_punct=True)
                 for i in ngrams_generator:
                     full_ngrams.append((i.text.lower(), 0 if flag_neg else 1))
 
@@ -175,21 +177,36 @@ class TextReport:
             ontology_terms.append([i["id"], i["text"]])
             for synonym in i["data"]["synonymes"].split(","):
                 ontology_terms.append([i["id"], synonym])
-        for i in full_ngrams:
-            for j in ontology_terms:
-                score = self._calculate_similarity(i[0], j[1])
-                if score >= 80:
-                    # [neg_flag, ngram, match_term, node_id]
-                    match_list.append([i[1], i[0], j[1], j[0]])
+
+        n_grams_words = [i[0] for i in full_ngrams]
+        onto_words = [i[1] for i in ontology_terms]
+        full_ngrams_processed = self._lemmatize_list(n_grams_words)
+        full_onto_processed = self._lemmatize_list(onto_words)
+        for n_gram_index, i in enumerate(full_ngrams_processed):
+            for onto_index, j in enumerate(full_onto_processed):
+                score = fuzz.ratio(i.lower(), j.lower())
+                if score >= 85:
+                    # [neg_flag, ngram, match_term, node_id, score]
+                    match_list.append(
+                        [
+                            full_ngrams[n_gram_index][1],
+                            i,
+                            j,
+                            ontology_terms[onto_index][0],
+                            score,
+                        ]
+                    )
         return match_list
 
-    def _calculate_similarity(self, sent: str, sent2: str) -> str:
-        sent_token = self.nlp.tokenizer(sent)
-        sent2_token = self.nlp.tokenizer(sent2)
-        sent_no_stop = ' '.join([word.text for word in sent_token if not word.text in self.all_stopwords])
-        sent2_no_stop = ' '.join([word.text for word in sent2_token if not word.text in self.all_stopwords])
-        score = fuzz.ratio(sent_no_stop.lower(), sent2_no_stop.lower())
-        return score
+    def _lemmatize_list(self, list_ngrams: list) -> list:
+        result_list = []
+        for elm in list_ngrams:
+            result = self.nlp(elm, disable=["tok2vec", "parser", "ner"])
+            sent_no_stop = " ".join(
+                [word.lemma_ for word in result if not word.is_stop]
+            )
+            result_list.append(sent_no_stop)
+        return result_list
 
     def analyze_text(self) -> list:
         """Analyse the whole text of the PDF and match it to the standard vocabulary

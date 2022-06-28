@@ -13,7 +13,7 @@ var input4_tag = new Tagify(input4);
 var input5 = document.querySelector("input[id=phenotype_datamined]");
 var input5_tag = new Tagify(input5);
 var input6 = document.querySelector("input[id=alternative_language]");
-var input6_tag = new Tagify(input6);
+var input6_tag = new Tagify(input6, { maxTags: 1 });
 var input7 = document.querySelector("input[id=correlates_with]");
 var input7_tag = new Tagify(input7);
 
@@ -442,8 +442,9 @@ $(function () {
         let absent_feat_overview_auto = document.getElementById(
           "feature-absent-auto"
         );
-        present_feat_overview_auto.innerHTML = "";
-        absent_feat_overview_auto.innerHTML = "";
+        present_feat_overview_auto.innerHTML = `ID | Vocab. Term | Text | Score<br />`;
+        absent_feat_overview_auto.innerHTML =
+          "ID | Vocab. Term | Text | Score<br />";
 
         // For each entires in our match list add to corresponding accordion
         for (const [key, value] of Object.entries(
@@ -453,21 +454,23 @@ $(function () {
             present_feat_overview_auto.innerHTML +=
               "<span style='color:green'>" +
               value[3] +
-              " " +
+              " | " +
               value[2] +
-              " (" +
+              " | " +
               value[1] +
-              ")" +
+              " | " +
+              value[4] +
               "</span><br />";
           } else if (value[0] == 0) {
             absent_feat_overview_auto.innerHTML +=
               "<span style='color:red'>" +
               value[3] +
-              " " +
+              " | " +
               value[2] +
-              " (" +
+              " | " +
               value[1] +
-              ")" +
+              " | " +
+              value[4] +
               "</span><br />";
           }
 
