@@ -31,6 +31,7 @@ class TextReport:
         self.image_stack = []
         self.raw_text = ""
         self.text_as_list = []
+        self.sentence_as_list = []
         self.header_text = []
         if self.lang == "fra":
             self.nlp = spacy.load("fr_core_news_sm")
@@ -148,6 +149,7 @@ class TextReport:
         doc = self.nlp(text_section)
         full_ngrams = []
         for sent_original in doc.sents:
+            self.sentence_as_list.append(sent_original.text)
             sent_list = self._split_sentence(sent_original)
             # Detect negation in sentence part and extract n-grams up to 6 words
             for sent_str in sent_list:
@@ -216,7 +218,7 @@ class TextReport:
             First value is the neg flag, second value is the ngram, third value
             is the matching terms, last value is the node ID.
         """
-        full_ngrams = self._spacy_ngrams(self.raw_text)
+        full_ngrams = self._spacy_ngrams(self.raw_text.replace('\n'," "))
         match_list = self._match_ngram_ontology(full_ngrams)
         return match_list
 
