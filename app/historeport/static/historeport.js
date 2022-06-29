@@ -442,9 +442,10 @@ $(function () {
         let absent_feat_overview_auto = document.getElementById(
           "feature-absent-auto"
         );
-        present_feat_overview_auto.innerHTML = `ID | Vocab. Term | Text | Score<br />`;
+        present_feat_overview_auto.innerHTML =
+          "ID | Vocab. Term | Pos. in Text | Text | Score<br />";
         absent_feat_overview_auto.innerHTML =
-          "ID | Vocab. Term | Text | Score<br />";
+          "ID | Vocab. Term | Pos. in Text | Text | Score<br />";
 
         // For each entires in our match list add to corresponding accordion
         for (const [key, value] of Object.entries(
@@ -457,6 +458,8 @@ $(function () {
               " | " +
               value[2] +
               " | " +
+              value[5] +
+              " | " +
               value[1] +
               " | " +
               value[4] +
@@ -467,6 +470,8 @@ $(function () {
               value[3] +
               " | " +
               value[2] +
+              " | " +
+              value[5] +
               " | " +
               value[1] +
               " | " +

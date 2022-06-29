@@ -157,7 +157,10 @@ class TextReport:
                 sent, flag_neg = self._detect_negation(sent_str)
                 ngrams_generator = ngrams(sent, (1, 2, 3, 4, 5, 6), filter_punct=True)
                 for i in ngrams_generator:
-                    full_ngrams.append((i.text.lower(), 0 if flag_neg else 1))
+                    pos_ngrams = " ".join(self.sentence_as_list).find(i.text)
+                    full_ngrams.append(
+                        (i.text.lower(), 0 if flag_neg else 1, pos_ngrams)
+                    )
 
         return full_ngrams
 
@@ -188,7 +191,7 @@ class TextReport:
             for onto_index, j in enumerate(full_onto_processed):
                 score = fuzz.ratio(i.lower(), j.lower())
                 if score >= 85:
-                    # [neg_flag, ngram, match_term, node_id, score]
+                    # [neg_flag, ngram, match_term, node_id, score, match pos in string]
                     match_list.append(
                         [
                             full_ngrams[n_gram_index][1],
@@ -196,6 +199,7 @@ class TextReport:
                             j,
                             ontology_terms[onto_index][0],
                             score,
+                            full_ngrams[n_gram_index][2],
                         ]
                     )
         return match_list
@@ -218,7 +222,7 @@ class TextReport:
             First value is the neg flag, second value is the ngram, third value
             is the matching terms, last value is the node ID.
         """
-        full_ngrams = self._spacy_ngrams(self.raw_text.replace('\n'," "))
+        full_ngrams = self._spacy_ngrams(self.raw_text.replace("\n", " "))
         match_list = self._match_ngram_ontology(full_ngrams)
         return match_list
 
