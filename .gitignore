@@ -177,3 +177,4 @@ docker/run.sh
 *.tar.gz
 IMPatienT
 !data/images/demo_patient
+.idea

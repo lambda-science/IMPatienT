@@ -13,7 +13,7 @@ var input4_tag = new Tagify(input4);
 var input5 = document.querySelector("input[id=phenotype_datamined]");
 var input5_tag = new Tagify(input5);
 var input6 = document.querySelector("input[id=alternative_language]");
-var input6_tag = new Tagify(input6);
+var input6_tag = new Tagify(input6, { maxTags: 1 });
 var input7 = document.querySelector("input[id=correlates_with]");
 var input7_tag = new Tagify(input7);
 

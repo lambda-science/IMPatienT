@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "impatient"
-version = "1.3.0"
+version = "1.5.0"
 description = "IMPatienT: an integrated web application to digitize, process and explore multimodal patient data"
 authors = ["Corentin Meyer <co.meyer@unistra.fr>"]
-license = "MIT"
+license = "AGPL"
 
 [tool.poetry.dependencies]
-python = ">=3.7.1,<4.0"
+python = ">=3.8,<4.0"
 pip = "*"
 setuptools = "*"
 wheel = "*"
@@ -44,7 +44,7 @@ PyJWT = "^2.3.0"
 en_core_web_sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.2.0/en_core_web_sm-3.2.0-py3-none-any.whl" }
 fr_core_news_sm = { url = "https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.2.0/fr_core_news_sm-3.2.0-py3-none-any.whl" }
 Flask-Cors = "^3.0.10"
-lightgbm = "^3.3.2"
+textacy = "^0.12.0"
 
 [tool.poetry.dev-dependencies]
 black = {extras = ["jupyter"], version = "*"}

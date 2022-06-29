@@ -251,7 +251,7 @@ def ocr_pdf():
         # pdf_object.detect_sections()
         # pdf_object.extract_section_text()
         match_list = pdf_object.analyze_text()
-        results = {"full_text": pdf_object.text_as_list, "match_list": match_list}
+        results = {"full_text": pdf_object.sentence_as_list, "match_list": match_list}
     return (
         json.dumps({"success": True, "results": results}),
         200,

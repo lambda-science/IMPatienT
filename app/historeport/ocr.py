@@ -10,6 +10,7 @@ import spacy
 from flask import current_app
 from pdf2image import convert_from_bytes
 from thefuzz import fuzz
+from textacy.extract.basics import ngrams
 
 
 class TextReport:
@@ -30,6 +31,7 @@ class TextReport:
         self.image_stack = []
         self.raw_text = ""
         self.text_as_list = []
+        self.sentence_as_list = []
         self.header_text = []
         if self.lang == "fra":
             self.nlp = spacy.load("fr_core_news_sm")
@@ -39,7 +41,7 @@ class TextReport:
             self.nlp = spacy.load("en_core_web_sm")
             self.negexlist = current_app.config["NEGEX_LIST_EN"]
             self.negex_sent = current_app.config["NEGEX_SENT_EN"]
-
+        self.all_stopwords = self.nlp.Defaults.stop_words
         self.results_match_dict = {}
 
     def get_grayscale(self, image):
@@ -109,7 +111,8 @@ class TextReport:
         sent = self.nlp(sentence)
         for negex_term in self.negexlist:
             if len(negex_term.split(" ")) == 1:
-                for i in sent.text.lower().split(" "):
+                token_list = [word.text.lower() for word in sent if word.is_alpha]
+                for i in token_list:
                     if i == negex_term:
                         return sent, True
             else:
@@ -127,8 +130,8 @@ class TextReport:
             list: list of sub-sentences from the original sentence
         """
         for sent_sep in self.negex_sent:
-            if sent_sep in sent_original.text:
-                sent_list = sent_original.text.split(sent_sep)
+            if sent_sep.lower() in sent_original.text.lower():
+                sent_list = sent_original.text.lower().split(sent_sep)
                 break
             else:
                 sent_list = [sent_original.text]
@@ -144,44 +147,21 @@ class TextReport:
             dict: all n-grams detected with negation boolean
         """
         doc = self.nlp(text_section)
-        final_one_ngrams = []
-        final_two_ngrams = []
-        final_three_ngrams = []
+        full_ngrams = []
         for sent_original in doc.sents:
+            self.sentence_as_list.append(sent_original.text)
             sent_list = self._split_sentence(sent_original)
+            # Detect negation in sentence part and extract n-grams up to 6 words
             for sent_str in sent_list:
+                n_gram_size = []
                 sent, flag_neg = self._detect_negation(sent_str)
-                temp_token_list = []
-                for token in sent:
-                    # if not token.is_stop and not token.is_punct and token.is_alpha:
-                    if not token.is_punct and token.is_alpha:
-                        final_one_ngrams.append(
-                            [token.text.lower(), 0 if flag_neg else 1]
-                        )
-                        temp_token_list.append(token.text.lower())
-                if len(temp_token_list) > 1:
-                    for i in range(len(temp_token_list) - 1):
-                        final_two_ngrams.append(
-                            [
-                                " ".join([temp_token_list[i], temp_token_list[i + 1]]),
-                                0 if flag_neg else 1,
-                            ]
-                        )
-                if len(temp_token_list) > 2:
-                    for i in range(len(temp_token_list) - 2):
-                        final_three_ngrams.append(
-                            [
-                                " ".join(
-                                    [
-                                        temp_token_list[i],
-                                        temp_token_list[i + 1],
-                                        temp_token_list[i + 2],
-                                    ]
-                                ),
-                                0 if flag_neg else 1,
-                            ]
-                        )
-        full_ngrams = final_one_ngrams + final_two_ngrams + final_three_ngrams
+                ngrams_generator = ngrams(sent, (1, 2, 3, 4, 5, 6), filter_punct=True)
+                for i in ngrams_generator:
+                    pos_ngrams = " ".join(self.sentence_as_list).find(i.text)
+                    full_ngrams.append(
+                        (i.text.lower(), 0 if flag_neg else 1, pos_ngrams)
+                    )
+
         return full_ngrams
 
     def _match_ngram_ontology(self, full_ngrams) -> list:
@@ -202,13 +182,37 @@ class TextReport:
             ontology_terms.append([i["id"], i["text"]])
             for synonym in i["data"]["synonymes"].split(","):
                 ontology_terms.append([i["id"], synonym])
-        for i in full_ngrams:
-            for j in ontology_terms:
-                score = fuzz.ratio(i[0].lower(), j[1].lower())
-                if score >= 80:
-                    # [neg_flag, ngram, match_term, node_id]
-                    match_list.append([i[1], i[0], j[1], j[0]])
+
+        n_grams_words = [i[0] for i in full_ngrams]
+        onto_words = [i[1] for i in ontology_terms]
+        full_ngrams_processed = self._lemmatize_list(n_grams_words)
+        full_onto_processed = self._lemmatize_list(onto_words)
+        for n_gram_index, i in enumerate(full_ngrams_processed):
+            for onto_index, j in enumerate(full_onto_processed):
+                score = fuzz.ratio(i.lower(), j.lower())
+                if score >= 85:
+                    # [neg_flag, ngram, match_term, node_id, score, match pos in string]
+                    match_list.append(
+                        [
+                            full_ngrams[n_gram_index][1],
+                            i,
+                            j,
+                            ontology_terms[onto_index][0],
+                            score,
+                            full_ngrams[n_gram_index][2],
+                        ]
+                    )
         return match_list
+
+    def _lemmatize_list(self, list_ngrams: list) -> list:
+        result_list = []
+        for elm in list_ngrams:
+            result = self.nlp(elm, disable=["tok2vec", "parser", "ner"])
+            sent_no_stop = " ".join(
+                [word.lemma_ for word in result if not word.is_stop]
+            )
+            result_list.append(sent_no_stop)
+        return result_list
 
     def analyze_text(self) -> list:
         """Analyse the whole text of the PDF and match it to the standard vocabulary
@@ -218,7 +222,7 @@ class TextReport:
             First value is the neg flag, second value is the ngram, third value
             is the matching terms, last value is the node ID.
         """
-        full_ngrams = self._spacy_ngrams(self.raw_text)
+        full_ngrams = self._spacy_ngrams(self.raw_text.replace("\n", " "))
         match_list = self._match_ngram_ontology(full_ngrams)
         return match_list
 
