@@ -5,13 +5,17 @@ from app.historeport import bp
 from app.historeport.boqa import *
 from app.historeport.forms import (
     DeleteButton,
+    RepredictReports,
     OntologyDescriptPreAbs,
     ReportForm,
     PdfUpload,
 )
+
 from app.histostats.vizualisation import (
     db_to_df,
     table_to_df,
+    generate_stat_per,
+    process_df,
 )
 from app.historeport.ocr import TextReport
 from app.historeport.onto_func import StandardVocabulary
@@ -37,8 +41,42 @@ def histoindex():
         str: Report Index HTML Page
     """
     form = DeleteButton()
+    form2 = RepredictReports()
     report_history = ReportHisto.query.all()
-    return render_template("histo_index.html", history=report_history, form=form)
+    return render_template(
+        "histo_index.html", history=report_history, form=form, form2=form2
+    )
+
+
+@bp.route("/historeport/repredict_reports", methods=["GET"])
+@login_required
+def repredict_reports():
+    """Route for to trigger the reprediction of all reports in the DB with latest data.
+
+    Returns:
+      redirect: Redirect to the historeports index HTML page
+    """
+    with open(os.path.join("data/ontology", "ontology.json"), "r") as fp:
+        onto_tree = json.load(fp)
+    df = db_to_df()
+    df, features_col = table_to_df(df, onto_tree)
+    df = process_df(df)
+    df_per_gene, df_per_diag = generate_stat_per(df, features_col, onto_tree)
+
+    for report in ReportHisto.query.all():
+        try:
+            results = get_boqa_pred(json.dumps(report.ontology_tree))
+        except:
+            results = ["No_Pred", 0]
+        if results[1] > 0.5:
+            report.BOQA_prediction = results[0]
+            report.BOQA_prediction_score = results[1]
+        else:
+            report.BOQA_prediction = "No_Pred"
+            report.BOQA_prediction_score = 0
+    db.session.commit()
+
+    return redirect(url_for("historeport.histoindex"))
 
 
 @bp.route("/historeport/download", methods=["GET"])

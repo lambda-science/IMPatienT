@@ -93,7 +93,7 @@ def subsample_query(query):
     return query
 
 
-def boqa_monte_carlo(query, items_stat, n_indiv=50, alpha=0.0001, beta=0.3):
+def boqa_monte_carlo(query, items_stat, n_indiv=50, alpha=0.001, beta=0.05):
     """Run the BOQA algorithm a number of time and average the results.
     Return a list of tuple for each disease and the frequency of time they appeared as the best prediction.
 

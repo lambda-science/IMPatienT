@@ -248,6 +248,16 @@ class DeleteButton(FlaskForm):
     submit = SubmitField("Confirm Deletion", render_kw={"class": "btn btn-danger"})
 
 
+class RepredictReports(FlaskForm):
+    """Button to force reprediction of all reports.
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
+
+    submit = SubmitField("Confirm Reprediction", render_kw={"class": "btn btn-warning"})
+
+
 class PdfUpload(FlaskForm):
     """Form for uploading images.
 
