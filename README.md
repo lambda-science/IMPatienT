@@ -52,6 +52,6 @@ IMPatienT is a platform to digitize, process and explore patient data that can h
 
 [See the wiki page: Deploy and maintain (LINUX)](<https://github.com/lambda-science/IMPatienT/wiki/(LINUX)-Deploy-&-Maintain-IMPatienT>)
 
-### (LEGACY - Deprecated) Developper Mode Setup (non-docker)
+### (LINUX) Developper Mode Setup
 
-[See the wiki page: Developper Mode Setup (non-docker)](<https://github.com/lambda-science/IMPatienT/wiki/(LEGACY---Deprecated)-Developper-Mode-Setup-(non-docker)>)
+[See the wiki page: Developper Mode Setup (LINUX)](<https://github.com/lambda-science/IMPatienT/wiki/(LINUX)-Developper-Mode-Setup>)
