@@ -27,7 +27,7 @@ The main maintainer is:
   <img src="https://i.imgur.com/csEXDnW.png" alt="Partner Banner" style="border-radius: 25px;" />
 </p>
 
-IMPatienT is developped and used in collaboration with the [Morphological Unit of the Institute of Myology of Paris](https://www.institut-myologie.org/en/recherche-2/neuromuscular-exploration-and-evaluation-centre/laboratoire-dhistopathologie-dr-norma-b-romero/). A production instance is deployed to help discovering new relevant features for congenital myopathies classification and diagnosis.
+IMPatienT is developped and used in collaboration with the [Morphological Unit of the Institute of Myology of Paris](https://www.institut-myologie.org/en/recherche-2/neuromuscular-investigation-center/morphological-unit/). A production instance is deployed to help discovering new relevant features for congenital myopathies classification and diagnosis.
 
 ## IMPatienT🗂️ Abstract
 
