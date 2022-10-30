@@ -9,7 +9,7 @@ If you are on the demo instance (https://impatient.lbgi.fr), you can login on to
 The application is preloaded with a database of histology reports and a standard vocabulary for muscle biopsy. Data on this demo instance is reset once every day.
 For the PDF automatic analysis, you can find a sample PDF [HERE](https://www.lbgi.fr/~meyer/IMPatienT/sample_demo_report.pdf) working with the preinstalled standard vocabulary. A sample image for image annotation can be found [HERE](https://www.lbgi.fr/~meyer/IMPatienT/sample_image_histo.jpg).
 ## Partners
-IMPatienT is developped and used in collaboration with the [Morphological Unit of the Institute of Myology of Paris](https://www.institut-myologie.org/en/recherche-2/neuromuscular-exploration-and-evaluation-centre/laboratoire-dhistopathologie-dr-norma-b-romero/). A production instance is deployed to help discovering new relevant features for congenital myopathies classification and diagnosis.
+IMPatienT is developped and used in collaboration with the [Morphological Unit of the Institute of Myology of Paris](https://www.institut-myologie.org/en/recherche-2/neuromuscular-investigation-center/morphological-unit/). A production instance is deployed to help discovering new relevant features for congenital myopathies classification and diagnosis.
 
 ## IMPatienT🗂️ Abstract
 
