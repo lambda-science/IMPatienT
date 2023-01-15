@@ -6,7 +6,7 @@ authors = ["Corentin Meyer <co.meyer@unistra.fr>"]
 license = "AGPL"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4.0"
+python = ">=3.8,<3.11"
 pip = "*"
 setuptools = "*"
 wheel = "*"
@@ -29,7 +29,7 @@ Pillow = "^9"
 joblib = "^1"
 dash-core-components = "^2"
 dash-bootstrap-components = "^1"
-Flask-Migrate = "^3"
+Flask-Migrate = "^4"
 Flask-Session = "^0"
 pytesseract = "^0"
 pdf2image = "^1"
@@ -46,16 +46,17 @@ fr_core_news_sm = { url = "https://github.com/explosion/spacy-models/releases/do
 Flask-Cors = "^3.0.10"
 textacy = "^0.12.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.0.221"
+mkdocs-material = "^9.0.5"
 black = {extras = ["jupyter"], version = "*"}
 ipykernel = "^6"
-pylint = "^2.11"
-pylint-flask-sqlalchemy = "^0"
-pylint-flask = "^0"
 unittest2 = "^1"
 pytest = "^6.2.5"
 bandit = "^1.7.1"
 pre-commit = "^2.16.0"
+mypy = "^0.991"
+mkdocstrings = "^0.19.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

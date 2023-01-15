@@ -178,3 +178,4 @@ docker/run.sh
 IMPatienT
 !data/images/demo_patient
 .idea
+.ruff_cache
