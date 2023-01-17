@@ -1,6 +1,8 @@
 import json
 import os
 
+import bleach
+
 from app import db
 from app.historeport.onto_func import StandardVocabulary
 from app.models import ReportHisto
@@ -79,14 +81,15 @@ def modify_onto():
     with open(
         os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as json_file:
-        json.dump(clean_tree, json_file, indent=4)
+        sanitized_json = json.loads(bleach.clean(json.dumps(clean_tree)))
+        json.dump(sanitized_json, json_file, indent=4)
 
     # Update All Reports to the latest Version of ontology
     template_ontology = StandardVocabulary(clean_tree)
     for report in ReportHisto.query.all():
         current_report_ontology = StandardVocabulary(report.ontology_tree)
-        updated_report_ontology = json.loads(
-            json.dumps(current_report_ontology.update_ontology(template_ontology))
+        updated_report_ontology = json.loads(bleach.clean(
+            json.dumps(current_report_ontology.update_ontology(template_ontology)))
         )
         # Issue: SQLAlchemy not updating JSON https://stackoverflow.com/questions/42559434/updates-to-json-field-dont-persist-to-db
 
