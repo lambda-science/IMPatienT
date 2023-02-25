@@ -27,12 +27,12 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         # Check if password match
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
+        user = User.objects(username=form.username.data)
+        if not user or not user[0].check_password(form.password.data):
             flash("Invalid username or password", "danger")
             return redirect(url_for("auth.login"))
         # Log user if password matched, store username and redirect user
-        login_user(user, remember=form.remember_me.data)
+        login_user(user[0], remember=form.remember_me.data)
         flash("Login successful", "success")
         return redirect(url_for("index.index"))
     return render_template("login.html", title="Sign In", form=form)
@@ -63,9 +63,9 @@ def reset_password_request():
     form = ResetPasswordRequestForm()
     # If form validated, look for user in database and create the token & email for password reset
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.objects(email=form.email.data)
         if user:
-            send_password_reset_email(user)
+            send_password_reset_email(user[0])
             flash(
                 "Check your email for the instructions to reset your password",
                 "success",
@@ -98,8 +98,9 @@ def reset_password(token):
     form = ResetPasswordForm()
     # Save new password to DB
     if form.validate_on_submit():
-        user.set_password(form.password.data)
-        db.session.commit()
+        my_user = user[0]
+        my_user.set_password(form.password.data)
+        my_user.save()
         flash("Your password has been reset.")
         return redirect(url_for("auth.login"))
     return render_template("reset_password.html", form=form)

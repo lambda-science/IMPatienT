@@ -9,20 +9,13 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app import db, login_manager
 
 
-class User(UserMixin, db.Model):
+class User(UserMixin, db.Document):
     """Database table for Users"""
 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(
-        db.String(64),
-        index=True,
-        unique=True,
-        nullable=False,
-    )
-    email = db.Column(db.String(120), index=True, unique=True, nullable=False)
-    password_hash = db.Column(db.String(128), nullable=False)
-    images = db.relationship("Image", backref="creator", lazy="dynamic")
-    report = db.relationship("ReportHisto", backref="creator", lazy="dynamic")
+    username = db.StringField(max_length=64, unique=True, required=True)
+    email = db.StringField(max_length=120, unique=True, required=True)
+    password_hash = db.StringField(max_length=128)
+    datetime = db.DateTimeField(default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return "<User {} Email {}>".format(self.username, self.email)
@@ -56,7 +49,7 @@ class User(UserMixin, db.Model):
             JWT Token: The generated token as string
         """
         return jwt.encode(
-            {"reset_password": self.id, "exp": time() + expires_in},
+            {"reset_password": str(self.id), "exp": time() + expires_in},
             current_app.config["SECRET_KEY"],
             algorithm="HS256",
         )
@@ -78,20 +71,19 @@ class User(UserMixin, db.Model):
             )["reset_password"]
         except:
             return
-        return User.query.get(id)
+        return User.objects(id=id)
 
     @staticmethod
     def create_admin_account():
         """Create a default admin account if no user is present in the database"""
-        user_entry = User.query.get(1)
+        user_entry = User.objects.all()
         if not user_entry:
             user = User(
                 username=current_app.config["DEFAULT_ADMIN_USERNAME"],
                 email=current_app.config["DEFAULT_ADMIN_EMAIL"],
             )
             user.set_password(current_app.config["DEFAULT_ADMIN_PASSWORD"])
-            db.session.add(user)
-            db.session.commit()
+            user.save()
 
 
 @login_manager.user_loader
@@ -104,35 +96,23 @@ def load_user(id):
     Returns:
         SQLAlchemy Obj: Return the user database entry object corresponding to the ID
     """
-    return User.query.get(int(id))
+    u = User.objects(id=id)[0]
+    return u
 
 
-class Image(db.Model):
+class Image(db.Document):
     """Database table for Image & annotations"""
 
-    id = db.Column(db.Integer, primary_key=True)
-    image_name = db.Column(db.String(140), nullable=False)
-    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    patient_id = db.Column(db.String(100), index=True, nullable=False)
-    biopsy_id = db.Column(db.String(100), index=True)
-    type_coloration = db.Column(db.String(140))
-    age_at_biopsy = db.Column(db.Integer, default=-1)
-    image_path = db.Column(db.String(4096), unique=True, nullable=False)
-    image_background_path = db.Column(db.String(4096), unique=True)
-    sigma_range_min = db.Column(db.Float())
-    sigma_range_max = db.Column(db.Float())
-    diagnostic = db.Column(db.String(140), index=True)
-    seg_matrix_path = db.Column(db.String(4096), unique=True)
-    mask_image_path = db.Column(db.String(4096), unique=True)
-    blend_image_path = db.Column(db.String(4096), unique=True)
-    classifier_path = db.Column(db.String(4096), unique=True)
-    mask_annot_path = db.Column(db.String(4096), unique=True)
-    class_info_path = db.Column(db.String(4096), unique=True)
-    datetime = db.Column(
-        db.DateTime(),
-        onupdate=datetime.datetime.utcnow,
-        default=datetime.datetime.utcnow,
-    )
+    image_name = db.StringField(max_length=140)
+    owner = db.ReferenceField(User)
+    patient_id = db.StringField(max_length=140)
+    biopsy_id = db.StringField(max_length=140)
+    type_coloration = db.StringField(max_length=140)
+    age_at_biopsy = db.IntField(min_value=-1, max_value=200, default=-1)
+    image_path = db.StringField(max_length=4096, unique=True)
+    diagnostic = db.StringField(max_length=140)
+    datetime = db.DateTimeField(default=datetime.datetime.utcnow)
+    meta = {"allow_inheritance": True}
 
     def __repr__(self):
         return "<Image Name {} Patient {}>".format(self.image_name, self.patient_id)
@@ -155,29 +135,24 @@ class Image(db.Model):
             return True
 
 
-class ReportHisto(db.Model):
+class ReportHisto(db.Document):
     """Database table text reports"""
 
-    id = db.Column(db.Integer, primary_key=True)
-    patient_id = db.Column(db.String(100), index=True)
-    expert_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    biopsie_id = db.Column(db.String(140))
-    muscle_prelev = db.Column(db.String(140))
-    age_biopsie = db.Column(db.Integer)
-    date_envoie = db.Column(db.String(10))
-    gene_diag = db.Column(db.String(140), index=True)
-    mutation = db.Column(db.String(140))
-    pheno_terms = db.Column(db.String(4096))
-    ontology_tree = db.Column(db.JSON, default=[], nullable=False)
-    comment = db.Column(db.Text, default="")
-    conclusion = db.Column(db.String(140), index=True)
-    BOQA_prediction = db.Column(db.String(140), index=True)
-    BOQA_prediction_score = db.Column(db.Float())
-    datetime = db.Column(
-        db.DateTime(),
-        onupdate=datetime.datetime.utcnow,
-        default=datetime.datetime.utcnow,
-    )
+    patient_id = db.StringField(max_length=140)
+    owner = db.ReferenceField(User)
+    biopsie_id = db.StringField(max_length=140)
+    muscle_prelev = db.StringField(max_length=140)
+    age_biopsie = db.IntField(min_value=-1, max_value=200, default=-1)
+    date_envoie = db.StringField(max_length=140)
+    gene_diag = db.StringField(max_length=140)
+    mutation = db.StringField(max_length=140)
+    pheno_terms = db.StringField(max_length=4096)
+    ontology_tree = db.ListField(default=[])
+    comment = db.StringField(max_length=4096, default="")
+    conclusion = db.StringField(max_length=140)
+    BOQA_prediction = db.StringField(max_length=140)
+    BOQA_prediction_score = db.FloatField()
+    datetime = db.DateTimeField(default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return "<ReportHisto ID {} ID {} Biopsie {}>".format(

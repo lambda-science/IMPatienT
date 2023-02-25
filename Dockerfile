@@ -13,7 +13,6 @@ RUN python -m poetry install --no-root --no-interaction && rm -rf ~/.cache/pypoe
 
 COPY --chown=impatient:impatient impatient.py config.py docker/boot.sh ./
 COPY --chown=impatient:impatient app app
-COPY --chown=impatient:impatient migrations migrations
 COPY --chown=impatient:impatient config config
 
 RUN chown impatient:impatient /home/impatient

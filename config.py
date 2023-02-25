@@ -2,8 +2,6 @@ import os
 
 from dotenv import load_dotenv
 
-import app.src.common as Common
-
 # Get base working directory and load env variables
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, ".env"))
@@ -20,6 +18,7 @@ class Config(object):
     DATA_FOLDER = os.path.join(basedir, "data")
     ONTOLOGY_FOLDER = os.path.join(basedir, "data", "ontology")
     IMAGES_FOLDER = os.path.join(basedir, "data", "images")
+    TEXT_FOLDER = os.path.join(basedir, "data", "images")
     CONFIG_FOLDER = os.path.join(basedir, "config")
     VIZ_FOLDER = os.path.join(basedir, "app", "static", "viz")
 
@@ -40,14 +39,11 @@ class Config(object):
     # Session saving on filesystem instead of user cookie
     SESSION_TYPE = "filesystem"
 
-    # Max upload size: 1GB
-    MAX_CONTENT_LENGTH = 1024 * 1024 * 1024
+    # Max upload size: 512MB
+    MAX_CONTENT_LENGTH = 1024 * 1024 * 512
 
     # DB connection settings
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-        basedir, "data", "database", "app.db"
-    )
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    MONGODB_SETTINGS = {"host": os.environ.get("MONGODB_HOST")}
 
     # Mail Settings from environnement variables
     MAIL_SERVER = os.environ.get("MAIL_SERVER")
@@ -56,6 +52,3 @@ class Config(object):
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     ADMINS_EMAIL = [os.environ.get("ADMINS_EMAIL")]
-
-    # Heroku to STDOut
-    LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT")
