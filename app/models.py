@@ -5,6 +5,8 @@ import jwt
 from flask import current_app
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
+import redis
+import rq
 
 from app import db, login_manager
 
@@ -85,6 +87,22 @@ class User(UserMixin, db.Document):
             user.set_password(current_app.config["DEFAULT_ADMIN_PASSWORD"])
             user.save()
 
+    def launch_task(self, name, description, *args, **kwargs):
+        rq_job = current_app.task_queue.enqueue(
+            "app.tasks." + name, self.id, *args, **kwargs
+        )
+        task = Task(
+            rq_id=rq_job.get_id(), name=name, description=description, owner=self
+        )
+        task.save()
+        return task
+
+    def get_tasks_in_progress(self):
+        return Task.objects(owner=self, complete=False).all()
+
+    def get_task_in_progress(self, name):
+        return Task.objects(name=name, owner=self, complete=False).first()
+
 
 @login_manager.user_loader
 def load_user(id):
@@ -98,6 +116,25 @@ def load_user(id):
     """
     u = User.objects(id=id).first()
     return u
+
+
+class Task(db.Document):
+    rq_id = db.StringField(max_length=36)
+    name = db.StringField(max_length=128)
+    description = db.StringField(max_length=128)
+    owner = db.ReferenceField(User)
+    complete = db.BooleanField(default=False)
+
+    def get_rq_job(self):
+        try:
+            rq_job = rq.job.Job.fetch(self.rq_id, connection=current_app.redis)
+        except (redis.exceptions.RedisError, rq.exceptions.NoSuchJobError):
+            return None
+        return rq_job
+
+    def get_progress(self):
+        job = self.get_rq_job()
+        return job.meta.get("progress", 0) if job is not None else 100
 
 
 class Image(db.Document):

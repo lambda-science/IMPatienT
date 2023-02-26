@@ -54,3 +54,8 @@ class Config(object):
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     ADMINS_EMAIL = [os.environ.get("ADMINS_EMAIL")]
+
+    # Redis Server
+    REDIS_PORT = os.environ.get("REDIS_PORT")
+    REDIS_HOST = os.environ.get("REDIS_HOST")
+    REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD")

@@ -1,6 +1,8 @@
 import logging
 import os
 from logging.handlers import RotatingFileHandler, SMTPHandler
+from redis import Redis
+import rq
 
 from config import Config
 from flask import Flask
@@ -36,6 +38,13 @@ def create_app(config_class=Config):
     mail.init_app(app)
     session.init_app(app)
     db.init_app(app)
+
+    app.redis = Redis(
+        host=app.config["REDIS_HOST"],
+        port=app.config["REDIS_PORT"],
+        password=app.config["REDIS_PASSWORD"],
+    )
+    app.task_queue = rq.Queue("impatient-tasks", connection=app.redis)
 
     # Configuration of our various flask-blueprint folders
     from app.errors import bp as errors_bp

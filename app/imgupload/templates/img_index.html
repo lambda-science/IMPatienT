@@ -3,6 +3,14 @@
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
+{% if not current_user.get_task_in_progress('export_data') %}
+<p>
+  <a href="{{ url_for('index.export_data') }}">
+    {{ ('Export your data') }}
+  </a>
+</p>
+{% endif %}
+
 <div class="row">
   <div class="col-xl-3 offset-md-4">
     <h1>Upload a new image</h1>

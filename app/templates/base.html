@@ -116,10 +116,22 @@
     {% endif %}
     {% endwith %}
 
+    <div class="container">
+      {% if current_user.is_authenticated %}
+      {% with tasks = current_user.get_tasks_in_progress() %}
+      {% if tasks %}
+      {% for task in tasks %}
+      <div class="alert alert-success" role="alert">
+        {{ task.description }}
+        <span id="{{ task.id }}-progress">{{ task.get_progress() }}</span>%
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      {% endif %}
 
-
-    {% block content %}
-    {% endblock %}
+      {% block content %}
+      {% endblock %}
   </main>
 
   <footer class="footer d-none d-xl-block">
