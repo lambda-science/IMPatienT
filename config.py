@@ -43,7 +43,9 @@ class Config(object):
     MAX_CONTENT_LENGTH = 1024 * 1024 * 512
 
     # DB connection settings
-    MONGODB_SETTINGS = {"host": os.environ.get("MONGODB_HOST")}
+    MONGODB_SETTINGS = {
+        "host": os.environ.get("MONGODB_HOST"),
+    }
 
     # Mail Settings from environnement variables
     MAIL_SERVER = os.environ.get("MAIL_SERVER")

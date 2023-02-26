@@ -86,29 +86,20 @@ def modify_onto():
 
     # Update All Reports to the latest Version of ontology
     template_ontology = StandardVocabulary(clean_tree)
-    for report in ReportHisto.query.all():
+    for report in ReportHisto.objects.all():
         current_report_ontology = StandardVocabulary(report.ontology_tree)
-        updated_report_ontology = json.loads(bleach.clean(
-            json.dumps(current_report_ontology.update_ontology(template_ontology)))
+        updated_report_ontology = json.loads(
+            bleach.clean(
+                json.dumps(current_report_ontology.update_ontology(template_ontology))
+            )
         )
         # Issue: SQLAlchemy not updating JSON https://stackoverflow.com/questions/42559434/updates-to-json-field-dont-persist-to-db
 
         report.ontology_tree = updated_report_ontology
-        flag_modified(report, "ontology_tree")
-    db.session.commit()
+        report.save()
 
     # Update The DashApp Callback & layout
     # By Force reloading the layout code & callbacks
-    dashapp = current_app.config["DASHAPP"]
-    with current_app.app_context():
-        import importlib
-        import sys
-
-        importlib.reload(sys.modules["app.dashapp.callbacks"])
-        import app.dashapp.layout
-
-        importlib.reload(app.dashapp.layout)
-        dashapp.layout = app.dashapp.layout.layout
     return json.dumps({"success": True}), 200, {"ContentType": "application/json"}
 
 
@@ -153,7 +144,7 @@ def invert_lang():
 
     # After Switching lang, switch it for all patients onto_tree !
     template_ontology = StandardVocabulary(onto)
-    for report in ReportHisto.query.all():
+    for report in ReportHisto.objects.all():
         current_report_ontology = StandardVocabulary(report.ontology_tree)
         updated_report_ontology = json.loads(
             json.dumps(current_report_ontology.update_ontology(template_ontology))
@@ -161,25 +152,11 @@ def invert_lang():
         # Issue: SQLAlchemy not updating JSON https://stackoverflow.com/questions/42559434/updates-to-json-field-dont-persist-to-db
 
         report.ontology_tree = updated_report_ontology
-        flag_modified(report, "ontology_tree")
-    db.session.commit()
+        report.save()
 
     df = db_to_df()
     df, features_col = table_to_df(df, onto)
     df = process_df(df)
     generate_stat_per(df, features_col, onto)
-
-    # Update The DashApp Callback & layout
-    # By Force reloading the layout code & callbacks
-    dashapp = current_app.config["DASHAPP"]
-    with current_app.app_context():
-        import importlib
-        import sys
-
-        importlib.reload(sys.modules["app.dashapp.callbacks"])
-        import app.dashapp.layout
-
-        importlib.reload(app.dashapp.layout)
-        dashapp.layout = app.dashapp.layout.layout
 
     return redirect(url_for("ontocreate.ontocreate"))

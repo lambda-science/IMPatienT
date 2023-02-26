@@ -54,7 +54,7 @@ def table_to_df(df, onto_tree):
     for index, row in df.iterrows():
         tree_as_dict.setdefault("id", []).append(row[0])
         tree_as_dict.setdefault("patient_id", []).append(row[1])
-        tree_as_dict.setdefault("expert_id", []).append(row[2])
+        tree_as_dict.setdefault("owner", []).append(row[2])
         tree_as_dict.setdefault("biopsie_id", []).append(row[3])
         tree_as_dict.setdefault("muscle_prelev", []).append(row[4])
         tree_as_dict.setdefault("age_biopsie", []).append(row[5])
@@ -88,7 +88,9 @@ def db_to_df():
     Returns:
         Dataframe: Dataframe representation of the SQLite table for text reports
     """
-    df = pd.read_sql(db.session.query(ReportHisto).statement, db.session.bind)
+    all_report_doc = ReportHisto.objects.all()
+    data = [obj.to_mongo().to_dict() for obj in all_report_doc]
+    df = pd.DataFrame(data)
     return df
 
 
@@ -119,8 +121,11 @@ def create_plotly_viz(df):
     df["age_biopsie"].replace({"N/A": -1}, inplace=True)
     muscle_prelev = df["muscle_prelev"].value_counts()
     as_list = muscle_prelev.index.tolist()
-    idx = as_list.index("")
-    as_list[idx] = "N/A"
+    try:
+        idx = as_list.index("")
+        as_list[idx] = "N/A"
+    except:
+        pass
     muscle_prelev.index = as_list
     fig1 = px.bar(
         x=muscle_prelev.index,
@@ -300,6 +305,8 @@ def generate_UNCLEAR(df):
     labels_trim = []
     for i in list(conclusion_boqa.index):
         labels_trim.append(string_wordbreaker(i))
+    print(conclusion_boqa.index)
+    print(conclusion_boqa)
     fig = px.bar(
         x=conclusion_boqa.index,
         y=conclusion_boqa,

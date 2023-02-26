@@ -4,7 +4,7 @@ import json
 from app import db
 from app.imgupload import bp
 from app.imgupload.forms import DeleteButton, ImageForm
-from app.models import Image
+from app.models import Image, User
 from flask import (
     current_app,
     flash,
@@ -46,14 +46,16 @@ def img_index():
         str: Image Index HTML Page
     """
     form = DeleteButton()
-    image_history = Image.query.all()
+    image_history = Image.objects.all()
     return render_template("img_index.html", form=form, image_history=image_history)
 
 
 @bp.route("/img_index/download", methods=["GET"])
 @login_required
 def img_download():
-    df = pd.read_sql(db.session.query(Image).statement, db.session.bind)
+    all_imgs_doc = Image.objects.all()
+    data = [obj.to_mongo().to_dict() for obj in all_imgs_doc]
+    df = pd.DataFrame(data)
     df.to_csv(
         os.path.join(current_app.config["IMAGES_FOLDER"], "images_db.csv"), index=False
     )
@@ -81,22 +83,15 @@ def delete_img(id_img):
     form = DeleteButton()
     # Retrieve database entry and delete it if existing
     if form.validate_on_submit():
-        image = Image.query.get(id_img)
+        image = Image.objects(id=id_img).first()
         if image is None:
             flash("Image {} not found.".format(id_img), "danger")
             return redirect(url_for("imgupload.img_index"))
         try:  # nosec
             os.remove(image.image_path)
-            os.remove(image.class_info_path)
-            os.remove(image.seg_matrix_path)
-            os.remove(image.classifier_path)
-            os.remove(image.blend_image_path)
-            os.remove(image.mask_image_path)
-            os.remove(image.mask_annot_path)
         except:  # nosec
             pass  # nosec
-        db.session.delete(image)
-        db.session.commit()
+        image.delete()
         flash("Deleted Image entry {}!".format(id_img), "success")
         return redirect(url_for("imgupload.img_index"))
     else:
@@ -113,7 +108,7 @@ def create_img():
     """
     # If args in URL, try to retrive report from DB and pre-fill it
     if request.args:
-        image_request = Image.query.get(request.args.get("id"))
+        image_request = Image.objects(id=request.args.get("id")).first()
         if image_request is not None:
             file = None
             with open(image_request.image_path, "rb") as fp:
@@ -145,23 +140,22 @@ def create_img():
         # Save the image to patient data folder
         file.save(os.path.join(data_patient_dir, filename))
 
-        # If Image is a Tiff, save a PNG format
-        if filename.split(".")[-1] in ["tiff", "tif", "TIFF", "TIF"]:
-            image = PILImage.open(file)
-            filename_back = ".".join(filename.split(".")[0:-1]) + ".png"
-            image.save(os.path.join(data_patient_dir, filename_back), "PNG")
-        else:
-            filename_back = filename
+        # # If Image is a Tiff, save a PNG format
+        # if filename.split(".")[-1] in ["tiff", "tif", "TIFF", "TIF"]:
+        #     image = PILImage.open(file)
+        #     filename_back = ".".join(filename.split(".")[0:-1]) + ".png"
+        #     image.save(os.path.join(data_patient_dir, filename_back), "PNG")
+        # else:
+        #     filename_back = filename
         # Create our new Image & Patient database entry
         image = Image(
             image_name=filename,
-            expert_id=current_user.id,
+            owner=User.objects(id=current_user.id).first(),
             patient_id=form.patient_ID.data,
             biopsy_id=form.biopsy_report_ID.data,
             type_coloration=form.type_coloration.data,
             age_at_biopsy=form.age_histo.data,
             image_path=os.path.join(data_patient_dir, filename),
-            image_background_path=os.path.join(data_patient_dir, filename_back),
         )
 
         with suppress(json.decoder.JSONDecodeError):
@@ -170,9 +164,7 @@ def create_img():
         # If not: add it to DB
 
         if not image.isduplicated():
-            db.session.add(image)
-
-        db.session.commit()
+            image.save()
 
         # Finally redirect to annotation
         return redirect(url_for("imgupload.img_index"))

@@ -19,7 +19,7 @@ from app.histostats.vizualisation import (
 )
 from app.historeport.ocr import TextReport
 from app.historeport.onto_func import StandardVocabulary
-from app.models import ReportHisto
+from app.models import ReportHisto, User
 from flask import (
     current_app,
     flash,
@@ -42,7 +42,7 @@ def histoindex():
     """
     form = DeleteButton()
     form2 = RepredictReports()
-    report_history = ReportHisto.query.all()
+    report_history = ReportHisto.objects.all()
     return render_template(
         "histo_index.html", history=report_history, form=form, form2=form2
     )
@@ -63,7 +63,7 @@ def repredict_reports():
     df = process_df(df)
     df_per_gene, df_per_diag = generate_stat_per(df, features_col, onto_tree)
 
-    for report in ReportHisto.query.all():
+    for report in ReportHisto.objects.all():
         try:
             results = get_boqa_pred(json.dumps(report.ontology_tree))
         except:
@@ -74,7 +74,7 @@ def repredict_reports():
         else:
             report.BOQA_prediction = "No_Pred"
             report.BOQA_prediction_score = 0
-    db.session.commit()
+        report.save()
 
     return redirect(url_for("historeport.histoindex"))
 
@@ -105,11 +105,11 @@ def historeport():
     # If args in URL, try to retrive report from DB and pre-fill it
     ontology_tree_exist = False
     if request.args:
-        report_request = ReportHisto.query.get(request.args.get("id"))
+        report_request = ReportHisto.objects(id=request.args.get("id")).first()
         if report_request is not None:
             form = ReportForm(
                 patient_id=report_request.patient_id,
-                expert_id=report_request.expert_id,
+                owner=report_request.owner,
                 biopsie_id=report_request.biopsie_id,
                 muscle_prelev=report_request.muscle_prelev,
                 age_biopsie=report_request.age_biopsie,
@@ -140,7 +140,7 @@ def historeport():
     if form.validate_on_submit():
         # Update existing DB entry or create a new one (else)
         if request.args:
-            report_entry = ReportHisto.query.get(request.args.get("id"))
+            report_entry = ReportHisto.objects(id=request.args.get("id")).first()
             if report_entry is not None:
                 form.populate_obj(report_entry)
                 onto_jstree = StandardVocabulary(report_entry.ontology_tree)
@@ -159,7 +159,7 @@ def historeport():
                         "value"
                     ]
                 report_entry.ontology_tree = onto_jstree.clean_tree()
-                report_entry.expert_id = current_user.id
+                report_entry.owner = User.objects(id=current_user.id).first()
                 try:
                     results = get_boqa_pred(json.dumps(report_entry.ontology_tree))
                 except:
@@ -170,12 +170,12 @@ def historeport():
                 else:
                     report_entry.BOQA_prediction = "No_Pred"
                     report_entry.BOQA_prediction_score = 0
+                report_entry.save()
                 # Update of template ontology
                 # template_ontology = Ontology(template)
                 # current_report_ontology = Ontology(report_entry.ontology_tree)
                 # template_ontology.update_ontology(current_report_ontology)
                 # template_ontology.dump_updated_to_file("config/ontology.json")
-                db.session.commit()
                 return redirect(url_for("historeport.histoindex"))
 
         else:
@@ -195,8 +195,7 @@ def historeport():
                 ]
             onto_jstree = StandardVocabulary(report_entry.ontology_tree)
             report_entry.ontology_tree = onto_jstree.clean_tree()
-            report_entry.expert_id = current_user.id
-            db.session.add(report_entry)
+            report_entry.owner = User.objects(id=current_user.id).first()
             try:
                 results = get_boqa_pred(json.dumps(report_entry.ontology_tree))
             except:
@@ -212,7 +211,7 @@ def historeport():
             # current_report_ontology = Ontology(report_entry.ontology_tree)
             # template_ontology.update_ontology(current_report_ontology)
             # template_ontology.dump_updated_to_file("config/ontology.json")
-            db.session.commit()
+            report_entry.save()
             return redirect(url_for("historeport.histoindex"))
 
     return render_template(
@@ -238,12 +237,11 @@ def delete_report(id_report):
     form = DeleteButton()
     # Retrieve database entry and delete it if existing
     if form.validate_on_submit():
-        report_form = ReportHisto.query.get(id_report)
+        report_form = ReportHisto.objects(id=id_report).first()
         if report_form is None:
             flash("Report {} not found.".format(id), "danger")
             return redirect(url_for("histoindex"))
-        db.session.delete(report_form)
-        db.session.commit()
+        report_form.delete()
         flash("Deleted entry {}!".format(id_report), "success")
         return redirect(url_for("historeport.histoindex"))
     else:

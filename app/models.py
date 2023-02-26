@@ -71,7 +71,7 @@ class User(UserMixin, db.Document):
             )["reset_password"]
         except:
             return
-        return User.objects(id=id)
+        return User.objects(id=id).first()
 
     @staticmethod
     def create_admin_account():
@@ -96,7 +96,7 @@ def load_user(id):
     Returns:
         SQLAlchemy Obj: Return the user database entry object corresponding to the ID
     """
-    u = User.objects(id=id)[0]
+    u = User.objects(id=id).first()
     return u
 
 
@@ -125,7 +125,7 @@ class Image(db.Document):
             bool: True if the image is already in the database, False otherwise
         """
         if (
-            Image.query.filter_by(
+            Image.objects(
                 image_name=self.image_name, patient_id=self.patient_id
             ).first()
             is None

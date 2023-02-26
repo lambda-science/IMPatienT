@@ -26,7 +26,6 @@ def internal_error(error):
     Returns:
         str: HTML page for error 500.
     """
-    db.session.rollback()
     return render_template("500.html"), 500
 
 

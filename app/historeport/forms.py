@@ -67,10 +67,10 @@ class ReportForm(FlaskForm):
     )
     age_biopsie = SelectField(
         "Patient age at biopsy:",
-        choices=["N/A"] + [i for i in range(101)],
-        default="N/A",
+        choices=[-1] + [i for i in range(101)],
+        default=-1,
         render_kw={
-            "placeholder": "Patient age at biopsy",
+            "placeholder": "Patient age at biopsy (-1 if unknown)",
             "class": "form-control custom-select",
         },
     )
