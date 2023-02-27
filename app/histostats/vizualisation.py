@@ -305,8 +305,6 @@ def generate_UNCLEAR(df):
     labels_trim = []
     for i in list(conclusion_boqa.index):
         labels_trim.append(string_wordbreaker(i))
-    print(conclusion_boqa.index)
-    print(conclusion_boqa)
     fig = px.bar(
         x=conclusion_boqa.index,
         y=conclusion_boqa,

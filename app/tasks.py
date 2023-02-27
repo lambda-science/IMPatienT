@@ -12,29 +12,21 @@ app = create_app()
 app.app_context().push()
 
 
-def example(seconds):
-    print("Starting task")
-    for i in range(seconds):
-        print(i)
-        time.sleep(1)
-    print("Task completed")
-
-
 def _set_task_progress(progress):
     job = get_current_job()
     if job:
         job.meta["progress"] = progress
         job.save_meta()
-        task = Task.query.get(job.get_id())
-        task.user.add_notification(
-            "task_progress", {"task_id": job.get_id(), "progress": progress}
-        )
+        task = Task.objects(rq_id=job.get_id()).first()
+        # task.user.add_notification(
+        #     "task_progress", {"task_id": job.get_id(), "progress": progress}
+        # )
         if progress >= 100:
             task.complete = True
         task.save()
 
 
-def export_posts(user_id):
+def export_data(user_id):
     try:
         user = User.objects(id=user_id).first()
         _set_task_progress(0)
@@ -50,7 +42,7 @@ def export_posts(user_id):
             _set_task_progress(100 * i // total_images)
         send_email(
             "[IMPatienT] Your Data",
-            sender=app.config["ADMINS"][0],
+            sender=app.config["ADMINS_EMAIL"][0],
             recipients=[user.email],
             text_body=render_template("email/export_data.txt", user=user),
             html_body=render_template("email/export_data.html", user=user),
