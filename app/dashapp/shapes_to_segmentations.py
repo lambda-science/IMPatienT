@@ -73,7 +73,6 @@ def compute_segmentations(
     shape_layers=None,
     label_to_colors_args={},
 ):
-
     # load original image
     img = img_to_ubyte_array(img_path)
 
