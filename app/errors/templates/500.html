@@ -1,10 +1,12 @@
 {% extends "base.html" %} {% block content %}
 <h1>Error 500: An unexpected error has occurred</h1>
-<h3>Please try going to the Standard Vocabulary module and
-  press "Save tree" to re-generate files and use this function again !</h3>
+<p>If this happened in the visualisation module, a common fix could be going to the Standard Vocabulary module and
+  press "Save tree" to re-generate files !</p>
 <p>The administrator has been notified. Sorry for the inconvenience!</p>
 <p>
   Please press the back button to go to the index:
   <a href="{{ url_for('index.index') }}">Back</a>
 </p>
-{% endblock %}
+<h3> Traceback: </h5>
+  <pre>{{ traceback_info }}</pre>
+  {% endblock %}

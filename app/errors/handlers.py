@@ -1,6 +1,7 @@
 from app import db
 from app.errors import bp
 from flask import render_template
+import traceback
 
 
 @bp.app_errorhandler(404)
@@ -27,7 +28,13 @@ def internal_error(error):
         str: HTML page for error 500.
     """
     db.session.rollback()
-    return render_template("500.html"), 500
+    # Capture the exception details
+    traceback_info = traceback.format_exc()
+
+    return (
+        render_template("500.html", traceback_info=traceback_info),
+        500,
+    )
 
 
 @bp.app_errorhandler(413)

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "impatient"
-version = "1.6.0"
+version = "1.6.1"
 description = "IMPatienT: an integrated web application to digitize, process and explore multimodal patient data"
 authors = ["Corentin Meyer <co.meyer@unistra.fr>"]
 license = "AGPL"
