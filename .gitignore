@@ -182,3 +182,5 @@ IMPatienT
 data/backup/*
 notebooks/*
 !notebooks/*.ipynb
+profile.json
+profile.html

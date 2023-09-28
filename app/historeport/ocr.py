@@ -28,7 +28,6 @@ class TextReport:
         self.ontology_path = os.path.join(
             current_app.config["ONTOLOGY_FOLDER"], "ontology.json"
         )
-        self.image_stack = []
         self.raw_text = ""
         self.text_as_list = []
         self.sentence_as_list = []
@@ -43,6 +42,7 @@ class TextReport:
             self.negex_sent = current_app.config["NEGEX_SENT_EN"]
         self.all_stopwords = self.nlp.Defaults.stop_words
         self.results_match_dict = {}
+        self.image_stack = convert_from_bytes(self.file_obj.read())
 
     def get_grayscale(self, image):
         """Convert an image as numpy array to grayscale
@@ -73,7 +73,6 @@ class TextReport:
         Returns:
             str: raw text as a string
         """
-        self.image_stack = convert_from_bytes(self.file_obj.read())
         page_list = []
         # Loop on each image (page) of the PDF file
         for image in self.image_stack:

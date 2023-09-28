@@ -1,5 +1,26 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed, FileField, FileRequired
+from wtforms.validators import DataRequired
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField
+
+
+class OntoUpload(FlaskForm):
+    """Form for uploading new ontology.
+
+    Args:
+        FlaskForm (FlaskForm Class): The FlaskForm Class
+    """
+
+    onto_file = FileField(
+        validators=[
+            FileAllowed(
+                ["json", "obo", "owl"],
+                "This file is not a valid ontology file !",
+            ),
+        ],
+        render_kw={"class": "form-control-file border"},
+    )
+    submit = SubmitField("Confirm Upload", render_kw={"class": "btn btn-warning"})
 
 
 class OntologyDescript(FlaskForm):

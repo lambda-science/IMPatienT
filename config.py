@@ -59,3 +59,41 @@ class Config(object):
 
     # Heroku to STDOut
     LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT")
+    ONTO_SCHEMA = {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "pattern": "^.*[:|_].*$"},
+                "text": {"type": "string"},
+                "icon": {"type": "boolean"},
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "description": {"type": "string"},
+                        "synonymes": {"type": "string"},
+                        "phenotype_datamined": {"type": "string"},
+                        "gene_datamined": {"type": "string"},
+                        "alternative_language": {"type": "string"},
+                        "correlates_with": {"type": "string"},
+                        "image_annotation": {"type": "boolean"},
+                        "hex_color": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+                        "hpo_datamined": {"type": "string"},
+                    },
+                    "required": [
+                        "description",
+                        "synonymes",
+                        "phenotype_datamined",
+                        "gene_datamined",
+                        "alternative_language",
+                        "correlates_with",
+                        "image_annotation",
+                        "hex_color",
+                        "hpo_datamined",
+                    ],
+                },
+                "parent": {"type": "string", "pattern": "[^.*[:|_].*$|^#$]]"},
+            },
+            "required": ["id", "text", "icon", "data", "parent"],
+        },
+    }

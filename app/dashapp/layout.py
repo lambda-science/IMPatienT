@@ -92,14 +92,19 @@ description = dbc.Col(
                         dbc.Row(
                             [
                                 dbc.Col(
-                                    html.P(
-                                        "This is the image annotation tool interface. "
-                                        "Select the standard vocabulary term and draw on the image to annotate parts of the image. "
-                                        "Then check the 'Compute Segmentation' tickbox to automatically expands your annotations to the whole image. "
-                                        "You may add more marks to clarify parts of the image where the classifier was not successful",
-                                        "and the classification will update. Once satisfied with the annotations area you can click the"
-                                        "'Save Annotation To Database' to save your annotations.",
-                                    ),
+                                    [
+                                        html.B(
+                                            "If your image is not displayed please hit F5 to refresh the page, it should solve most issues."
+                                        ),
+                                        html.P(
+                                            "This is the image annotation tool interface. "
+                                            "Select the standard vocabulary term and draw on the image to annotate parts of the image. "
+                                            "Then check the 'Compute Segmentation' tickbox to automatically expands your annotations to the whole image. "
+                                            "You may add more marks to clarify parts of the image where the classifier was not successful",
+                                            "and the classification will update. Once satisfied with the annotations area you can click the"
+                                            "'Save Annotation To Database' to save your annotations.",
+                                        ),
+                                    ],
                                     md=True,
                                 ),
                             ]

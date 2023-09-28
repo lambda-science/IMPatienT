@@ -1,13 +1,15 @@
 import json
 import os
+import jsonschema
+from jsonschema import validate
 
 import bleach
-
+from werkzeug.utils import secure_filename
 from app import db
-from app.historeport.onto_func import StandardVocabulary
+from app.historeport.onto_func import StandardVocabulary, ImpatientVocab
 from app.models import ReportHisto
 from app.ontocreate import bp
-from app.ontocreate.forms import InvertLangButton, OntologyDescript
+from app.ontocreate.forms import InvertLangButton, OntologyDescript, OntoUpload
 from app.histostats.vizualisation import (
     db_to_df,
     table_to_df,
@@ -50,7 +52,50 @@ def ontocreate():
     """
     form = OntologyDescript()
     form2 = InvertLangButton()
-    return render_template("ontocreate.html", form=form, form2=form2)
+    form_onto = OntoUpload()
+    if form_onto.validate_on_submit() and form_onto.onto_file.data:
+        # Get the uploaded file
+        uploaded_file = form_onto.onto_file.data
+        # Check if the file has an allowed extension
+        if uploaded_file.filename[-4:] == "json":
+            onto_data = ImpatientVocab()
+            onto_data.load_json_f(uploaded_file)
+
+        else:
+            onto_data = ImpatientVocab()
+            onto_data.load_ontology_f(uploaded_file)
+            onto_data.onto_to_json()
+
+        validate(
+            instance=onto_data.impatient_json,
+            schema=current_app.config["ONTO_SCHEMA"],
+        )
+        onto_data.impatient_json[0]["data"]["image_annotation"] = True
+        file_path = os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json")
+        flag_valid = True
+
+        if flag_valid:
+            onto_data.dump_json(file_path)
+            for report in ReportHisto.query.all():
+                report.ontology_tree = onto_data.impatient_json
+                flag_modified(report, "ontology_tree")
+            db.session.commit()
+            # Update The DashApp Callback & layout
+            # By Force reloading the layout code & callbacks
+            dashapp = current_app.config["DASHAPP"]
+            with current_app.app_context():
+                import importlib
+                import sys
+
+                importlib.reload(sys.modules["app.dashapp.callbacks"])
+                import app.dashapp.layout
+
+                importlib.reload(app.dashapp.layout)
+                dashapp.layout = app.dashapp.layout.layout
+            return redirect(url_for("ontocreate.ontocreate"))
+    return render_template(
+        "ontocreate.html", form=form, form2=form2, form_onto=form_onto
+    )
 
 
 @bp.route("/modify_onto", methods=["PATCH"])
@@ -88,8 +133,10 @@ def modify_onto():
     template_ontology = StandardVocabulary(clean_tree)
     for report in ReportHisto.query.all():
         current_report_ontology = StandardVocabulary(report.ontology_tree)
-        updated_report_ontology = json.loads(bleach.clean(
-            json.dumps(current_report_ontology.update_ontology(template_ontology)))
+        updated_report_ontology = json.loads(
+            bleach.clean(
+                json.dumps(current_report_ontology.update_ontology(template_ontology))
+            )
         )
         # Issue: SQLAlchemy not updating JSON https://stackoverflow.com/questions/42559434/updates-to-json-field-dont-persist-to-db
 
@@ -122,6 +169,36 @@ def download_onto():
     """
     return send_from_directory(
         current_app.config["ONTOLOGY_FOLDER"], "ontology.json", as_attachment=True
+    )
+
+
+@bp.route("/upload_onto", methods=["POST"])
+@login_required
+def upload_onto():
+    """Route to upload an ontology in place as JSON, OWL or OBO file."""
+    return send_from_directory(
+        current_app.config["ONTOLOGY_FOLDER"], "ontology.json", as_attachment=True
+    )
+
+
+@bp.route("/download_onto_as_obo", methods=["GET"])
+@login_required
+def download_onto_as_obo():
+    """Route to download the standard vocabulary JSON file.
+
+    Returns:
+        File: returns the file
+    """
+    my_onto = ImpatientVocab()
+    my_onto.load_json(
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json")
+    )
+    my_onto.json_to_onto()
+    my_onto.dump_onto(
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.obo")
+    )
+    return send_from_directory(
+        current_app.config["ONTOLOGY_FOLDER"], "ontology.obo", as_attachment=True
     )
 
 
