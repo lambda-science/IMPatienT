@@ -15,7 +15,7 @@ This project is free and open-source under the AGPL license, feel free to fork a
 ## Contact:
 
 The main maintainer is:
-[**Corentin Meyer** - PhD Student @ CSTB Team - iCube - University Of Strasbourg](https://cmeyer.fr) <co.meyer@unistra.fr>
+[**Corentin Meyer** - PhD in Biomedical AI](https://cmeyer.fr) <contact@cmeyer.fr>
 
 ## Citing IMPatienT🗂️
 
