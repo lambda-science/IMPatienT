@@ -54,7 +54,7 @@ def repredict_reports():
       redirect: Redirect to the historeports index HTML page
     """
     with open(
-            os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r"
+        os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r"
     ) as fp:
         onto_tree = json.load(fp)
     df = db_to_df()
@@ -81,7 +81,7 @@ def repredict_reports():
 @bp.route("/historeport/download", methods=["GET"])
 def histo_download():
     with open(
-            os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r"
+        os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r"
     ) as fp:
         onto_tree = json.load(fp)
     df = db_to_df()
@@ -126,7 +126,7 @@ def historeport():
     # If no args: empty form
     else:
         with open(
-                os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json")
+            os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json")
         ) as f:
             empty_json_tree = json.load(f)
         form = ReportForm(ontology_tree=empty_json_tree)

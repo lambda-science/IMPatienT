@@ -27,7 +27,7 @@ def _texture_filter(gaussian_filtered):
 
 
 def _mutiscale_basic_features_singlechannel(
-        img, intensity=True, edges=True, texture=True, sigma_min=0.5, sigma_max=16
+    img, intensity=True, edges=True, texture=True, sigma_min=0.5, sigma_max=16
 ):
     """Features for a single channel nd image.
 
@@ -63,13 +63,13 @@ def _mutiscale_basic_features_singlechannel(
 
 
 def multiscale_basic_features(
-        image,
-        multichannel=True,
-        intensity=True,
-        edges=True,
-        texture=True,
-        sigma_min=0.5,
-        sigma_max=16,
+    image,
+    multichannel=True,
+    intensity=True,
+    edges=True,
+    texture=True,
+    sigma_min=0.5,
+    sigma_max=16,
 ):
     """Local features for a single- or multi-channel nd image.
 

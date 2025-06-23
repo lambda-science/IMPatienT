@@ -165,8 +165,8 @@ class StandardVocabulary:
                 updated_jstree_as_list.append(i)
             elif i["id"] in dest_onto.jstree_as_dict.keys():
                 if (
-                        i["text"] != dest_onto.jstree_as_dict[i["id"]]["text"]
-                        or i["data"] != dest_onto.jstree_as_dict[i["id"]]["data"]
+                    i["text"] != dest_onto.jstree_as_dict[i["id"]]["text"]
+                    or i["data"] != dest_onto.jstree_as_dict[i["id"]]["data"]
                 ):
                     # If destination has modified data or name: update
                     i["text"] = dest_onto.jstree_as_dict[i["id"]]["text"]
@@ -213,8 +213,8 @@ class StandardVocabulary:
         # If destination has different parent ID: change it.
         for i in dest_onto.jstree_as_dict.keys():
             if (
-                    dest_onto.jstree_as_dict[i]["parent"]
-                    != self.jstree_as_dict[i]["parent"]
+                dest_onto.jstree_as_dict[i]["parent"]
+                != self.jstree_as_dict[i]["parent"]
             ):
                 self.jstree_as_dict[i]["parent"] = dest_onto.jstree_as_dict[i]["parent"]
 

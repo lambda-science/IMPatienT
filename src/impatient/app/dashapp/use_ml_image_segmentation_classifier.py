@@ -38,7 +38,7 @@ def getenv(e):
 
 
 def use_img_classifier_in_mem(
-        clf, segmenter_args, label_to_colors_args, img_path, out_img
+    clf, segmenter_args, label_to_colors_args, img_path, out_img
 ):
     img = skimage.io.imread(img_path)
 

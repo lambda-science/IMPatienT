@@ -28,7 +28,7 @@ def fromhex(n):
 
 
 def label_to_colors(
-        img, colormap=px.colors.qualitative.Light24, alpha=128, color_class_offset=0
+    img, colormap=px.colors.qualitative.Light24, alpha=128, color_class_offset=0
 ):
     """
     Take MxN matrix containing integers representing labels and return an MxNx4
@@ -44,7 +44,7 @@ def label_to_colors(
     for key, value in colormap.items():
         hex_value = value.replace("#", "")
         colormap_converted[key] = tuple(
-            [fromhex(hex_value[s: s + 2]) for s in range(0, len(hex_value), 2)]
+            [fromhex(hex_value[s : s + 2]) for s in range(0, len(hex_value), 2)]
         )
     cimg = np.zeros(img.shape[:2] + (3,), dtype="uint8")
     label_on_img = np.unique(img).tolist()
@@ -69,11 +69,11 @@ def grey_labels(img):
 
 
 def compute_segmentations(
-        shapes,
-        img_path=None,
-        features=None,
-        shape_layers=None,
-        label_to_colors_args={},
+    shapes,
+    img_path=None,
+    features=None,
+    shape_layers=None,
+    label_to_colors_args={},
 ):
     # load original image
     img = img_to_ubyte_array(img_path)

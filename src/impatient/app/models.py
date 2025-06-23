@@ -40,10 +40,10 @@ class Image(db.Model):
             bool: True if the image is already in the database, False otherwise
         """
         if (
-                Image.query.filter_by(
-                    image_name=self.image_name, patient_id=self.patient_id
-                ).first()
-                is None
+            Image.query.filter_by(
+                image_name=self.image_name, patient_id=self.patient_id
+            ).first()
+            is None
         ):
             return False
         else:

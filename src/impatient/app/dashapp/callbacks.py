@@ -76,11 +76,11 @@ def color_to_class(ontology, color_hex):
 
 
 def make_default_figure(
-        images=None,
-        stroke_color="",
-        stroke_width=3,
-        shapes=[],
-        source_img=None,
+    images=None,
+    stroke_color="",
+    stroke_width=3,
+    shapes=[],
+    source_img=None,
 ):
     fig = plot_common.dummy_fig()
     plot_common.add_layout_images_to_fig(fig, images)
@@ -113,12 +113,12 @@ def save_img_classifier(clf, label_to_colors_args, segmenter_args):
 
 
 def show_segmentation(
-        image_path,
-        mask_shapes,
-        features,
-        segmenter_args,
-        class_label_colormap,
-        onto_tree_imgannot,
+    image_path,
+    mask_shapes,
+    features,
+    segmenter_args,
+    class_label_colormap,
+    onto_tree_imgannot,
 ):
     """adds an image showing segmentations to a figure's layout"""
     # add 1 because classifier takes 0 to mean no mask
@@ -176,14 +176,14 @@ def register_callbacks(dashapp):
         ],
     )
     def annotation_react(
-            href,
-            graph_relayoutData,
-            any_label_class_button_value,
-            stroke_width_value,
-            show_segmentation_value,
-            download_button_n_clicks,
-            sigma_range_slider_value,
-            masks_data,
+        href,
+        graph_relayoutData,
+        any_label_class_button_value,
+        stroke_width_value,
+        show_segmentation_value,
+        download_button_n_clicks,
+        sigma_range_slider_value,
+        masks_data,
     ):
         classified_image_store_data = dash.no_update
         classifier_store_data = dash.no_update
@@ -216,8 +216,8 @@ def register_callbacks(dashapp):
                     ]
 
         if cbcontext in ["sigma-range-slider.value"] or (
-                ("Show segmentation" in show_segmentation_value)
-                and (len(masks_data["shapes"]) > 0)
+            ("Show segmentation" in show_segmentation_value)
+            and (len(masks_data["shapes"]) > 0)
         ):
             segmentation_features_dict = {
                 "intensity": True,
@@ -257,7 +257,7 @@ def register_callbacks(dashapp):
 
         # We want the segmentation to be computed
         if ("Show segmentation" in show_segmentation_value) and (
-                len(masks_data["shapes"]) > 0
+            len(masks_data["shapes"]) > 0
         ):
             segimgpng = None
             try:

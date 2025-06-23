@@ -274,11 +274,11 @@ def generate_stat_per(df, features_col, onto):
         stat_per_diag[i]["n"] = nrow
         stat_per_diag[i]["feature"] = ds[ds > 0].round().to_dict()
     with open(
-            os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.json"), "w"
+        os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_gene.json"), "w"
     ) as f:
         json.dump(stat_per_gene, f, indent=4, ensure_ascii=False)
     with open(
-            os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_diag.json"), "w"
+        os.path.join(current_app.config["VIZ_FOLDER"], "stat_per_diag.json"), "w"
     ) as f:
         json.dump(stat_per_diag, f, indent=4, ensure_ascii=False)
 
@@ -419,7 +419,7 @@ def update_phenotype_gene(df):
         df (DataFrame): Processed DataFrame
     """
     with open(
-            os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
     ) as fp:
         onto = json.load(fp)
     for term in onto:
@@ -444,7 +444,7 @@ def update_phenotype_gene(df):
                 sorted(phenotype_datamined_temp)
             )
     with open(
-            os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as fp:
         json.dump(onto, fp, indent=4)
 
@@ -457,7 +457,7 @@ def update_correlation_data(corrMatrix, onto):
         corrMatrix (Dataframe): Correlation Dataframe computed from processed dataframe.
     """
     with open(
-            os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
     ) as fp:
         onto = json.load(fp)
     for term in onto:
@@ -469,7 +469,7 @@ def update_correlation_data(corrMatrix, onto):
         else:
             pass
     with open(
-            os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as fp:
         json.dump(onto, fp, indent=4)
 
@@ -480,8 +480,8 @@ def string_breaker(s, max_length=10):
     lines_nb = int(len(s) / max_length)
     new_string = []
     for i in range(lines_nb):
-        new_string.append(s[i * max_length: i * max_length + max_length])
-    new_string.append(s[lines_nb * max_length:])
+        new_string.append(s[i * max_length : i * max_length + max_length])
+    new_string.append(s[lines_nb * max_length :])
     return "<br>".join(new_string)
 
 

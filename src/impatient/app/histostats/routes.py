@@ -13,7 +13,7 @@ def statsindex():
     """
     # Up to stat_per_diag to move in the historeport part to not always regenerate
     with open(
-            os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r"
+        os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r"
     ) as fp:
         onto_tree = json.load(fp)
     df = db_to_df()

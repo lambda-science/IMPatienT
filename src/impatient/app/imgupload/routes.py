@@ -55,7 +55,7 @@ def img_download():
         os.path.join(current_app.config["IMAGES_FOLDER"], "images_db.csv"), index=False
     )
     with tarfile.open(
-            os.path.join(current_app.config["DATA_FOLDER"], "image_data.tar.gz"), "w:gz"
+        os.path.join(current_app.config["DATA_FOLDER"], "image_data.tar.gz"), "w:gz"
     ) as tar:
         tar.add(
             current_app.config["IMAGES_FOLDER"],

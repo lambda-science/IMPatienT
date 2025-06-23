@@ -123,7 +123,7 @@ def modify_onto():
     for i in dirty_tree:
         clean_tree.append(dirty_tree[i])
     with open(
-            os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as json_file:
         sanitized_json = json.loads(bleach.clean(json.dumps(clean_tree)))
         json.dump(sanitized_json, json_file, indent=4)
@@ -208,7 +208,7 @@ def invert_lang():
 
     # Open the ontology, invert text and alternative field, save it
     with open(
-            os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "r"
     ) as fp:
         onto = json.load(fp)
 
@@ -219,7 +219,7 @@ def invert_lang():
             term["data"]["alternative_language"] = temp_term
 
     with open(
-            os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
+        os.path.join(current_app.config["ONTOLOGY_FOLDER"], "ontology.json"), "w"
     ) as fp:
         json.dump(onto, fp, indent=4)
 

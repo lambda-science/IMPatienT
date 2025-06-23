@@ -35,10 +35,10 @@ def boqa(alpha, beta, query, items_stat):
         # Cardinality calculation of terms between H and Q
         m = matrix_m(query, hidden)
         a[disease] = (
-                pow(beta, m[0, 1])
-                * pow(1 - beta, m[1, 1])
-                * pow(1 - alpha, m[0, 0])
-                * pow(alpha, m[1, 0])
+            pow(beta, m[0, 1])
+            * pow(1 - beta, m[1, 1])
+            * pow(1 - alpha, m[0, 0])
+            * pow(alpha, m[1, 0])
         )
         a_init += a[disease]
     for disease in items_stat:
