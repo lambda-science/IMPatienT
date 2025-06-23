@@ -1,0 +1,147 @@
+{% extends "base.html" %} {% block content %}
+    <!-- JS Tree -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/themes/default/style.min.css"
+          integrity="sha512-P8BwDSUInKMA7I116Z1RFg/Dfk85uFdliEUYO7vQlwtxLVMNvZimfMAQsaf++9EhlAGOVX6yhDQAIY3/70jDUg=="
+          crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/jstree.min.js"
+            integrity="sha512-bU6dl4fd2XN3Do3aWypPP2DcKywDyR3YlyszV+rOw9OpglrGyBs6TyTsbglf9umgE+sy+dKm1UHhi07Lv+Vtfg=="
+            crossorigin="anonymous"></script>
+
+    <!-- Tagify -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.9.5/tagify.css"
+          integrity="sha512-BaWShaAj9H6cyD1SI+/ekd0OtzwPiGXz6R1SP39S3n9URHluzg6asEPsbbldma1UVTGAf1NEYHFAnWcA5bxHzg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.9.5/tagify.min.js"
+            integrity="sha512-BGEMEI3qqrE/xefnyaPBBZ7luE9L7+kUNxCP0hyQMDYqxyC6w4vQbjjrqiSQxGIHs8C2cl65zvbhmXt5JZUHow=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <div class="row">
+        <div class="col-xl">
+            <h1>Standard Vocabulary Tree</h1>
+            <a href="{{ url_for('ontocreate.download_onto') }}"><i class="fa-solid fa-download"></i> Download Vocabulary
+                (.JSON)
+            </a>
+            <a href="{{ url_for('ontocreate.download_onto_as_obo') }}"><i class="fa-solid fa-download"></i> Download
+                Vocabulary
+                (.OBO)
+            </a>
+
+            <!-- Button Show Popup -->
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#RepredictPopup">
+                <i
+                        class="fa-solid fa-upload"></i>
+                Upload Vocab (Experimental)
+            </button>
+
+            <!-- Reprediction Confirmation Popup -->
+            <div class="modal fade" id="RepredictPopup" tabindex="-1" aria-labelledby="RepredictPopupLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="RepredictPopupLabel">Confirm Upload Vocabulary</h5>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <p>This will replace the current vocabulary with your custom file. Please note that this
+                                will DELETE all
+                                terms annotation for each patient because you are totally repalce your previous
+                                vocabulary. You will have
+                                to re-annotate all patients from the database.This feature is experimental and might not
+                                work with all
+                                vocabularies in OWL and OBO formats. Espcially it has issue with big ones (>1000
+                                classes). In case of
+                                error, the vocabulary will not be switched.</p>
+                            <form action="" method="post" enctype="multipart/form-data" style="display: inline">
+                                {{ form_onto.hidden_tag() }} {{ form_onto.onto_file }} {{ form_onto.submit }}
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="text" id="plugins4_q" value="" type="search" id="form1" class="form-control"
+                   placeholder="Search"/>
+            <div id="jstree" class="demo" style="overflow: scroll; max-height: 600px"></div>
+
+            <button type="button" class="btn btn-success" onclick="save_tree()"><i
+                    class="fa-regular fa-floppy-disk"></i>
+                Save Tree
+            </button>
+            <div class="spinner-border text-success" role="status" id="savespinner" hidden>
+                <span class="sr-only"></span>
+            </div>
+
+            <!-- Button Show Popup -->
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LangInvertPopup"><i
+                    class="fa-solid fa-repeat"></i>
+                Invert Vocabulary Language
+            </button>
+
+            <!-- Deletion Popup -->
+            <div class="modal fade" id="LangInvertPopup" tabindex="-1" aria-labelledby="LangInvertPopupLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="LangInvertPopupLabel">
+                                Confirm Ontology Lang Inversion
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{{ url_for('ontocreate.invert_lang') }}" method="post"
+                                  style="display: inline">
+                                {{ form2.hidden_tag() }} {{ form2.submit }}
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl">
+            <h1>Vocabulary Properties</h1>
+            <form method="post">
+                {% for error in form.errors %}
+                    <span style="color: red">{{ error }}: {{ form.errors[error] }}</span>
+                {% endfor %}
+                {{ form.hidden_tag() }}
+                {{ form.onto_id_ext.label(class="form-label") }}
+                {{ form.onto_id_ext }}
+                {{ form.onto_name.label(class="form-label") }}
+                {{ form.onto_name }}
+                {{ form.alternative_language.label(class="form-label") }}
+                {{ form.alternative_language }}
+                {{ form.synonymes.label(class="form-label") }}
+                {{ form.synonymes }}
+                {{ form.image_annotation.label(class="form-label") }}
+                {{ form.image_annotation }} <br/>
+                {{ form.hpo_datamined.label(class="form-label") }}
+                {{ form.hpo_datamined }}
+                {{ form.gene_datamined.label(class="form-label") }}
+                {{ form.gene_datamined }}
+                {{ form.phenotype_datamined.label(class="form-label") }}
+                {{ form.phenotype_datamined }}
+                {{ form.correlates_with.label(class="form-label") }}
+                {{ form.correlates_with }}
+                {{ form.description.label(class="form-label") }}
+                {{ form.description }}
+
+                <!-- <button type="button" class="btn btn-success" onclick="update_node_data()"><i
+                    class="fa-regular fa-floppy-disk"></i>
+                  Update Details
+                </button> -->
+            </form>
+        </div>
+    </div>
+    <meta id="data-url" data-jstree="{{ url_for('ontocreate.onto_json', filename='ontology.json') }}"
+          data-savetree="{{ url_for('ontocreate.modify_onto') }}"/>
+    <script src="{{ url_for('ontocreate.static', filename='ontocreate.js') }}"></script>
+{% endblock %}

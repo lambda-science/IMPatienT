@@ -1,0 +1,24 @@
+.table tr {
+    line-height: 10px;
+    min-height: 10px;
+    height: 10px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(41, 43, 44);
+    color: white;
+    text-align: center;
+}
+
+.obfuscate {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+* {
+    font-family: "Nunito Sans", sans-serif;
+}

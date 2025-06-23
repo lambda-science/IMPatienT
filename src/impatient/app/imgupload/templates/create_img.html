@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <!-- Tagify -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.9.5/tagify.css"
+          integrity="sha512-BaWShaAj9H6cyD1SI+/ekd0OtzwPiGXz6R1SP39S3n9URHluzg6asEPsbbldma1UVTGAf1NEYHFAnWcA5bxHzg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.9.5/tagify.min.js"
+            integrity="sha512-BGEMEI3qqrE/xefnyaPBBZ7luE9L7+kUNxCP0hyQMDYqxyC6w4vQbjjrqiSQxGIHs8C2cl65zvbhmXt5JZUHow=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <div class="row">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6">
+            <h1>Modify/Upload New Image</h1><br/>
+            <form method=post enctype=multipart/form-data>
+                {% for error in form.errors %}
+                    <span style="color: red;">{{ error }}: {{ form.errors[error] }}</span>
+                {% endfor %}
+                {{ form.hidden_tag() }}
+                {{ form.patient_ID.label(class="form-label") }}
+                {{ form.patient_ID }}
+                <h4>Select an image file</h4>
+                {{ form.image }} <br/>
+                {{ form.biopsy_report_ID.label(class="form-label") }}
+                {{ form.biopsy_report_ID }}
+                {{ form.type_coloration.label(class="form-label") }}
+                {{ form.type_coloration }}
+                {{ form.age_histo.label(class="form-label") }}
+                {{ form.age_histo }}
+                {{ form.diagnostic.label(class="form-label") }}
+                {{ form.diagnostic }}
+                <button type="submit" class="btn btn-primary mb-2"><i class="fa-solid fa-upload"></i> Upload</button>
+        </div>
+        <div class="col-xl-3"></div>
+    </div>
+    <script src="{{ url_for('imgupload.static', filename='imgupload.js') }}"></script>
+{% endblock %}
