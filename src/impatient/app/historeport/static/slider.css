@@ -1,0 +1,63 @@
+markneg {
+    background: rgb(112, 5, 5);
+    color: rgb(255, 255, 255);
+}
+
+markpos {
+    background: rgb(9, 158, 9);
+    color: rgb(255, 255, 255);
+}
+
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f0ad4e+10,d9534f+10,d9534f+30,5cb85c+30 */
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f0ad4e+45,d9534f+45,d9534f+55,5cb85c+55 */
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#d9534f+5,f0ad4e+5,f0ad4e+5,f0ad4e+51,d2ffc9+51,0cf900+100 */
+
+/* Mozilla */
+input[type="range"]::-moz-range-track {
+    background: -moz-linear-gradient(
+            left,
+            #f0ad4e 15%,
+            #d9534f 15%,
+            #d9534f 30%,
+            #5cb85c 30%
+    ); /* FF3.6-15 */
+    background: linear-gradient(
+            to right,
+            #f0ad4e 15%,
+            #d9534f 15%,
+            #d9534f 30%,
+            #5cb85c 30%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+/* Chrome */
+input[type="range"]::-webkit-slider-runnable-track {
+    background: -webkit-linear-gradient(
+            left,
+            #f0ad4e 15%,
+            #d9534f 15%,
+            #d9534f 30%,
+            #5cb85c 30%
+    ); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(
+            to right,
+            #f0ad4e 15%,
+            #d9534f 15%,
+            #d9534f 30%,
+            #5cb85c 30%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+/* IE*/
+input[type="range"]::-ms-fill-lower,
+input[type="range"]::-ms-fill-upper {
+    background: #f0ad4e; /* Old browsers */
+    background: linear-gradient(
+            to right,
+            #f0ad4e 15%,
+            #d9534f 15%,
+            #d9534f 30%,
+            #5cb85c 30%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0ad4e', endColorstr='#5cb85c', GradientType=1); /* IE6-9 */
+}

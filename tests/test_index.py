@@ -5,9 +5,8 @@ import unittest
 topdir = os.path.join(os.path.dirname(__file__), "..")
 sys.path.append(topdir)
 
-from app import create_app, db
-from app.models import User
-from config import Config
+from impatient.app import create_app, db
+from impatient.config import Config
 
 
 class TestConfig(Config):

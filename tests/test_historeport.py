@@ -6,10 +6,9 @@ import unittest
 topdir = os.path.join(os.path.dirname(__file__), "..")
 sys.path.append(topdir)
 
-from app import create_app, db
-from app.historeport.onto_func import StandardVocabulary
-from app.models import User
-from config import Config
+from impatient.app import create_app, db
+from impatient.app.historeport.onto_func import StandardVocabulary
+from impatient.config import Config
 
 
 class TestConfig(Config):
@@ -30,9 +29,6 @@ class HistoReportCase(unittest.TestCase):
         self.client = self.app.test_client()
         self.app_context.push()
         db.create_all()
-        user = User(username="test", email="test@test.test")
-        user.set_password("azerty")
-        db.session.add(user)
         db.session.commit()
         self.client.post(
             "/login",

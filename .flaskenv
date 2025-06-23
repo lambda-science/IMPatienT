@@ -1,1 +1,1 @@
-FLASK_APP=impatient.py
+FLASK_APP=src/impatient/impatient_app.py

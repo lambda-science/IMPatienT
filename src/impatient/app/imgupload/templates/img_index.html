@@ -1,0 +1,87 @@
+{% extends "base.html" %} {% block content %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css"/>
+
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+    <div class="row">
+        <div class="col-xl-3 offset-md-4">
+            <h1>Upload a new image</h1>
+            <div class="text-center">
+                <a href="{{ url_for('imgupload.create_img') }}" class="btn btn-info btn-lg" role="button"><i
+                        class="fa-solid fa-plus"></i> New Image
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl">
+            <h1>Image Database</h1> <a href="{{ url_for('imgupload.img_download') }}"><i
+                class="fa-solid fa-download"></i>
+            Download All Images (.tar.gz)</a>
+            <table id="image-history" class="table table-striped table-bordered table-hover table-responsive">
+                <thead class="table-info">
+                <th class="align-middle text-center">Biopsy ID</th>
+                <th class="align-middle text-center">Patient ID</th>
+                <th class="align-middle text-center">Image Name</th>
+                <th class="align-middle text-center">Diagnostic</th>
+                <th class="align-middle text-center">Action</th>
+                </thead>
+                {% for image in image_history %}
+                    <tr>
+                        <td class="align-middle text-center">{{ image.biopsy_id }}</td>
+                        <td class="align-middle text-center">{{ image.patient_id }}</td>
+                        <td class="align-middle text-center">{{ image.image_name }}</td>
+                        <td class="align-middle text-center">{{ image.diagnostic }}</td>
+                        <td class="align-middle text-center">
+                            <a class="btn btn-warning btn-sm" role="button" href="dashboard?id={{ image.id }}"><i
+                                    class="fa-solid fa-draw-polygon"></i>
+                                Anotate
+                            </a>
+                            <a class="btn btn-success btn-sm" role="button" href="create_img?id={{ image.id }}"><i
+                                    class="fa-regular fa-image"></i>
+                                Modify
+                            </a>
+                            <!-- Button Show Popup -->
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#DeletionPopup{{ image.id }}"><i
+                                    class="fa-regular fa-trash-can"></i>
+                                Delete
+                            </button>
+
+                            <!-- Deletion Popup -->
+                            <div class="modal fade" id="DeletionPopup{{ image.id }}" tabindex="-1"
+                                 aria-labelledby="DeletionPopupLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="DeletionPopupLabel">
+                                                Confirm Delete Popup
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{ url_for('imgupload.delete_img', id_img=image.id) }}"
+                                                  method="post"
+                                                  style="display: inline">
+                                                {{ form.hidden_tag() }} {{ form.submit }}
+                                            </form>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <script src="{{ url_for('imgupload.static', filename='img_index.js') }}"></script>
+
+{% endblock %}

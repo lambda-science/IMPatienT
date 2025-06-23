@@ -1,67 +1,64 @@
-[tool.poetry]
+[project]
 name = "impatient"
-version = "1.6.1"
+version = "1.7.0"
 description = "IMPatienT: an integrated web application to digitize, process and explore multimodal patient data"
-authors = ["Corentin Meyer <co.meyer@unistra.fr>"]
-license = "AGPL"
+authors = [{ name = "Corentin Meyer", email = "contact@cmeyer.fr" }]
+maintainers = [
+    { name = "Corentin Meyer", email = "contact@cmeyer.fr" }
+]
+requires-python = ">= 3.10"
 
-[tool.poetry.dependencies]
-python = ">=3.8,<3.11"
-pip = "*"
-setuptools = "*"
-wheel = "*"
-scikit-learn = "^1"
-scikit-image = "^0"
-dash = "^2"
-Flask = "^2"
-Flask-WTF = "^0"
-WTForms = "^2"
-wtforms-validators = "^1"
-Flask-Login = "^0"
-Flask-SQLAlchemy = "^2"
-Flask-Mail = "^0"
-python-dotenv = "^0"
-pandas = "^1.3"
-numpy = "^1"
-plotly = "^5"
-CairoSVG = "^2"
-Pillow = "^9"
-joblib = "^1"
-dash-core-components = "^2"
-dash-bootstrap-components = "^1"
-Flask-Migrate = "^4"
-Flask-Session = "^0"
-pytesseract = "^0"
-pdf2image = "^1"
-spacy = "^3"
-thefuzz = "^0"
-email-validator = "^1"
-dash-html-components = "^2"
-gunicorn = "^20"
-opencv-python-headless = "^4"
-python-Levenshtein = "^0.12.2"
-PyJWT = "^2.3.0"
-en_core_web_sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.2.0/en_core_web_sm-3.2.0-py3-none-any.whl" }
-fr_core_news_sm = { url = "https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.2.0/fr_core_news_sm-3.2.0-py3-none-any.whl" }
-Flask-Cors = "^3.0.10"
-textacy = "^0.12.0"
-bleach = "^5.0.1"
-pronto = "^2.5.5"
-jsonschema = "^4.19.0"
-scalene = "^1.5.31.1"
+dependencies = [
+    "scikit-learn<2",
+    "scikit-image<1",
+    "dash<4",
+    "Flask<4",
+    "Flask-WTF<2",
+    "WTForms<3",
+    "wtforms-validators<2",
+    "Flask-SQLAlchemy<4",
+    "Flask-Mail<1",
+    "python-dotenv<1",
+    "pandas<3",
+    "numpy<2",
+    "plotly<7",
+    "Pillow<12",
+    "joblib<2",
+    "dash-core-components<3",
+    "dash-bootstrap-components<2",
+    "Flask-Migrate<5",
+    "Flask-Session<1",
+    "pytesseract<1",
+    "pdf2image<2",
+    "spacy<=3.8.7",
+    "thefuzz<1",
+    "email-validator<3",
+    "dash-html-components<3",
+    "gunicorn<24",
+    "opencv-python-headless<5",
+    "python-Levenshtein<0.27.1",
+    "PyJWT<2.4.0",
+    "en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl",
+    "fr_core_news_sm @ https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.8.0/fr_core_news_sm-3.8.0-py3-none-any.whl",
+    "Flask-Cors<7",
+    "textacy<1",
+    "bleach<5.1.1",
+    "pronto<2.6.5",
+    "jsonschema<4.20.0",
+    "cairosvg<3.0.0",
+    "huggingface-hub>=0.33.0",
+]
 
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.0.221"
-mkdocs-material = "^9.0.5"
-black = {extras = ["jupyter"], version = "*"}
-ipykernel = "^6"
-unittest2 = "^1"
-pytest = "^6.2.5"
-bandit = "^1.7.1"
-pre-commit = "^2.16.0"
-mypy = "^0.991"
-mkdocstrings = "^0.19.1"
+[dependency-groups]
+dev = [
+]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/impatient"]

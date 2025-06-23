@@ -157,7 +157,7 @@ package-lock.json
 *.list
 joblib*
 *.back
-app/static/viz/*
+src/impatient/app/static/viz/*
 *.jar
 *.pdf
 git-filter-repo
@@ -184,3 +184,4 @@ notebooks/*
 !notebooks/*.ipynb
 profile.json
 profile.html
+!src/*
