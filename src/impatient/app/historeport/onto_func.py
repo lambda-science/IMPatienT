@@ -1,8 +1,9 @@
+import io
 import json
 import random
-from pronto import Ontology, Definition
-import io
+
 from flask_wtf.file import FileField
+from pronto import Ontology, Definition
 
 
 class ImpatientVocab:
@@ -35,9 +36,7 @@ class ImpatientVocab:
 
     def json_to_onto(self) -> Ontology:
         self.impatient_onto = Ontology()
-        term_mapping = (
-            {}
-        )  # A dictionary to store term IDs and their corresponding created terms
+        term_mapping = {}  # A dictionary to store term IDs and their corresponding created terms
 
         # First pass: Create terms without adding superclasses
         for term in self.impatient_json:

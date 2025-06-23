@@ -1,35 +1,30 @@
-import io
 import base64
+import io
 import json
 import os
-import dash
 import pickle  # nosec
 import traceback
-
-from flask import current_app
 from urllib import parse
-from joblib import Memory
-
-import numpy as np
-import pandas as pd
 
 import PIL.Image
-from skimage import io as skio
-from dash.dependencies import Input, Output, State
-from dash import html
-from dash import dcc
+import dash
 import dash_bootstrap_components as dbc
+import numpy as np
+from dash import html
+from dash.dependencies import Input, Output, State
+from flask import current_app
+from joblib import Memory
+from skimage import io as skio
 
-from impatient.app import db
-import impatient.app.dashapp.plot_common as plot_common
-from impatient.app.models import Image
 import impatient.app.dashapp.common_func as common_func
+import impatient.app.dashapp.plot_common as plot_common
+from impatient.app import db
 from impatient.app.dashapp.shapes_to_segmentations import (
     compute_segmentations,
     blend_image_and_classified_regions_pil,
 )
-
 from impatient.app.dashapp.trainable_segmentation import multiscale_basic_features
+from impatient.app.models import Image
 
 memory = Memory("./joblib_cache", verbose=1)
 compute_features = memory.cache(multiscale_basic_features)

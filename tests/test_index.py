@@ -5,7 +5,7 @@ import unittest
 topdir = os.path.join(os.path.dirname(__file__), "..")
 sys.path.append(topdir)
 
-from impatient.app import create_app, db
+from impatient.app import create_app
 from impatient.config import Config
 
 

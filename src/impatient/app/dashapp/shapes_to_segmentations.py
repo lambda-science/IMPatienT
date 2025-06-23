@@ -1,14 +1,16 @@
+from time import time
+
 import PIL.Image
 import numpy as np
+import plotly.express as px
 import skimage
-import skimage.util
-import skimage.io
 import skimage.color
+import skimage.io
+import skimage.util
+from sklearn.ensemble import RandomForestClassifier
+
 import impatient.app.dashapp.shape_utils as shape_utils
 from impatient.app.dashapp.trainable_segmentation import fit_segmenter
-import plotly.express as px
-from sklearn.ensemble import RandomForestClassifier
-from time import time
 
 
 def img_to_ubyte_array(img):

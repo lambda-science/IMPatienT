@@ -9,13 +9,16 @@ load_dotenv(os.path.join(basedir, ".env"))
 
 class Config(object):
     """Class to load all config parameters of the Flask App"""
+
     SECRET_KEY = os.environ.get("SECRET_KEY") or "myverylongsecretkey"
 
     DATA_FOLDER = os.path.join("/home/impatient", "data")
     ONTOLOGY_FOLDER = os.path.join("/home/impatient/", "data", "ontology")
     IMAGES_FOLDER = os.path.join("/home/impatient", "data", "images")
     CONFIG_FOLDER = os.path.join("/home/impatient", "src", "impatient", "config")
-    VIZ_FOLDER = os.path.join("/home/impatient", "src", "impatient", "app", "static", "viz")
+    VIZ_FOLDER = os.path.join(
+        "/home/impatient", "src", "impatient", "app", "static", "viz"
+    )
 
     negex_en = open(os.path.join(CONFIG_FOLDER, "negex_en.txt"), "r")
     negex_fr = open(os.path.join(CONFIG_FOLDER, "negex_fr.txt"), "r")

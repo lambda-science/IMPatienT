@@ -3,14 +3,14 @@ import os
 
 import numpy as np
 import pandas as pd
-import plotly
 import plotly.express as px
 import plotly.figure_factory as ff
 import plotly.graph_objs as go
-from impatient.app import db
-from impatient.app.models import ReportHisto
 from flask import current_app
 from sklearn.metrics import confusion_matrix
+
+from impatient.app import db
+from impatient.app.models import ReportHisto
 
 
 def id_to_name(onto, ids_list, mode="full"):

@@ -1,5 +1,15 @@
-import json
 from contextlib import suppress
+
+from flask import (
+    current_app,
+    flash,
+    redirect,
+    render_template,
+    request,
+    url_for,
+    make_response,
+)
+
 from impatient.app import db
 from impatient.app.historeport import bp
 from impatient.app.historeport.boqa import *
@@ -10,25 +20,15 @@ from impatient.app.historeport.forms import (
     ReportForm,
     PdfUpload,
 )
-
+from impatient.app.historeport.ocr import TextReport
+from impatient.app.historeport.onto_func import StandardVocabulary
 from impatient.app.histostats.vizualisation import (
     db_to_df,
     table_to_df,
     generate_stat_per,
     process_df,
 )
-from impatient.app.historeport.ocr import TextReport
-from impatient.app.historeport.onto_func import StandardVocabulary
 from impatient.app.models import ReportHisto
-from flask import (
-    current_app,
-    flash,
-    redirect,
-    render_template,
-    request,
-    url_for,
-    make_response,
-)
 
 
 @bp.route("/historeport", methods=["GET", "POST"])
@@ -53,7 +53,9 @@ def repredict_reports():
     Returns:
       redirect: Redirect to the historeports index HTML page
     """
-    with open(os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r") as fp:
+    with open(
+            os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r"
+    ) as fp:
         onto_tree = json.load(fp)
     df = db_to_df()
     df, features_col = table_to_df(df, onto_tree)
@@ -78,7 +80,9 @@ def repredict_reports():
 
 @bp.route("/historeport/download", methods=["GET"])
 def histo_download():
-    with open(os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r") as fp:
+    with open(
+            os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r"
+    ) as fp:
         onto_tree = json.load(fp)
     df = db_to_df()
     df, features_col = table_to_df(df, onto_tree)

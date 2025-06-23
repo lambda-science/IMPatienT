@@ -1,12 +1,13 @@
 """V1_0
 
 Revision ID: f7981800ac1e
-Revises: 
+Revises:
 Create Date: 2021-10-30 00:37:27.797639
 
 """
-from alembic import op
+
 import sqlalchemy as sa
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = "f7981800ac1e"

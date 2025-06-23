@@ -1,11 +1,12 @@
+import os
+
+import dash_bootstrap_components as dbc
 from dash import dcc
 from dash import html
-import dash_bootstrap_components as dbc
-import os
-from impatient.app.dashapp import bp
-import impatient.app.dashapp.plot_common as plot_common
+
 import impatient.app.dashapp.common_func as common_func
-import json
+import impatient.app.dashapp.plot_common as plot_common
+from impatient.app.dashapp import bp
 
 DEFAULT_STROKE_WIDTH = 3  # gives line width of 2^3 = 8
 

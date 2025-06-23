@@ -1,7 +1,5 @@
-import collections
 import json
 import os
-from shlex import join
 
 import cv2
 import numpy as np
@@ -9,8 +7,8 @@ import pytesseract
 import spacy
 from flask import current_app
 from pdf2image import convert_from_bytes
-from thefuzz import fuzz
 from textacy.extract.basics import ngrams
+from thefuzz import fuzz
 
 
 class TextReport:

@@ -13,18 +13,20 @@ Note that currently only png format is supported for output images.
 
 """
 
+import base64
+import io
+import json
 import os
+import pickle  # nosec
+
+import skimage.io
+
 import impatient.app.dashapp.plot_common as plot_common
 import impatient.app.dashapp.shapes_to_segmentations as shapes_to_segmentations
 from impatient.app.dashapp.trainable_segmentation import (
     multiscale_basic_features,
     predict_segmenter,
 )
-import pickle  # nosec
-import base64
-import io
-import skimage.io
-import json
 
 
 def getenv(e):

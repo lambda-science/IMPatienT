@@ -1,9 +1,7 @@
-import json
-import os
+from flask import current_app, render_template
 
 from impatient.app.histostats import bp
 from impatient.app.histostats.vizualisation import *
-from flask import current_app, render_template
 
 
 @bp.route("/histostats", methods=["GET", "POST"])
@@ -14,7 +12,9 @@ def statsindex():
         str: Dashboard HTML Page
     """
     # Up to stat_per_diag to move in the historeport part to not always regenerate
-    with open(os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r") as fp:
+    with open(
+            os.path.join("/home/impatient/data/ontology/", "ontology.json"), "r"
+    ) as fp:
         onto_tree = json.load(fp)
     df = db_to_df()
     df, features_col = table_to_df(df, onto_tree)

@@ -1,10 +1,10 @@
-import os
-from contextlib import suppress
 import json
-from impatient.app import db
-from impatient.app.imgupload import bp
-from impatient.app.imgupload.forms import DeleteButton, ImageForm
-from impatient.app.models import Image
+import os
+import tarfile
+from contextlib import suppress
+
+import pandas as pd
+from PIL import Image as PILImage
 from flask import (
     current_app,
     flash,
@@ -13,13 +13,14 @@ from flask import (
     request,
     send_from_directory,
     url_for,
-    make_response,
 )
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
-from PIL import Image as PILImage
-import pandas as pd
-import tarfile
+
+from impatient.app import db
+from impatient.app.imgupload import bp
+from impatient.app.imgupload.forms import DeleteButton, ImageForm
+from impatient.app.models import Image
 
 
 @bp.route("/data/images/<path:filename>")

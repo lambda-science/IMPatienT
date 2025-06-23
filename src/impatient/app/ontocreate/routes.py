@@ -1,21 +1,7 @@
 import json
 import os
-import jsonschema
-from jsonschema import validate
 
 import bleach
-from werkzeug.utils import secure_filename
-from impatient.app import db
-from impatient.app.historeport.onto_func import StandardVocabulary, ImpatientVocab
-from impatient.app.models import ReportHisto
-from impatient.app.ontocreate import bp
-from impatient.app.ontocreate.forms import InvertLangButton, OntologyDescript, OntoUpload
-from impatient.app.histostats.vizualisation import (
-    db_to_df,
-    table_to_df,
-    process_df,
-    generate_stat_per,
-)
 from flask import (
     current_app,
     redirect,
@@ -24,7 +10,24 @@ from flask import (
     send_from_directory,
     url_for,
 )
+from jsonschema import validate
 from sqlalchemy.orm.attributes import flag_modified
+
+from impatient.app import db
+from impatient.app.historeport.onto_func import StandardVocabulary, ImpatientVocab
+from impatient.app.histostats.vizualisation import (
+    db_to_df,
+    table_to_df,
+    process_df,
+    generate_stat_per,
+)
+from impatient.app.models import ReportHisto
+from impatient.app.ontocreate import bp
+from impatient.app.ontocreate.forms import (
+    InvertLangButton,
+    OntologyDescript,
+    OntoUpload,
+)
 
 
 @bp.route("/ontology/<path:filename>")

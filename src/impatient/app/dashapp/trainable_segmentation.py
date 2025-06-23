@@ -1,9 +1,10 @@
-from itertools import combinations_with_replacement
 import itertools
+from itertools import combinations_with_replacement
+
 import numpy as np
+from joblib import Parallel, delayed
 from skimage import filters, feature
 from skimage import img_as_float32
-from joblib import Parallel, delayed
 
 try:
     from sklearn.exceptions import NotFittedError
@@ -11,7 +12,6 @@ try:
     has_sklearn = True
 except ImportError:
     has_sklearn = False
-
 
     class NotFittedError(Exception):
         pass

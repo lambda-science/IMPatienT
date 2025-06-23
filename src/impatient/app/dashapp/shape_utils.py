@@ -1,8 +1,9 @@
-from cairosvg import svg2png
-import skimage
-import PIL.Image
 import io
+
+import PIL.Image
 import numpy as np
+import skimage
+from cairosvg import svg2png
 
 
 def shape_to_svg_code(shape, fig=None, width=None, height=None):
@@ -38,9 +39,7 @@ def shape_to_svg_code(shape, fig=None, width=None, height=None):
     fill-opacity="0"
 />
 </svg>
-""".format(
-        **fmt_dict
-    )
+""".format(**fmt_dict)
 
 
 def shape_to_png(fig=None, shape=None, width=None, height=None, write_to=None):
